@@ -4,13 +4,13 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <StartupObject></StartupObject>
-    <Version>0.1.8-beta</Version>
+    <Version>0.1.8-beta3</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
     <RepositoryUrl>https://github.com/Sram-Tools/SramComparer.SoE</RepositoryUrl>
     <PackageDescription>Allows to compare unknown parts of SoE's sram file</PackageDescription>
     <NeutralLanguage></NeutralLanguage>
-    <Description>This tool allows to compare unknown buffers in SRAM file.</Description>
+    <Description>This tool allows to compare unknown buffers in Secret of Evermore's SRAM file.</Description>
     <Authors>Sram-Tools</Authors>
     <Company />
     <Copyright></Copyright>
@@ -18,12 +18,13 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <NoWin32Manifest>true</NoWin32Manifest>
     <PackageIcon>Icon.png</PackageIcon>
-    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\LICENSE.md">
+    <None Include="..\LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
@@ -34,9 +35,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SramComparer\SramCommons\SramCommons.csproj" />
-    <ProjectReference Include="..\..\SramComparer\SramComparer\SramComparer.csproj" />
-    <ProjectReference Include="..\SramCommons.SoE\SramCommons.SoE.csproj" />
+    <PackageReference Include="SramCommons.SoE" Version="0.2.0-beta" />
+    <PackageReference Include="SramComparer" Version="0.1.4" />
   </ItemGroup>
 
   <ItemGroup>
