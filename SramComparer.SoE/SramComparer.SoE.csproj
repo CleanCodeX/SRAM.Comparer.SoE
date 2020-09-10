@@ -4,14 +4,14 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <StartupObject></StartupObject>
-    <Version>0.1.8-beta3</Version>
+    <Version>0.2.0-beta1</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
-    <RepositoryUrl>https://github.com/Sram-Tools/SramComparer.SoE</RepositoryUrl>
+    <RepositoryUrl>https://github.com/CleanCodeX/SramComparer.SoE</RepositoryUrl>
     <PackageDescription>Allows to compare unknown parts of SoE's sram file</PackageDescription>
     <NeutralLanguage></NeutralLanguage>
     <Description>This tool allows to compare unknown buffers in Secret of Evermore's SRAM file.</Description>
-    <Authors>Sram-Tools</Authors>
+    <Authors>XETH</Authors>
     <Company />
     <Copyright></Copyright>
     <PackageTags>SoE, SRAM, Secret of Evermore</PackageTags>
@@ -19,7 +19,7 @@
     <NoWin32Manifest>true</NoWin32Manifest>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
@@ -35,8 +35,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SramCommons.SoE" Version="0.2.0-beta" />
-    <PackageReference Include="SramComparer" Version="0.1.4" />
+    <PackageReference Include="SramCommons.SoE" Version="0.2.0-beta5" />
+    <PackageReference Include="SramComparer" Version="0.1.5-beta3" />
   </ItemGroup>
 
   <ItemGroup>

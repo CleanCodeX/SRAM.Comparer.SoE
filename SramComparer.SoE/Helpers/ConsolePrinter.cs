@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using App.Commons.Extensions;
-using SramCommons.SoE.Helpers;
 using SramCommons.SoE.Models.Enums;
 using SramComparer.Extensions;
 using SramComparer.Helpers;
@@ -27,11 +26,11 @@ namespace SramComparer.SoE.Helpers
             WriteSettingName(Res.SettingExportDirectory, CmdOptions.Exportdir);
             WriteValue(options.ExportDirectory);
 
-            WriteSettingName(Res.SettingCurrentGameToCompare, $"{CmdOptions.Game} [1-4|{Res.All}]");
-            WriteValue(Equals(options.Game, default(GameId)) ? Res.All : options.Game.ToInt().ToString());
+            WriteSettingName(Res.SettingCurrentGameToCompare, $"{CmdOptions.Game} [1-4|0={Res.All}]");
+            WriteValue(options.Game == 0 ? Res.All : options.Game.ToString());
 
-            WriteSettingName(Res.SettingComparisonGameToCompare, $"{CmdOptions.ComparisonGame} [1-4|{Res.All}]");
-            WriteValue(Equals(options.ComparisonGame, default(GameId)) ? Res.SameAsCurrentGame : options.ComparisonGame.ToInt().ToString());
+            WriteSettingName(Res.SettingComparisonGameToCompare, $"{CmdOptions.ComparisonGame} [1-4|0={Res.All}]");
+            WriteValue(options.ComparisonGame == 0 ? Res.SameAsCurrentGame : options.ComparisonGame.ToString());
 
             WriteSettingName(Res.SettingRegion, $"{CmdOptions.Region} [{string.Join("|", Enum.GetNames(typeof(FileRegion)))}]");
             WriteValue(options.Region.ToString());

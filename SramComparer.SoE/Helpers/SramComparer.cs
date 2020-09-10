@@ -2,7 +2,6 @@
 using System.Text;
 using App.Commons.Extensions;
 using SramCommons.Extensions;
-using SramCommons.SoE.Helpers;
 using SramCommons.SoE.Models;
 using SramCommons.SoE.Models.Structs;
 using SramComparer.Helpers;
@@ -14,18 +13,18 @@ using Res = SramComparer.Properties.Resources;
 
 namespace SramComparer.SoE.Helpers
 {
-    public class SramComparer: SramComparerBase<SramFile, SramGame, GameId>
+    public class SramComparer: SramComparerBase<SramFile, SramGame>
     {
         public override void CompareSram(SramFile currFile, SramFile compFile, IOptions options)
         {
             WriteNewSectionHeader();
             Console.ForegroundColor = ConsoleColor.Yellow;
 
-            var optionGameId = (GameId)options.Game;
-            var optionCompGameId = (GameId)options.ComparisonGame;
+            var optionGameIndex = options.Game - 1;
+            var optionCompGameIndex = options.ComparisonGame -1;
             var optionFlags = (ComparisonFlags)options.Flags;
 
-            Console.WriteLine(optionGameId != default
+            Console.WriteLine(optionGameIndex > -1
                 ? string.Format(Res.StatusGameWillBeComparedTemplate, options.Game)
                 : Res.StatusAllGamesWillBeCompared);
 
@@ -56,16 +55,14 @@ namespace SramComparer.SoE.Helpers
             var timestamps = new StringBuilder();
             timestamps.AppendLine($"{Resources.GamesCurrentUnknown12BValues} (2+? {Res.Bytes.ToLower()}): ({Resources.ChangesAtEveryInGameSave})");
 
-            if (optionGameId != default && optionCompGameId != default)
-                allDiffBytes = CompareGames(optionGameId, optionCompGameId);
+            if (optionGameIndex > -1 && optionCompGameIndex > -1)
+                allDiffBytes = CompareGames(optionGameIndex, optionCompGameIndex);
             else
-                for (var i = 0; i < 4; i++)
+                for (var gameIndex = 0; gameIndex < 4; gameIndex++)
                 {
-                    var gameId = (GameId) i + 1;
+                    if (optionGameIndex > -1 && optionGameIndex != gameIndex) continue;
 
-                    if (optionGameId != default && optionGameId != gameId) continue;
-
-                    allDiffBytes = CompareGames(gameId);
+                    allDiffBytes = CompareGames(gameIndex);
                 }
 
             if (options.Flags.HasFlag(ComparisonFlags.NonGameBuffer))
@@ -121,40 +118,43 @@ namespace SramComparer.SoE.Helpers
                     Console.WriteLine(timestamps.ToString());
             }
 
-            int CompareGames(GameId gameId, GameId compGameId = default)
+            int CompareGames(int gameIndex, int compGameIndex = default)
             {
-                if (compGameId == default)
-                    compGameId = gameId;
+                if (compGameIndex == -1)
+                    compGameIndex = gameIndex;
 
-                var currGame = currFile.GetGame(gameId);
+                var currGame = currFile.GetGame(gameIndex);
                 var currGameBytes = currFile.GetCurrentGameBytes();
 
-                var compGame = compFile.GetGame(gameId);
+                var compGame = compFile.GetGame(gameIndex);
                 var compGameBytes = compFile.GetCurrentGameBytes();
+
+                var gameId = gameIndex + 1;
+                var compGameId = compGameIndex + 1;
 
                 if (optionFlags.HasFlag(ComparisonFlags.AllGameChecksums) || compGame.Checksum != currGame.Checksum)
                     checksums.AppendLine(
-                        $"{" ".Repeat(2)}{Res.Game} {gameId.ToInt()}: {currGame.Checksum.PadLeft()} = ({Res.ReversedByteOrder}) {currGame.Checksum.ReverseBytes().PadLeft()}");
+                        $"{" ".Repeat(2)}{Res.Game} {gameId}: {currGame.Checksum.PadLeft()} = ({Res.ReversedByteOrder}) {currGame.Checksum.ReverseBytes().PadLeft()}");
 
                 if (optionFlags.HasFlag(ComparisonFlags.AllUnknown12Bs) || compGame.Unknown12B != currGame.Unknown12B)
                     timestamps.AppendLine(
-                        $"{" ".Repeat(2)}{Res.Game} {gameId.ToInt()}: {currGame.Unknown12B.PadLeft()} = ({Res.ReversedByteOrder}) {currGame.Unknown12B.ReverseBytes().PadLeft()}");
+                        $"{" ".Repeat(2)}{Res.Game} {gameId}: {currGame.Unknown12B.PadLeft()} = ({Res.ReversedByteOrder}) {currGame.Unknown12B.ReverseBytes().PadLeft()}");
 
                 if (compGameBytes.SequenceEqual(currGameBytes)) return allDiffBytes;
 
                 checksums.AppendLine(
-                    $"{" ".Repeat(2)}{Res.Game} {compGameId.ToInt()}: {compGame.Checksum.PadLeft()} = ({Res.ReversedByteOrder}) {compGame.Checksum.ReverseBytes().PadLeft()} ({Res.Comparison.ToLower()} {Res.Game.ToLower()})");
+                    $"{" ".Repeat(2)}{Res.Game} {compGameId}: {compGame.Checksum.PadLeft()} = ({Res.ReversedByteOrder}) {compGame.Checksum.ReverseBytes().PadLeft()} ({Res.Comparison.ToLower()} {Res.Game.ToLower()})");
 
                 timestamps.AppendLine(
-                    $"{" ".Repeat(2)}{Res.Game} {compGameId.ToInt()}: {compGame.Unknown12B.PadLeft()} = ({Res.ReversedByteOrder}) {compGame.Unknown12B.ReverseBytes().PadLeft()} ({Res.Comparison.ToLower()} {Res.Game.ToLower()})");
+                    $"{" ".Repeat(2)}{Res.Game} {compGameId}: {compGame.Unknown12B.PadLeft()} = ({Res.ReversedByteOrder}) {compGame.Unknown12B.ReverseBytes().PadLeft()} ({Res.Comparison.ToLower()} {Res.Game.ToLower()})");
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($@"[ {Res.SectionGameHasChangedTemplate} ]---------------------------------------------", gameId.ToInt());
+                Console.WriteLine($@"[ {Res.SectionGameHasChangedTemplate} ]---------------------------------------------", gameId);
                 Console.ResetColor();
 
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine(" ".Repeat(2) + $@"[ {Res.SectionGameUnknownsChangedTemplate} ].......................................", gameId.ToInt());
+                Console.WriteLine(" ".Repeat(2) + $@"[ {Res.SectionGameUnknownsChangedTemplate} ].......................................", gameId);
                 Console.ResetColor();
 
                 var gameDiffBytes = CompareGame(currGame, compGame, options);
@@ -162,7 +162,7 @@ namespace SramComparer.SoE.Helpers
                 {
                     Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine(" ".Repeat(4) + Res.StatusGameUnknownsChangedGameIdBytesTemplate, gameId.ToInt(), gameDiffBytes);
+                    Console.WriteLine(" ".Repeat(4) + Res.StatusGameUnknownsChangedGameIdBytesTemplate, gameId, gameDiffBytes);
                     Console.ResetColor();
                 }
 
@@ -174,20 +174,20 @@ namespace SramComparer.SoE.Helpers
 
                 EnsureMinConsoleWidth(165);
 
-                bufferName = $"{nameof(compFile.Sram.Game)} {gameId.ToInt()}";
-                var bufferOffset = Offsets.FirstGame + gameId.ToInt() * Sizes.Game.All;
+                bufferName = $"{nameof(compFile.Sram.Game)} {gameId}";
+                var bufferOffset = Offsets.FirstGame + gameId * Sizes.Game.All;
                 var gameBufferDiffBytes = CompareByteArray(bufferName, bufferOffset, currGameBytes, compGameBytes, false);
                 if (gameBufferDiffBytes > gameDiffBytes)
                 {
                     Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.WriteLine($@"{" ".Repeat(2)}[ {Res.SectionGameChangedTemplate} ]...................................", gameId);
+                    Console.WriteLine($@"{" ".Repeat(2)}[ {Res.SectionGameChangedTemplate} ]...................................", gameIndex);
                     // ReSharper disable once RedundantArgumentDefaultValue
 
                     CompareByteArray(bufferName, bufferOffset, currGameBytes, compGameBytes, true, Offsets.Game.GetNameFromOffset);
                     Console.WriteLine();
                     Console.ForegroundColor = gameDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White;
-                    Console.WriteLine(" ".Repeat(4) + Res.StatusGameChangedBytesTemplate, gameId.ToInt(), gameBufferDiffBytes);
+                    Console.WriteLine(" ".Repeat(4) + Res.StatusGameChangedBytesTemplate, gameId, gameBufferDiffBytes);
                     Console.ResetColor();
                 }
 

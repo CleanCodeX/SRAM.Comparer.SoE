@@ -1,17 +1,16 @@
 ﻿using System;
 using System.IO;
 using App.Commons.Extensions;
-using SramCommons.SoE.Helpers;
+using SramComparer.Helpers.Enums;
 using SramComparer.SoE.Helpers;
 using SramComparer.SoE.Helpers.Enums;
-using SramComparer.Helpers.Enums;
 using Res = SramComparer.Properties.Resources;
 // ReSharper disable RedundantArgumentDefaultValue
 // ReSharper disable AccessToStaticMemberViaDerivedType
 
 namespace SramComparer.SoE
 {
-	internal class Program
+    internal class Program
 	{
 		public static int Main(string[] args)
 		{
@@ -37,8 +36,9 @@ namespace SramComparer.SoE
 		    }
 
 		    ConsolePrinter.PrintCommands();
-
-		    while (true)
+		    const int maxGameId = 4;
+			
+			while (true)
 		    {
 			    try
 			    {
@@ -70,14 +70,14 @@ namespace SramComparer.SoE
 						    CommandHelper.InvertIncludeFlag(ref options.Flags, command == nameof(Commands.fca) ? ComparisonFlags.AllGameChecksums : ComparisonFlags.GameChecksum);
 						    break;
 					    case nameof(Commands.sg):
-						    options.Game = CommandHelper.GetGameId();
-						    if (options.Game == GameId.All)
-							    options.ComparisonGame = GameId.All;
+						    options.Game = CommandHelper.GetGameId(maxGameId);
+						    if (options.Game == default)
+							    options.ComparisonGame = default;
 
 						    break;
 					    case nameof(Commands.scg):
-						    if (options.Game != GameId.All)
-							    options.ComparisonGame = CommandHelper.GetGameId();
+						    if (options.Game != default)
+							    options.ComparisonGame = CommandHelper.GetGameId(maxGameId);
 						    else
 							    ConsolePrinter.PrintError(Res.ErrorComparisoGameSetButNotGame);
 
@@ -89,16 +89,16 @@ namespace SramComparer.SoE
 						    CommandHelper.OverwriteComparisonFileWithCurrentFile(options);
 						    break;
 					    case nameof(Commands.b):
-						    CommandHelper.BackupSramFile(options, SramFileKind.Curr, false);
+						    CommandHelper.BackupSramFile(options, SramFileKind.Current, false);
 						    break;
 					    case nameof(Commands.r):
-						    CommandHelper.BackupSramFile(options, SramFileKind.Curr, true);
+						    CommandHelper.BackupSramFile(options, SramFileKind.Current, true);
 						    break;
 					    case nameof(Commands.bc):
-						    CommandHelper.BackupSramFile(options, SramFileKind.Comp, false);
+						    CommandHelper.BackupSramFile(options, SramFileKind.Comparison, false);
 						    break;
 					    case nameof(Commands.rc):
-						    CommandHelper.BackupSramFile(options, SramFileKind.Comp, true);
+						    CommandHelper.BackupSramFile(options, SramFileKind.Comparison, true);
 						    break;
 					    case nameof(Commands.e):
 						    CommandHelper.ExportCurrentComparison(options);
