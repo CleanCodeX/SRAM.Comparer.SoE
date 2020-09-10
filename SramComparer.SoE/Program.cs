@@ -20,7 +20,7 @@ namespace SramComparer.SoE
 		    var options = CmdLineParser.Parse(args);
 		    ConsolePrinter.PrintSettings(options);
 
-		    if (string.IsNullOrEmpty(options.CurrentGameFilepath) || string.IsNullOrEmpty(options.ComparisonGameFilepath))
+		    if (options.CurrentGameFilepath.IsNullOrEmpty() || options.ComparisonGameFilepath.IsNullOrEmpty())
 		    {
 				Console.WriteLine();
 				Console.BackgroundColor = ConsoleColor.Red;
