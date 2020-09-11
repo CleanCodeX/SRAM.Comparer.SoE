@@ -1,4 +1,4 @@
-﻿using SramCommons.SoE.Models;
+﻿using SramCommons.SoE;
 using SramCommons.SoE.Models.Structs;
 using SramComparer.Helpers;
 

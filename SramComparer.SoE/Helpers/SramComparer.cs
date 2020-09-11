@@ -2,7 +2,8 @@
 using System.Text;
 using App.Commons.Extensions;
 using SramCommons.Extensions;
-using SramCommons.SoE.Models;
+using SramCommons.SoE;
+using SramCommons.SoE.Constants;
 using SramCommons.SoE.Models.Structs;
 using SramComparer.Helpers;
 using SramComparer.SoE.Properties;

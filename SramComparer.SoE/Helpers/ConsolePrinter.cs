@@ -152,5 +152,16 @@ namespace SramComparer.SoE.Helpers
                 Commands.b, Commands.bc, Commands.r, Commands.rc));
             Console.ResetColor();
         }
+
+        public static void PrintFatalError(string fataError)
+        {
+            Console.WriteLine();
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(fataError);
+            Console.ResetColor();
+
+            Console.ReadKey();
+        }
     }
 }

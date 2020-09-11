@@ -1,119 +1,59 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using App.Commons.Extensions;
 using SramComparer.Helpers.Enums;
 using SramComparer.SoE.Helpers;
 using SramComparer.SoE.Helpers.Enums;
+using SramComparer.SoE.Properties;
 using Res = SramComparer.Properties.Resources;
 // ReSharper disable RedundantArgumentDefaultValue
 // ReSharper disable AccessToStaticMemberViaDerivedType
 
 namespace SramComparer.SoE
 {
-    internal class Program
+    public class Program
 	{
 		public static int Main(string[] args)
 		{
-		    Console.SetWindowSize(130, 50);
-		    Console.BufferHeight = 1000;
-
 		    var options = CmdLineParser.Parse(args);
-		    ConsolePrinter.PrintSettings(options);
+		    var isCommandMode = options.Commands is not null;
 
-		    if (options.CurrentGameFilepath.IsNullOrEmpty() || options.ComparisonGameFilepath.IsNullOrEmpty())
-		    {
-				Console.WriteLine();
-				Console.BackgroundColor = ConsoleColor.Red;
-				Console.ForegroundColor = ConsoleColor.Yellow;
-				Console.WriteLine(Res.ErrorMissingPathArguments);
-				Console.ResetColor();
-
-				ConsolePrinter.PrintManual();
-
-				Console.ReadKey();
-
+			if (options.CurrentGameFilepath.IsNullOrEmpty())
+			{
+				ConsolePrinter.PrintFatalError(Res.ErrorMissingPathArguments);
 				return 0;
-		    }
+			}
 
-		    ConsolePrinter.PrintCommands();
-		    const int maxGameId = 4;
-			
+			if (!isCommandMode)
+			{
+				SetInitialConsoleSize();
+				ConsolePrinter.PrintSettings(options);
+				ConsolePrinter.PrintCommands();
+			}
+
+			var commands = options.Commands?.Split('-') ?? Enumerable.Empty<string>();
+			var queuedCommands = new Queue<string>(commands);
+
+			if(isCommandMode)
+				Console.WriteLine($"{Resources.QueuedCommands}: {queuedCommands.Count} ({options.Commands})");
+
 			while (true)
 		    {
 			    try
 			    {
-				    var command = Console.ReadLine();
+				    string? command;
+				    if (isCommandMode)
+					    queuedCommands.TryDequeue(out command);
+				    else
+					    command = Console.ReadLine();
 
-				    switch (command)
-				    {
-					    case nameof(Commands.cmd):
-						    ConsolePrinter.PrintCommands();
-						    break;
-					    case nameof(Commands.s):
-						    ConsolePrinter.PrintSettings(options);
-						    break;
-					    case nameof(Commands.m):
-						    ConsolePrinter.PrintManual();
-						    break;
-					    case nameof(Commands.fwg):
-						    CommandHelper.InvertIncludeFlag(ref options.Flags, ComparisonFlags.WholeGameBuffer);
-						    break;
-					    case nameof(Commands.fng):
-						    CommandHelper.InvertIncludeFlag(ref options.Flags, ComparisonFlags.NonGameBuffer);
-						    break;
-					    case nameof(Commands.fu12b):
-					    case nameof(Commands.fu12ba):
-						    CommandHelper.InvertIncludeFlag(ref options.Flags, command == nameof(Commands.fu12ba) ? ComparisonFlags.AllUnknown12Bs : ComparisonFlags.Unknown12B);
-						    break;
-					    case nameof(Commands.fc):
-					    case nameof(Commands.fca):
-						    CommandHelper.InvertIncludeFlag(ref options.Flags, command == nameof(Commands.fca) ? ComparisonFlags.AllGameChecksums : ComparisonFlags.GameChecksum);
-						    break;
-					    case nameof(Commands.sg):
-						    options.Game = CommandHelper.GetGameId(maxGameId);
-						    if (options.Game == default)
-							    options.ComparisonGame = default;
+					if (InternalRunCommand(command, options) == false)
+					    break;
 
-						    break;
-					    case nameof(Commands.scg):
-						    if (options.Game != default)
-							    options.ComparisonGame = CommandHelper.GetGameId(maxGameId);
-						    else
-							    ConsolePrinter.PrintError(Res.ErrorComparisoGameSetButNotGame);
-
-						    break;
-					    case nameof(Commands.c):
-						    CommandHelper.CompareFiles(options);
-						    break;
-					    case nameof(Commands.ow):
-						    CommandHelper.OverwriteComparisonFileWithCurrentFile(options);
-						    break;
-					    case nameof(Commands.b):
-						    CommandHelper.BackupSramFile(options, SramFileKind.Current, false);
-						    break;
-					    case nameof(Commands.r):
-						    CommandHelper.BackupSramFile(options, SramFileKind.Current, true);
-						    break;
-					    case nameof(Commands.bc):
-						    CommandHelper.BackupSramFile(options, SramFileKind.Comparison, false);
-						    break;
-					    case nameof(Commands.rc):
-						    CommandHelper.BackupSramFile(options, SramFileKind.Comparison, true);
-						    break;
-					    case nameof(Commands.e):
-						    CommandHelper.ExportCurrentComparison(options);
-						    break;
-					    case nameof(Commands.w):
-						    Console.Clear();
-						    ConsolePrinter.PrintCommands();
-						    break;
-					    case nameof(Commands.q):
-						    return 0;
-					    default:
-						    ConsolePrinter.PrintError(Res.ErrorNoValidCommand.InsertArgs(command));
-
-						    break;
-				    }
+				    if (isCommandMode && queuedCommands.Count == 0)
+					    break;
 			    }
 			    catch (IOException ex)
 			    {
@@ -124,6 +64,123 @@ namespace SramComparer.SoE
 				    ConsolePrinter.PrintError(ex);
 			    }
             }
-        }
-    }
+
+		    return 0;
+		}
+
+		public static bool RunCommand(string command, Options options, TextWriter? outStream = null)
+		{
+			SetInitialConsoleSize();
+
+			var defaultStream = Console.Out;
+
+			if (outStream is not null)
+				Console.SetOut(outStream);
+
+			if (options.CurrentGameFilepath.IsNullOrEmpty())
+			{
+				ConsolePrinter.PrintFatalError(Res.ErrorMissingPathArguments);
+				return false;
+			}
+
+			try
+			{
+				return InternalRunCommand(command, options) is not null;
+			}
+			finally
+			{
+				if (outStream is not null)
+					Console.SetOut(defaultStream);
+			}
+		}
+
+		private static bool? InternalRunCommand(string? command, Options options)
+		{
+			switch (command)
+			{
+				case nameof(Commands.cmd):
+					ConsolePrinter.PrintCommands();
+					return true;
+				case nameof(Commands.s):
+					ConsolePrinter.PrintSettings(options);
+					return true;
+				case nameof(Commands.m):
+					ConsolePrinter.PrintManual();
+					return true;
+				case nameof(Commands.fwg):
+					CommandHelper.InvertIncludeFlag(ref options.Flags, ComparisonFlags.WholeGameBuffer);
+					return true;
+				case nameof(Commands.fng):
+					CommandHelper.InvertIncludeFlag(ref options.Flags, ComparisonFlags.NonGameBuffer);
+					return true;
+				case nameof(Commands.fu12b):
+				case nameof(Commands.fu12ba):
+					CommandHelper.InvertIncludeFlag(ref options.Flags,
+						command == nameof(Commands.fu12ba) ? ComparisonFlags.AllUnknown12Bs : ComparisonFlags.Unknown12B);
+					return true;
+				case nameof(Commands.fc):
+				case nameof(Commands.fca):
+					CommandHelper.InvertIncludeFlag(ref options.Flags,
+						command == nameof(Commands.fca) ? ComparisonFlags.AllGameChecksums : ComparisonFlags.GameChecksum);
+					return true;
+				case nameof(Commands.sg):
+					options.Game = CommandHelper.GetGameId(maxGameId: 4);
+					if (options.Game == default)
+						options.ComparisonGame = default;
+
+					return true;
+				case nameof(Commands.scg):
+					if (options.Game != default)
+						options.ComparisonGame = CommandHelper.GetGameId(maxGameId: 4);
+					else
+						ConsolePrinter.PrintError(Res.ErrorComparisoGameSetButNotGame);
+
+					return true;
+				case nameof(Commands.c):
+					CommandHelper.CompareFiles(options);
+					return true;
+				case nameof(Commands.ow):
+					CommandHelper.OverwriteComparisonFileWithCurrentFile(options);
+					return true;
+				case nameof(Commands.b):
+					CommandHelper.BackupSramFile(options, SramFileKind.Current, false);
+					return true;
+				case nameof(Commands.r):
+					CommandHelper.BackupSramFile(options, SramFileKind.Current, true);
+					return true;
+				case nameof(Commands.bc):
+					CommandHelper.BackupSramFile(options, SramFileKind.Comparison, false);
+					return true;
+				case nameof(Commands.rc):
+					CommandHelper.BackupSramFile(options, SramFileKind.Comparison, true);
+					return true;
+				case nameof(Commands.e):
+					CommandHelper.ExportCurrentComparison(options);
+					return true;
+				case nameof(Commands.w):
+					Console.Clear();
+					ConsolePrinter.PrintCommands();
+					return true;
+				case nameof(Commands.q):
+					return false;
+				default:
+					ConsolePrinter.PrintError(Res.ErrorNoValidCommand.InsertArgs(command));
+
+					return true;
+			}
+		}
+
+		private static void SetInitialConsoleSize()
+		{
+			try
+			{
+				Console.SetWindowSize(130, 50);
+				Console.BufferHeight = 1000;
+			}
+			catch
+			{
+				// Ignore
+			}
+		}
+	}
 }

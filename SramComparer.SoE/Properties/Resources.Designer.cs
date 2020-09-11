@@ -140,5 +140,14 @@ namespace SramComparer.SoE.Properties {
                 return ResourceManager.GetString("GamesCurrentUnknown12BValues", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Queued commands ähnelt.
+        /// </summary>
+        internal static string QueuedCommands {
+            get {
+                return ResourceManager.GetString("QueuedCommands", resourceCulture);
+            }
+        }
     }
 }

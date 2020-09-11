@@ -4,7 +4,7 @@ namespace SramComparer.SoE.Helpers.Enums
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     [SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "<Ausstehend>")]
-    internal enum Commands
+    public enum Commands
     {
         cmd,
         s,

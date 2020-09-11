@@ -178,4 +178,7 @@
   <data name="GamesCurrentUnknown12BValues" xml:space="preserve">
     <value>Game's current 'UnknownB12' values</value>
   </data>
+  <data name="QueuedCommands" xml:space="preserve">
+    <value>Queued commands</value>
+  </data>
 </root>

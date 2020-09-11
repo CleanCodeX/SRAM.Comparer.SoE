@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using App.Commons.Extensions;
-using SramCommons.SoE.Models;
+using SramCommons.SoE.Constants;
 // ReSharper disable InconsistentNaming
 
 namespace SramComparer.SoE.Helpers
