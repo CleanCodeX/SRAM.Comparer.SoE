@@ -26,25 +26,24 @@ namespace SramComparer.SoE
 				return 0;
 			}
 
-			if (!isCommandMode)
+			var commands = options.Commands?.Split('-') ?? Enumerable.Empty<string>();
+			var queuedCommands = new Queue<string>(commands);
+
+			if (isCommandMode)
+				Console.WriteLine(@$"{Resources.QueuedCommands}: {queuedCommands.Count} ({string.Join(", ", commands)})");
+			else
 			{
 				SetInitialConsoleSize();
 				ConsolePrinter.PrintSettings(options);
 				ConsolePrinter.PrintCommands();
 			}
 
-			var commands = options.Commands?.Split('-') ?? Enumerable.Empty<string>();
-			var queuedCommands = new Queue<string>(commands);
-
-			if(isCommandMode)
-				Console.WriteLine($"{Resources.QueuedCommands}: {queuedCommands.Count} ({options.Commands})");
-
 			while (true)
 		    {
 			    try
 			    {
 				    string? command;
-				    if (isCommandMode)
+				    if (isCommandMode && queuedCommands.Count > 0)
 					    queuedCommands.TryDequeue(out command);
 				    else
 					    command = Console.ReadLine();
@@ -52,8 +51,10 @@ namespace SramComparer.SoE
 					if (InternalRunCommand(command, options) == false)
 					    break;
 
-				    if (isCommandMode && queuedCommands.Count == 0)
+#if !DEBUG
+					if (isCommandMode && queuedCommands.Count == 0)
 					    break;
+#endif
 			    }
 			    catch (IOException ex)
 			    {
