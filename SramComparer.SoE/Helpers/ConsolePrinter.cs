@@ -63,7 +63,7 @@ namespace SramComparer.SoE.Helpers
             PrintCommandKey(Commands.sg);
             Console.WriteLine(Res.CommandSetGame);
 
-            PrintCommandKey(Commands.scg);
+            PrintCommandKey(Commands.sgc);
             Console.WriteLine(Res.CommandSetComparisonGame);
 
             PrintGroupName(Res.CmdGroupSetFlags);
@@ -148,7 +148,7 @@ namespace SramComparer.SoE.Helpers
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine();
             Console.WriteLine(ResSoE.AppManualCommandsTemplate.InsertArgs(
-                Commands.ow, Commands.c, Commands.e, Commands.sg, Commands.scg, Commands.fwg, Commands.fng, 
+                Commands.ow, Commands.c, Commands.e, Commands.sg, Commands.sgc, Commands.fwg, Commands.fng, 
                 Commands.b, Commands.bc, Commands.r, Commands.rc));
             Console.ResetColor();
         }

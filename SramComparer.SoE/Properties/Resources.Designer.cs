@@ -124,6 +124,15 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die compared with game {0} ähnelt.
+        /// </summary>
+        internal static string ComparedWithGameTemplated {
+            get {
+                return ResourceManager.GetString("ComparedWithGameTemplated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Game&apos;s current &apos;Checksum&apos; values ähnelt.
         /// </summary>
         internal static string GamesCurrentChecksumValues {

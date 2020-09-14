@@ -5,14 +5,13 @@ using SramCommons.Extensions;
 using SramCommons.SoE;
 using SramCommons.SoE.Constants;
 using SramCommons.SoE.Models.Structs;
-using SramComparer.Helpers;
 using SramComparer.SoE.Properties;
 using static SramComparer.Helpers.ConsolePrinterBase;
 using static SramComparer.SoE.Helpers.UnkownBufferOffsetFinder;
 using Res = SramComparer.Properties.Resources;
 // ReSharper disable RedundantArgumentDefaultValue
 
-namespace SramComparer.SoE.Helpers
+namespace SramComparer.SoE
 {
     public class SramComparer: SramComparerBase<SramFile, SramGame>
     {
@@ -133,6 +132,10 @@ namespace SramComparer.SoE.Helpers
                 var gameId = gameIndex + 1;
                 var compGameId = compGameIndex + 1;
 
+                var gameIdString = gameId.ToString();
+                if(gameId != compGameId)
+                    gameIdString += Resources.ComparedWithGameTemplated.InsertArgs(compGameId);
+
                 if (optionFlags.HasFlag(ComparisonFlags.AllGameChecksums) || compGame.Checksum != currGame.Checksum)
                     checksums.AppendLine(
                         $"{" ".Repeat(2)}{Res.Game} {gameId}: {currGame.Checksum.PadLeft()} = ({Res.ReversedByteOrder}) {currGame.Checksum.ReverseBytes().PadLeft()}");
@@ -150,7 +153,7 @@ namespace SramComparer.SoE.Helpers
                     $"{" ".Repeat(2)}{Res.Game} {compGameId}: {compGame.Unknown12B.PadLeft()} = ({Res.ReversedByteOrder}) {compGame.Unknown12B.ReverseBytes().PadLeft()} ({Res.Comparison.ToLower()} {Res.Game.ToLower()})");
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($@"[ {Res.SectionGameHasChangedTemplate} ]---------------------------------------------", gameId);
+                Console.WriteLine($@"[ {Res.SectionGameHasChangedTemplate} ]---------------------------------------------", gameIdString);
                 Console.ResetColor();
 
                 Console.WriteLine();
@@ -188,7 +191,7 @@ namespace SramComparer.SoE.Helpers
                     CompareByteArray(bufferName, bufferOffset, currGameBytes, compGameBytes, true, Offsets.Game.GetNameFromOffset);
                     Console.WriteLine();
                     Console.ForegroundColor = gameDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White;
-                    Console.WriteLine(" ".Repeat(4) + Res.StatusGameChangedBytesTemplate, gameId, gameBufferDiffBytes);
+                    Console.WriteLine(" ".Repeat(4) + Res.StatusGameChangedBytesTemplate, gameIdString, gameBufferDiffBytes);
                     Console.ResetColor();
                 }
 

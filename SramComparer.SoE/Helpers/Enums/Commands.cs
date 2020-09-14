@@ -16,7 +16,7 @@ namespace SramComparer.SoE.Helpers.Enums
         fc,
         fca,
         sg,
-        scg,
+        sgc,
         c,
         ow,
         b,

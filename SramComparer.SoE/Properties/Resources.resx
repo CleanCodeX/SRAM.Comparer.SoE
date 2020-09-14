@@ -181,4 +181,7 @@
   <data name="QueuedCommands" xml:space="preserve">
     <value>Queued commands</value>
   </data>
+  <data name="ComparedWithGameTemplated" xml:space="preserve">
+    <value>compared with game {0}</value>
+  </data>
 </root>

@@ -82,7 +82,7 @@ namespace SramComparer.SoE.Helpers
 						options.ComparisonGame = default;
 
 					return true;
-				case nameof(Commands.scg):
+				case nameof(Commands.sgc):
 					if (options.Game != default)
 						options.ComparisonGame = GetGameId(maxGameId: 4);
 					else
