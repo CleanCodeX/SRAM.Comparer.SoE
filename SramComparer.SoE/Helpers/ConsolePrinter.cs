@@ -163,5 +163,18 @@ namespace SramComparer.SoE.Helpers
 
             Console.ReadKey();
         }
+
+        public static void SetInitialConsoleSize()
+        {
+            try
+            {
+                Console.SetWindowSize(130, 50);
+                Console.BufferHeight = 1000;
+            }
+            catch
+            {
+                // Ignore
+            }
+        }
     }
 }
