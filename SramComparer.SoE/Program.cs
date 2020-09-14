@@ -7,6 +7,7 @@ using SramComparer.SoE.Helpers;
 using SramComparer.SoE.Properties;
 using Res = SramComparer.Properties.Resources;
 // ReSharper disable AccessToStaticMemberViaDerivedType
+// ReSharper disable PossibleMultipleEnumeration
 
 namespace SramComparer.SoE
 {
