@@ -37,7 +37,7 @@
 
   <ItemGroup>
     <PackageReference Include="SramCommons.SoE" Version="0.2.0-beta6" />
-    <PackageReference Include="SramComparer" Version="0.1.6-b3" />
+    <PackageReference Include="SramComparer" Version="0.1.6-b4" />
   </ItemGroup>
 
   <ItemGroup>
