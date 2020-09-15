@@ -24,6 +24,7 @@ namespace SramComparer.SoE.Helpers.Enums
         r,
         rc,
         e,
+        ts,
         w,
         q,
     }

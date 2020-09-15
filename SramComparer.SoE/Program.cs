@@ -6,6 +6,8 @@ using App.Commons.Extensions;
 using SramComparer.SoE.Helpers;
 using SramComparer.SoE.Properties;
 using Res = SramComparer.Properties.Resources;
+using static SramComparer.SoE.Helpers.ConsolePrinter;
+using static SramComparer.Helpers.ConsolePrinterBase;
 // ReSharper disable AccessToStaticMemberViaDerivedType
 // ReSharper disable PossibleMultipleEnumeration
 
@@ -20,7 +22,7 @@ namespace SramComparer.SoE
 
 			if (options.CurrentGameFilepath.IsNullOrEmpty())
 			{
-				ConsolePrinter.PrintFatalError(Res.ErrorMissingPathArguments);
+				PrintFatalError(Res.ErrorMissingPathArguments);
 				return 0;
 			}
 
@@ -31,9 +33,9 @@ namespace SramComparer.SoE
 				Console.WriteLine(@$"{Resources.QueuedCommands}: {queuedCommands.Count} ({string.Join(", ", commands)})");
 			else
 			{
-				ConsolePrinter.SetInitialConsoleSize();
-				ConsolePrinter.PrintSettings(options);
-				ConsolePrinter.PrintCommands();
+				SetInitialConsoleSize();
+				PrintSettings(options);
+				PrintCommands();
 			}
 
 			while (true)
@@ -44,9 +46,12 @@ namespace SramComparer.SoE
 				    if (isCommandMode && queuedCommands.Count > 0)
 					    queuedCommands.TryDequeue(out command);
 				    else
-					    command = Console.ReadLine();
+				    {
+					    WriteNewSectionHeader();
+						command = Console.ReadLine();
+				    }
 
-					if (CommandHelper.InternalRunCommand(command, options) == false)
+				    if (CommandHelper.InternalRunCommand(command, options) == false)
 					    break;
 
 #if !DEBUG
@@ -56,11 +61,13 @@ namespace SramComparer.SoE
 			    }
 			    catch (IOException ex)
 			    {
-				    ConsolePrinter.PrintError(ex.Message);
-			    }
+				    PrintError(ex.Message);
+				    WriteNewSectionHeader();
+				}
 			    catch (Exception ex)
 			    {
-				    ConsolePrinter.PrintError(ex);
+				    PrintError(ex);
+				    WriteNewSectionHeader();
 			    }
             }
 

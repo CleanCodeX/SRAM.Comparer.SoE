@@ -103,6 +103,9 @@ namespace SramComparer.SoE.Helpers
             PrintCommandKey(Commands.e);
             Console.WriteLine(Res.CommandExportComparisonResult);
 
+            PrintCommandKey(Commands.ts);
+            Console.WriteLine(Res.CommandTransferSramToOtherGameFile);
+
             PrintGroupName(Res.CmdGroupDisplay);
 
             PrintCommandKey(Commands.m);

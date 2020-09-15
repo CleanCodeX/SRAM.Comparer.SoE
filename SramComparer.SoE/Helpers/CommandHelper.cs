@@ -7,6 +7,8 @@ using SramComparer.Helpers;
 using SramComparer.Helpers.Enums;
 using SramComparer.Properties;
 using SramComparer.SoE.Helpers.Enums;
+using static SramComparer.Helpers.ConsolePrinterBase;
+using static SramComparer.SoE.Helpers.ConsolePrinter;
 // ReSharper disable RedundantArgumentDefaultValue
 
 namespace SramComparer.SoE.Helpers
@@ -21,7 +23,7 @@ namespace SramComparer.SoE.Helpers
 
         public static bool RunCommand(string command, Options options, TextWriter? outStream = null)
         {
-	        ConsolePrinter.SetInitialConsoleSize();
+	        SetInitialConsoleSize();
 
 	        var defaultStream = Console.Out;
 
@@ -30,7 +32,7 @@ namespace SramComparer.SoE.Helpers
 
 	        if (options.CurrentGameFilepath.IsNullOrEmpty())
 	        {
-		        ConsolePrinter.PrintFatalError(Resources.ErrorMissingPathArguments);
+		        PrintFatalError(Resources.ErrorMissingPathArguments);
 		        return false;
 	        }
 
@@ -52,13 +54,13 @@ namespace SramComparer.SoE.Helpers
 				case "":
 					return true;
 				case nameof(Commands.cmd):
-					ConsolePrinter.PrintCommands();
+					PrintCommands();
 					return true;
 				case nameof(Commands.s):
-					ConsolePrinter.PrintSettings(options);
+					PrintSettings(options);
 					return true;
 				case nameof(Commands.m):
-					ConsolePrinter.PrintManual();
+					PrintManual();
 					return true;
 				case nameof(Commands.fwg):
 					InvertIncludeFlag(ref options.Flags, ComparisonFlags.WholeGameBuffer);
@@ -86,7 +88,7 @@ namespace SramComparer.SoE.Helpers
 					if (options.Game != default)
 						options.ComparisonGame = GetGameId(maxGameId: 4);
 					else
-						ConsolePrinterBase.PrintError(Resources.ErrorComparisoGameSetButNotGame);
+						PrintError(Resources.ErrorComparisoGameSetButNotGame);
 
 					return true;
 				case nameof(Commands.c):
@@ -110,14 +112,17 @@ namespace SramComparer.SoE.Helpers
 				case nameof(Commands.e):
 					ExportCurrentComparison(options);
 					return true;
+				case nameof(Commands.ts):
+					TransferSramToOtherGameFile(options);
+					return true;
 				case nameof(Commands.w):
 					Console.Clear();
-					ConsolePrinter.PrintCommands();
+					PrintCommands();
 					return true;
 				case nameof(Commands.q):
 					return false;
 				default:
-					ConsolePrinterBase.PrintError(Resources.ErrorNoValidCommand.InsertArgs(command));
+					PrintError(Resources.ErrorNoValidCommand.InsertArgs(command));
 
 					return true;
 			}

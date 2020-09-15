@@ -5,6 +5,7 @@ using SramCommons.Extensions;
 using SramCommons.SoE;
 using SramCommons.SoE.Constants;
 using SramCommons.SoE.Models.Structs;
+using SramComparer.Helpers;
 using SramComparer.SoE.Properties;
 using static SramComparer.Helpers.ConsolePrinterBase;
 using static SramComparer.SoE.Helpers.UnkownBufferOffsetFinder;
