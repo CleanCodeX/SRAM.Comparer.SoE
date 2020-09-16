@@ -19,7 +19,7 @@ Users see "Run apps - Runtime" column, coders see "Build apps - SDK" column at:
 https://dotnet.microsoft.com
 
 ## Download binaries
-http://xeth.de/releases  
+http://xeth.de/Releases/SramComparer
 [SramComparer.SoE.0.2.0.zip (win x64)](http://xeth.de/Releases/SramComparer/SramComparer.SoE.0.1.8.zip "SramComparer.SoE.0.2.0.zip (win x64)")
 
 ## How to use
