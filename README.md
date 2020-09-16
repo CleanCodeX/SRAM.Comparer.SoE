@@ -30,7 +30,7 @@ https://dotnet.microsoft.com
      Make sure this is enabled if existing. Otherwise you have manually ensure that the emulator updates
      the srm file.  
 ***1.2*** Start the tool by passing the game's srm filepath as first command parameter. The file can also be
-     dragged onto the tool.
+     dragged onto the tool.  
 ***1.3*** Have a look into UnknownOffsets.txt to see examples of what parts of SRAM structure are still
      considered "unknown".  
 
