@@ -6,7 +6,7 @@ using SramComparer.SoE.Services;
 
 namespace SramComparer.SoE
 {
-    public class Program
+    public static class Program
 	{
         static Program()
         {
