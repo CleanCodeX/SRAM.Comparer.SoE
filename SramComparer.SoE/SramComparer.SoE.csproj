@@ -38,7 +38,7 @@
 
   <ItemGroup>
     <PackageReference Include="Snes.SramCommons.SoE" Version="0.2.0-e" />
-    <PackageReference Include="Snes.SramComparer" Version="1.0.0-f" />
+    <PackageReference Include="Snes.SramComparer" Version="1.0.0-g" />
   </ItemGroup>
 
   <ItemGroup>
