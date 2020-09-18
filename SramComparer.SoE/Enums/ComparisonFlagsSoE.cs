@@ -4,7 +4,7 @@ using SramComparer.Enums;
 namespace SramComparer.SoE.Enums
 {
     [Flags]
-    public enum ComparisonFlagsSoE
+    public enum ComparisonFlagsSoE : uint
     {
         NonGameBuffer   = ComparisonFlags.NonGameBuffer,
         WholeGameBuffer = ComparisonFlags.WholeGameBuffer,

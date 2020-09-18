@@ -15,21 +15,31 @@ namespace SramComparer.SoE.Services
 
         protected override bool OnUnHandledCommand(string command, IOptions options)
         {
-            switch(command)
+            switch (command)
             {
-				case nameof(Commands.fu12b):
-				case nameof(Commands.fu12ba):
-					options.Flags = InvertIncludeFlag(options.Flags,
-						command == nameof(Commands.fu12ba) ? ComparisonFlagsSoE.AllUnknown12Bs : ComparisonFlagsSoE.Unknown12B);
-					return true;
-				case nameof(Commands.fc):
-				case nameof(Commands.fca):
-					options.Flags = InvertIncludeFlag(options.Flags,
-						command == nameof(Commands.fca) ? ComparisonFlagsSoE.AllGameChecksums : ComparisonFlagsSoE.GameChecksum);
-					return true;
-				default:
-					return false;
-			}
+                case nameof(Commands.c):
+                    CompareFiles(options);
+                    break;
+                case nameof(Commands.e):
+                    ExportCurrentComparison(options);
+                    break;
+                case nameof(Commands.fu12b) or nameof(Commands.fu12ba):
+                    options.Flags = InvertIncludeFlag(options.Flags,
+                        command == nameof(Commands.fu12ba)
+                            ? ComparisonFlagsSoE.AllUnknown12Bs
+                            : ComparisonFlagsSoE.Unknown12B);
+                    break;
+                case nameof(Commands.fc) or nameof(Commands.fca):
+                    options.Flags = InvertIncludeFlag(options.Flags,
+                        command == nameof(Commands.fca)
+                            ? ComparisonFlagsSoE.AllGameChecksums
+                            : ComparisonFlagsSoE.GameChecksum);
+                    break;
+                default:
+                    return false;
+            }
+
+            return true;
         }
     }
 }

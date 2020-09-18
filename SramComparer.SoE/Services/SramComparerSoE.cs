@@ -5,7 +5,6 @@ using SramCommons.Extensions;
 using SramCommons.SoE;
 using SramCommons.SoE.Constants;
 using SramCommons.SoE.Models.Structs;
-using SramComparer.Enums;
 using SramComparer.Helpers;
 using SramComparer.Services;
 using SramComparer.SoE.Enums;
@@ -14,21 +13,21 @@ using static SramComparer.SoE.Helpers.UnkownBufferOffsetFinder;
 using Res = SramComparer.Properties.Resources;
 // ReSharper disable RedundantArgumentDefaultValue
 
-namespace SramComparer.SoE
+namespace SramComparer.SoE.Services
 {
     public class SramComparerSoE : SramComparerBase<SramFile, SramGame>
     {
         public SramComparerSoE() : base(ServiceCollection.ConsolePrinter) {}
         public SramComparerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
 
-        public override void CompareSram(SramFile currFile, SramFile compFile, IOptions options)
+        public override int CompareSram(SramFile currFile, SramFile compFile, IOptions options)
         {
             ConsolePrinter.PrintSectionHeader();
             Console.ForegroundColor = ConsoleColor.Yellow;
 
             var optionGameIndex = options.Game - 1;
             var optionCompGameIndex = options.ComparisonGame -1;
-            var optionFlags = (ComparisonFlags)options.Flags;
+            var optionFlags = (ComparisonFlagsSoE)options.Flags;
 
             Console.WriteLine(optionGameIndex > -1
                 ? string.Format(Res.StatusGameWillBeComparedTemplate, options.Game)
@@ -71,7 +70,7 @@ namespace SramComparer.SoE
                     allDiffBytes = CompareGames(gameIndex);
                 }
 
-            if (options.Flags.HasFlag(ComparisonFlags.NonGameBuffer))
+            if (options.Flags.HasFlag(ComparisonFlagsSoE.NonGameBuffer))
             {
                 var nonGameUnknownDiffBytes = CompareByteArray(nameof(currFile.Sram.Unknown1), 0, currFile.Sram.Unknown1, compFile.Sram.Unknown1, false);
 
@@ -124,6 +123,8 @@ namespace SramComparer.SoE
                     Console.WriteLine(timestamps.ToString());
             }
 
+            return allDiffBytes;
+
             int CompareGames(int gameIndex, int compGameIndex = default)
             {
                 if (compGameIndex == -1)
@@ -140,7 +141,7 @@ namespace SramComparer.SoE
 
                 var gameIdString = gameId.ToString();
                 if(gameId != compGameId)
-                    gameIdString += Resources.ComparedWithGameTemplated.InsertArgs(compGameId);
+                    gameIdString += $" {Resources.ComparedWithGameTemplated.InsertArgs(compGameId)}";
 
                 if (optionFlags.HasFlag(ComparisonFlagsSoE.AllGameChecksums) || compGame.Checksum != currGame.Checksum)
                     checksums.AppendLine(
@@ -176,7 +177,7 @@ namespace SramComparer.SoE
                     Console.ResetColor();
                 }
 
-                if (!optionFlags.HasFlag(ComparisonFlags.WholeGameBuffer))
+                if (!optionFlags.HasFlag(ComparisonFlagsSoE.WholeGameBuffer))
                 {
                     allDiffBytes += gameDiffBytes;
                     return allDiffBytes;
@@ -206,7 +207,7 @@ namespace SramComparer.SoE
             }
         }
 
-        protected override int CompareGame(SramGame currGame, SramGame compGame, IOptions options)
+        public override int CompareGame(SramGame currGame, SramGame compGame, IOptions options)
         {
             // ReSharper disable once InlineOutVariableDeclaration
             string name;

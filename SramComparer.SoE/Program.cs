@@ -1,8 +1,5 @@
 ﻿using App.Commons.Extensions;
-using SramComparer.SoE.Helpers;
 using SramComparer.SoE.Services;
-// ReSharper disable AccessToStaticMemberViaDerivedType
-// ReSharper disable PossibleMultipleEnumeration
 
 namespace SramComparer.SoE
 {
@@ -21,9 +18,7 @@ namespace SramComparer.SoE
             cmdLineParser.ThrowIfNull(nameof(cmdLineParser));
 
             var options = cmdLineParser.Parse(args);
-		    var isCommandMode = options.Commands is not null;
-
-            if (isCommandMode)
+            if (options.Commands is not null)
                 CommandQueue.Instance.Run(options);
             else
                 CommandMenu.Instance.Run(options);
