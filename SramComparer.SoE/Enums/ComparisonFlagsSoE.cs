@@ -1,12 +1,13 @@
 ﻿using System;
+using SramComparer.Enums;
 
-namespace SramComparer.SoE
+namespace SramComparer.SoE.Enums
 {
     [Flags]
-    public enum ComparisonFlags
+    public enum ComparisonFlagsSoE
     {
-        NonGameBuffer   = 1 << 0,
-        WholeGameBuffer = 1 << 1,
+        NonGameBuffer   = ComparisonFlags.NonGameBuffer,
+        WholeGameBuffer = ComparisonFlags.WholeGameBuffer,
         GameChecksum        = 1 << 2,
         AllGameChecksums    = 1 << 3 | GameChecksum,
         Unknown12B      = 1 << 4,

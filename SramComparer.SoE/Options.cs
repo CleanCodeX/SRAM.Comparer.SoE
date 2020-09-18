@@ -1,7 +1,8 @@
 ﻿using SramCommons.SoE.Models.Enums;
+using SramComparer.SoE.Enums;
 
 namespace SramComparer.SoE
 {
-    public class Options : OptionsBase<FileRegion, ComparisonFlags>
+    public class Options : Options<FileRegion, ComparisonFlagsSoE>
     { }
 }

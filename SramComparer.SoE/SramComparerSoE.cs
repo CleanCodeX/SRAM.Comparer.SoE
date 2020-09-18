@@ -5,20 +5,25 @@ using SramCommons.Extensions;
 using SramCommons.SoE;
 using SramCommons.SoE.Constants;
 using SramCommons.SoE.Models.Structs;
+using SramComparer.Enums;
 using SramComparer.Helpers;
+using SramComparer.Services;
+using SramComparer.SoE.Enums;
 using SramComparer.SoE.Properties;
-using static SramComparer.Helpers.ConsolePrinterBase;
 using static SramComparer.SoE.Helpers.UnkownBufferOffsetFinder;
 using Res = SramComparer.Properties.Resources;
 // ReSharper disable RedundantArgumentDefaultValue
 
 namespace SramComparer.SoE
 {
-    public class SramComparer: SramComparerBase<SramFile, SramGame>
+    public class SramComparerSoE : SramComparerBase<SramFile, SramGame>
     {
+        public SramComparerSoE() : base(ServiceCollection.ConsolePrinter) {}
+        public SramComparerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
+
         public override void CompareSram(SramFile currFile, SramFile compFile, IOptions options)
         {
-            WriteNewSectionHeader();
+            ConsolePrinter.PrintSectionHeader();
             Console.ForegroundColor = ConsoleColor.Yellow;
 
             var optionGameIndex = options.Game - 1;
@@ -112,10 +117,10 @@ namespace SramComparer.SoE
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine();
 
-                if (optionFlags.HasFlag(ComparisonFlags.GameChecksum))
+                if (optionFlags.HasFlag(ComparisonFlagsSoE.GameChecksum))
                     Console.WriteLine(checksums.ToString());
 
-                if (optionFlags.HasFlag(ComparisonFlags.Unknown12B))
+                if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12B))
                     Console.WriteLine(timestamps.ToString());
             }
 
@@ -137,11 +142,11 @@ namespace SramComparer.SoE
                 if(gameId != compGameId)
                     gameIdString += Resources.ComparedWithGameTemplated.InsertArgs(compGameId);
 
-                if (optionFlags.HasFlag(ComparisonFlags.AllGameChecksums) || compGame.Checksum != currGame.Checksum)
+                if (optionFlags.HasFlag(ComparisonFlagsSoE.AllGameChecksums) || compGame.Checksum != currGame.Checksum)
                     checksums.AppendLine(
                         $"{" ".Repeat(2)}{Res.Game} {gameId}: {currGame.Checksum.PadLeft()} = ({Res.ReversedByteOrder}) {currGame.Checksum.ReverseBytes().PadLeft()}");
 
-                if (optionFlags.HasFlag(ComparisonFlags.AllUnknown12Bs) || compGame.Unknown12B != currGame.Unknown12B)
+                if (optionFlags.HasFlag(ComparisonFlagsSoE.AllUnknown12Bs) || compGame.Unknown12B != currGame.Unknown12B)
                     timestamps.AppendLine(
                         $"{" ".Repeat(2)}{Res.Game} {gameId}: {currGame.Unknown12B.PadLeft()} = ({Res.ReversedByteOrder}) {currGame.Unknown12B.ReverseBytes().PadLeft()}");
 
@@ -177,7 +182,7 @@ namespace SramComparer.SoE
                     return allDiffBytes;
                 }
 
-                EnsureMinConsoleWidth(165);
+                ConsoleHelper.EnsureMinConsoleWidth(165);
 
                 bufferName = $"{nameof(compFile.Sram.Game)} {gameId}";
                 var bufferOffset = Offsets.FirstGame + gameId * Sizes.Game.All;
@@ -273,7 +278,7 @@ namespace SramComparer.SoE
             offset = GetGameOffset(nameof(currGame.Unknown12A), out name);
             diffBytes += CompareByteArray(name, offset, currGame.Unknown12A, compGame.Unknown12A);
 
-            if (options.Flags.HasFlag(ComparisonFlags.Unknown12B))
+            if (options.Flags.HasFlag(ComparisonFlagsSoE.Unknown12B))
             {
                 offset = GetGameOffset(nameof(currGame.Unknown12B), out name);
                 diffBytes += CompareUShort(name, offset, currGame.Unknown12B,
