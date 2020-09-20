@@ -18,12 +18,12 @@ namespace SramComparer.SoE
             cmdLineParser.ThrowIfNull(nameof(cmdLineParser));
 
             var options = cmdLineParser.Parse(args);
-            if (options.Commands is not null)
-                CommandQueue.Instance.Run(options);
-            else
+            if (options.Commands is null)
                 CommandMenu.Instance.Run(options);
+            else
+                CommandQueue.Instance.Run(options);
 
-		    return 0;
+            return 0;
 		}
 	}
 }
