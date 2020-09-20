@@ -13,7 +13,7 @@ namespace SramComparer.SoE.Services
         public void CompareFiles(IOptions options) => CompareFiles<SramComparerSoE>(options);
         public void ExportCurrentComparison(IOptions options) => ExportCurrentComparison<SramComparerSoE>(options);
 
-        protected override bool OnUnHandledCommand(string command, IOptions options)
+        protected override bool OnShouldHandleCommand(string command, IOptions options)
         {
             switch (command)
             {
@@ -36,10 +36,10 @@ namespace SramComparer.SoE.Services
                             : ComparisonFlagsSoE.GameChecksum);
                     break;
                 default:
-                    return false;
+                    return true;
             }
 
-            return true;
+            return false;
         }
     }
 }
