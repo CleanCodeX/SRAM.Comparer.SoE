@@ -1,11 +1,13 @@
-﻿using App.Commons.Extensions;
+﻿using System.Runtime.CompilerServices;
+using App.Commons.Extensions;
 using SramComparer.SoE.Services;
 
 namespace SramComparer.SoE
 {
     public static class Program
 	{
-        static Program()
+        [ModuleInitializer]
+        public static void InitializeServices()
         {
             ServiceCollection.CmdLineParser = new CmdLineParserSoE();
             ServiceCollection.CommandExecutor = new CommandExecutorSoE();
