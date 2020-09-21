@@ -1,4 +1,5 @@
-﻿using SramCommons.SoE;
+﻿using System.IO;
+using SramCommons.SoE;
 using SramCommons.SoE.Models.Structs;
 using SramComparer.Services;
 using SramComparer.SoE.Enums;
@@ -10,7 +11,9 @@ namespace SramComparer.SoE.Services
         public CommandHandlerSoE() { }
 		public CommandHandlerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
 
+        public void CompareFiles(Stream currFile, Stream compFile, IOptions options) => CompareFiles<SramComparerSoE>(currFile, compFile, options);
         public void CompareFiles(IOptions options) => CompareFiles<SramComparerSoE>(options);
+
         public void ExportCurrentComparison(IOptions options) => ExportCurrentComparison<SramComparerSoE>(options);
 
         protected override bool OnRunCommand(string command, IOptions options)
