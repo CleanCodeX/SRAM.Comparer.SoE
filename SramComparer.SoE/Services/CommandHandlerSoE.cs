@@ -36,7 +36,7 @@ namespace SramComparer.SoE.Services
                             : ComparisonFlagsSoE.GameChecksum);
                     break;
                 default:
-                    return base.RunCommand(command, options);
+                    return base.OnRunCommand(command, options);
             }
 
             return true;
