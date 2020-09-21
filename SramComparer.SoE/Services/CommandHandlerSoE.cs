@@ -5,15 +5,15 @@ using SramComparer.SoE.Enums;
 
 namespace SramComparer.SoE.Services
 {
-    public class CommandExecutorSoE: CommandExecutor<SramFile, SramGame>
+    public class CommandHandlerSoE: CommandHandler<SramFile, SramGame>
     {
-        public CommandExecutorSoE() { }
-		public CommandExecutorSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
+        public CommandHandlerSoE() { }
+		public CommandHandlerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
 
         public void CompareFiles(IOptions options) => CompareFiles<SramComparerSoE>(options);
         public void ExportCurrentComparison(IOptions options) => ExportCurrentComparison<SramComparerSoE>(options);
 
-        protected override bool OnShouldHandleCommand(string command, IOptions options)
+        protected override bool OnRunCommand(string command, IOptions options)
         {
             switch (command)
             {
@@ -36,10 +36,10 @@ namespace SramComparer.SoE.Services
                             : ComparisonFlagsSoE.GameChecksum);
                     break;
                 default:
-                    return true;
+                    return base.RunCommand(command, options);
             }
 
-            return false;
+            return true;
         }
     }
 }

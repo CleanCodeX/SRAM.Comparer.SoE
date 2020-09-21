@@ -10,7 +10,7 @@ namespace SramComparer.SoE
         public static void InitializeServices()
         {
             ServiceCollection.CmdLineParser = new CmdLineParserSoE();
-            ServiceCollection.CommandExecutor = new CommandExecutorSoE();
+            ServiceCollection.CommandHandler = new CommandHandlerSoE();
             ServiceCollection.ConsolePrinter = new ConsolePrinterSoE();
         }
 
