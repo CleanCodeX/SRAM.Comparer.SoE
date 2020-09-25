@@ -12,16 +12,32 @@ allows to compare unknown buffers in Secret of Evermore's SRAM file.
 * Display of changed or all checksums (**optional**)
 * All settings can be set by cmd line arguments
 
+## Changelog
+0.2.1 
+* Bugfixes
+* Added transfer of SRAM data to similar game 
+
+0.2.0 
+* Bugfixes
+* Added specific current game with same or different comparison game 
+* Display of changed or all checksums 
+* Export comparison result as text file
+* Backup / restore functionality of current and comparison sram file
+
+0.1.0 
+* Comparison of Unknowns only or whole game buffer
+* Comparison of whole sram outside games 
+
 ## How to run
 This Project is based on .net 5 runtime.
 
 Users see "Run apps - Runtime" column, coders see "Build apps - SDK" column at:  
-https://dotnet.microsoft.com
+https://dotnet.microsoft.com/download/dotnet/5.0
 
 ## Download binaries
 [Releases](http://xeth.de/Releases/SramComparer)
 
-[SramComparer.SoE.0.2.0.zip (win x64)](http://xeth.de/Releases/SramComparer/SramComparer.SoE.0.1.8.zip "SramComparer.SoE.0.2.0.zip (win x64)")
+[SramComparer.SoE.0.2.1.zip (win x64)](http://xeth.de/Releases/SramComparer/SramComparer.SoE.0.2.1.zip "SramComparer.SoE.0.2.1.zip (win x64)")
 
 ## How to use
 **Steps**:
