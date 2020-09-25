@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <StartupObject></StartupObject>
-    <Version>0.2.0-l</Version>
+    <Version>0.2.0-n</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
     <RepositoryUrl>https://github.com/CleanCodeX/SramComparer.SoE</RepositoryUrl>
@@ -37,8 +37,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Snes.SramCommons.SoE" Version="0.2.0-h" />
-    <PackageReference Include="Snes.SramComparer" Version="1.0.0-t" />
+    <PackageReference Include="Snes.SramFormat.SoE" Version="0.2.0-d" />
+    <PackageReference Include="Snes.SramComparer" Version="1.0.0-y" />
   </ItemGroup>
 
   <ItemGroup>

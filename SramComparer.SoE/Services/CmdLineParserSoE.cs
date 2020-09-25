@@ -1,4 +1,4 @@
-﻿using SramCommons.SoE.Models.Enums;
+﻿using SramFormat.SoE.Models.Enums;
 using SramComparer.Services;
 using SramComparer.SoE.Enums;
 

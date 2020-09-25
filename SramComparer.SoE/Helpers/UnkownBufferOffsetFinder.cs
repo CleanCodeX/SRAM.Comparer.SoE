@@ -1,13 +1,15 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using App.Commons.Extensions;
-using SramCommons.SoE.Constants;
+using System.Runtime.InteropServices;
+using SramFormat.SoE.Constants;
+using SramFormat.SoE.Models.Structs;
+
 // ReSharper disable InconsistentNaming
 
 namespace SramComparer.SoE.Helpers
 {
     internal static class UnkownBufferOffsetFinder
     {
-        public static int GetGameBufferOffset(string bufferName) => (int)bufferName.ParseEnum<GameUnknownOffset>();
+        public static int GetGameBufferOffset(string bufferName) => (int)Marshal.OffsetOf<SramGame>(bufferName); // (int)bufferName.ParseEnum<GameUnknownOffset>();
         public static int GetSramBufferOffset(string bufferName) => Offsets.SramUnknown1;
 
         [SuppressMessage("ReSharper", "UnusedMember.Local")]

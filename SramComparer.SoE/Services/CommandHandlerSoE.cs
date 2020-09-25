@@ -1,12 +1,12 @@
 ﻿using System.IO;
-using SramCommons.SoE;
-using SramCommons.SoE.Models.Structs;
+using SramFormat.SoE;
+using SramFormat.SoE.Models.Structs;
 using SramComparer.Services;
 using SramComparer.SoE.Enums;
 
 namespace SramComparer.SoE.Services
 {
-    public class CommandHandlerSoE: CommandHandler<SramFile, SramGame>
+    public class CommandHandlerSoE: CommandHandler<SramFileSoE, SramGame>
     {
         public CommandHandlerSoE() { }
 		public CommandHandlerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}

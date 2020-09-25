@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using App.Commons.Extensions;
 using SramCommons.Extensions;
-using SramCommons.SoE;
-using SramCommons.SoE.Constants;
-using SramCommons.SoE.Models.Structs;
+using SramFormat.SoE;
+using SramFormat.SoE.Constants;
+using SramFormat.SoE.Models.Structs;
 using SramComparer.Helpers;
 using SramComparer.Services;
 using SramComparer.SoE.Enums;
@@ -15,12 +16,12 @@ using Res = SramComparer.Properties.Resources;
 
 namespace SramComparer.SoE.Services
 {
-    public class SramComparerSoE : SramComparerBase<SramFile, SramGame>
+    public class SramComparerSoE : SramComparerBase<SramFileSoE, SramGame>
     {
         public SramComparerSoE() : base(ServiceCollection.ConsolePrinter) {}
         public SramComparerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
 
-        public override int CompareSram(SramFile currFile, SramFile compFile, IOptions options)
+        public override int CompareSram(SramFileSoE currFile, SramFileSoE compFile, IOptions options)
         {
             ConsolePrinter.PrintSectionHeader();
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -131,10 +132,10 @@ namespace SramComparer.SoE.Services
                     compGameIndex = gameIndex;
 
                 var currGame = currFile.GetGame(gameIndex);
-                var currGameBytes = currFile.GetCurrentGameBytes();
+                var currGameBytes = currFile.GetGameBytes(gameIndex);
 
                 var compGame = compFile.GetGame(gameIndex);
-                var compGameBytes = compFile.GetCurrentGameBytes();
+                var compGameBytes = compFile.GetGameBytes(gameIndex);
 
                 var gameId = gameIndex + 1;
                 var compGameId = compGameIndex + 1;
