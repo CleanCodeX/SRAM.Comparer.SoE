@@ -27,5 +27,5 @@ namespace SramComparer.SoE
 
             return 0;
 		}
-	}
+    }
 }
