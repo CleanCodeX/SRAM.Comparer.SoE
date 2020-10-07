@@ -141,4 +141,13 @@
   <data name="ComparedWithGameTemplated" xml:space="preserve">
     <value>compared with game {0}</value>
   </data>
+  <data name="Invalid" xml:space="preserve">
+    <value>invalid</value>
+  </data>
+  <data name="Valid" xml:space="preserve">
+    <value>valid</value>
+  </data>
+  <data name="ValidationStatus" xml:space="preserve">
+    <value>Validation-status</value>
+  </data>
 </root>

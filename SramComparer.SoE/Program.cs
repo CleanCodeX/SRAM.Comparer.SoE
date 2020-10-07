@@ -9,9 +9,9 @@ namespace SramComparer.SoE
         [ModuleInitializer]
         public static void InitializeServices()
         {
+            ServiceCollection.ConsolePrinter = new ConsolePrinterSoE();
             ServiceCollection.CmdLineParser = new CmdLineParserSoE();
             ServiceCollection.CommandHandler = new CommandHandlerSoE();
-            ServiceCollection.ConsolePrinter = new ConsolePrinterSoE();
         }
 
 		public static int Main(string[] args)
