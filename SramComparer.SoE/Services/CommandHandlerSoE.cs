@@ -11,20 +11,23 @@ namespace SramComparer.SoE.Services
         public CommandHandlerSoE() { }
 		public CommandHandlerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
 
-        public void CompareFiles(Stream currFile, Stream compFile, IOptions options) => CompareFiles<SramComparerSoE>(currFile, compFile, options);
-        public void CompareFiles(IOptions options) => CompareFiles<SramComparerSoE>(options);
+        public void Compare(Stream currFile, Stream compFile, IOptions options) => Compare<SramComparerSoE>(currFile, compFile, options);
+        public void Compare(Stream currFile, Stream compFile, IOptions options, TextWriter output) => Compare<SramComparerSoE>(currFile, compFile, options, output);
+        public void Compare(IOptions options) => Compare<SramComparerSoE>(options);
+        public void Compare(IOptions options, TextWriter output) => Compare<SramComparerSoE>(options, output);
 
-        public void ExportCurrentComparison(IOptions options) => ExportCurrentComparison<SramComparerSoE>(options);
+        public void ExportComparison(IOptions options, bool showInExplorer = false) => ExportComparison<SramComparerSoE>(options, showInExplorer);
+        public void ExportComparison(IOptions options, string filepath, bool showInExplorer = false) => ExportComparison<SramComparerSoE>(options, filepath, showInExplorer);
 
         protected override bool OnRunCommand(string command, IOptions options)
         {
             switch (command)
             {
                 case nameof(Commands.c):
-                    CompareFiles(options);
+                    Compare(options);
                     break;
                 case nameof(Commands.e):
-                    ExportCurrentComparison(options);
+                    ExportComparison(options, true);
                     break;
                 case nameof(Commands.fu12b) or nameof(Commands.fu12ba):
                     options.Flags = InvertIncludeFlag(options.Flags,
