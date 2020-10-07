@@ -131,5 +131,32 @@ namespace SramComparer.SoE.Properties {
                 return ResourceManager.GetString("GamesCurrentUnknown12BValues", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die invalid ähnelt.
+        /// </summary>
+        internal static string Invalid {
+            get {
+                return ResourceManager.GetString("Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die valid ähnelt.
+        /// </summary>
+        internal static string Valid {
+            get {
+                return ResourceManager.GetString("Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Validation-status ähnelt.
+        /// </summary>
+        internal static string ValidationStatus {
+            get {
+                return ResourceManager.GetString("ValidationStatus", resourceCulture);
+            }
+        }
     }
 }
