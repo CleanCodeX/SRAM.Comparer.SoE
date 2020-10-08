@@ -4,6 +4,6 @@ using SramComparer.SoE.Enums;
 
 namespace SramComparer.SoE.Services
 {
-    public class CmdLineParserSoE : CmdLineParser<Options, FileRegion, ComparisonFlagsSoE>
-    { }
+	public class CmdLineParserSoE : CmdLineParser<Options, FileRegion, ComparisonFlagsSoE>
+	{ }
 }

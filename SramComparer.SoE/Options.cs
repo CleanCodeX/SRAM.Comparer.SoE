@@ -3,6 +3,6 @@ using SramComparer.SoE.Enums;
 
 namespace SramComparer.SoE
 {
-    public class Options : Options<FileRegion, ComparisonFlagsSoE>
-    { }
+	public class Options : Options<FileRegion, ComparisonFlagsSoE>
+	{ }
 }
