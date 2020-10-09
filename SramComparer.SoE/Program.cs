@@ -21,9 +21,9 @@ namespace SramComparer.SoE
 
 			var options = cmdLineParser.Parse(args);
 			if (options.Commands is null)
-				CommandMenu.Instance.Run(options);
+				CommandMenu.Instance.Show(options);
 			else
-				CommandQueue.Instance.Run(options);
+				CommandQueue.Instance.Start(options);
 
 			return 0;
 		}
