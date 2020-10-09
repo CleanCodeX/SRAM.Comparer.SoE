@@ -22,14 +22,14 @@ namespace SramComparer.SoE.Helpers
 		[SuppressMessage("ReSharper", "UnusedMember.Global")]
 		private enum GameUnknownOffset
 		{
-			Unknown4_BoyBuff = Offsets.Game.Unknown4, // Offset 112
+			Unknown4_BoyBuff = Offsets.Game.Unknown4_BoyBuff__BuffFlags, // Offset 112
 			Unknown4_BoyBuff__BuffFlags = Unknown4_BoyBuff, // Offset 112
 			Unknown4_BoyBuff__Unknown1 = Unknown4_BoyBuff + 2, // Offset 114
 			Unknown4_BoyBuff__Unknown2 = Unknown4_BoyBuff + 4, // Offset 116
 			Unknown4_BoyBuff__Unknown3 = Unknown4_BoyBuff + 28, // Offset 138
 			Unknown4_BoyBuff__Unknown4 = Unknown4_BoyBuff + 30, // Offset 140
 
-			Unknown7_DogBuff = Offsets.Game.Unknown7, // Offset 177
+			Unknown7_DogBuff = Offsets.Game.Unknown7_DogBuff__BuffFlags, // Offset 177
 			Unknown7_DogBuff__BuffFlags = Unknown7_DogBuff, // Offset 177
 			Unknown7_DogBuff__Unknown1 = Unknown7_DogBuff + 2, // Offset 179
 			Unknown7_DogBuff__Unknown2 = Unknown7_DogBuff + 4, // Offset 181
