@@ -4,15 +4,15 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <StartupObject></StartupObject>
-    <Version>0.2.1-f</Version>
+    <Version>0.2.1</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
     <RepositoryUrl>https://github.com/CleanCodeX/SramComparer.SoE</RepositoryUrl>
     <PackageDescription>Allows to compare unknown parts of SoE's sram file</PackageDescription>
     <NeutralLanguage></NeutralLanguage>
     <Description>Comparer for Secret of Evermore's SRAM file.</Description>
-    <Authors>XETH</Authors>
-    <Company />
+    <Authors>CleanCodeX</Authors>
+    <Company>CleanCodeX</Company>
     <Copyright></Copyright>
     <PackageTags>SoE, SRAM, Secret of Evermore</PackageTags>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
@@ -21,8 +21,8 @@
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>new in this version: SramComparer console can be used/controlled by other API (.Net) or through highjacking its console stream. (non .Net)</PackageReleaseNotes>
-    <PackageId>Snes.SramComparer.SoE</PackageId>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageId>CCX.SramComparer.SoE</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,8 +33,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Snes.SramFormat.SoE" Version="0.2.0-f" />
-    <PackageReference Include="Snes.SramComparer" Version="1.0.1-g" />
+    <PackageReference Include="CCX.SramComparer" Version="1.0.0" />
+    <PackageReference Include="CCX.SramFormat.SoE" Version="0.2.0" />
   </ItemGroup>
 
   <ItemGroup>

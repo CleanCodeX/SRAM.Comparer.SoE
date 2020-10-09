@@ -5,6 +5,7 @@ using SramComparer.SoE.Properties;
 
 namespace SramComparer.SoE.Services
 {
+	/// <summary>Console printer implementation for SoE</summary>
 	public class ConsolePrinterSoE : ConsolePrinter
 	{
 		protected override void PrintCustomCommands()

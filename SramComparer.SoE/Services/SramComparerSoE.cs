@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using App.Commons.Extensions;
+using Common.Shared.Min.Extensions;
 using SramCommons.Extensions;
 using SramCommons.Models;
 using SramComparer.Helpers;
@@ -17,11 +17,13 @@ using Res = SramComparer.Properties.Resources;
 
 namespace SramComparer.SoE.Services
 {
+	/// <summary>SRAM comparer implementation for SoE</summary>
 	public class SramComparerSoE : SramComparerBase<SramFileSoE, SramGame>
 	{
 		public SramComparerSoE() : base(ServiceCollection.ConsolePrinter) {}
 		public SramComparerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
 
+		/// <inheritdoc cref="SramComparerBase{TSramFile,TSramGame}"/>
 		public override int CompareSram(SramFileSoE currFile, SramFileSoE compFile, IOptions options)
 		{
 			ConsolePrinter.PrintSectionHeader();
@@ -217,7 +219,7 @@ namespace SramComparer.SoE.Services
 			ConsolePrinter.PrintSectionHeader();
 
 			Console.ForegroundColor = ConsoleColor.DarkYellow;
-			Console.WriteLine($"{Resources.ValidationStatus}:");
+			Console.WriteLine($@"{Resources.ValidationStatus}:");
 
 			OnPrintGameValidationStatus(Res.Current, currFile);
 			OnPrintGameValidationStatus(Res.Comparison, compFile);
@@ -226,20 +228,20 @@ namespace SramComparer.SoE.Services
 		protected virtual void OnPrintGameValidationStatus(string name, ISramFile file)
 		{
 			Console.ForegroundColor = ConsoleColor.Gray;
-			Console.Write($"{name}:".PadRight(15));
+			Console.Write($@"{name}:".PadRight(15));
 
 			Console.ForegroundColor = ConsoleColor.DarkYellow;
-			Console.Write($" {Res.Game} (1-4)");
+			Console.Write($@" {Res.Game} (1-4)");
 
 			Console.ForegroundColor = ConsoleColor.White;
-			Console.Write(" [ ");
+			Console.Write(@" [ ");
 
 			for (var i = 0; i <= 3; i++)
 			{
 				if (i > 0)
 				{
 					Console.ForegroundColor = ConsoleColor.White;
-					Console.Write($" | ");
+					Console.Write(@" | ");
 				}
 
 				var isValid = file.IsValid(i);
@@ -248,9 +250,10 @@ namespace SramComparer.SoE.Services
 			}
 
 			Console.ForegroundColor = ConsoleColor.White;
-			Console.WriteLine(" ]");
+			Console.WriteLine(@" ]");
 		}
 
+		/// <inheritdoc cref="SramComparerBase{TSramFile,TSramGame}"/>
 		public override int CompareGame(SramGame currGame, SramGame compGame, IOptions options)
 		{
 			var delimiter = StructDelimiter;

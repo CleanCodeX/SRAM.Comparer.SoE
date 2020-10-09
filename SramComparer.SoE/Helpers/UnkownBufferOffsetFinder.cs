@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-using App.Commons.Extensions;
+using Common.Shared.Min.Extensions;
 using SramFormat.SoE.Constants;
 using SramFormat.SoE.Models.Structs;
 

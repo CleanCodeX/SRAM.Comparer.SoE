@@ -1,5 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
-using App.Commons.Extensions;
+using Common.Shared.Min.Extensions;
 using SramComparer.SoE.Services;
 
 namespace SramComparer.SoE
