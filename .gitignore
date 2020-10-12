@@ -351,3 +351,4 @@ MigrationBackup/
 
 /SramComparer.SoE/nuget.config
 /SramComparer.SoE/Properties/launchSettings.json
+/Properties/launchSettings.json

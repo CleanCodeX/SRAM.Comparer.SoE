@@ -26,7 +26,6 @@ namespace SramComparer.SoE.Services
 		/// <inheritdoc cref="SramComparerBase{TSramFile,TSramGame}"/>
 		public override int CompareSram(SramFileSoE currFile, SramFileSoE compFile, IOptions options)
 		{
-			ConsolePrinter.PrintSectionHeader();
 			PrintGameValidationStatus(currFile, compFile);
 
 			ConsolePrinter.PrintParagraph();
@@ -95,18 +94,14 @@ namespace SramComparer.SoE.Services
 			ConsolePrinter.PrintParagraph();
 
 			const int borderLength = 29;
+			var color = allDiffBytes > 0 ? ConsoleColor.Yellow : ConsoleColor.Green;
+			ConsolePrinter.PrintColoredLine(color, "=".Repeat(borderLength));
 			if (allDiffBytes > 0)
-			{
-				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, "=".Repeat(borderLength));
-				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, @$"== {Res.StatusSramChangedBytesTemplate} ".PadRight(borderLength + 1, '=').InsertArgs(allDiffBytes));
-			}
+				ConsolePrinter.PrintColoredLine(color, @$"== {Res.StatusSramChangedBytesTemplate} ".PadRight(borderLength + 1, '=').InsertArgs(allDiffBytes));
 			else
-			{
-				ConsolePrinter.PrintColoredLine(ConsoleColor.Green, "=".Repeat(borderLength));
-				ConsolePrinter.PrintColoredLine(ConsoleColor.Green, @$"== {Res.StatusNoSramBytesChanged} =".PadRight(borderLength, '='));
-			}
+				ConsolePrinter.PrintColoredLine(color, @$"== {Res.StatusNoSramBytesChanged} =".PadRight(borderLength, '='));
 
-			ConsolePrinter.PrintLine("=".Repeat(borderLength));
+			ConsolePrinter.PrintColoredLine(color, "=".Repeat(borderLength));
 			ConsolePrinter.ResetColor();
 
 			if (optionFlags != default)
@@ -223,7 +218,7 @@ namespace SramComparer.SoE.Services
 				ConsolePrinter.PrintColored(isValid ? ConsoleColor.DarkGreen : ConsoleColor.Red, isValid ? Resources.Valid : Resources.Invalid);
 			}
 
-			ConsolePrinter.PrintColored(ConsoleColor.White, @" ]");
+			ConsolePrinter.PrintColoredLine(ConsoleColor.White, @" ]");
 		}
 
 		/// <inheritdoc cref="SramComparerBase{TSramFile,TSramGame}"/>
