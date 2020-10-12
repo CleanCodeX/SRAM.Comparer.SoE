@@ -1,5 +1,4 @@
-﻿using System;
-using SramComparer.Services;
+﻿using SramComparer.Services;
 using SramComparer.SoE.Enums;
 using SramComparer.SoE.Properties;
 
@@ -11,16 +10,16 @@ namespace SramComparer.SoE.Services
 		protected override void PrintCustomCommands()
 		{
 			PrintCommandKey(Commands.fc);
-			Console.WriteLine(Resources.CommandIncludeChecksum);
+			PrintLine(Resources.CommandIncludeChecksum);
 
 			PrintCommandKey(Commands.fca);
-			Console.WriteLine(Resources.CommandIncludeAllChecksums);
+			PrintLine(Resources.CommandIncludeAllChecksums);
 
 			PrintCommandKey(Commands.fu12b);
-			Console.WriteLine(Resources.CommandIncludeUnknown12B);
+			PrintLine(Resources.CommandIncludeUnknown12B);
 
 			PrintCommandKey(Commands.fu12ba);
-			Console.WriteLine(Resources.CommandIncludeAllUnknown12Bs);
+			PrintLine(Resources.CommandIncludeAllUnknown12Bs);
 		}
 	}
 }

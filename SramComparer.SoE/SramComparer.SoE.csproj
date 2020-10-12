@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <StartupObject></StartupObject>
-    <Version>0.2.3-a1</Version>
+    <Version>0.2.3-a2</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
     <RepositoryUrl>https://github.com/CleanCodeX/SramComparer.SoE</RepositoryUrl>
@@ -26,14 +26,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Icon.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
+    <None Remove="SramComparer.SoE.csproj.DotSettings" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CCX.SramComparer" Version="1.0.2-a2" />
+    <PackageReference Include="CCX.SramComparer" Version="1.0.2-a3" />
     <PackageReference Include="CCX.SramFormat.SoE" Version="0.2.3-a4" />
   </ItemGroup>
 

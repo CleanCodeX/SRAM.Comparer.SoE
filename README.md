@@ -21,7 +21,7 @@ https://dotnet.microsoft.com
 ## Download binaries
 [Releases](http://xeth.de/Releases/SramComparer)
 
-[SramComparer.SoE.0.2.0.zip (win x64)](http://xeth.de/Releases/SramComparer/SramComparer.SoE.0.1.8.zip "SramComparer.SoE.0.2.0.zip (win x64)")
+[SramComparer.SoE.0.2.1.zip (win x64)](http://xeth.de/Releases/SramComparer/SramComparer.SoE.0.2.1.zip "SramComparer.SoE.0.2.1.zip (win x64)")
 
 ## How to use
 **Steps**:

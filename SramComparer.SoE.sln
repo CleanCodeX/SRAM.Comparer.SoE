@@ -7,9 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SramComparer.SoE", "SramCom
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ABB403B0-2E2F-4E72-B11E-0C3F8BE9672F}"
 	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-		LICENSE.txt = LICENSE.txt
-		README.md = README.md
+		ReadMe.md = ReadMe.md
 		UnknownOffsets.txt = UnknownOffsets.txt
 	EndProjectSection
 EndProject

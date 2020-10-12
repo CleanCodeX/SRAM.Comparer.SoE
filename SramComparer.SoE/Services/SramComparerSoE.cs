@@ -29,28 +29,23 @@ namespace SramComparer.SoE.Services
 			ConsolePrinter.PrintSectionHeader();
 			PrintGameValidationStatus(currFile, compFile);
 
-			Console.WriteLine();
-			Console.ForegroundColor = ConsoleColor.Yellow;
+			ConsolePrinter.PrintParagraph();
 
-			var optionGameIndex = options.Game - 1;
+			var optionGameIndex = options.CurrentGame - 1;
 			var optionCompGameIndex = options.ComparisonGame - 1;
 			var optionFlags = (ComparisonFlagsSoE)options.Flags;
 
-			Console.WriteLine(optionGameIndex > -1
-				? string.Format(Res.StatusGameWillBeComparedTemplate, options.Game)
+			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, optionGameIndex > -1
+				? string.Format(Res.StatusGameWillBeComparedTemplate, options.CurrentGame)
 				: Res.StatusAllGamesWillBeCompared);
 
 			Console.ForegroundColor = ConsoleColor.White;
-			Console.WriteLine();
+			ConsolePrinter.PrintParagraph();
 
 			var offset = GetSramOffset(nameof(compFile.Sram.Unknown1), out var bufferName);
 			var sramDiffBytes = CompareByteArray(Res.Sram + ":" + bufferName, offset, compFile.Sram.Unknown1, currFile.Sram.Unknown1);
 			if (sramDiffBytes > 0)
-			{
-				Console.ForegroundColor = ConsoleColor.Green;
-				Console.WriteLine(Res.StatusTotalDiffBytesTemplate, sramDiffBytes);
-				Console.ForegroundColor = ConsoleColor.White;
-			}
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Green, Res.StatusTotalDiffBytesTemplate.InsertArgs(sramDiffBytes));
 
 			static int GetSramOffset(string bufferName, out string name)
 			{
@@ -83,51 +78,46 @@ namespace SramComparer.SoE.Services
 
 				if (nonGameUnknownDiffBytes > 0)
 				{
-					Console.WriteLine();
-					Console.ForegroundColor = ConsoleColor.Magenta;
-					Console.WriteLine(" ".Repeat(2) + $@"[ {Res.SectionNonGameUnknowns} ].......................................");
-					Console.ResetColor();
+					ConsolePrinter.PrintParagraph();
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.SectionNonGameUnknowns} ].......................................");
+					ConsolePrinter.ResetColor();
 
 					nonGameUnknownDiffBytes = CompareByteArray(nameof(currFile.Sram.Unknown1), Offsets.SramUnknown1, currFile.Sram.Unknown1, compFile.Sram.Unknown1, true);
 
-					Console.WriteLine();
-					Console.ForegroundColor = nonGameUnknownDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White;
-					Console.WriteLine(" ".Repeat(4) + Res.StatusNonGameUnknownsBytesTemplate, nonGameUnknownDiffBytes);
-					Console.ResetColor();
+					ConsolePrinter.PrintParagraph();
+					ConsolePrinter.PrintColoredLine(nonGameUnknownDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White, " ".Repeat(4) + Res.StatusNonGameUnknownsBytesTemplate.InsertArgs(nonGameUnknownDiffBytes));
+					ConsolePrinter.ResetColor();
 
 					allDiffBytes += nonGameUnknownDiffBytes;
 				}
 			}
 
-			Console.WriteLine();
+			ConsolePrinter.PrintParagraph();
 
 			const int borderLength = 29;
 			if (allDiffBytes > 0)
 			{
-				Console.ForegroundColor = ConsoleColor.Yellow;
-				Console.WriteLine("=".Repeat(borderLength));
-				Console.WriteLine(@$"== {Res.StatusSramChangedBytesTemplate} ".PadRight(borderLength + 1, '='), allDiffBytes);
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, "=".Repeat(borderLength));
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, @$"== {Res.StatusSramChangedBytesTemplate} ".PadRight(borderLength + 1, '=').InsertArgs(allDiffBytes));
 			}
 			else
 			{
-				Console.ForegroundColor = ConsoleColor.Green;
-				Console.WriteLine("=".Repeat(borderLength));
-				Console.WriteLine(@$"== {Res.StatusNoSramBytesChanged} =".PadRight(borderLength, '='));
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Green, "=".Repeat(borderLength));
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Green, @$"== {Res.StatusNoSramBytesChanged} =".PadRight(borderLength, '='));
 			}
 
-			Console.WriteLine("=".Repeat(borderLength));
-			Console.ResetColor();
+			ConsolePrinter.PrintLine("=".Repeat(borderLength));
+			ConsolePrinter.ResetColor();
 
 			if (optionFlags != default)
 			{
-				Console.ForegroundColor = ConsoleColor.Cyan;
-				Console.WriteLine();
+				ConsolePrinter.PrintParagraph();
 
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.GameChecksum))
-					Console.WriteLine(checksums.ToString());
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, checksums.ToString());
 
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12B))
-					Console.WriteLine(timestamps.ToString());
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, timestamps.ToString());
 			}
 
 			return allDiffBytes;
@@ -166,22 +156,19 @@ namespace SramComparer.SoE.Services
 				timestamps.AppendLine(
 					$"{" ".Repeat(2)}{Res.Game} {compGameId}: {compGame.Unknown12B.PadLeft()} = ({Res.ReversedByteOrder}) {compGame.Unknown12B.ReverseBytes().PadLeft()} ({Res.Comparison.ToLower()} {Res.Game.ToLower()})");
 
-				Console.ForegroundColor = ConsoleColor.Yellow;
-				Console.WriteLine($@"[ {Res.SectionGameHasChangedTemplate} ]---------------------------------------------", gameIdString);
-				Console.ResetColor();
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.SectionGameHasChangedTemplate} ]---------------------------------------------".InsertArgs(gameIdString));
+				ConsolePrinter.ResetColor();
 
-				Console.WriteLine();
-				Console.ForegroundColor = ConsoleColor.Magenta;
-				Console.WriteLine(" ".Repeat(2) + $@"[ {Res.SectionGameUnknownsChangedTemplate} ].......................................", gameId);
-				Console.ResetColor();
+				ConsolePrinter.PrintParagraph();
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.SectionGameUnknownsChangedTemplate} ].......................................".InsertArgs(gameId));
+				ConsolePrinter.ResetColor();
 
 				var gameDiffBytes = CompareGame(currGame, compGame, options);
 				if (gameDiffBytes > 0)
 				{
-					Console.WriteLine();
-					Console.ForegroundColor = ConsoleColor.Green;
-					Console.WriteLine(" ".Repeat(4) + Res.StatusGameUnknownsChangedGameIdBytesTemplate, gameId, gameDiffBytes);
-					Console.ResetColor();
+					ConsolePrinter.PrintParagraph();
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Green, " ".Repeat(4) + Res.StatusGameUnknownsChangedGameIdBytesTemplate.InsertArgs(gameId, gameDiffBytes));
+					ConsolePrinter.ResetColor();
 				}
 
 				if (!optionFlags.HasFlag(ComparisonFlagsSoE.WholeGameBuffer))
@@ -197,16 +184,14 @@ namespace SramComparer.SoE.Services
 				var gameBufferDiffBytes = CompareByteArray(bufferName, bufferOffset, currGameBytes, compGameBytes, false);
 				if (gameBufferDiffBytes > gameDiffBytes)
 				{
-					Console.WriteLine();
-					Console.ForegroundColor = ConsoleColor.Magenta;
-					Console.WriteLine($@"{" ".Repeat(2)}[ {Res.SectionGameChangedTemplate} ]...................................", gameIndex);
+					ConsolePrinter.PrintParagraph();
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, $@"{" ".Repeat(2)}[ {Res.SectionGameChangedTemplate} ]...................................".InsertArgs(gameIndex));
 					// ReSharper disable once RedundantArgumentDefaultValue
 
 					CompareByteArray(bufferName, bufferOffset, currGameBytes, compGameBytes, true, Offsets.Game.GetNameFromOffset);
-					Console.WriteLine();
-					Console.ForegroundColor = gameDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White;
-					Console.WriteLine(" ".Repeat(4) + Res.StatusGameChangedBytesTemplate, gameIdString, gameBufferDiffBytes);
-					Console.ResetColor();
+					ConsolePrinter.PrintParagraph();
+					ConsolePrinter.PrintColoredLine(gameDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White, " ".Repeat(4) + Res.StatusGameChangedBytesTemplate.InsertArgs(gameIdString, gameBufferDiffBytes));
+					ConsolePrinter.ResetColor();
 				}
 
 				allDiffBytes += gameBufferDiffBytes;
@@ -217,9 +202,7 @@ namespace SramComparer.SoE.Services
 		protected virtual void PrintGameValidationStatus(SramFileSoE currFile, SramFileSoE compFile)
 		{
 			ConsolePrinter.PrintSectionHeader();
-
-			Console.ForegroundColor = ConsoleColor.DarkYellow;
-			Console.WriteLine($@"{Resources.ValidationStatus}:");
+			ConsolePrinter.PrintColoredLine(ConsoleColor.DarkYellow, $@"{Resources.ValidationStatus}:");
 
 			OnPrintGameValidationStatus(Res.Current, currFile);
 			OnPrintGameValidationStatus(Res.Comparison, compFile);
@@ -227,30 +210,20 @@ namespace SramComparer.SoE.Services
 
 		protected virtual void OnPrintGameValidationStatus(string name, ISramFile file)
 		{
-			Console.ForegroundColor = ConsoleColor.Gray;
-			Console.Write($@"{name}:".PadRight(15));
-
-			Console.ForegroundColor = ConsoleColor.DarkYellow;
-			Console.Write($@" {Res.Game} (1-4)");
-
-			Console.ForegroundColor = ConsoleColor.White;
-			Console.Write(@" [ ");
+			ConsolePrinter.PrintColored(ConsoleColor.Gray, $@"{name}:".PadRight(15));
+			ConsolePrinter.PrintColored(ConsoleColor.DarkYellow, $@" {Res.Game} (1-4)");
+			ConsolePrinter.PrintColored(ConsoleColor.White, @" [ ");
 
 			for (var i = 0; i <= 3; i++)
 			{
 				if (i > 0)
-				{
-					Console.ForegroundColor = ConsoleColor.White;
-					Console.Write(@" | ");
-				}
+					ConsolePrinter.PrintColored(ConsoleColor.White, @" | ");
 
 				var isValid = file.IsValid(i);
-				Console.ForegroundColor = isValid ? ConsoleColor.DarkGreen : ConsoleColor.Red;
-				Console.Write(isValid ? Resources.Valid : Resources.Invalid);
+				ConsolePrinter.PrintColored(isValid ? ConsoleColor.DarkGreen : ConsoleColor.Red, isValid ? Resources.Valid : Resources.Invalid);
 			}
 
-			Console.ForegroundColor = ConsoleColor.White;
-			Console.WriteLine(@" ]");
+			ConsolePrinter.PrintColored(ConsoleColor.White, @" ]");
 		}
 
 		/// <inheritdoc cref="SramComparerBase{TSramFile,TSramGame}"/>
