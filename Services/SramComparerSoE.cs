@@ -18,6 +18,7 @@ using Res = SramComparer.Properties.Resources;
 namespace SramComparer.SoE.Services
 {
 	/// <summary>SRAM comparer implementation for SoE</summary>
+	/// <inheritdoc cref="SramComparerBase{TSramFile,TSramGame}"/>
 	public class SramComparerSoE : SramComparerBase<SramFileSoE, SramGame>
 	{
 		public SramComparerSoE() : base(ServiceCollection.ConsolePrinter) {}

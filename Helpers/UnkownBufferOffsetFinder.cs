@@ -8,6 +8,7 @@ using SramFormat.SoE.Models.Structs;
 
 namespace SramComparer.SoE.Helpers
 {
+	/// <summary>List of buffers in sub-structures</summary>
 	internal static class UnkownBufferOffsetFinder
 	{
 		internal const string StructDelimiter = "__";

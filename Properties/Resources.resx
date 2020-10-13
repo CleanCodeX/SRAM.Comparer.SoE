@@ -150,4 +150,22 @@
   <data name="ValidationStatus" xml:space="preserve">
     <value>Validation-status</value>
   </data>
+  <data name="NonGameBuffer" xml:space="preserve">
+    <value>Non game buffer</value>
+  </data>
+  <data name="WholeGameBuffer" xml:space="preserve">
+    <value>Whole game buffer</value>
+  </data>
+  <data name="GameChecksum" xml:space="preserve">
+    <value>Game checksum</value>
+  </data>
+  <data name="AllGameChecksums" xml:space="preserve">
+    <value>All game checksums</value>
+  </data>
+  <data name="Unknown12B" xml:space="preserve">
+    <value>Unknown12B</value>
+  </data>
+  <data name="AllUnknown12Bs" xml:space="preserve">
+    <value>All Unknown12Bs</value>
+  </data>
 </root>

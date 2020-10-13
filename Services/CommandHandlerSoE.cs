@@ -7,6 +7,7 @@ using SramComparer.SoE.Enums;
 namespace SramComparer.SoE.Services
 {
 	/// <summary>Command handler implementation for SoE</summary>
+	/// <inheritdoc cref="CommandHandler{TSramFile,TSramGame}"/>
 	public class CommandHandlerSoE: CommandHandler<SramFileSoE, SramGame>
 	{
 		public CommandHandlerSoE() { }
