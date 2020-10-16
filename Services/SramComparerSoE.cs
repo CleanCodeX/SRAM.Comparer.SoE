@@ -134,36 +134,36 @@ namespace SramComparer.SoE.Services
 
 				var gameIdString = gameId.ToString();
 				if (gameId != compGameId)
-					gameIdString += $" {Resources.ComparedWithGameTemplated.InsertArgs(compGameId)}";
+					gameIdString += $" ({Resources.ComparedWithGameTemplated.InsertArgs(compGameId)})";
 
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.AllGameChecksums) || compGame.Checksum != currGame.Checksum)
 					checksums.AppendLine(
-						$"{" ".Repeat(2)}{Res.Game} {gameId}: {currGame.Checksum.PadLeft()} = ({Res.ReversedByteOrder}) {currGame.Checksum.ReverseBytes().PadLeft()}");
+						$"{" ".Repeat(2)}{Res.Game} {gameId}: {currGame.Checksum.PadLeft()}");
 
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.AllUnknown12Bs) || compGame.Unknown12B != currGame.Unknown12B)
 					timestamps.AppendLine(
-						$"{" ".Repeat(2)}{Res.Game} {gameId}: {currGame.Unknown12B.PadLeft()} = ({Res.ReversedByteOrder}) {currGame.Unknown12B.ReverseBytes().PadLeft()}");
+						$"{" ".Repeat(2)}{Res.Game} {gameId}: {currGame.Unknown12B.PadLeft()}");
 
 				if (compGameBytes.SequenceEqual(currGameBytes)) return allDiffBytes;
 
 				checksums.AppendLine(
-					$"{" ".Repeat(2)}{Res.Game} {compGameId}: {compGame.Checksum.PadLeft()} = ({Res.ReversedByteOrder}) {compGame.Checksum.ReverseBytes().PadLeft()} ({Res.Comparison.ToLower()} {Res.Game.ToLower()})");
+					$"{" ".Repeat(2)}{Res.Game} {compGameId}: {compGame.Checksum.PadLeft()}");
 
 				timestamps.AppendLine(
-					$"{" ".Repeat(2)}{Res.Game} {compGameId}: {compGame.Unknown12B.PadLeft()} = ({Res.ReversedByteOrder}) {compGame.Unknown12B.ReverseBytes().PadLeft()} ({Res.Comparison.ToLower()} {Res.Game.ToLower()})");
+					$"{" ".Repeat(2)}{Res.Game} {compGameId}: {compGame.Unknown12B.PadLeft()}");
 
-				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.SectionGameHasChangedTemplate} ]---------------------------------------------".InsertArgs(gameIdString));
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.Game} {gameIdString} ]---------------------------------------------");
 				ConsolePrinter.ResetColor();
 
 				ConsolePrinter.PrintParagraph();
-				ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.SectionGameUnknownsChangedTemplate} ].......................................".InsertArgs(gameId));
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.UnknownsOnly} ].......................................");
 				ConsolePrinter.ResetColor();
 
 				var gameDiffBytes = CompareGame(currGame, compGame, options);
 				if (gameDiffBytes > 0)
 				{
 					ConsolePrinter.PrintParagraph();
-					ConsolePrinter.PrintColoredLine(ConsoleColor.Green, " ".Repeat(4) + Res.StatusGameUnknownsChangedGameIdBytesTemplate.InsertArgs(gameId, gameDiffBytes));
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Green, " ".Repeat(4) + Res.StatusGameUnknownsChangedBytesTemplate.InsertArgs(gameDiffBytes));
 					ConsolePrinter.ResetColor();
 				}
 
