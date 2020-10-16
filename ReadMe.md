@@ -13,7 +13,7 @@ allows to compare unknown buffers in Secret of Evermore's SRAM file.
 * All settings can be set by cmd line arguments
 
 ## How to run
-This Project is based on .net 5 runtime.
+This Project is based on .NET 5 runtime.
 
 Users see "Run apps - Runtime" column, coders see "Build apps - SDK" column at:  
 https://dotnet.microsoft.com
