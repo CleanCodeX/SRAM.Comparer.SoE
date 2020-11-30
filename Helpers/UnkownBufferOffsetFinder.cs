@@ -48,6 +48,9 @@ namespace SramComparer.SoE.Helpers
 			Unknown15_Offset23 = Unknown15 + 23, // Offset 538
 			Unknown15_Offset24 = Unknown15 + 24, // Offset 539
 			Unknown15_Offset25To117 = Unknown15 + 25, // Offset 540
+
+			Unknown16C = Offsets.Game.Unknown16C, // Offset 643
+			Unknown16C__Offset1To5 = Unknown16C + 1, // Offset 644
 		}
 	}
 }

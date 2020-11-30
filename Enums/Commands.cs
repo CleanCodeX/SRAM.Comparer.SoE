@@ -27,6 +27,6 @@ namespace SramComparer.SoE.Enums
 		fu12b,
 		fu12ba,
 		fc,
-		fca,
+		fca
 	}
 }

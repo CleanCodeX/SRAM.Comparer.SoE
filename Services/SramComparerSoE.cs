@@ -360,8 +360,14 @@ namespace SramComparer.SoE.Services
 				BitConverter.GetBytes(currGame.Unknown16B_GoticaFlags.ToUInt()), 
 				BitConverter.GetBytes(compGame.Unknown16B_GoticaFlags.ToUInt()));
 
+			// 16 C
 			offset = GetGameOffset(nameof(currGame.Unknown16C), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown16C, compGame.Unknown16C);
+			diffBytes += CompareByte(name, offset,
+				currGame.Unknown16C.Offset0.ToByte(),
+				compGame.Unknown16C.Offset0.ToByte());
+
+			offset = GetGameOffset($"{nameof(currGame.Unknown16C)}{delimiter}{nameof(currGame.Unknown16C.Offset1To5)}", out name);
+			diffBytes += CompareByteArray(name, offset, currGame.Unknown16C.Offset1To5, compGame.Unknown16C.Offset1To5);
 			// 
 
 			offset = GetGameOffset(nameof(currGame.Unknown17), out name);

@@ -3,6 +3,7 @@ using SramFormat.SoE;
 using SramFormat.SoE.Models.Structs;
 using SramComparer.Services;
 using SramComparer.SoE.Enums;
+using SramFormat.SoE.Constants;
 
 namespace SramComparer.SoE.Services
 {
@@ -60,5 +61,7 @@ namespace SramComparer.SoE.Services
 
 			return true;
 		}
+
+		public override int GetGameOffset(int gameIndex) => Offsets.FirstGame + Sizes.Game.All * gameIndex + base.GetGameOffset(gameIndex);
 	}
 }
