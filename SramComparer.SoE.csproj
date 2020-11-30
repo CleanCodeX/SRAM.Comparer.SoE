@@ -32,8 +32,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CCX.SramComparer" Version="1.0.2-a8" />
-    <!--<PackageReference Include="CCX.SramFormat.SoE" Version="0.2.3-a5" />-->
+    <PackageReference Include="CCX.SramComparer" Version="1.0.2-a9" />
+    <PackageReference Include="CCX.SramFormat.SoE" Version="0.2.3-a7" />
   </ItemGroup>
 
   <ItemGroup>
