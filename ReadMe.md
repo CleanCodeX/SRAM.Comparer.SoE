@@ -1,8 +1,8 @@
 # SoE-SramComparer
-allows to compare unknown buffers in Secret of Evermore's SRAM file. 
+Allows to compare unknown buffers in Secret of Evermore's SRAM file. 
 
 ## Features
-* Print current or change and save offset values
+* Print (or change and save) offset values
 * Comparison of Unknowns only (*default*) or whole game buffer (**optional**)
 * Comparison of whole sram outside games (**optional**)
 * Display of differences in decimal, hex and binary format
@@ -14,7 +14,7 @@ allows to compare unknown buffers in Secret of Evermore's SRAM file.
 * All settings can be set by cmd line arguments
 
 ## How to run
-This Project is based on .NET 5 runtime.
+This application is based on .NET 5 runtime.
 
 1) Head to https://dotnet.microsoft.com
 2) Click on Download button.
@@ -23,7 +23,7 @@ This Project is based on .NET 5 runtime.
 ## Download binaries
 [Releases](http://xeth.de/Releases/SramComparer)
 
-[Comparer-SoE.0.2.1.zip (win x64)](http://xeth.de/Releases/SramComparer/Comparer-SoE.0.2.1.zip "Comparer-SoE.0.2.1.zip (win x64)")
+[Latest Setup](http://xeth.de/Releases/Comparer-SoE/setup.exe)
 
 ## How to use
 **Steps**:
