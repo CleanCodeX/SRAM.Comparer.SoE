@@ -20,24 +20,23 @@ A non exhaustive list can be found here:
 [Unknown Offsets](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/UnknownOffsets.txt)
 
 ## What's to do?
-You could join us to help finding meanings for various SRAM offsets.
+You could join to help finding meanings for various SRAM offsets.
 This can be done either by using 
 
 * [Web Comparison](http://compare.xeth.de) 
 * [App Installer Setup (exe)](http://xeth.de/Releases/Comparer-SoE/setup.exe) 
 * [Release Zip files](http://xeth.de/Releases/SramComparer)
 
-Once you found a meaning for some offsets you could try to enable or disable these flags in other SRAM (*.srm) files to prove your discovery. 
-Reading and manipulating offset values can be done either by using online 
+Once you found a meaning for a offset value, try to enable or disable this flag in other SRAM (*.srm) files to prove your discovery. 
+Reading and manipulating offset values can be done either by using  
 
-* [Web Editor](http://offset.xeth.de) 
-* [App Installer Setup (exe)](http://xeth.de/Releases/Comparer-SoE/setup.exe) 
-* [Release Zip files](http://xeth.de/Releases/SramComparer)
+* [Web Offset Editor](http://offset.xeth.de) 
+* App Installer Setup (exe)
+* Release Zip files
 
 ## Download binaries
-[Releases](http://xeth.de/Releases/SramComparer)
-
-[Latest Setup](http://xeth.de/Releases/Comparer-SoE/setup.exe)
+* [Releases](http://xeth.de/Releases/SramComparer)
+* [Latest Setup](http://xeth.de/Releases/Comparer-SoE/setup.exe)
 
 ## Prerequisites (Runtime)
 This application is using latest .NET 5 runtime.
