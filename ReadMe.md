@@ -21,9 +21,18 @@ A non exhaustive list can be found here:
 
 ## What's to do?
 You could join us to help finding meanings for various SRAM offsets.
-This can be either done via [Web Comparison](http://compare.xeth.de) or downloading the Console app.
-Once you found a meanings of some offsets you could try to enable or disable these flags in other SRAM (*.srm) files to prove the discovered meaning. 
-Reading and manipulating offset values can either be done by using online [Web Editor](http://offset.xeth.de) or by [App Installer Setup](http://xeth.de/Releases/Comparer-SoE).
+This can be done either by using 
+
+* [Web Comparison](http://compare.xeth.de) 
+* [App Installer Setup (exe)](http://xeth.de/Releases/Comparer-SoE/setup.exe) 
+* [Release Zip files](http://xeth.de/Releases/SramComparer)
+
+Once you found a meaning for some offsets you could try to enable or disable these flags in other SRAM (*.srm) files to prove your discovery. 
+Reading and manipulating offset values can be done either by using online 
+
+* [Web Editor](http://offset.xeth.de) 
+* [App Installer Setup (exe)](http://xeth.de/Releases/Comparer-SoE/setup.exe) 
+* [Release Zip files](http://xeth.de/Releases/SramComparer)
 
 ## Download binaries
 [Releases](http://xeth.de/Releases/SramComparer)
@@ -31,7 +40,7 @@ Reading and manipulating offset values can either be done by using online [Web E
 [Latest Setup](http://xeth.de/Releases/Comparer-SoE/setup.exe)
 
 ## Prerequisites (Runtime)
-This application is based on .NET 5 runtime.
+This application is using latest .NET 5 runtime.
 
 1) Head to https://dotnet.microsoft.com
 2) Click on Download button.
@@ -76,6 +85,8 @@ This application is based on .NET 5 runtime.
      If you are unsure, leave it as it is to compare as less as possible bytes.
 
 ***7.***   (optional) Current and comparison srm file can be backed-up press (b|bc) or restored (r|rc) individually.
+
+***8.***   (optional) SRAM offset values for specific game slots can be displayed by pressing (pov) or manipulated (sov). You can decide whether to update your current sram file (backup recommended) or creating a new file.
 
 ## Screenshots
 ![Commands](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/Cmd.png "Commands")
