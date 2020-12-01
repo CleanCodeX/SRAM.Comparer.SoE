@@ -2,7 +2,7 @@
 Allows to compare (unknown) buffers and manipulate offset values in Secret of Evermore's SRAM file.
 
 ## Features
-* Print (or change and save) offset values
+* Display (or manipulate and save) offset values
 * Comparison of Unknowns only (*default*) or whole game buffer (**optional**)
 * Comparison of whole sram outside games (**optional**)
 * Display of differences in decimal, hex and binary format
@@ -39,7 +39,7 @@ Reading and manipulating offset values can be done either by using
 * [Latest Setup](http://xeth.de/Releases/Comparer-SoE/setup.exe)
 
 ## Prerequisites (Runtime)
-This application is using latest .NET 5 runtime.
+This application uses the latest .NET 5 runtime.
 
 1) Head to https://dotnet.microsoft.com
 2) Click on Download button.
@@ -85,7 +85,7 @@ This application is using latest .NET 5 runtime.
 
 ***7.***   (optional) Current and comparison srm file can be backed-up press (b|bc) or restored (r|rc) individually.
 
-***8.***   (optional) SRAM offset values for specific game slots can be displayed by pressing (pov) or manipulated (sov). You can decide whether to update your current sram file (backup recommended) or creating a new file.
+***8.***   (optional) SRAM offset values for specific game slots can be displayed by pressing (dov) or manipulated (mov). You can decide whether to update your current sram file (backup recommended) or creating a new file.
 
 ## Screenshots
 ![Commands](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/Cmd.png "Commands")

@@ -24,6 +24,8 @@ namespace SramComparer.SoE.Enums
 		ts = BaseCommands.ts,
 		w = BaseCommands.w,
 		q = BaseCommands.q,
+		dov = BaseCommands.dov,
+		mov = BaseCommands.mov,
 		fu12b,
 		fu12ba,
 		fc,
