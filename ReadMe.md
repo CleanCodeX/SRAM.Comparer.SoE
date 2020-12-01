@@ -24,14 +24,14 @@ You could join to help finding meanings for various SRAM offsets.
 This can be done either by using 
 
 * [Web Comparison](http://compare.xeth.de) 
-* [App Installer Setup (exe)](http://xeth.de/Releases/Comparer-SoE/setup.exe) 
+* [App Installer Setup](http://xeth.de/Releases/Comparer-SoE/SramComparer.SoE.application) 
 * [Release Zip File](http://xeth.de/Releases/SramComparer)
 
 Once you found a meaning for a offset value, try to enable or disable this flag in other SRAM (*.srm) files to prove your discovery. 
 Reading and manipulating offset values can be done either by using  
 
 * [Web Offset Editor](http://offset.xeth.de) 
-* App Installer Setup (exe)
+* App Installer Setup
 * Release Zip File
 
 ## Download binaries
