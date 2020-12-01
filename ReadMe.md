@@ -25,14 +25,14 @@ This can be done either by using
 
 * [Web Comparison](http://compare.xeth.de) 
 * [App Installer Setup (exe)](http://xeth.de/Releases/Comparer-SoE/setup.exe) 
-* [Release Zip files](http://xeth.de/Releases/SramComparer)
+* [Release Zip File](http://xeth.de/Releases/SramComparer)
 
 Once you found a meaning for a offset value, try to enable or disable this flag in other SRAM (*.srm) files to prove your discovery. 
 Reading and manipulating offset values can be done either by using  
 
 * [Web Offset Editor](http://offset.xeth.de) 
 * App Installer Setup (exe)
-* Release Zip files
+* Release Zip File
 
 ## Download binaries
 * [Releases](http://xeth.de/Releases/SramComparer)
@@ -88,16 +88,16 @@ This application uses the latest .NET 5 runtime.
 ***8.***   (optional) SRAM offset values for specific game slots can be displayed by pressing (dov) or manipulated (mov). You can decide whether to update your current sram file (backup recommended) or creating a new file.
 
 ## Screenshots
-![Commands](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/Cmd.png "Commands")
+![Commands](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Cmd.png "Commands")
 
-![Few Flags Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/FewFlagsChange.png "Few Flags Change")
+![Few Flags Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/FewFlagsChange.png "Few Flags Change")
 
 ![Many Values Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/ManyValuesChange.png "Many Values Change")
 
-![No SRAM Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/NoChange.png "No SRAM Change")
+![No SRAM Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/NoChange.png "No SRAM Change")
 
-![Whole Game Comparison](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/WholeGameComparison.png "Whole Game Comparison")
+![Whole Game Comparison](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/WholeGameComparison.png "Whole Game Comparison")
 
-![Whole Game Comparison #2](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/WholeGameComparison2.png "Whole Game Comparison #2")
+![Whole Game Comparison #2](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/WholeGameComparison2.png "Whole Game Comparison #2")
 
-![Optional Game Info](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/OptionalGameInfo.png "Optional Game Info")
+![Optional Game Info](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/OptionalGameInfo.png "Optional Game Info")
