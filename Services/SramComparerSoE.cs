@@ -60,7 +60,7 @@ namespace SramComparer.SoE.Services
 			checksums.AppendLine($"{Resources.GamesCurrentChecksumValues} (2 {Res.Bytes.ToLower()}): ({Resources.ChangesAtEveryInGameSave})");
 
 			var timestamps = new StringBuilder();
-			timestamps.AppendLine($"{Resources.GamesCurrentUnknown12BValues} (2+? {Res.Bytes.ToLower()}): ({Resources.ChangesAtEveryInGameSave})");
+			timestamps.AppendLine($"{Resources.GamesCurrentUnknown12BValues} (2 {Res.Bytes.ToLower()}): ({Resources.ChangesAtEveryInGameSave})");
 
 			if (optionGameIndex > -1 && optionCompGameIndex > -1)
 				allDiffBytes = CompareGames(optionGameIndex, optionCompGameIndex);
@@ -136,21 +136,23 @@ namespace SramComparer.SoE.Services
 				if (gameId != compGameId)
 					gameIdString += $" ({Resources.ComparedWithGameTemplated.InsertArgs(compGameId)})";
 
+				var currGameName = $"{Res.CurrentShort} {Res.Game} {gameId}";
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.AllGameChecksums) || compGame.Checksum != currGame.Checksum)
 					checksums.AppendLine(
-						$"{" ".Repeat(2)}{Res.Game} {gameId}: {currGame.Checksum.PadLeft()}");
+						$"{" ".Repeat(2)}{currGameName}: {currGame.Checksum.PadLeft()}");
 
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.AllUnknown12Bs) || compGame.Unknown12B != currGame.Unknown12B)
 					timestamps.AppendLine(
-						$"{" ".Repeat(2)}{Res.Game} {gameId}: {currGame.Unknown12B.PadLeft()}");
+						$"{" ".Repeat(2)}{currGameName}: {currGame.Unknown12B.PadLeft()}");
 
 				if (compGameBytes.SequenceEqual(currGameBytes)) return allDiffBytes;
 
+				var compGameName = $"{Res.ComparisonShort} {Res.Game} {compGameId}";
 				checksums.AppendLine(
-					$"{" ".Repeat(2)}{Res.Game} {compGameId}: {compGame.Checksum.PadLeft()}");
+					$"{" ".Repeat(2)}{compGameName}: {compGame.Checksum.PadLeft()}");
 
 				timestamps.AppendLine(
-					$"{" ".Repeat(2)}{Res.Game} {compGameId}: {compGame.Unknown12B.PadLeft()}");
+					$"{" ".Repeat(2)}{compGameName}: {compGame.Unknown12B.PadLeft()}");
 
 				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.Game} {gameIdString} ]---------------------------------------------");
 				ConsolePrinter.ResetColor();

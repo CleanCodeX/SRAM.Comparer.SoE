@@ -1,4 +1,5 @@
-﻿using SramComparer.Services;
+﻿using System;
+using SramComparer.Services;
 using SramComparer.SoE.Enums;
 using SramComparer.SoE.Properties;
 
@@ -10,17 +11,19 @@ namespace SramComparer.SoE.Services
 	{
 		protected override void PrintCustomCommands()
 		{
+			PrintGroupName(@"Secret Of Evermore");
+
 			PrintCommandKey(Commands.fc);
-			PrintLine(Resources.CommandIncludeChecksum);
+			PrintColoredLine(ConsoleColor.Yellow, Resources.CommandIncludeChecksum);
 
 			PrintCommandKey(Commands.fca);
-			PrintLine(Resources.CommandIncludeAllChecksums);
+			PrintColoredLine(ConsoleColor.Yellow, Resources.CommandIncludeAllChecksums);
 
 			PrintCommandKey(Commands.fu12b);
-			PrintLine(Resources.CommandIncludeUnknown12B);
+			PrintColoredLine(ConsoleColor.Yellow, Resources.CommandIncludeUnknown12B);
 
 			PrintCommandKey(Commands.fu12ba);
-			PrintLine(Resources.CommandIncludeAllUnknown12Bs);
+			PrintColoredLine(ConsoleColor.Yellow, Resources.CommandIncludeAllUnknown12Bs);
 		}
 	}
 }
