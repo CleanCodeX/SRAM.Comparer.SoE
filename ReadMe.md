@@ -13,7 +13,7 @@ Allows to compare (unknown) buffers and manipulate offset values in Secret of Ev
 * Display of changed or all checksums (**optional**)
 * All settings can be set by cmd line arguments
 
-##What to find?
+## What's still unknown?
 A little less than 50% of SoE's SRAM file game slot format is still unknown.
 Most of unknown parts is reserved for pickup information of various ingredients sniff spots, chests, gourds, pots and which persons was spoken twice. Despite these there are also game relevant progress flags and others.
 A non exhaustive list can be found here:
