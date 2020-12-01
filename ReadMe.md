@@ -21,9 +21,9 @@ A non exhaustive list can be found here:
 
 ## What's to do?
 You could join us to help finding meanings for various SRAM offsets.
-This can be either done via [Web Comparison](https://compare.xeth.de) or downloading the Console app.
+This can be either done via [Web Comparison](http://compare.xeth.de) or downloading the Console app.
 Once you found a meanings of some offsets you could try to enable or disable these flags in other SRAM (*.srm) files to prove the discovered meaning. 
-Reading and manipulating offset values can either be done by using online [Web Editor](https://offset.xeth.de) or by [App Installer Setup](http://xeth.de/Releases/Comparer-SoE).
+Reading and manipulating offset values can either be done by using online [Web Editor](http://offset.xeth.de) or by [App Installer Setup](http://xeth.de/Releases/Comparer-SoE).
 
 ## Download binaries
 [Releases](http://xeth.de/Releases/SramComparer)
