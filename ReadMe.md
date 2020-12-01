@@ -79,15 +79,9 @@ This application is based on .NET 5 runtime.
 
 ## Screenshots
 ![Commands](http://xeth.de/meta/SramComparer/Cmd.png "Commands")
-
 ![Few Flags Change](http://xeth.de/meta/SramComparer/FewFlagsChange.png "Few Flags Change")
-
 ![Many Values Change](http://xeth.de/meta/SramComparer/ManyValuesChange.png "Many Values Change")
-
 ![No SRAM Change](http://xeth.de/meta/SramComparer/NoChange.png "No SRAM Change")
-
 ![Whole Game Comparison](http://xeth.de/meta/SramComparer/WholeGameComparison.png "Whole Game Comparison")
-
 ![Whole Game Comparison #2](http://xeth.de/meta/SramComparer/WholeGameComparison2.png "Whole Game Comparison #2")
-
 ![Optional Game Info](http://xeth.de/meta/SramComparer/OptionalGameInfo.png "Optional Game Info")
