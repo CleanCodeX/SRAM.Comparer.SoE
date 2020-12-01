@@ -78,16 +78,16 @@ This application is based on .NET 5 runtime.
 ***7.***   (optional) Current and comparison srm file can be backed-up press (b|bc) or restored (r|rc) individually.
 
 ## Screenshots
-![Commands](Meta/Cmd.png "Commands")
+![Commands](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/Cmd.png "Commands")
 
-![Few Flags Change](Meta/FewFlagsChange.png "Few Flags Change")
+![Few Flags Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/FewFlagsChange.png "Few Flags Change")
 
-![Many Values Change](Meta/ManyValuesChange.png "Many Values Change")
+![Many Values Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/ManyValuesChange.png "Many Values Change")
 
-![No SRAM Change](Meta/NoChange.png "No SRAM Change")
+![No SRAM Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/NoChange.png "No SRAM Change")
 
-![Whole Game Comparison](Meta/WholeGameComparison.png "Whole Game Comparison")
+![Whole Game Comparison](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/WholeGameComparison.png "Whole Game Comparison")
 
-![Whole Game Comparison #2](Meta/WholeGameComparison2.png "Whole Game Comparison #2")
+![Whole Game Comparison #2](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/WholeGameComparison2.png "Whole Game Comparison #2")
 
-![Optional Game Info](Meta/OptionalGameInfo.png "Optional Game Info")
+![Optional Game Info](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/OptionalGameInfo.png "Optional Game Info")
