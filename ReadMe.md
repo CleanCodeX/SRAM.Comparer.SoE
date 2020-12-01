@@ -24,19 +24,19 @@ You could join to help finding meanings for various SRAM offsets.
 This can be done either by using 
 
 * [Web Comparison](http://compare.xeth.de) 
-* [App Installer Setup](http://xeth.de/Releases/Comparer-SoE) 
-* [Release Zip File](http://xeth.de/Releases/SramComparer)
+* Installer
+* Release
 
 Once you found a meaning for a offset value, try to enable or disable this flag in other SRAM (*.srm) files to prove your discovery. 
 Reading and manipulating offset values can be done either by using  
 
 * [Web Offset Editor](http://offset.xeth.de) 
-* App Installer Setup
-* Release Zip File
+* Installer
+* Release
 
 ## Download binaries
-* [Releases](http://xeth.de/Releases/SramComparer)
-* [Latest Setup](http://xeth.de/Releases/Comparer-SoE)
+* [Releases (Zip)](http://xeth.de/Releases/SramComparer)
+* [Latest Installer (Zip)](http://xeth.de/Releases/Comparer-SoE/Setup.zip)
 
 ## Prerequisites (Runtime)
 This application uses the latest .NET 5 runtime.
