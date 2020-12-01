@@ -14,22 +14,28 @@ Allows to compare (unknown) buffers and manipulate offset values in Secret of Ev
 * All settings can be set by cmd line arguments
 
 ## What's still unknown?
-A little less than 50% of SoE's SRAM file game slot format is still unknown.
-Most of unknown parts is reserved for pickup information of various ingredients sniff spots, chests, gourds, pots and which persons was spoken twice. Despite these there are also game relevant progress flags and others.
+A little less than 50% of SoE's SRAM file game slot format is still considered as 'unknown', meaning that we don't really know what these parts of SRAM actually do.
+Most of unknown parts are reserved for pick-up information of various ingredient sniff spots, opened chests, gourds, pots and which persons were spoken to twice. Despite these there are also game relevant progress flags which we want to know to be able to write more capable SRAM editors.
 A non exhaustive list can be found here:
 [Unknown Offsets](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/UnknownOffsets.txt)
 
-## How to run
-This application is based on .NET 5 runtime.
-
-1) Head to https://dotnet.microsoft.com
-2) Click on Download button.
-3) Users see "Run apps - Runtime" column, coders see "Build apps - SDK" column.
+## What's to do?
+You could join us to help finding meanings for various SRAM offsets.
+This can be either done via [Web Comparison](https://compare.xeth.de) or downloading the Console app.
+Once you found a meanings of some offsets you could try to enable or disable these flags in other SRAM (*.srm) files to prove the discovered meaning. 
+Reading and manipulating offset values can either be done by using online [Web Editor](https://offset.xeth.de) or by [App Installer (exe)](http://xeth.de/Releases/Comparer-SoE/setup.exe).
 
 ## Download binaries
 [Releases](http://xeth.de/Releases/SramComparer)
 
 [Latest Setup](http://xeth.de/Releases/Comparer-SoE/setup.exe)
+
+## Prerequisites (Runtime)
+This application is based on .NET 5 runtime.
+
+1) Head to https://dotnet.microsoft.com
+2) Click on Download button.
+3) Users see "Run apps - Runtime" column, coders see "Build apps - SDK" column.
 
 ## How to use
 **Steps**:
