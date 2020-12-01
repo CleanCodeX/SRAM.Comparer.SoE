@@ -78,16 +78,16 @@ This application is based on .NET 5 runtime.
 ***7.***   (optional) Current and comparison srm file can be backed-up press (b|bc) or restored (r|rc) individually.
 
 ## Screenshots
-![Commands](http://xeth.de/meta/SramComparer/Cmd.png "Commands")
+![Commands](Meta/Cmd.png "Commands")
 
-![Few Flags Change](http://xeth.de/meta/SramComparer/FewFlagsChange.png "Few Flags Change")
+![Few Flags Change](Meta/FewFlagsChange.png "Few Flags Change")
 
-![Many Values Change](http://xeth.de/meta/SramComparer/ManyValuesChange.png "Many Values Change")
+![Many Values Change](Meta/ManyValuesChange.png "Many Values Change")
 
-![No SRAM Change](http://xeth.de/meta/SramComparer/NoChange.png "No SRAM Change")
+![No SRAM Change](Meta/NoChange.png "No SRAM Change")
 
-![Whole Game Comparison](http://xeth.de/meta/SramComparer/WholeGameComparison.png "Whole Game Comparison")
+![Whole Game Comparison](Meta/WholeGameComparison.png "Whole Game Comparison")
 
-![Whole Game Comparison #2](http://xeth.de/meta/SramComparer/WholeGameComparison2.png "Whole Game Comparison #2")
+![Whole Game Comparison #2](Meta/WholeGameComparison2.png "Whole Game Comparison #2")
 
-![Optional Game Info](http://xeth.de/meta/SramComparer/OptionalGameInfo.png "Optional Game Info")
+![Optional Game Info](Meta/OptionalGameInfo.png "Optional Game Info")
