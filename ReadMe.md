@@ -33,7 +33,7 @@ Reading and manipulating offset values can be done either by using
 * Release
 
 ## Download binaries
-* [Releases (Zip)](http://xeth.de/Releases/SramComparer)
+* [Releases](http://xeth.de/Releases/SramComparer)
 
 ## Prerequisites (Runtime)
 This application uses the latest .NET 5 runtime.
