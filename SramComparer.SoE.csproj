@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CCX.SramComparer" Version="1.0.2-b9" />
+    <PackageReference Include="CCX.SramComparer" Version="1.0.2-c1" />
     <PackageReference Include="CCX.SramFormat.SoE" Version="0.2.3-a8" />
   </ItemGroup>
 
