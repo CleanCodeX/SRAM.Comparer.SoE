@@ -70,7 +70,7 @@
     <None Update="Icon.ico">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Media\Cmd.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
