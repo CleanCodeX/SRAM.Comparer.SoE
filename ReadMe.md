@@ -85,16 +85,16 @@ This application uses the latest .NET 5 runtime.
 ***8.***   (optional) SRAM offset values for specific game slots can be displayed by pressing (dov) or manipulated (mov). You can decide whether to update your current sram file (backup recommended) or creating a new file.
 
 ## Screenshots
-![Commands](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Images/Cmd.png "Commands")
+![Commands](Media\\Images\\Cmd.png "Commands")
 
-![Few Flags Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Images/FewFlagsChange.png "Few Flags Change")
+![Few Flags Change](Media\\Images\\FewFlagsChange.png "Few Flags Change")
 
-![Many Values Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/Images/ManyValuesChange.png "Many Values Change")
+![Many Values Change](Media\\Images\\ManyValuesChange.png "Many Values Change")
 
-![No SRAM Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Images/NoChange.png "No SRAM Change")
+![No SRAM Change](Media\\Images\\NoChange.png "No SRAM Change")
 
-![Whole Game Comparison](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Images/WholeGameComparison.png "Whole Game Comparison")
+![Whole Game Comparison](Media\\Images\\WholeGameComparison.png "Whole Game Comparison")
 
-![Whole Game Comparison #2](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Images/WholeGameComparison2.png "Whole Game Comparison #2")
+![Whole Game Comparison #2](Media\\Images\\WholeGameComparison2.png "Whole Game Comparison #2")
 
-![Optional Game Info](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Images/OptionalGameInfo.png "Optional Game Info")
+![Optional Game Info](Media\\Images\\OptionalGameInfo.png "Optional Game Info")
