@@ -17,28 +17,28 @@ Allows to compare (unknown) buffers and manipulate offset values in Secret of Ev
 A little less than 50% of SoE's SRAM file game slot format is still considered as 'unknown', meaning that we don't really know what these parts of SRAM actually do.
 Most of unknown parts are reserved for pick-up information of various ingredient sniff spots, opened chests, gourds, pots and which persons were spoken to twice. Despite these there are also game relevant progress flags which we want to know to write more capable SRAM editors.
 A non exhaustive list can be found here:
-[Unknown Offsets](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/UnknownOffsets.txt)
+[Unknown Offsets](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Text/UnknownOffsets.txt){target="_blank"}
 
-## What's to do?
+## How can I help?
 You could join to help finding meanings for various SRAM offsets.
 This can be done either by using 
 
-* [Web Comparison](http://compare.xeth.de) 
+* [Web Comparison](http://compare.xeth.de){target="_blank"}
 * Release
 
 Once you found a meaning for a offset value, try to enable or disable this flag in other SRAM (*.srm) files to prove your discovery. 
 Reading and manipulating offset values can be done either by using  
 
-* [Web Offset Editor](http://offset.xeth.de) 
+* [Web Offset Editor](http://offset.xeth.de){target="_blank"}
 * Release
 
 ## Download binaries
-* [Releases](http://xeth.de/Releases/SramComparer)
+[Releases](http://xeth.de/Releases/SramComparer){target="_blank"}
 
 ## Prerequisites (Runtime)
 This application uses the latest .NET 5 runtime.
 
-1) Head to https://dotnet.microsoft.com
+1) Head to [.Net](https://dotnet.microsoft.com){target="_blank"}
 2) Click on Download button.
 3) Users see "Run apps - Runtime" column, coders see "Build apps - SDK" column.
 
@@ -85,16 +85,16 @@ This application uses the latest .NET 5 runtime.
 ***8.***   (optional) SRAM offset values for specific game slots can be displayed by pressing (dov) or manipulated (mov). You can decide whether to update your current sram file (backup recommended) or creating a new file.
 
 ## Screenshots
-![Commands](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Cmd.png "Commands")
+![Commands](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Images/Cmd.png "Commands")
 
-![Few Flags Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/FewFlagsChange.png "Few Flags Change")
+![Few Flags Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Images/FewFlagsChange.png "Few Flags Change")
 
-![Many Values Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/ManyValuesChange.png "Many Values Change")
+![Many Values Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Meta/Images/ManyValuesChange.png "Many Values Change")
 
-![No SRAM Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/NoChange.png "No SRAM Change")
+![No SRAM Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Images/NoChange.png "No SRAM Change")
 
-![Whole Game Comparison](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/WholeGameComparison.png "Whole Game Comparison")
+![Whole Game Comparison](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Images/WholeGameComparison.png "Whole Game Comparison")
 
-![Whole Game Comparison #2](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/WholeGameComparison2.png "Whole Game Comparison #2")
+![Whole Game Comparison #2](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Images/WholeGameComparison2.png "Whole Game Comparison #2")
 
-![Optional Game Info](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/OptionalGameInfo.png "Optional Game Info")
+![Optional Game Info](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Images/OptionalGameInfo.png "Optional Game Info")
