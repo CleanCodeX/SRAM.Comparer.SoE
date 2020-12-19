@@ -34,21 +34,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Media\Text\changelog.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Media\Markdown\Downloads.md">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Media\Text\changelog.txt">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
@@ -86,49 +71,10 @@
       <PackagePath></PackagePath>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="Media\Images\Cmd.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Images\FewFlagsChange.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Images\ManyValuesChange.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Images\NoChange.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Images\OptionalGameInfo.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Markdown\HowToUse.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Markdown\Prerequisites.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Markdown\HowCanIHelp.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Markdown\WhatIsUnknown.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Markdown\Imagery.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Images\WholeGameComparison.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Images\WholeGameComparison2.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
     <None Update="Media\Markdown\Features.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ReadMe.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="ReadMeCombined.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Media\Text\UnknownOffsets.txt">
