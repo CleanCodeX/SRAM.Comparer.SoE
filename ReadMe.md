@@ -32,15 +32,15 @@ Reading and manipulating offset values can be done either by using
 * [Web Offset Editor](http://offset.xeth.de)
 * Release
 
-## Download binaries
-[Releases](http://xeth.de/Releases/SramComparer)
-
 ## Prerequisites (Runtime)
 This application uses the latest .NET 5 runtime.
 
 1) Head to [.Net](https://dotnet.microsoft.com)
 2) Click on Download button.
 3) Users see "Run apps - Runtime" column, coders see "Build apps - SDK" column.
+
+## Download Binaries
+[Releases](http://xeth.de/Releases/SramComparer)
 
 ## How to use
 **Steps**:
