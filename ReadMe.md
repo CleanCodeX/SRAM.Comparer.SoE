@@ -17,28 +17,28 @@ Allows to compare (unknown) buffers and manipulate offset values in Secret of Ev
 A little less than 50% of SoE's SRAM file game slot format is still considered as 'unknown', meaning that we don't really know what these parts of SRAM actually do.
 Most of unknown parts are reserved for pick-up information of various ingredient sniff spots, opened chests, gourds, pots and which persons were spoken to twice. Despite these there are also game relevant progress flags which we want to know to write more capable SRAM editors.
 A non exhaustive list can be found here:
-[Unknown Offsets](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Text/UnknownOffsets.txt){target="_blank"}
+[Unknown Offsets](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Text/UnknownOffsets.txt){:target="_blank"}
 
 ## How can I help?
 You could join to help finding meanings for various SRAM offsets.
 This can be done either by using 
 
-* [Web Comparison](http://compare.xeth.de){target="_blank"}
+* [Web Comparison](http://compare.xeth.de)
 * Release
 
 Once you found a meaning for a offset value, try to enable or disable this flag in other SRAM (*.srm) files to prove your discovery. 
 Reading and manipulating offset values can be done either by using  
 
-* [Web Offset Editor](http://offset.xeth.de){target="_blank"}
+* [Web Offset Editor](http://offset.xeth.de)
 * Release
 
 ## Download binaries
-[Releases](http://xeth.de/Releases/SramComparer){target="_blank"}
+[Releases](http://xeth.de/Releases/SramComparer)
 
 ## Prerequisites (Runtime)
 This application uses the latest .NET 5 runtime.
 
-1) Head to [.Net](https://dotnet.microsoft.com){target="_blank"}
+1) Head to [.Net](https://dotnet.microsoft.com)
 2) Click on Download button.
 3) Users see "Run apps - Runtime" column, coders see "Build apps - SDK" column.
 
