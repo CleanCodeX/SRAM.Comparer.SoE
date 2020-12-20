@@ -17,7 +17,7 @@ Allows to compare (unknown) buffers and manipulate offset values in Secret of Ev
 A little less than 50% of SoE's SRAM file game slot format is still considered as 'unknown', meaning that we don't really know what these parts of SRAM actually do.
 Most of unknown parts are reserved for pick-up information of various ingredient sniff spots, opened chests, gourds, pots and which persons were spoken to twice. Despite these there are also game relevant progress flags which we want to know to write more capable SRAM editors.
 A non exhaustive list can be found here:
-[Unknown Offsets](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Media/Markdown/Unknowns.md)
+[Unknown Offsets](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Markdown/Unknowns.md)
 
 ## How can I help?
 You could join to help finding meanings for various SRAM offsets.
@@ -85,16 +85,16 @@ This application uses the latest .NET 5 runtime.
 ***8.***   (optional) SRAM offset values for specific game slots can be displayed by pressing (dov) or manipulated (mov). You can decide whether to update your current sram file (backup recommended) or creating a new file.
 
 ## Screenshots
-![Commands](Media/Images/Cmd.png "Commands")
+![Commands](Images/Cmd.png "Commands")
 
-![Few Flags Change](Media/Images/FewFlagsChange.png "Few Flags Change")
+![Few Flags Change](Images/FewFlagsChange.png "Few Flags Change")
 
-![Many Values Change](Media/Images/ManyValuesChange.png "Many Values Change")
+![Many Values Change](Images/ManyValuesChange.png "Many Values Change")
 
-![No SRAM Change](Media/Images/NoChange.png "No SRAM Change")
+![No SRAM Change](Images/NoChange.png "No SRAM Change")
 
-![Whole Game Comparison](Media/Images/WholeGameComparison.png "Whole Game Comparison")
+![Whole Game Comparison](Images/WholeGameComparison.png "Whole Game Comparison")
 
-![Whole Game Comparison #2](Media/Images/WholeGameComparison2.png "Whole Game Comparison #2")
+![Whole Game Comparison #2](Images/WholeGameComparison2.png "Whole Game Comparison #2")
 
-![Optional Game Info](Media/Images/OptionalGameInfo.png "Optional Game Info")
+![Optional Game Info](Images/OptionalGameInfo.png "Optional Game Info")
