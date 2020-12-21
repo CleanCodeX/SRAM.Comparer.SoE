@@ -6,7 +6,7 @@
      the srm file.  
 ***1.2*** Start the tool by passing the game's srm filepath as first command parameter. The file can also be
      dragged onto the tool.  
-***1.3*** Have a look into the [Unknowns](xeth.de/embed?p=unknowns) list to see examples of what parts of SRAM structure are still
+***1.3*** Have a look into the [Unknowns](embed?p=unknowns) list to see examples of what parts of SRAM structure are still
      considered "unknown".  
 
 ***2.***   Switch to this tool and press (ow) to create/overwrite a comparison copy of your current SRAM file allow

@@ -13,7 +13,7 @@ Allows to compare (unknown) buffers and manipulate offset values in Secret of Ev
 * [C|W] Display of changed or all game's checksums (**optional**)
 * [C] Settings can be set by cmd line arguments
 
-*) C = Supported by [Windows Console App](embed?p=download)
+*) C = Supported by [Windows Console App](embed?p=downloads)
    W = Supported by [Web App](compare)
 
-See Images [here](Embed?p=Imagery).
+See Images [here](embed?p=imagery).
