@@ -15,4 +15,4 @@ Allows to compare (unknown) buffers and manipulate offset values in Secret of Ev
 
 *) C = Supported by [Windows Console App](p?c=downloads), W = Supported by [Web App](compare)
 
-See Images [here](p?c=imagery).
+See images [here](p?c=imagery).
