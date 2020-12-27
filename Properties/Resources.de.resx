@@ -15,7 +15,7 @@
 		<value>Alle Speicherslot Prüfsummen</value>
 	</data>
 	<data name="AllUnknown12Bs" xml:space="preserve">
-		<value>Alle Speicherslot Unknown12Bs</value>
+		<value>Alle Speicherslot Unknown12Bs</value><comment>Don't translate term Unknown12Bs</comment>
 	</data>
 	<data name="ChangesAtEveryInGameSave" xml:space="preserve">
 		<value>ändert sich bei jeder spielinternen Speicherung</value>
@@ -24,13 +24,13 @@
 		<value>Alle Speicherslot Prüfsummen anzeigen</value>
 	</data>
 	<data name="CommandIncludeAllUnknown12Bs" xml:space="preserve">
-		<value>Alle Speicherslot Unknown12Bs anzeigen</value>
+		<value>Alle Speicherslot Unknown12Bs anzeigen</value><comment>Don't translate term Unknown12Bs</comment>
 	</data>
 	<data name="CommandIncludeChecksum" xml:space="preserve">
 		<value>Prüfsumme des betroffenen Speicherslots anzeigen</value>
 	</data>
 	<data name="CommandIncludeUnknown12B" xml:space="preserve">
-		<value>Unknown12B des betroffenenSpeicherslots anzeigen</value>
+		<value>Unknown12B des betroffenenSpeicherslots anzeigen</value><comment>Don't translate term Unknown12Bs</comment>
 	</data>
 	<data name="ComparedWithGameTemplated" xml:space="preserve">
 		<value>verglichen mit Speicherslot {0}</value>
@@ -60,6 +60,6 @@
 		<value>Unknown12B</value><comment>Don't translate this term</comment>
 	</data>
 	<data name="GamesCurrentUnknown12BValues" xml:space="preserve">
-		<value>Unknown12B des betreffenden Speicherslots</value>
+		<value>Unknown12B des betreffenden Speicherslots</value><comment>Don't translate term Unknown12B</comment>
 	</data>
 </root>

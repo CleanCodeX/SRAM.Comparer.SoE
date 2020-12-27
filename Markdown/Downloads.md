@@ -8,8 +8,6 @@ This application uses the latest .NET 5 runtime.
 ## Download Binaries
 * [v0.2.4 - 2020-12-26](http://xeth.de/Releases/SramComparer/Comparer-SoE.0.2.4.zip)
 
-* [v0.2.4 - 2020-12-26 (x86 only)](http://xeth.de/Releases/SramComparer/x86/Comparer-SoE.0.2.4.zip)
-
 * [v0.2.3 - 2020-12-02](http://xeth.de/Releases/SramComparer/Comparer-SoE.0.2.3.zip)
 
 * [v0.2.1 - 2020-09-27](http://xeth.de/Releases/SramComparer/Comparer-SoE.0.2.1.zip)

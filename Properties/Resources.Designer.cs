@@ -22,7 +22,7 @@ namespace SramComparer.SoE.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace SramComparer.SoE.Properties {
         ///   Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SramComparer.SoE.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace SramComparer.SoE.Properties {
         ///   Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,18 +61,18 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die All game checksums ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die All savelot checksums ähnelt.
         /// </summary>
-        internal static string AllGameChecksums {
+        public static string AllGameChecksums {
             get {
                 return ResourceManager.GetString("AllGameChecksums", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die All Unknown12Bs ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die All saveslot Unknown12Bs ähnelt.
         /// </summary>
-        internal static string AllUnknown12Bs {
+        public static string AllUnknown12Bs {
             get {
                 return ResourceManager.GetString("AllUnknown12Bs", resourceCulture);
             }
@@ -81,79 +81,79 @@ namespace SramComparer.SoE.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die changes at every in-game save ähnelt.
         /// </summary>
-        internal static string ChangesAtEveryInGameSave {
+        public static string ChangesAtEveryInGameSave {
             get {
                 return ResourceManager.GetString("ChangesAtEveryInGameSave", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show all game checksums ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show all game slot checksums ähnelt.
         /// </summary>
-        internal static string CommandIncludeAllChecksums {
+        public static string CommandIncludeAllChecksums {
             get {
                 return ResourceManager.GetString("CommandIncludeAllChecksums", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show all game checksums ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show all game slot Unknown12Bs ähnelt.
         /// </summary>
-        internal static string CommandIncludeAllUnknown12Bs {
+        public static string CommandIncludeAllUnknown12Bs {
             get {
                 return ResourceManager.GetString("CommandIncludeAllUnknown12Bs", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show game checksum ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show affected game slot&apos;s checksum ähnelt.
         /// </summary>
-        internal static string CommandIncludeChecksum {
+        public static string CommandIncludeChecksum {
             get {
                 return ResourceManager.GetString("CommandIncludeChecksum", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show game Unknown12Bs ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show affected game slot&apos;s Unknown12Bs ähnelt.
         /// </summary>
-        internal static string CommandIncludeUnknown12B {
+        public static string CommandIncludeUnknown12B {
             get {
                 return ResourceManager.GetString("CommandIncludeUnknown12B", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die compared with game {0} ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die compared with game slot {0} ähnelt.
         /// </summary>
-        internal static string ComparedWithGameTemplated {
+        public static string ComparedWithGameTemplated {
             get {
                 return ResourceManager.GetString("ComparedWithGameTemplated", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Game checksum ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Game slot checksum ähnelt.
         /// </summary>
-        internal static string GameChecksum {
+        public static string GameChecksum {
             get {
                 return ResourceManager.GetString("GameChecksum", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Game&apos;s current &apos;Checksum&apos; values ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Game slot&apos;s current &apos;Checksum&apos; values ähnelt.
         /// </summary>
-        internal static string GamesCurrentChecksumValues {
+        public static string GamesCurrentChecksumValues {
             get {
                 return ResourceManager.GetString("GamesCurrentChecksumValues", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Game&apos;s current &apos;UnknownB12&apos; values ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Game slot&apos;s current &apos;UnknownB12&apos; values ähnelt.
         /// </summary>
-        internal static string GamesCurrentUnknown12BValues {
+        public static string GamesCurrentUnknown12BValues {
             get {
                 return ResourceManager.GetString("GamesCurrentUnknown12BValues", resourceCulture);
             }
@@ -162,16 +162,16 @@ namespace SramComparer.SoE.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die invalid ähnelt.
         /// </summary>
-        internal static string Invalid {
+        public static string Invalid {
             get {
                 return ResourceManager.GetString("Invalid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Non game buffer ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Non-game slot area ähnelt.
         /// </summary>
-        internal static string NonGameBuffer {
+        public static string NonGameBuffer {
             get {
                 return ResourceManager.GetString("NonGameBuffer", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace SramComparer.SoE.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Unknown12B ähnelt.
         /// </summary>
-        internal static string Unknown12B {
+        public static string Unknown12B {
             get {
                 return ResourceManager.GetString("Unknown12B", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace SramComparer.SoE.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die valid ähnelt.
         /// </summary>
-        internal static string Valid {
+        public static string Valid {
             get {
                 return ResourceManager.GetString("Valid", resourceCulture);
             }
@@ -198,16 +198,16 @@ namespace SramComparer.SoE.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Validation-status ähnelt.
         /// </summary>
-        internal static string ValidationStatus {
+        public static string ValidationStatus {
             get {
                 return ResourceManager.GetString("ValidationStatus", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Whole game buffer ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Whole game slot area ähnelt.
         /// </summary>
-        internal static string WholeGameBuffer {
+        public static string WholeGameBuffer {
             get {
                 return ResourceManager.GetString("WholeGameBuffer", resourceCulture);
             }

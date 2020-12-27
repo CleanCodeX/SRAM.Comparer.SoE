@@ -124,10 +124,10 @@
     <value>Show all game slot checksums</value>
   </data>
   <data name="CommandIncludeUnknown12B" xml:space="preserve">
-    <value>Show affected game slot's Unknown12Bs</value>
+    <value>Show affected game slot's Unknown12Bs</value><comment>Don't translate term Unknown12Bs</comment>
   </data>
   <data name="CommandIncludeAllUnknown12Bs" xml:space="preserve">
-    <value>Show all game slot Unknown12Bs</value>
+    <value>Show all game slot Unknown12Bs</value><comment>Don't translate term Unknown12Bs</comment>
   </data>
   <data name="ChangesAtEveryInGameSave" xml:space="preserve">
     <value>changes at every in-game save</value>
@@ -136,7 +136,7 @@
     <value>Game slot's current 'Checksum' values</value>
   </data>
   <data name="GamesCurrentUnknown12BValues" xml:space="preserve">
-    <value>Game slot's current 'UnknownB12' values</value>
+    <value>Game slot's current 'UnknownB12' values</value><comment>Don't translate term Unknown12B</comment>
   </data>
   <data name="ComparedWithGameTemplated" xml:space="preserve">
     <value>compared with game slot {0}</value>
@@ -166,6 +166,6 @@
     <value>Unknown12B</value><comment>Don't translate this term</comment>
   </data>
   <data name="AllUnknown12Bs" xml:space="preserve">
-    <value>All saveslot Unknown12Bs</value>
+    <value>All saveslot Unknown12Bs</value><comment>Don't translate term Unknown12Bs</comment>
   </data>
 </root>
