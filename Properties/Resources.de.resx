@@ -1,0 +1,65 @@
+﻿<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="AllGameChecksums" xml:space="preserve">
+		<value>Alle Speicherslot Prüfsummen</value>
+	</data>
+	<data name="AllUnknown12Bs" xml:space="preserve">
+		<value>Alle Speicherslot Unknown12Bs</value>
+	</data>
+	<data name="ChangesAtEveryInGameSave" xml:space="preserve">
+		<value>ändert sich bei jeder spielinternen Speicherung</value>
+	</data>
+	<data name="CommandIncludeAllChecksums" xml:space="preserve">
+		<value>Alle Speicherslot Prüfsummen anzeigen</value>
+	</data>
+	<data name="CommandIncludeAllUnknown12Bs" xml:space="preserve">
+		<value>Alle Speicherslot Unknown12Bs anzeigen</value>
+	</data>
+	<data name="CommandIncludeChecksum" xml:space="preserve">
+		<value>Prüfsumme des betroffenen Speicherslots anzeigen</value>
+	</data>
+	<data name="CommandIncludeUnknown12B" xml:space="preserve">
+		<value>Unknown12B des betroffenenSpeicherslots anzeigen</value>
+	</data>
+	<data name="ComparedWithGameTemplated" xml:space="preserve">
+		<value>verglichen mit Speicherslot {0}</value>
+	</data>
+	<data name="GameChecksum" xml:space="preserve">
+		<value>Speicherslot Prüfsumme</value>
+	</data>
+	<data name="Valid" xml:space="preserve">
+		<value>gültig</value>
+	</data>
+	<data name="ValidationStatus" xml:space="preserve">
+		<value>Validierungs-Status</value>
+	</data>
+	<data name="WholeGameBuffer" xml:space="preserve">
+		<value>Gesamter Speicherslot-Bereich</value>
+	</data>
+	<data name="GamesCurrentChecksumValues" xml:space="preserve">
+		<value>Prüfsumme des betreffenden Speicherslots</value>
+	</data>
+	<data name="Invalid" xml:space="preserve">
+		<value>ungültig</value>
+	</data>
+	<data name="NonGameBuffer" xml:space="preserve">
+		<value>Nicht-Speicherslot-Bereich</value>
+	</data>
+	<data name="Unknown12B" xml:space="preserve">
+		<value>Unknown12B</value><comment>Don't translate this term</comment>
+	</data>
+	<data name="GamesCurrentUnknown12BValues" xml:space="preserve">
+		<value>Unknown12B des betreffenden Speicherslots</value>
+	</data>
+</root>

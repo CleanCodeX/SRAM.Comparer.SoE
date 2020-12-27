@@ -118,28 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CommandIncludeChecksum" xml:space="preserve">
-    <value>Show game checksum</value>
+    <value>Show affected game slot's checksum</value>
   </data>
   <data name="CommandIncludeAllChecksums" xml:space="preserve">
-    <value>Show all game checksums</value>
+    <value>Show all game slot checksums</value>
   </data>
   <data name="CommandIncludeUnknown12B" xml:space="preserve">
-    <value>Show game Unknown12Bs</value>
+    <value>Show affected game slot's Unknown12Bs</value>
   </data>
   <data name="CommandIncludeAllUnknown12Bs" xml:space="preserve">
-    <value>Show all game checksums</value>
+    <value>Show all game slot Unknown12Bs</value>
   </data>
   <data name="ChangesAtEveryInGameSave" xml:space="preserve">
     <value>changes at every in-game save</value>
   </data>
   <data name="GamesCurrentChecksumValues" xml:space="preserve">
-    <value>Game's current 'Checksum' values</value>
+    <value>Game slot's current 'Checksum' values</value>
   </data>
   <data name="GamesCurrentUnknown12BValues" xml:space="preserve">
-    <value>Game's current 'UnknownB12' values</value>
+    <value>Game slot's current 'UnknownB12' values</value>
   </data>
   <data name="ComparedWithGameTemplated" xml:space="preserve">
-    <value>compared with game {0}</value>
+    <value>compared with game slot {0}</value>
   </data>
   <data name="Invalid" xml:space="preserve">
     <value>invalid</value>
@@ -151,21 +151,21 @@
     <value>Validation-status</value>
   </data>
   <data name="NonGameBuffer" xml:space="preserve">
-    <value>Non game buffer</value>
+    <value>Non-game slot area</value>
   </data>
   <data name="WholeGameBuffer" xml:space="preserve">
-    <value>Whole game buffer</value>
+    <value>Whole game slot area</value>
   </data>
   <data name="GameChecksum" xml:space="preserve">
-    <value>Game checksum</value>
+    <value>Game slot checksum</value>
   </data>
   <data name="AllGameChecksums" xml:space="preserve">
-    <value>All game checksums</value>
+    <value>All savelot checksums</value>
   </data>
   <data name="Unknown12B" xml:space="preserve">
-    <value>Unknown12B</value>
+    <value>Unknown12B</value><comment>Don't translate this term</comment>
   </data>
   <data name="AllUnknown12Bs" xml:space="preserve">
-    <value>All Unknown12Bs</value>
+    <value>All saveslot Unknown12Bs</value>
   </data>
 </root>
