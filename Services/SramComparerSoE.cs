@@ -18,28 +18,27 @@ using Res = SramComparer.Properties.Resources;
 namespace SramComparer.SoE.Services
 {
 	/// <summary>SRAM comparer implementation for SoE</summary>
-	/// <inheritdoc cref="SramComparerBase{TSramFile,TSramGame}"/>
-	public class SramComparerSoE : SramComparerBase<SramFileSoE, SramGame>
+	/// <inheritdoc cref="SramComparerBase{TSramFile,TSaveSlot}"/>
+	public class SramComparerSoE : SramComparerBase<SramFileSoE, SaveSlot>
 	{
 		public SramComparerSoE() : base(ServiceCollection.ConsolePrinter) {}
 		public SramComparerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
 
-		/// <inheritdoc cref="SramComparerBase{TSramFile,TSramGame}"/>
+		/// <inheritdoc cref="SramComparerBase{TSramFile,TSaveSlot}"/>
 		public override int CompareSram(SramFileSoE currFile, SramFileSoE compFile, IOptions options)
 		{
-			PrintGameValidationStatus(currFile, compFile);
+			PrintSaveSlotValidationStatus(currFile, compFile);
 
 			ConsolePrinter.PrintParagraph();
 
-			var optionGameIndex = options.CurrentGame - 1;
-			var optionCompGameIndex = options.ComparisonGame - 1;
-			var optionFlags = (ComparisonFlagsSoE)options.Flags;
+			var optionSaveSlotIndex = options.CurrentSramFileSaveSlot - 1;
+			var optionCompSaveSlotIndex = options.ComparisonSramFileSaveSlot - 1;
+			var optionFlags = (ComparisonFlagsSoE)options.ComparisonFlags;
 
-			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, optionGameIndex > -1
-				? string.Format(Res.StatusGameWillBeComparedTemplate, options.CurrentGame)
-				: Res.StatusAllGamesWillBeCompared);
+			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, optionSaveSlotIndex > -1
+				? string.Format(Res.StatusSingleSaveSlotWillBeComparedTemplate, options.CurrentSramFileSaveSlot)
+				: Res.StatusAllSaveSlotsWillBeCompared);
 
-			Console.ForegroundColor = ConsoleColor.White;
 			ConsolePrinter.PrintParagraph();
 
 			var offset = GetSramOffset(nameof(compFile.Sram.Unknown1), out var bufferName);
@@ -57,38 +56,38 @@ namespace SramComparer.SoE.Services
 			var allDiffBytes = sramDiffBytes;
 
 			var checksums = new StringBuilder();
-			checksums.AppendLine($"{Resources.GamesCurrentChecksumValues} (2 {Res.Bytes.ToLower()}): ({Resources.ChangesAtEveryInGameSave})");
+			checksums.AppendLine($"{Resources.CurrentSaveSlotChecksumValues} (2 {Res.Bytes.ToLower()}): ({Resources.ChangesAtEveryInSaveSlotSave})");
 
 			var timestamps = new StringBuilder();
-			timestamps.AppendLine($"{Resources.GamesCurrentUnknown12BValues} (2 {Res.Bytes.ToLower()}): ({Resources.ChangesAtEveryInGameSave})");
+			timestamps.AppendLine($"{Resources.CurrentSaveSlotUnknown12BValues} (2 {Res.Bytes.ToLower()}): ({Resources.ChangesAtEveryInSaveSlotSave})");
 
-			if (optionGameIndex > -1 && optionCompGameIndex > -1)
-				allDiffBytes = CompareGames(optionGameIndex, optionCompGameIndex);
+			if (optionSaveSlotIndex > -1 && optionCompSaveSlotIndex > -1)
+				allDiffBytes = CompareSaveSlots(optionSaveSlotIndex, optionCompSaveSlotIndex);
 			else
-				for (var gameIndex = 0; gameIndex < 4; gameIndex++)
+				for (var slotIndex = 0; slotIndex < 4; slotIndex++)
 				{
-					if (optionGameIndex > -1 && optionGameIndex != gameIndex) continue;
+					if (optionSaveSlotIndex > -1 && optionSaveSlotIndex != slotIndex) continue;
 
-					allDiffBytes = CompareGames(gameIndex);
+					allDiffBytes = CompareSaveSlots(slotIndex);
 				}
 
-			if (options.Flags.HasFlag(ComparisonFlagsSoE.NonGameBuffer))
+			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.NonSlotByteByByteComparison))
 			{
-				var nonGameUnknownDiffBytes = CompareByteArray(nameof(currFile.Sram.Unknown1), 0, currFile.Sram.Unknown1, compFile.Sram.Unknown1, false);
+				var nonSaveSlotUnknownDiffBytes = CompareByteArray(nameof(currFile.Sram.Unknown1), 0, currFile.Sram.Unknown1, compFile.Sram.Unknown1, false);
 
-				if (nonGameUnknownDiffBytes > 0)
+				if (nonSaveSlotUnknownDiffBytes > 0)
 				{
 					ConsolePrinter.PrintParagraph();
-					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.SectionNonGameUnknowns} ].......................................");
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.SectionNonSaveSlotUnknowns} ].......................................");
 					ConsolePrinter.ResetColor();
 
-					nonGameUnknownDiffBytes = CompareByteArray(nameof(currFile.Sram.Unknown1), Offsets.SramUnknown1, currFile.Sram.Unknown1, compFile.Sram.Unknown1, true);
+					nonSaveSlotUnknownDiffBytes = CompareByteArray(nameof(currFile.Sram.Unknown1), Offsets.SramUnknown1, currFile.Sram.Unknown1, compFile.Sram.Unknown1, true);
 
 					ConsolePrinter.PrintParagraph();
-					ConsolePrinter.PrintColoredLine(nonGameUnknownDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White, " ".Repeat(4) + Res.StatusNonGameUnknownsBytesTemplate.InsertArgs(nonGameUnknownDiffBytes));
+					ConsolePrinter.PrintColoredLine(nonSaveSlotUnknownDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White, " ".Repeat(4) + Res.StatusNonSaveSlotUnknownsBytesTemplate.InsertArgs(nonSaveSlotUnknownDiffBytes));
 					ConsolePrinter.ResetColor();
 
-					allDiffBytes += nonGameUnknownDiffBytes;
+					allDiffBytes += nonSaveSlotUnknownDiffBytes;
 				}
 			}
 
@@ -109,67 +108,67 @@ namespace SramComparer.SoE.Services
 			{
 				ConsolePrinter.PrintParagraph();
 
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.GameChecksum))
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumComparedSlots))
 					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, checksums.ToString());
 
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12B))
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BComparedSlots))
 					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, timestamps.ToString());
 			}
 
 			return allDiffBytes;
 
-			int CompareGames(int gameIndex, int compGameIndex = default)
+			int CompareSaveSlots(int slotIndex, int compSaveSlotIndex = default)
 			{
-				if (compGameIndex == -1)
-					compGameIndex = gameIndex;
+				if (compSaveSlotIndex == -1)
+					compSaveSlotIndex = slotIndex;
 
-				var currGame = currFile.GetGame(gameIndex);
-				var currGameBytes = currFile.GetGameBytes(gameIndex);
+				var currSaveSlot = currFile.GetSaveSlot(slotIndex);
+				var currSaveSlotBytes = currFile.GetSaveSlotBytes(slotIndex);
 
-				var compGame = compFile.GetGame(gameIndex);
-				var compGameBytes = compFile.GetGameBytes(gameIndex);
+				var compSaveSlot = compFile.GetSaveSlot(slotIndex);
+				var compSaveSlotBytes = compFile.GetSaveSlotBytes(slotIndex);
 
-				var gameId = gameIndex + 1;
-				var compGameId = compGameIndex + 1;
+				var gameId = slotIndex + 1;
+				var compSaveSlotId = compSaveSlotIndex + 1;
 
 				var gameIdString = gameId.ToString();
-				if (gameId != compGameId)
-					gameIdString += $" ({Resources.ComparedWithGameTemplated.InsertArgs(compGameId)})";
+				if (gameId != compSaveSlotId)
+					gameIdString += $" ({Resources.ComparedWithOtherSaveSlotTemplate.InsertArgs(compSaveSlotId)})";
 
-				var currGameName = $"{Res.CurrentShort} {Res.Game} {gameId}";
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.AllGameChecksums) || compGame.Checksum != currGame.Checksum)
+				var currSaveSlotName = $"{Res.CurrentShort} {Res.SaveSlot} {gameId}";
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumAllSlots) || compSaveSlot.Checksum != currSaveSlot.Checksum)
 					checksums.AppendLine(
-						$"{" ".Repeat(2)}{currGameName}: {currGame.Checksum.PadLeft()}");
+						$"{" ".Repeat(2)}{currSaveSlotName}: {currSaveSlot.Checksum.PadLeft()}");
 
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.AllUnknown12Bs) || compGame.Unknown12B != currGame.Unknown12B)
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BAllSlots) || compSaveSlot.Unknown12B != currSaveSlot.Unknown12B)
 					timestamps.AppendLine(
-						$"{" ".Repeat(2)}{currGameName}: {currGame.Unknown12B.PadLeft()}");
+						$"{" ".Repeat(2)}{currSaveSlotName}: {currSaveSlot.Unknown12B.PadLeft()}");
 
-				if (compGameBytes.SequenceEqual(currGameBytes)) return allDiffBytes;
+				if (compSaveSlotBytes.SequenceEqual(currSaveSlotBytes)) return allDiffBytes;
 
-				var compGameName = $"{Res.ComparisonShort} {Res.Game} {compGameId}";
+				var compSaveSlotName = $"{Res.ComparisonShort} {Res.SaveSlot} {compSaveSlotId}";
 				checksums.AppendLine(
-					$"{" ".Repeat(2)}{compGameName}: {compGame.Checksum.PadLeft()}");
+					$"{" ".Repeat(2)}{compSaveSlotName}: {compSaveSlot.Checksum.PadLeft()}");
 
 				timestamps.AppendLine(
-					$"{" ".Repeat(2)}{compGameName}: {compGame.Unknown12B.PadLeft()}");
+					$"{" ".Repeat(2)}{compSaveSlotName}: {compSaveSlot.Unknown12B.PadLeft()}");
 
-				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.Game} {gameIdString} ]---------------------------------------------");
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.SaveSlot} {gameIdString} ]---------------------------------------------");
 				ConsolePrinter.ResetColor();
 
 				ConsolePrinter.PrintParagraph();
-				ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.UnknownsOnly} ].......................................");
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.UnknownAreasOnly} ].......................................");
 				ConsolePrinter.ResetColor();
 
-				var gameDiffBytes = CompareGame(currGame, compGame, options);
+				var gameDiffBytes = CompareSaveSlot(currSaveSlot, compSaveSlot, options);
 				if (gameDiffBytes > 0)
 				{
 					ConsolePrinter.PrintParagraph();
-					ConsolePrinter.PrintColoredLine(ConsoleColor.Green, " ".Repeat(4) + Res.StatusGameUnknownsChangedBytesTemplate.InsertArgs(gameDiffBytes));
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Green, " ".Repeat(4) + Res.StatusUnknownsChangedBytesTemplate.InsertArgs(gameDiffBytes));
 					ConsolePrinter.ResetColor();
 				}
 
-				if (!optionFlags.HasFlag(ComparisonFlagsSoE.WholeGameBuffer))
+				if (!optionFlags.HasFlag(ComparisonFlagsSoE.SlotByteByByteComparison))
 				{
 					allDiffBytes += gameDiffBytes;
 					return allDiffBytes;
@@ -177,18 +176,18 @@ namespace SramComparer.SoE.Services
 
 				ConsoleHelper.EnsureMinConsoleWidth(165);
 
-				bufferName = $"{nameof(compFile.Sram.Game)} {gameId}";
-				var bufferOffset = Offsets.FirstGame + gameId * Sizes.Game.All;
-				var gameBufferDiffBytes = CompareByteArray(bufferName, bufferOffset, currGameBytes, compGameBytes, false);
+				bufferName = $"{nameof(compFile.Sram.SaveSlots)} {gameId}";
+				var bufferOffset = Offsets.FirstSaveSlot + gameId * Sizes.SaveSlot.All;
+				var gameBufferDiffBytes = CompareByteArray(bufferName, bufferOffset, currSaveSlotBytes, compSaveSlotBytes, false);
 				if (gameBufferDiffBytes > gameDiffBytes)
 				{
 					ConsolePrinter.PrintParagraph();
-					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, $@"{" ".Repeat(2)}[ {Res.SectionGameChangedTemplate} ]...................................".InsertArgs(gameIndex));
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, $@"{" ".Repeat(2)}[ {Res.SectionSaveSlotChangedTemplate} ]...................................".InsertArgs(slotIndex));
 					// ReSharper disable once RedundantArgumentDefaultValue
 
-					CompareByteArray(bufferName, bufferOffset, currGameBytes, compGameBytes, true, Offsets.Game.GetNameFromOffset);
+					CompareByteArray(bufferName, bufferOffset, currSaveSlotBytes, compSaveSlotBytes, true, Offsets.SaveSlot.GetNameFromOffset);
 					ConsolePrinter.PrintParagraph();
-					ConsolePrinter.PrintColoredLine(gameDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White, " ".Repeat(4) + Res.StatusGameChangedBytesTemplate.InsertArgs(gameIdString, gameBufferDiffBytes));
+					ConsolePrinter.PrintColoredLine(gameDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White, " ".Repeat(4) + Res.StatusSaveSlotChangedBytesTemplate.InsertArgs(gameIdString, gameBufferDiffBytes));
 					ConsolePrinter.ResetColor();
 				}
 
@@ -197,19 +196,19 @@ namespace SramComparer.SoE.Services
 			}
 		}
 
-		protected virtual void PrintGameValidationStatus(SramFileSoE currFile, SramFileSoE compFile)
+		protected virtual void PrintSaveSlotValidationStatus(SramFileSoE currFile, SramFileSoE compFile)
 		{
 			ConsolePrinter.PrintSectionHeader();
 			ConsolePrinter.PrintColoredLine(ConsoleColor.DarkYellow, $@"{Resources.ValidationStatus}:");
 
-			OnPrintGameValidationStatus(Res.Current, currFile);
-			OnPrintGameValidationStatus(Res.Comparison, compFile);
+			OnPrintSaveSlotValidationStatus(Res.Current, currFile);
+			OnPrintSaveSlotValidationStatus(Res.Comparison, compFile);
 		}
 
-		protected virtual void OnPrintGameValidationStatus(string name, ISramFile file)
+		protected virtual void OnPrintSaveSlotValidationStatus(string name, ISramFile file)
 		{
 			ConsolePrinter.PrintColored(ConsoleColor.Gray, $@"{name}:".PadRight(15));
-			ConsolePrinter.PrintColored(ConsoleColor.DarkYellow, $@" {Res.Game} (1-4)");
+			ConsolePrinter.PrintColored(ConsoleColor.DarkYellow, $@" {Res.SaveSlot} (1-4)");
 			ConsolePrinter.PrintColored(ConsoleColor.White, @" [ ");
 
 			for (var i = 0; i <= 3; i++)
@@ -224,8 +223,8 @@ namespace SramComparer.SoE.Services
 			ConsolePrinter.PrintColoredLine(ConsoleColor.White, @" ]");
 		}
 
-		/// <inheritdoc cref="SramComparerBase{TSramFile,TSramGame}"/>
-		public override int CompareGame(SramGame currGame, SramGame compGame, IOptions options)
+		/// <inheritdoc cref="SramComparerBase{TSramFile,TSaveSlot}"/>
+		public override int CompareSaveSlot(SaveSlot currSaveSlot, SaveSlot compSaveSlot, IOptions options)
 		{
 			var delimiter = StructDelimiter;
 
@@ -234,156 +233,156 @@ namespace SramComparer.SoE.Services
 			// ReSharper disable once JoinDeclarationAndInitializer
 			int offset;
 
-			offset = GetGameOffset(nameof(currGame.Unknown1), out name);
-			var diffBytes = CompareByteArray(name, offset, currGame.Unknown1, compGame.Unknown1);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown1), out name);
+			var diffBytes = CompareByteArray(name, offset, currSaveSlot.Unknown1, compSaveSlot.Unknown1);
 
-			offset = GetGameOffset(nameof(currGame.Unknown2), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown2, compGame.Unknown2);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown2), out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown2, compSaveSlot.Unknown2);
 
-			offset = GetGameOffset(nameof(currGame.Unknown3), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown3, compGame.Unknown3);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown3), out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown3, compSaveSlot.Unknown3);
 
 			//Unknown 4
-			offset = GetGameOffset($"{nameof(currGame.Unknown4_BoyBuff)}{delimiter}{nameof(currGame.Unknown4_BoyBuff.BuffFlags)}", out name);
-			diffBytes += CompareUShort(name, offset, currGame.Unknown4_BoyBuff.BuffFlags.ToUShort(), compGame.Unknown4_BoyBuff.BuffFlags.ToUShort());
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown4_BoyBuff)}{delimiter}{nameof(currSaveSlot.Unknown4_BoyBuff.BuffFlags)}", out name);
+			diffBytes += CompareUShort(name, offset, currSaveSlot.Unknown4_BoyBuff.BuffFlags.ToUShort(), compSaveSlot.Unknown4_BoyBuff.BuffFlags.ToUShort());
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown4_BoyBuff)}{delimiter}{nameof(currGame.Unknown4_BoyBuff.Unknown1)}", out name);
-			diffBytes += CompareUShort(name, offset, currGame.Unknown4_BoyBuff.Unknown1, compGame.Unknown4_BoyBuff.Unknown1);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown4_BoyBuff)}{delimiter}{nameof(currSaveSlot.Unknown4_BoyBuff.Unknown1)}", out name);
+			diffBytes += CompareUShort(name, offset, currSaveSlot.Unknown4_BoyBuff.Unknown1, compSaveSlot.Unknown4_BoyBuff.Unknown1);
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown4_BoyBuff)}{delimiter}{nameof(currGame.Unknown4_BoyBuff.Unknown2)}", out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown4_BoyBuff.Unknown2, compGame.Unknown4_BoyBuff.Unknown2);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown4_BoyBuff)}{delimiter}{nameof(currSaveSlot.Unknown4_BoyBuff.Unknown2)}", out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown4_BoyBuff.Unknown2, compSaveSlot.Unknown4_BoyBuff.Unknown2);
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown4_BoyBuff)}{delimiter}{nameof(currGame.Unknown4_BoyBuff.Unknown3)}", out name);
-			diffBytes += CompareUShort(name, offset, currGame.Unknown4_BoyBuff.Unknown3, compGame.Unknown4_BoyBuff.Unknown3);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown4_BoyBuff)}{delimiter}{nameof(currSaveSlot.Unknown4_BoyBuff.Unknown3)}", out name);
+			diffBytes += CompareUShort(name, offset, currSaveSlot.Unknown4_BoyBuff.Unknown3, compSaveSlot.Unknown4_BoyBuff.Unknown3);
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown4_BoyBuff)}{delimiter}{nameof(currGame.Unknown4_BoyBuff.Unknown4)}", out name);
-			diffBytes += CompareUShort(name, offset, currGame.Unknown4_BoyBuff.Unknown4, compGame.Unknown4_BoyBuff.Unknown4);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown4_BoyBuff)}{delimiter}{nameof(currSaveSlot.Unknown4_BoyBuff.Unknown4)}", out name);
+			diffBytes += CompareUShort(name, offset, currSaveSlot.Unknown4_BoyBuff.Unknown4, compSaveSlot.Unknown4_BoyBuff.Unknown4);
 			//Unknown 4
 
-			offset = GetGameOffset(nameof(currGame.Unknown5), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown5, compGame.Unknown5);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown5), out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown5, compSaveSlot.Unknown5);
 
-			offset = GetGameOffset(nameof(currGame.Unknown6), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown6, compGame.Unknown6);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown6), out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown6, compSaveSlot.Unknown6);
 
 			//Unknown 7
-			offset = GetGameOffset($"{nameof(currGame.Unknown7_DogBuff)}{delimiter}{nameof(currGame.Unknown7_DogBuff.BuffFlags)}", out name);
-			diffBytes += CompareUShort(name, offset, currGame.Unknown7_DogBuff.BuffFlags.ToUShort(), compGame.Unknown7_DogBuff.BuffFlags.ToUShort());
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown7_DogBuff)}{delimiter}{nameof(currSaveSlot.Unknown7_DogBuff.BuffFlags)}", out name);
+			diffBytes += CompareUShort(name, offset, currSaveSlot.Unknown7_DogBuff.BuffFlags.ToUShort(), compSaveSlot.Unknown7_DogBuff.BuffFlags.ToUShort());
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown7_DogBuff)}{delimiter}{nameof(currGame.Unknown7_DogBuff.Unknown1)}", out name);
-			diffBytes += CompareUShort(name, offset, currGame.Unknown7_DogBuff.Unknown1, compGame.Unknown7_DogBuff.Unknown1);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown7_DogBuff)}{delimiter}{nameof(currSaveSlot.Unknown7_DogBuff.Unknown1)}", out name);
+			diffBytes += CompareUShort(name, offset, currSaveSlot.Unknown7_DogBuff.Unknown1, compSaveSlot.Unknown7_DogBuff.Unknown1);
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown7_DogBuff)}{delimiter}{nameof(currGame.Unknown7_DogBuff.Unknown2)}", out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown7_DogBuff.Unknown2, compGame.Unknown7_DogBuff.Unknown2);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown7_DogBuff)}{delimiter}{nameof(currSaveSlot.Unknown7_DogBuff.Unknown2)}", out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown7_DogBuff.Unknown2, compSaveSlot.Unknown7_DogBuff.Unknown2);
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown7_DogBuff)}{delimiter}{nameof(currGame.Unknown7_DogBuff.Unknown3)}", out name);
-			diffBytes += CompareUShort(name, offset, currGame.Unknown7_DogBuff.Unknown3, compGame.Unknown7_DogBuff.Unknown3);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown7_DogBuff)}{delimiter}{nameof(currSaveSlot.Unknown7_DogBuff.Unknown3)}", out name);
+			diffBytes += CompareUShort(name, offset, currSaveSlot.Unknown7_DogBuff.Unknown3, compSaveSlot.Unknown7_DogBuff.Unknown3);
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown7_DogBuff)}{delimiter}{nameof(currGame.Unknown7_DogBuff.Unknown4)}", out name);
-			diffBytes += CompareUShort(name, offset, currGame.Unknown7_DogBuff.Unknown4, compGame.Unknown7_DogBuff.Unknown4);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown7_DogBuff)}{delimiter}{nameof(currSaveSlot.Unknown7_DogBuff.Unknown4)}", out name);
+			diffBytes += CompareUShort(name, offset, currSaveSlot.Unknown7_DogBuff.Unknown4, compSaveSlot.Unknown7_DogBuff.Unknown4);
 			//Unknown 7
 
-			offset = GetGameOffset(nameof(currGame.Unknown8), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown8, compGame.Unknown8);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown8), out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown8, compSaveSlot.Unknown8);
 
-			offset = GetGameOffset(nameof(currGame.Unknown9), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown9, compGame.Unknown9);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown9), out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown9, compSaveSlot.Unknown9);
 
-			offset = GetGameOffset(nameof(currGame.Unknown10), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown10, compGame.Unknown10);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown10), out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown10, compSaveSlot.Unknown10);
 
-			offset = GetGameOffset(nameof(currGame.Unknown11), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown11, compGame.Unknown11);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown11), out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown11, compSaveSlot.Unknown11);
 
 			// 12 A - C
-			offset = GetGameOffset(nameof(currGame.Unknown12A), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown12A, compGame.Unknown12A);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown12A), out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown12A, compSaveSlot.Unknown12A);
 
-			if (options.Flags.HasFlag(ComparisonFlagsSoE.Unknown12B))
+			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.Unknown12BComparedSlots))
 			{
-				offset = GetGameOffset(nameof(currGame.Unknown12B), out name);
-				diffBytes += CompareUShort(name, offset, currGame.Unknown12B,
-					compGame.Unknown12B);
+				offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown12B), out name);
+				diffBytes += CompareUShort(name, offset, currSaveSlot.Unknown12B,
+					compSaveSlot.Unknown12B);
 			}
 
-			offset = GetGameOffset(nameof(currGame.Unknown12C), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown12C, compGame.Unknown12C);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown12C), out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown12C, compSaveSlot.Unknown12C);
 			// 
 
-			offset = GetGameOffset(nameof(currGame.Unknown13), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown13, compGame.Unknown13);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown13), out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown13, compSaveSlot.Unknown13);
 
-			offset = GetGameOffset(nameof(currGame.Unknown14_AntiquaFlags), out name);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown14), out name);
 			diffBytes += CompareByteArray(name, offset, 
-				BitConverter.GetBytes(currGame.Unknown14_AntiquaFlags.ToUInt()), 
-				BitConverter.GetBytes(compGame.Unknown14_AntiquaFlags.ToUInt()));
+				BitConverter.GetBytes(currSaveSlot.Unknown14.ToUInt()), 
+				BitConverter.GetBytes(compSaveSlot.Unknown14.ToUInt()));
 
 			//Unknown 15
-			offset = GetGameOffset($"{nameof(currGame.Unknown15)}{delimiter}{nameof(currGame.Unknown15.Offset0To16)}", out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown15.Offset0To16, compGame.Unknown15.Offset0To16);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown15)}{delimiter}{nameof(currSaveSlot.Unknown15.Offset0To16)}", out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown15.Offset0To16, compSaveSlot.Unknown15.Offset0To16);
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown15)}{delimiter}{nameof(currGame.Unknown15.Offset17)}", out name);
-			diffBytes += CompareByte(name, offset, currGame.Unknown15.Offset17.ToByte(), compGame.Unknown15.Offset17.ToByte());
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown15)}{delimiter}{nameof(currSaveSlot.Unknown15.Offset17)}", out name);
+			diffBytes += CompareByte(name, offset, currSaveSlot.Unknown15.Offset17.ToByte(), compSaveSlot.Unknown15.Offset17.ToByte());
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown15)}{delimiter}{nameof(currGame.Unknown15.Offset18)}", out name);
-			diffBytes += CompareByte(name, offset, currGame.Unknown15.Offset18.ToByte(), compGame.Unknown15.Offset18.ToByte());
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown15)}{delimiter}{nameof(currSaveSlot.Unknown15.Offset18)}", out name);
+			diffBytes += CompareByte(name, offset, currSaveSlot.Unknown15.Offset18.ToByte(), compSaveSlot.Unknown15.Offset18.ToByte());
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown15)}{delimiter}{nameof(currGame.Unknown15.Offset19)}", out name);
-			diffBytes += CompareByte(name, offset, currGame.Unknown15.Offset19.ToByte(), compGame.Unknown15.Offset19.ToByte());
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown15)}{delimiter}{nameof(currSaveSlot.Unknown15.Offset19)}", out name);
+			diffBytes += CompareByte(name, offset, currSaveSlot.Unknown15.Offset19.ToByte(), compSaveSlot.Unknown15.Offset19.ToByte());
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown15)}{delimiter}{nameof(currGame.Unknown15.Offset20)}", out name);
-			diffBytes += CompareByte(name, offset, currGame.Unknown15.Offset20.ToByte(), compGame.Unknown15.Offset20.ToByte());
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown15)}{delimiter}{nameof(currSaveSlot.Unknown15.Offset20)}", out name);
+			diffBytes += CompareByte(name, offset, currSaveSlot.Unknown15.Offset20.ToByte(), compSaveSlot.Unknown15.Offset20.ToByte());
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown15)}{delimiter}{nameof(currGame.Unknown15.Offset21)}", out name);
-			diffBytes += CompareByte(name, offset, currGame.Unknown15.Offset21, compGame.Unknown15.Offset21);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown15)}{delimiter}{nameof(currSaveSlot.Unknown15.Offset21)}", out name);
+			diffBytes += CompareByte(name, offset, currSaveSlot.Unknown15.Offset21, compSaveSlot.Unknown15.Offset21);
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown15)}{delimiter}{nameof(currGame.Unknown15.Offset22)}", out name);
-			diffBytes += CompareByte(name, offset, currGame.Unknown15.Offset22, compGame.Unknown15.Offset22);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown15)}{delimiter}{nameof(currSaveSlot.Unknown15.Offset22)}", out name);
+			diffBytes += CompareByte(name, offset, currSaveSlot.Unknown15.Offset22, compSaveSlot.Unknown15.Offset22);
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown15)}{delimiter}{nameof(currGame.Unknown15.Offset22)}", out name);
-			diffBytes += CompareByte(name, offset, currGame.Unknown15.Offset22, compGame.Unknown15.Offset22);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown15)}{delimiter}{nameof(currSaveSlot.Unknown15.Offset22)}", out name);
+			diffBytes += CompareByte(name, offset, currSaveSlot.Unknown15.Offset22, compSaveSlot.Unknown15.Offset22);
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown15)}{delimiter}{nameof(currGame.Unknown15.Offset23)}", out name);
-			diffBytes += CompareByte(name, offset, currGame.Unknown15.Offset23, compGame.Unknown15.Offset23);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown15)}{delimiter}{nameof(currSaveSlot.Unknown15.Offset23)}", out name);
+			diffBytes += CompareByte(name, offset, currSaveSlot.Unknown15.Offset23, compSaveSlot.Unknown15.Offset23);
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown15)}{delimiter}{nameof(currGame.Unknown15.Offset24)}", out name);
-			diffBytes += CompareByte(name, offset, currGame.Unknown15.Offset24.ToByte(), compGame.Unknown15.Offset24.ToByte());
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown15)}{delimiter}{nameof(currSaveSlot.Unknown15.Offset24)}", out name);
+			diffBytes += CompareByte(name, offset, currSaveSlot.Unknown15.Offset24.ToByte(), compSaveSlot.Unknown15.Offset24.ToByte());
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown15)}{delimiter}{nameof(currGame.Unknown15.Offset25To117)}", out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown15.Offset25To117, compGame.Unknown15.Offset25To117);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown15)}{delimiter}{nameof(currSaveSlot.Unknown15.Offset25To117)}", out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown15.Offset25To117, compSaveSlot.Unknown15.Offset25To117);
 			//Unknown 15
 
 			// 16 A - C
-			offset = GetGameOffset(nameof(currGame.Unknown16A), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown16A, compGame.Unknown16A);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown16A), out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown16A, compSaveSlot.Unknown16A);
 
-			offset = GetGameOffset(nameof(currGame.Unknown16B_GothicaFlags), out name);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown16B_GothicaFlags), out name);
 			diffBytes += CompareByteArray(name, offset, 
-				BitConverter.GetBytes(currGame.Unknown16B_GothicaFlags.ToUInt()), 
-				BitConverter.GetBytes(compGame.Unknown16B_GothicaFlags.ToUInt()));
+				BitConverter.GetBytes(currSaveSlot.Unknown16B_GothicaFlags.ToUInt()), 
+				BitConverter.GetBytes(compSaveSlot.Unknown16B_GothicaFlags.ToUInt()));
 
 			// 16 C
-			offset = GetGameOffset(nameof(currGame.Unknown16C), out name);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown16C), out name);
 			diffBytes += CompareByte(name, offset,
-				currGame.Unknown16C.Offset0.ToByte(),
-				compGame.Unknown16C.Offset0.ToByte());
+				currSaveSlot.Unknown16C.Offset0.ToByte(),
+				compSaveSlot.Unknown16C.Offset0.ToByte());
 
-			offset = GetGameOffset($"{nameof(currGame.Unknown16C)}{delimiter}{nameof(currGame.Unknown16C.Offset1To5)}", out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown16C.Offset1To5, compGame.Unknown16C.Offset1To5);
+			offset = GetSaveSlotOffset($"{nameof(currSaveSlot.Unknown16C)}{delimiter}{nameof(currSaveSlot.Unknown16C.Offset1To5)}", out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown16C.Offset1To5, compSaveSlot.Unknown16C.Offset1To5);
 			// 
 
-			offset = GetGameOffset(nameof(currGame.Unknown17), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown17, compGame.Unknown17);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown17), out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown17, compSaveSlot.Unknown17);
 
-			offset = GetGameOffset(nameof(currGame.Unknown18), out name);
-			diffBytes += CompareByteArray(name, offset, currGame.Unknown18, compGame.Unknown18);
+			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown18), out name);
+			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown18, compSaveSlot.Unknown18);
 
 			return diffBytes;
 
-			static int GetGameOffset(string bufferName, out string name)
+			static int GetSaveSlotOffset(string bufferName, out string name)
 			{
 				name = bufferName;
-				return  GetGameBufferOffset(bufferName);
+				return  GetSaveSlotBufferOffset(bufferName);
 			}
 		}
 	}

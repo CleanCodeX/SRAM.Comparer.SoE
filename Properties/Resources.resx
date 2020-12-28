@@ -117,29 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CommandIncludeChecksum" xml:space="preserve">
-    <value>Show affected game slot's checksum</value>
+  <data name="CommandShowChecksumOfComparedSaveSlot" xml:space="preserve">
+    <value>Show checksum of compared save slot</value>
   </data>
-  <data name="CommandIncludeAllChecksums" xml:space="preserve">
-    <value>Show all game slot checksums</value>
+  <data name="CommandShowChecksumsOfAllSaveSlots" xml:space="preserve">
+    <value>Show checksums of all save slots</value>
   </data>
-  <data name="CommandIncludeUnknown12B" xml:space="preserve">
-    <value>Show affected game slot's Unknown12Bs</value><comment>Don't translate term Unknown12Bs</comment>
+  <data name="CommandShowUnknown12BValueOfComparedSaveSlot" xml:space="preserve">
+    <value>Show Unknown12B value of compared save slot</value><comment>Don't translate term Unknown12Bs</comment>
   </data>
-  <data name="CommandIncludeAllUnknown12Bs" xml:space="preserve">
-    <value>Show all game slot Unknown12Bs</value><comment>Don't translate term Unknown12Bs</comment>
+  <data name="CommandShowUnknown12BValuesOfAllSaveSlots" xml:space="preserve">
+    <value>Show Unknown12B values of all save slots</value><comment>Don't translate term Unknown12Bs</comment>
   </data>
-  <data name="ChangesAtEveryInGameSave" xml:space="preserve">
+  <data name="ChangesAtEveryInSaveSlotSave" xml:space="preserve">
     <value>changes at every in-game save</value>
   </data>
-  <data name="GamesCurrentChecksumValues" xml:space="preserve">
-    <value>Game slot's current 'Checksum' values</value>
+  <data name="CurrentSaveSlotChecksumValues" xml:space="preserve">
+    <value>Save slot's current 'Checksum' values</value>
   </data>
-  <data name="GamesCurrentUnknown12BValues" xml:space="preserve">
-    <value>Game slot's current 'UnknownB12' values</value><comment>Don't translate term Unknown12B</comment>
+  <data name="CurrentSaveSlotUnknown12BValues" xml:space="preserve">
+    <value>Save slot's current 'UnknownB12' values</value><comment>Don't translate term Unknown12B</comment>
   </data>
-  <data name="ComparedWithGameTemplated" xml:space="preserve">
-    <value>compared with game slot {0}</value>
+  <data name="ComparedWithOtherSaveSlotTemplate" xml:space="preserve">
+    <value>compared with save slot {0}</value>
   </data>
   <data name="Invalid" xml:space="preserve">
     <value>invalid</value>
@@ -150,22 +150,16 @@
   <data name="ValidationStatus" xml:space="preserve">
     <value>Validation-status</value>
   </data>
-  <data name="NonGameBuffer" xml:space="preserve">
-    <value>Non-game slot area</value>
+  <data name="ChecksumComparedSlots" xml:space="preserve">
+    <value>Checksum of compared save slots</value>
   </data>
-  <data name="WholeGameBuffer" xml:space="preserve">
-    <value>Whole game slot area</value>
+  <data name="ChecksumsAllSlots" xml:space="preserve">
+    <value>Checksum of all save slots</value>
   </data>
-  <data name="GameChecksum" xml:space="preserve">
-    <value>Game slot checksum</value>
+  <data name="Unknown12BComparedSlots" xml:space="preserve">
+    <value>Unknown12B of compared save slots</value><comment>Don't translate term Unknown12B</comment>
   </data>
-  <data name="AllGameChecksums" xml:space="preserve">
-    <value>All savelot checksums</value>
-  </data>
-  <data name="Unknown12B" xml:space="preserve">
-    <value>Unknown12B</value><comment>Don't translate this term</comment>
-  </data>
-  <data name="AllUnknown12Bs" xml:space="preserve">
-    <value>All saveslot Unknown12Bs</value><comment>Don't translate term Unknown12Bs</comment>
+  <data name="Unknown12BAllSlots" xml:space="preserve">
+    <value>Unknown12B of all save slots</value><comment>Don't translate term Unknown12B</comment>
   </data>
 </root>

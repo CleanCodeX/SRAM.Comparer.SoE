@@ -5,6 +5,6 @@ namespace SramComparer.SoE
 {
 	/// <summary>Options implementation for SoE</summary>
 	/// <inheritdoc cref="Options{TFileRegion,TComparisonFlags}"/>
-	public class Options : Options<FileRegion, ComparisonFlagsSoE>
+	public class Options : Options<GameRegion, ComparisonFlagsSoE>
 	{ }
 }

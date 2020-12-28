@@ -3,7 +3,7 @@ Allows to compare (unknown) buffers and manipulate offset values in Secret of Ev
 
 ## Features
 * [C|W] Display (or manipulate and save) offset values
-* [C|W] Comparison of Unknowns only (*default*) or whole game buffer (**optional**)
+* [C|W] Comparison of Unknowns only (*default*) or whole save slot area (**optional**)
 * [C|W] Comparison of whole sram outside games (**optional**)
 * [C|W] Display of differences in decimal, hex and binary format
 * [C|W] Comparison of all 4 games (*default*) or one specific current game with same or different comparison game (**optional**)

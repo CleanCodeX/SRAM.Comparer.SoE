@@ -7,8 +7,8 @@ using SramFormat.SoE.Models.Structs;
 namespace SramComparer.SoE.Services
 {
 	/// <summary>Command handler implementation for SoE</summary>
-	/// <inheritdoc cref="CommandHandler{TSramFile,TSramGame}"/>
-	public class CommandHandlerSoE: CommandHandler<SramFileSoE, SramGame>
+	/// <inheritdoc cref="CommandHandler{TSramFile,TSaveSlot}"/>
+	public class CommandHandlerSoE: CommandHandler<SramFileSoE, SaveSlot>
 	{
 		public CommandHandlerSoE() { }
 		public CommandHandlerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
@@ -31,28 +31,28 @@ namespace SramComparer.SoE.Services
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
 		public void ExportComparison(IOptions options, string filepath, bool showInExplorer) => ExportComparison<SramComparerSoE>(options, filepath, showInExplorer);
 
-		/// <inheritdoc cref="CommandHandler{TSramFile,TSramGame}"/>
+		/// <inheritdoc cref="CommandHandler{TSramFile,TSaveSlot}"/>
 		protected override bool OnRunCommand(string command, IOptions options)
 		{
 			switch (command)
 			{
-				case nameof(Commands.c):
+				case nameof(CommandsSoE.c):
 					Compare(options);
 					break;
-				case nameof(Commands.e):
+				case nameof(CommandsSoE.e):
 					ExportComparison(options, true);
 					break;
-				case nameof(Commands.fu12b) or nameof(Commands.fu12ba):
-					options.Flags = InvertIncludeFlag(options.Flags,
-						command == nameof(Commands.fu12ba)
-							? ComparisonFlagsSoE.AllUnknown12Bs
-							: ComparisonFlagsSoE.Unknown12B);
+				case nameof(CommandsSoE.u12b) or nameof(CommandsSoE.u12ba):
+					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
+						command == nameof(CommandsSoE.u12ba)
+							? ComparisonFlagsSoE.Unknown12BAllSlots
+							: ComparisonFlagsSoE.Unknown12BComparedSlots);
 					break;
-				case nameof(Commands.fc) or nameof(Commands.fca):
-					options.Flags = InvertIncludeFlag(options.Flags,
-						command == nameof(Commands.fca)
-							? ComparisonFlagsSoE.AllGameChecksums
-							: ComparisonFlagsSoE.GameChecksum);
+				case nameof(CommandsSoE.cs) or nameof(CommandsSoE.csa):
+					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
+						command == nameof(CommandsSoE.csa)
+							? ComparisonFlagsSoE.ChecksumAllSlots
+							: ComparisonFlagsSoE.ChecksumComparedSlots);
 					break;
 				default:
 					return base.OnRunCommand(command, options);

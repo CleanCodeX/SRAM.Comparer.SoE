@@ -2,32 +2,34 @@
 Allows to compare (unknown) buffers and manipulate offset values in Secret of Evermore's SRAM file.
 
 ## Features
-* Display (or manipulate and save) offset values
-* Comparison of Unknowns only (*default*) or whole game buffer (**optional**)
-* Comparison of whole sram outside games (**optional**)
+* Display (or modify and save) offset values
+* Comparison of Unknowns area only (*default*) or complete save slot area (**optional**)
+* Comparison of the non-save slot area (**optional**)
 * Display of differences in decimal, hex and binary format
-* Comparison of all 4 games (*default*) or one specific current game with same or different comparison game (**optional**)
+* Comparison of all save slots (*default*) or one specific slot with same or different comparison slot (**optional**)
 * Export comparison result as text file
 * Backup / restore functionality of current and comparison sram file
-* Transfer of SRAM data to similar game 
-* Display of changed or all checksums (**optional**)
+* Transfer of SRAM data to another game name 
+* Display checksums for changed or all slots (**optional**)
 * All settings can be set by cmd line arguments
 
 ## What's still unknown?
-A little less than 50% of SoE's SRAM file game slot format is still considered as 'unknown', meaning that we don't really know what these parts of SRAM actually do.
-Most of unknown parts are reserved for pick-up information of various ingredient sniff spots, opened chests, gourds, pots and which persons were spoken to twice. Despite these there are also game relevant progress flags which we want to know to write more capable SRAM editors.
+Aprox. 54% of SoE's SRAM game slot format is still considered as 'unknown', meaning that we don't really know what these parts of SRAM actually represent.
+Most of unknown parts are reserved for pick-up information from various ingredient sniff spots, opened chests, gourds, pots and which people were spoken twice. Despite these things there are also game relevant progress flags which need to be known to write a more capable SRAM editor.
 A non exhaustive list can be found here:
 [Unknown Offsets](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Markdown/Unknowns.md)
 
-## How can I help?
-You could join to help finding meanings for various SRAM offsets.
-This can be done either by using 
+## Can I help?
+Actually you can! Compare SRAM files, it's not difficult at all.
+
+This would be really awesome. Your help would save much time in not doing something twice what someone else already did.
+
+Join the SoE 'exploration' community to find meanings for various SRAM offsets. This can be done either by using
 
 * [Web Comparison](http://compare.xeth.de)
 * Release
 
-Once you found a meaning for a offset value, try to enable or disable this flag in other SRAM (*.srm) files to prove your discovery. 
-Reading and manipulating offset values can be done either by using  
+Once you found a meaning for an offset value, try to enable or disable this flag in other SRAM (*.srm) files to prove your find. Reading and modifying offset values can be done using the following: 
 
 * [Web Offset Editor](http://offset.xeth.de)
 * Release
@@ -67,32 +69,20 @@ This application uses the latest .NET 5 runtime.
 ***4.2)*** As soon as you can clearly assign a change in the game to a change in the SRAM, you have found a meaning for this specific offset. Then press (e) to export the comparison result as a text file in your export directory.
 ***4.3)*** Rename the file according to your find.
 ***4.4)*** Check whether the change found also occurs in other game versions. E.g. unpatched or patched versions.
-***4.5) If it is reproducible, report the find via community.xeth.de. If necessary, create a pull request for a change to the documentation and the SRAM structure in the GitHub repository..
+***4.5) If it is reproducible, report the find via [community](http://community.xeth.de). If necessary, create a pull request for a change to the documentation and the SRAM structure in the GitHub repository..
 
 ***5)***   To start a "fresh" comparison without previous SRAM changes, press again (ow) to save your current SRAM file 
      as comparison file. Then start again at step 3.1.
 
-***6.1)*** (optional, advanced) If you have more than one slot with changes to comparison file, press (sg) to
-     set the game's save slot (1-4) to avoid comparing other game slots. If two different game slots should be 
-     compared with each other, additionally press (sgc) to set the the slot of comparison file, too.
-***6.2)*** (optional, advanced) Press (fwg | fng) to set comparison modes. 
+***6.1)*** (optional) If you have more than one slot with changes to comparison file, press (ss) to
+     set the game's save slot (1-4) to avoid comparing other save slots. If two different save slots should be 
+     compared with each other, additionally press (ssc) to set the the slot of comparison file, too.
+***6.2)*** (optional) Press (asbc | nsbc) to set comparison modes. 
      If you are unsure, leave at default to compare as less as possible bytes.
 
 ***7)***   (optional) Current and comparison srm file can be backed-up (b|bc) or restored (r|rc) individually.
 
-***8)***   (optional) SRAM offset values for specific game slots can be displayed by pressing (dev) or manipulated by (mov). You can decide whether to update your current SRAM file (backup recommended) or creating a new file.
+***8)***   (optional) SRAM offset values for specific save slots can be displayed by pressing (ov) or manipulated by (mov). You can decide whether to update your current SRAM file (backup recommended) or creating a new file.
 
 ## Screenshots
-![Commands](Images/Cmd.png "Commands")
-
-![Few Flags Change](Images/FewFlagsChange.png "Few Flags Change")
-
-![Many Values Change](Images/ManyValuesChange.png "Many Values Change")
-
-![No SRAM Change](Images/NoChange.png "No SRAM Change")
-
-![Whole Game Comparison](Images/WholeGameComparison.png "Whole Game Comparison")
-
-![Whole Game Comparison #2](Images/WholeGameComparison2.png "Whole Game Comparison #2")
-
-![Optional Game Info](Images/OptionalGameInfo.png "Optional Game Info")
+[Imagery](http://imagery.xeth.de)

@@ -20,7 +20,10 @@ namespace SramComparer.SoE
 			cmdLineParser.ThrowIfNull(nameof(cmdLineParser));
 
 			var options = cmdLineParser.Parse(args);
-			if (options.Commands is null)
+
+			ServiceCollection.ConsolePrinter.ColorizeOutput = options.ColorizeOutput;
+
+			if (options.BatchCommands is null)
 				CommandMenu.Instance.Show(options);
 			else
 				CommandQueue.Instance.Start(options);

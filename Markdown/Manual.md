@@ -28,12 +28,12 @@
 ***5)***   To start a "fresh" comparison without previous SRAM changes, press again (ow) to save your current SRAM file 
      as comparison file. Then start again at step 3.1.
 
-***6.1)*** (optional, advanced) If you have more than one slot with changes to comparison file, press (sg) to
-     set the game's save slot (1-4) to avoid comparing other game slots. If two different game slots should be 
-     compared with each other, additionally press (sgc) to set the the slot of comparison file, too.
-***6.2)*** (optional, advanced) Press (fwg | fng) to set comparison modes. 
+***6.1)*** (optional, advanced) If you have more than one slot with changes to comparison file, press (ss) to
+     set the game's save slot (1-4) to avoid comparing other save slots. If two different save slots should be 
+     compared with each other, additionally press (ssc) to set the the slot of comparison file, too.
+***6.2)*** (optional, advanced) Press (fws | fns) to set comparison modes. 
      If you are unsure, leave at default to compare as less as possible bytes.
 
 ***7)***   (optional) Current and comparison srm file can be backed-up (b|bc) or restored (r|rc) individually.
 
-***8)***   (optional) SRAM offset values for specific game slots can be displayed by pressing (dev) or manipulated by (mov). You can decide whether to update your current SRAM file (backup recommended) or creating a new file.
+***8)***   (optional) SRAM offset values for specific save slots can be displayed by pressing (dev) or manipulated by (mov). You can decide whether to update your current SRAM file (backup recommended) or creating a new file.

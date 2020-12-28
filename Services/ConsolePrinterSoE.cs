@@ -1,7 +1,7 @@
 ﻿using System;
+using Common.Shared.Min.Extensions;
 using SramComparer.Services;
 using SramComparer.SoE.Enums;
-using SramComparer.SoE.Properties;
 
 namespace SramComparer.SoE.Services
 {
@@ -13,17 +13,17 @@ namespace SramComparer.SoE.Services
 		{
 			PrintGroupName(@"Secret Of Evermore");
 
-			PrintCommandKey(Commands.fc);
-			PrintColoredLine(ConsoleColor.Yellow, Resources.CommandIncludeChecksum);
+			PrintCommandKey(CommandsSoE.cs);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.cs.GetDisplayName()!);
 
-			PrintCommandKey(Commands.fca);
-			PrintColoredLine(ConsoleColor.Yellow, Resources.CommandIncludeAllChecksums);
+			PrintCommandKey(CommandsSoE.csa);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.csa.GetDisplayName()!);
 
-			PrintCommandKey(Commands.fu12b);
-			PrintColoredLine(ConsoleColor.Yellow, Resources.CommandIncludeUnknown12B);
+			PrintCommandKey(CommandsSoE.u12b);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.u12b.GetDisplayName()!);
 
-			PrintCommandKey(Commands.fu12ba);
-			PrintColoredLine(ConsoleColor.Yellow, Resources.CommandIncludeAllUnknown12Bs);
+			PrintCommandKey(CommandsSoE.u12ba);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.u12ba.GetDisplayName()!);
 		}
 	}
 }

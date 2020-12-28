@@ -7,8 +7,8 @@
 
 ![No SRAM Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/NoChange.png "No SRAM Change")
 
-![Whole Game Comparison](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/WholeGameComparison.png "Whole Game Comparison")
+![Whole Save Slot Area Comparison](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/WholeSaveSlotAreaComparison.png "Whole Save Slot Area Comparison")
 
-![Whole Game Comparison #2](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/WholeGameComparison2.png "Whole Game Comparison #2")
+![Whole Save Slot Area Comparison #2](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/WholeSaveSlotAreaComparison2.png "Whole Save Slot Area Comparison #2")
 
-![Optional Game Info](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/OptionalGameInfo.png "Optional Game Info")
+![Optional Save Slot Info](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/OptionalSaveSlotInfo.png "Optional Save Slot Info")

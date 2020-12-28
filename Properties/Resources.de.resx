@@ -11,32 +11,32 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-	<data name="AllGameChecksums" xml:space="preserve">
-		<value>Alle Speicherslot Prüfsummen</value>
+	<data name="ChecksumsAllSlots" xml:space="preserve">
+		<value>Prüfsummen aller Speicherslots</value>
 	</data>
-	<data name="AllUnknown12Bs" xml:space="preserve">
-		<value>Alle Speicherslot Unknown12Bs</value><comment>Don't translate term Unknown12Bs</comment>
+	<data name="Unknown12BAllSlots" xml:space="preserve">
+		<value>Unknown12B aller Speicherslots</value><comment>Don't translate term Unknown12Bs</comment>
 	</data>
-	<data name="ChangesAtEveryInGameSave" xml:space="preserve">
+	<data name="ChangesAtEveryInSaveSlotSave" xml:space="preserve">
 		<value>ändert sich bei jeder spielinternen Speicherung</value>
 	</data>
-	<data name="CommandIncludeAllChecksums" xml:space="preserve">
+	<data name="CommandShowChecksumsOfAllSaveSlots" xml:space="preserve">
 		<value>Alle Speicherslot Prüfsummen anzeigen</value>
 	</data>
-	<data name="CommandIncludeAllUnknown12Bs" xml:space="preserve">
-		<value>Alle Speicherslot Unknown12Bs anzeigen</value><comment>Don't translate term Unknown12Bs</comment>
+	<data name="CommandShowUnknown12BValuesOfAllSaveSlots" xml:space="preserve">
+		<value>Unknown12B Werte aller Speicherslot anzeigen</value><comment>Don't translate term Unknown12Bs</comment>
 	</data>
-	<data name="CommandIncludeChecksum" xml:space="preserve">
-		<value>Prüfsumme des betroffenen Speicherslots anzeigen</value>
+	<data name="CommandShowChecksumOfComparedSaveSlot" xml:space="preserve">
+		<value>Prüfsumme des verglichenen Speicherslot anzeigen</value>
 	</data>
-	<data name="CommandIncludeUnknown12B" xml:space="preserve">
-		<value>Unknown12B des betroffenenSpeicherslots anzeigen</value><comment>Don't translate term Unknown12Bs</comment>
+	<data name="CommandShowUnknown12BValueOfComparedSaveSlot" xml:space="preserve">
+		<value>Unknown12B Wert des verglichenen Speicherslot anzeigen</value><comment>Don't translate term Unknown12Bs</comment>
 	</data>
-	<data name="ComparedWithGameTemplated" xml:space="preserve">
+	<data name="ComparedWithOtherSaveSlotTemplate" xml:space="preserve">
 		<value>verglichen mit Speicherslot {0}</value>
 	</data>
-	<data name="GameChecksum" xml:space="preserve">
-		<value>Speicherslot Prüfsumme</value>
+	<data name="ChecksumComparedSlots" xml:space="preserve">
+		<value>Prüfsummen verglichener Speicherslots</value>
 	</data>
 	<data name="Valid" xml:space="preserve">
 		<value>gültig</value>
@@ -44,22 +44,16 @@
 	<data name="ValidationStatus" xml:space="preserve">
 		<value>Validierungs-Status</value>
 	</data>
-	<data name="WholeGameBuffer" xml:space="preserve">
-		<value>Gesamter Speicherslot-Bereich</value>
-	</data>
-	<data name="GamesCurrentChecksumValues" xml:space="preserve">
-		<value>Prüfsumme des betreffenden Speicherslots</value>
+	<data name="CurrentSaveSlotChecksumValues" xml:space="preserve">
+		<value>Prüfsumme des verglichenen Speicherslot</value>
 	</data>
 	<data name="Invalid" xml:space="preserve">
 		<value>ungültig</value>
 	</data>
-	<data name="NonGameBuffer" xml:space="preserve">
-		<value>Nicht-Speicherslot-Bereich</value>
+	<data name="Unknown12BComparedSlots" xml:space="preserve">
+		<value>Unknown12B verglichener Speicherslots</value><comment>Don't translate this term</comment>
 	</data>
-	<data name="Unknown12B" xml:space="preserve">
-		<value>Unknown12B</value><comment>Don't translate this term</comment>
-	</data>
-	<data name="GamesCurrentUnknown12BValues" xml:space="preserve">
-		<value>Unknown12B des betreffenden Speicherslots</value><comment>Don't translate term Unknown12B</comment>
+	<data name="CurrentSaveSlotUnknown12BValues" xml:space="preserve">
+		<value>Unknown12B des verglichenen Speicherslot</value><comment>Don't translate term Unknown12B</comment>
 	</data>
 </root>
