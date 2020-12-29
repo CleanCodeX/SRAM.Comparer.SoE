@@ -93,7 +93,7 @@ namespace SramComparer.SoE.Services
 
 			ConsolePrinter.PrintParagraph();
 
-			const int borderLength = 29;
+			const int borderLength = 50;
 			var color = allDiffBytes > 0 ? ConsoleColor.Yellow : ConsoleColor.Green;
 			ConsolePrinter.PrintColoredLine(color, "=".Repeat(borderLength));
 			if (allDiffBytes > 0)
