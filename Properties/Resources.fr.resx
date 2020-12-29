@@ -30,8 +30,8 @@
 		<value>Unknown12B of all save slots</value><comment>Was: Afficher toutes les valeurs Unknown12B
 		</comment>
 	</data>
-	<data name="Unknown12BComparedSlots" xml:space="preserve">
-		<value>Unknown12B of compared save slots</value><comment>Was: Valeurs Unknown12B de la partie en cours
+	<data name="Unknown12BWhenDifferent" xml:space="preserve">
+		<value>Unknown12B when different</value><comment>Was: Valeurs Unknown12B de la partie en cours
 		</comment>
 	</data>
 	<data name="CommandShowUnknown12BValueOfComparedSaveSlot" xml:space="preserve">
@@ -44,7 +44,7 @@
 		<value>Show checksum of compared save slot</value><comment>was: Checksum de la partie en cours
 		</comment>
 	</data>
-	<data name="ChecksumComparedSlots" xml:space="preserve">
+	<data name="ChecksumWhenDifferent" xml:space="preserve">
 		<value>Checksum of compared save slots</value><comment>Retranslation needed</comment>
 	</data>
 	<data name="ChecksumsAllSlots" xml:space="preserve">

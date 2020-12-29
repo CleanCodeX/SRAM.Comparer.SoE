@@ -15,16 +15,16 @@ namespace SramComparer.SoE.Enums
 		[DisplayNameLocalized(nameof(ResComp.NonSlotByteByByteComparison), typeof(Res))]
 		NonSlotByteByByteComparison = ComparisonFlags.NonSlotByteByByteComparison,
 
-		[DisplayNameLocalized(nameof(Res.ChecksumComparedSlots), typeof(Res))]
-		ChecksumComparedSlots = 1 << 2,
+		[DisplayNameLocalized(nameof(Res.ChecksumWhenDifferent), typeof(Res))]
+		ChecksumWhenDifferent = 1 << 2,
 
 		[DisplayNameLocalized(nameof(Res.ChecksumsAllSlots), typeof(Res))]
-		ChecksumAllSlots = 1 << 3 | ChecksumComparedSlots,
+		ChecksumAllSlots = 1 << 3 | ChecksumWhenDifferent,
 
-		[DisplayNameLocalized(nameof(Res.Unknown12BComparedSlots), typeof(Res))]
-		Unknown12BComparedSlots = 1 << 4,
+		[DisplayNameLocalized(nameof(Res.Unknown12BWhenDifferent), typeof(Res))]
+		Unknown12BWhenDifferent = 1 << 4,
 
 		[DisplayNameLocalized(nameof(Res.Unknown12BAllSlots), typeof(Res))]
-		Unknown12BAllSlots = 1 << 5 | Unknown12BComparedSlots,
+		Unknown12BAllSlots = 1 << 5 | Unknown12BWhenDifferent,
 	}
 }

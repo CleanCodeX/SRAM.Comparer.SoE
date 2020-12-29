@@ -79,20 +79,20 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Checksum of compared save slots ähnelt.
-        /// </summary>
-        public static string ChecksumComparedSlots {
-            get {
-                return ResourceManager.GetString("ChecksumComparedSlots", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Checksum of all save slots ähnelt.
         /// </summary>
         public static string ChecksumsAllSlots {
             get {
                 return ResourceManager.GetString("ChecksumsAllSlots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Checksum when different ähnelt.
+        /// </summary>
+        public static string ChecksumWhenDifferent {
+            get {
+                return ResourceManager.GetString("ChecksumWhenDifferent", resourceCulture);
             }
         }
         
@@ -160,11 +160,11 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Unknown12B of compared save slots ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Unknown12B when different ähnelt.
         /// </summary>
-        public static string Unknown12BComparedSlots {
+        public static string Unknown12BWhenDifferent {
             get {
-                return ResourceManager.GetString("Unknown12BComparedSlots", resourceCulture);
+                return ResourceManager.GetString("Unknown12BWhenDifferent", resourceCulture);
             }
         }
         

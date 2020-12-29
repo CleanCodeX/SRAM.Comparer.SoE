@@ -144,14 +144,14 @@
   <data name="ValidationStatus" xml:space="preserve">
     <value>Validation-status</value>
   </data>
-  <data name="ChecksumComparedSlots" xml:space="preserve">
-    <value>Checksum of compared save slots</value>
+  <data name="ChecksumWhenDifferent" xml:space="preserve">
+    <value>Checksum when different</value>
   </data>
   <data name="ChecksumsAllSlots" xml:space="preserve">
     <value>Checksum of all save slots</value>
   </data>
-  <data name="Unknown12BComparedSlots" xml:space="preserve">
-    <value>Unknown12B of compared save slots</value><comment>Don't translate term Unknown12B</comment>
+  <data name="Unknown12BWhenDifferent" xml:space="preserve">
+    <value>Unknown12B when different</value><comment>Don't translate term Unknown12B</comment>
   </data>
   <data name="Unknown12BAllSlots" xml:space="preserve">
     <value>Unknown12B of all save slots</value><comment>Don't translate term Unknown12B</comment>

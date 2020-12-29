@@ -35,8 +35,8 @@
 	<data name="ComparedWithOtherSaveSlotTemplate" xml:space="preserve">
 		<value>verglichen mit Speicherslot {0}</value>
 	</data>
-	<data name="ChecksumComparedSlots" xml:space="preserve">
-		<value>Prüfsummen verglichener Speicherslots</value>
+	<data name="ChecksumWhenDifferent" xml:space="preserve">
+		<value>Prüfsumme wenn unterschiedlich</value>
 	</data>
 	<data name="Valid" xml:space="preserve">
 		<value>gültig</value>
@@ -47,8 +47,8 @@
 	<data name="Invalid" xml:space="preserve">
 		<value>ungültig</value>
 	</data>
-	<data name="Unknown12BComparedSlots" xml:space="preserve">
-		<value>Unknown12B verglichener Speicherslots</value><comment>Don't translate this term</comment>
+	<data name="Unknown12BWhenDifferent" xml:space="preserve">
+		<value>Unknown12B wenn unterschiedlich</value><comment>Don't translate this term</comment>
 	</data>
 	<data name="Checksum" xml:space="preserve">
 		<value>Prüfsumme</value>

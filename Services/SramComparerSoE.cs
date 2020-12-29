@@ -108,10 +108,10 @@ namespace SramComparer.SoE.Services
 			{
 				ConsolePrinter.PrintParagraph();
 
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumComparedSlots))
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumWhenDifferent))
 					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, FormatAdditionalValues(nameof(checksums), checksums));
 
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BComparedSlots))
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BWhenDifferent))
 					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, FormatAdditionalValues(nameof(timestamps), timestamps));
 			}
 
@@ -140,13 +140,9 @@ namespace SramComparer.SoE.Services
 			
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumAllSlots) || compSlot.Checksum != currSlot.Checksum)
 					checksums.AppendLine($"{currSlotNameString}: {currSlot.Checksum.PadLeft()}");
-				//else if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumComparedSlots))
-				//	checksums.AppendLine($"{currSlotNameString}: {Res.Same}");
 
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BAllSlots) || compSlot.Unknown12B != currSlot.Unknown12B)
 					timestamps.AppendLine($"{currSlotNameString}: {currSlot.Unknown12B.PadLeft()}");
-				//else if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BComparedSlots))
-				//	timestamps.AppendLine($"{currSlotNameString}: {Res.Same}");
 
 				if (compSlotBytes.SequenceEqual(currSlotBytes)) return allDiffBytes;
 
@@ -303,7 +299,7 @@ namespace SramComparer.SoE.Services
 			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown12A), out name);
 			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown12A, compSaveSlot.Unknown12A);
 
-			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.Unknown12BComparedSlots))
+			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.Unknown12BWhenDifferent))
 			{
 				offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown12B), out name);
 				diffBytes += CompareUShort(name, offset, currSaveSlot.Unknown12B,
