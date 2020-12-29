@@ -20,4 +20,4 @@ This application uses the latest .NET 5 runtime.
 
 ## History
 
-* [Changelog](Console-Changelog)
+* [Changelog](Changelog-Console)
