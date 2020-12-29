@@ -31,13 +31,17 @@ namespace SramComparer.SoE.Services
 
 			ConsolePrinter.PrintParagraph();
 
-			var optionSaveSlotIndex = options.CurrentSramFileSaveSlot - 1;
-			var optionCompSaveSlotIndex = options.ComparisonSramFileSaveSlot - 1;
+			var optionCurrSlotIndex = options.CurrentSramFileSaveSlot - 1;
+			var optionCompSlotIndex = options.ComparisonSramFileSaveSlot - 1;
 			var optionFlags = (ComparisonFlagsSoE)options.ComparisonFlags;
 
-			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, optionSaveSlotIndex > -1
-				? string.Format(Res.StatusSingleSaveSlotWillBeComparedTemplate, options.CurrentSramFileSaveSlot)
-				: Res.StatusAllSaveSlotsWillBeCompared);
+			var slotComparisonMode = optionCompSlotIndex > -1
+				? Res.StatusTwoDifferentSaveSlotsWillBeComparedTemplate.InsertArgs(options.CurrentSramFileSaveSlot,
+					options.ComparisonSramFileSaveSlot)
+				: optionCurrSlotIndex > -1
+					? string.Format(Res.StatusSingleSaveSlotWillBeComparedTemplate, options.CurrentSramFileSaveSlot)
+					: Res.StatusAllSaveSlotsWillBeCompared;
+			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, slotComparisonMode);
 
 			ConsolePrinter.PrintParagraph();
 
@@ -56,17 +60,17 @@ namespace SramComparer.SoE.Services
 			var allDiffBytes = sramDiffBytes;
 
 			var checksums = new StringBuilder();
-			checksums.AppendLine($"{Resources.Checksum} (2 {Res.Bytes}): ({Resources.ChangesAtEveryInSaveSlotSave})");
+			checksums.AppendLine($"{Resources.Checksum} (2 {Res.Bytes} | {Resources.ChangesAtEveryInSaveSlotSave}):");
 
 			var timestamps = new StringBuilder();
 			timestamps.AppendLine($"{nameof(SaveSlot.Unknown12B)} (2 {Res.Bytes}):");
 
-			if (optionSaveSlotIndex > -1 && optionCompSaveSlotIndex > -1)
-				allDiffBytes = CompareSaveSlots(optionSaveSlotIndex, optionCompSaveSlotIndex);
+			if (optionCurrSlotIndex > -1 && optionCompSlotIndex > -1)
+				allDiffBytes = CompareSaveSlots(optionCurrSlotIndex, optionCompSlotIndex);
 			else
 				for (var slotIndex = 0; slotIndex < 4; slotIndex++)
 				{
-					if (optionSaveSlotIndex > -1 && optionSaveSlotIndex != slotIndex) continue;
+					if (optionCurrSlotIndex > -1 && optionCurrSlotIndex != slotIndex) continue;
 
 					allDiffBytes = CompareSaveSlots(slotIndex);
 				}
@@ -125,8 +129,8 @@ namespace SramComparer.SoE.Services
 				var currSlot = currFile.GetSaveSlot(currSlotIndex);
 				var currSlotBytes = currFile.GetSaveSlotBytes(currSlotIndex);
 
-				var compSlot = compFile.GetSaveSlot(currSlotIndex);
-				var compSlotBytes = compFile.GetSaveSlotBytes(currSlotIndex);
+				var compSlot = compFile.GetSaveSlot(compSlotIndex);
+				var compSlotBytes = compFile.GetSaveSlotBytes(compSlotIndex);
 
 				var currSlotId = currSlotIndex + 1;
 				var compSlotId = compSlotIndex + 1;
@@ -135,8 +139,9 @@ namespace SramComparer.SoE.Services
 				if (currSlotId != compSlotId)
 					slotIdString += $" ({Resources.ComparedWithOtherSaveSlotTemplate.InsertArgs(compSlotId)})";
 
-				var currSlotName = $"({Res.CurrentShort}) {Res.SaveSlot} {currSlotId}";
-				var currSlotNameString = $"{" ".Repeat(2)}{currSlotName}: ";
+				var padding = 25;
+				var currSlotName = $"{$"({Res.CurrentSramFile})".PadRight(padding)} {Res.SaveSlot} {currSlotId}";
+				var currSlotNameString = $"{" ".Repeat(2)}{currSlotName}";
 			
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumAllSlots) || compSlot.Checksum != currSlot.Checksum)
 					checksums.AppendLine($"{currSlotNameString}: {currSlot.Checksum.PadLeft()}");
@@ -146,9 +151,9 @@ namespace SramComparer.SoE.Services
 
 				if (compSlotBytes.SequenceEqual(currSlotBytes)) return allDiffBytes;
 
-				var compSlotName = $"({Res.ComparisonShort}) {Res.SaveSlot} {compSlotId}";
-				var compSlotNameString = $"{" ".Repeat(2)}{compSlotName}: ";
-				
+				var compSlotName = $"{$"({Res.ComparisonSramFile})".PadRight(padding)} {Res.SaveSlot} {compSlotId}";
+				var compSlotNameString = $"{" ".Repeat(2)}{compSlotName}";
+
 				checksums.AppendLine($"{compSlotNameString}: {compSlot.Checksum.PadLeft()}");
 				timestamps.AppendLine($"{compSlotNameString}: {compSlot.Unknown12B.PadLeft()}");
 

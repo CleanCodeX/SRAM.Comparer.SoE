@@ -5,6 +5,8 @@
 * Support for game region and comparison file path as unnamed params
 * French localization
 * Some localization changes for English and German
+* Bugfix when comparing two different slots
+* Various other minor bugfixes
 
 #### 0.2.4 - 2020-12-26 
 * Markdown changes
