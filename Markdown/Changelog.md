@@ -1,12 +1,12 @@
 ﻿## Changelog SRAM-Comparer
 
 #### 0.2.6 - 2020-12-29 
-* Colorization now optional
-* Support for game region and comparison file path as unnamed params
-* French localization
-* Some localization changes for English and German
 * Bugfix when comparing two different slots
-* Various other minor bugfixes
+* Some other minor bugfixes
+* Colorization now optional
+* Support for game region and comparison file path as unnamed cmd arguments
+* Added french localization
+* Some localization changes for English and German
 
 #### 0.2.4 - 2020-12-26 
 * Markdown changes

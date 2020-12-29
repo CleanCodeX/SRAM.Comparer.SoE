@@ -18,6 +18,6 @@ This application uses the latest .NET 5 runtime.
 
 * [v0.1.8 - 2020-09-03](http://xeth.de/Releases/SramComparer/Comparer-SoE.0.1.8.zip){target="_"}
 
-## Changelog
+## History
 
-* [Changelog](Changelog)
+* [Changelog](Console-Changelog)
