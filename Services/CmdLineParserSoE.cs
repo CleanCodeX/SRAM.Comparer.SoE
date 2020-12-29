@@ -1,6 +1,6 @@
-﻿using SramFormat.SoE.Models.Enums;
-using SramComparer.Services;
+﻿using SramComparer.Services;
 using SramComparer.SoE.Enums;
+using SramFormat.SoE.Enums;
 
 namespace SramComparer.SoE.Services
 {

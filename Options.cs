@@ -1,5 +1,5 @@
-﻿using SramFormat.SoE.Models.Enums;
-using SramComparer.SoE.Enums;
+﻿using SramComparer.SoE.Enums;
+using SramFormat.SoE.Enums;
 
 namespace SramComparer.SoE
 {

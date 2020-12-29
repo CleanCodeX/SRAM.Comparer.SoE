@@ -35,12 +35,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>portable</DebugType>
+    <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <DebugType>portable</DebugType>
+    <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
@@ -52,8 +52,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CCX.SramComparer" Version="1.0.3-b2" />
-    <PackageReference Include="CCX.SramFormat.SoE" Version="0.2.5-a2" />
+    <PackageReference Include="CCX.SramComparer" Version="1.0.4-a1" />
+    <PackageReference Include="CCX.SramFormat.SoE" Version="0.2.6-a2" />
   </ItemGroup>
 
   <ItemGroup>
