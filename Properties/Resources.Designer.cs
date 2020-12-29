@@ -133,24 +133,6 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Save slot&apos;s current &apos;Checksum&apos; values ähnelt.
-        /// </summary>
-        public static string CurrentSaveSlotChecksumValues {
-            get {
-                return ResourceManager.GetString("CurrentSaveSlotChecksumValues", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Save slot&apos;s current &apos;UnknownB12&apos; values ähnelt.
-        /// </summary>
-        public static string CurrentSaveSlotUnknown12BValues {
-            get {
-                return ResourceManager.GetString("CurrentSaveSlotUnknown12BValues", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die invalid ähnelt.
         /// </summary>
         public static string Invalid {

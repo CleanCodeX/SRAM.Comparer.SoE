@@ -44,16 +44,10 @@
 	<data name="ValidationStatus" xml:space="preserve">
 		<value>Validierungs-Status</value>
 	</data>
-	<data name="CurrentSaveSlotChecksumValues" xml:space="preserve">
-		<value>Prüfsumme des verglichenen Speicherslot</value>
-	</data>
 	<data name="Invalid" xml:space="preserve">
 		<value>ungültig</value>
 	</data>
 	<data name="Unknown12BComparedSlots" xml:space="preserve">
 		<value>Unknown12B verglichener Speicherslots</value><comment>Don't translate this term</comment>
-	</data>
-	<data name="CurrentSaveSlotUnknown12BValues" xml:space="preserve">
-		<value>Unknown12B des verglichenen Speicherslot</value><comment>Don't translate term Unknown12B</comment>
 	</data>
 </root>

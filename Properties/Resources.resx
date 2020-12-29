@@ -132,12 +132,6 @@
   <data name="ChangesAtEveryInSaveSlotSave" xml:space="preserve">
     <value>changes at every in-game save</value>
   </data>
-  <data name="CurrentSaveSlotChecksumValues" xml:space="preserve">
-    <value>Save slot's current 'Checksum' values</value>
-  </data>
-  <data name="CurrentSaveSlotUnknown12BValues" xml:space="preserve">
-    <value>Save slot's current 'UnknownB12' values</value><comment>Don't translate term Unknown12B</comment>
-  </data>
   <data name="ComparedWithOtherSaveSlotTemplate" xml:space="preserve">
     <value>compared with save slot {0}</value>
   </data>

@@ -56,10 +56,10 @@ namespace SramComparer.SoE.Services
 			var allDiffBytes = sramDiffBytes;
 
 			var checksums = new StringBuilder();
-			checksums.AppendLine($"{Resources.CurrentSaveSlotChecksumValues} (2 {Res.Bytes.ToLower()}): ({Resources.ChangesAtEveryInSaveSlotSave})");
+			checksums.AppendLine($"{ComparisonFlagsSoE.ChecksumComparedSlots.GetDisplayName()} (2 {Res.Bytes.ToLower()}): ({Resources.ChangesAtEveryInSaveSlotSave})");
 
 			var timestamps = new StringBuilder();
-			timestamps.AppendLine($"{Resources.CurrentSaveSlotUnknown12BValues} (2 {Res.Bytes.ToLower()}): ({Resources.ChangesAtEveryInSaveSlotSave})");
+			timestamps.AppendLine($"{ComparisonFlagsSoE.Unknown12BComparedSlots.GetDisplayName()} (2 {Res.Bytes.ToLower()}): ({Resources.ChangesAtEveryInSaveSlotSave})");
 
 			if (optionSaveSlotIndex > -1 && optionCompSaveSlotIndex > -1)
 				allDiffBytes = CompareSaveSlots(optionSaveSlotIndex, optionCompSaveSlotIndex);

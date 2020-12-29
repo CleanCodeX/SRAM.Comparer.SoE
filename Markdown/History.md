@@ -1,4 +1,7 @@
 ﻿## History
+* 0.2.6 - 2020-12-29 
+French localization
+
 * 0.2.4 - 2020-12-26 
 Markdown changes
 

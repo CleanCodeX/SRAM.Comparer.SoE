@@ -1,0 +1,57 @@
+﻿<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="ChangesAtEveryInSaveSlotSave" xml:space="preserve">
+		<value>Différences dans chaque sauvegarde</value>
+	</data>
+	<data name="Valid" xml:space="preserve">
+		<value>valide</value>
+	</data>
+	<data name="Invalid" xml:space="preserve">
+		<value>invalide</value>
+	</data>
+	<data name="ValidationStatus" xml:space="preserve">
+		<value>Statut de validation</value>
+	</data>
+	<data name="ComparedWithOtherSaveSlotTemplate" xml:space="preserve">
+		<value>par rapport à la partie {0}</value>
+	</data>
+	<data name="Unknown12BAllSlots" xml:space="preserve">
+		<value>Unknown12B of all save slots</value><comment>Was: Afficher toutes les valeurs Unknown12B
+		</comment>
+	</data>
+	<data name="Unknown12BComparedSlots" xml:space="preserve">
+		<value>Unknown12B of compared save slots</value><comment>Was: Valeurs Unknown12B de la partie en cours
+		</comment>
+	</data>
+	<data name="CommandShowUnknown12BValueOfComparedSaveSlot" xml:space="preserve">
+		<value>Show Unknown12B value of compared save slot</value><comment>Afficher toutes les valeurs Unknown12B</comment>
+	</data>
+	<data name="CommandShowUnknown12BValuesOfAllSaveSlots" xml:space="preserve">
+		<value>Show Unknown12B values of all save slots</value><comment>Retranslation needed</comment>
+	</data>
+	<data name="CommandShowChecksumOfComparedSaveSlot" xml:space="preserve">
+		<value>Show checksum of compared save slot</value><comment>was: Checksum de la partie en cours
+		</comment>
+	</data>
+	<data name="ChecksumComparedSlots" xml:space="preserve">
+		<value>Checksum of compared save slots</value><comment>Retranslation needed</comment>
+	</data>
+	<data name="ChecksumsAllSlots" xml:space="preserve">
+		<value>Checksum of all save slots</value><comment>was: Afficher tous les checksums
+		</comment>
+	</data>
+	<data name="CommandShowChecksumsOfAllSaveSlots" xml:space="preserve">
+		<value>Show checksums of all save slots</value><comment>Afficher le checksum affecté</comment>
+	</data>
+</root>
