@@ -50,4 +50,7 @@
 	<data name="Unknown12BComparedSlots" xml:space="preserve">
 		<value>Unknown12B verglichener Speicherslots</value><comment>Don't translate this term</comment>
 	</data>
+	<data name="Checksum" xml:space="preserve">
+		<value>Prüfsumme</value>
+	</data>
 </root>

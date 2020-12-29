@@ -156,4 +156,7 @@
   <data name="Unknown12BAllSlots" xml:space="preserve">
     <value>Unknown12B of all save slots</value><comment>Don't translate term Unknown12B</comment>
   </data>
+  <data name="Checksum" xml:space="preserve">
+    <value>Checksum</value>
+  </data>
 </root>

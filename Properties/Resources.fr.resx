@@ -54,4 +54,7 @@
 	<data name="CommandShowChecksumsOfAllSaveSlots" xml:space="preserve">
 		<value>Show checksums of all save slots</value><comment>Afficher le checksum affecté</comment>
 	</data>
+	<data name="Checksum" xml:space="preserve">
+		<value>Checksum</value>
+	</data>
 </root>

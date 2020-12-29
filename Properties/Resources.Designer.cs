@@ -70,6 +70,15 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Checksum ähnelt.
+        /// </summary>
+        public static string Checksum {
+            get {
+                return ResourceManager.GetString("Checksum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Checksum of compared save slots ähnelt.
         /// </summary>
         public static string ChecksumComparedSlots {

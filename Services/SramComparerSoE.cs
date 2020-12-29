@@ -56,10 +56,10 @@ namespace SramComparer.SoE.Services
 			var allDiffBytes = sramDiffBytes;
 
 			var checksums = new StringBuilder();
-			checksums.AppendLine($"{ComparisonFlagsSoE.ChecksumComparedSlots.GetDisplayName()} (2 {Res.Bytes.ToLower()}): ({Resources.ChangesAtEveryInSaveSlotSave})");
+			checksums.AppendLine($"{Resources.Checksum} (2 {Res.Bytes}): ({Resources.ChangesAtEveryInSaveSlotSave})");
 
 			var timestamps = new StringBuilder();
-			timestamps.AppendLine($"{ComparisonFlagsSoE.Unknown12BComparedSlots.GetDisplayName()} (2 {Res.Bytes.ToLower()}): ({Resources.ChangesAtEveryInSaveSlotSave})");
+			timestamps.AppendLine($"{nameof(SaveSlot.Unknown12B)} (2 {Res.Bytes}):");
 
 			if (optionSaveSlotIndex > -1 && optionCompSaveSlotIndex > -1)
 				allDiffBytes = CompareSaveSlots(optionSaveSlotIndex, optionCompSaveSlotIndex);
@@ -117,7 +117,7 @@ namespace SramComparer.SoE.Services
 
 			return allDiffBytes;
 
-			int CompareSaveSlots(int currSlotIndex, int compSlotIndex = default)
+			int CompareSaveSlots(int currSlotIndex, int compSlotIndex = -1)
 			{
 				if (compSlotIndex == -1)
 					compSlotIndex = currSlotIndex;
@@ -135,23 +135,26 @@ namespace SramComparer.SoE.Services
 				if (currSlotId != compSlotId)
 					slotIdString += $" ({Resources.ComparedWithOtherSaveSlotTemplate.InsertArgs(compSlotId)})";
 
-				var currSlotName = $"{Res.Current} {Res.SaveSlot} {currSlotId}";
+				var currSlotName = $"({Res.CurrentShort}) {Res.SaveSlot} {currSlotId}";
+				var currSlotNameString = $"{" ".Repeat(2)}{currSlotName}: ";
+			
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumAllSlots) || compSlot.Checksum != currSlot.Checksum)
-					checksums.AppendLine(
-						$"{" ".Repeat(2)}{currSlotName}: {currSlot.Checksum.PadLeft()}");
+					checksums.AppendLine($"{currSlotNameString}: {currSlot.Checksum.PadLeft()}");
+				//else if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumComparedSlots))
+				//	checksums.AppendLine($"{currSlotNameString}: {Res.Same}");
 
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BAllSlots) || compSlot.Unknown12B != currSlot.Unknown12B)
-					timestamps.AppendLine(
-						$"{" ".Repeat(2)}{currSlotName}: {currSlot.Unknown12B.PadLeft()}");
+					timestamps.AppendLine($"{currSlotNameString}: {currSlot.Unknown12B.PadLeft()}");
+				//else if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BComparedSlots))
+				//	timestamps.AppendLine($"{currSlotNameString}: {Res.Same}");
 
 				if (compSlotBytes.SequenceEqual(currSlotBytes)) return allDiffBytes;
 
-				var compSlotName = $"{Res.Comparison} {Res.SaveSlot} {compSlotId}";
-				checksums.AppendLine(
-					$"{" ".Repeat(2)}{compSlotName}: {compSlot.Checksum.PadLeft()}");
-
-				timestamps.AppendLine(
-					$"{" ".Repeat(2)}{compSlotName}: {compSlot.Unknown12B.PadLeft()}");
+				var compSlotName = $"({Res.ComparisonShort}) {Res.SaveSlot} {compSlotId}";
+				var compSlotNameString = $"{" ".Repeat(2)}{compSlotName}: ";
+				
+				checksums.AppendLine($"{compSlotNameString}: {compSlot.Checksum.PadLeft()}");
+				timestamps.AppendLine($"{compSlotNameString}: {compSlot.Unknown12B.PadLeft()}");
 
 				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.SaveSlot} {slotIdString} ]---------------------------------------------");
 				ConsolePrinter.ResetColor();
