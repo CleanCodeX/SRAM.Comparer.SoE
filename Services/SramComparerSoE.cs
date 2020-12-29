@@ -109,92 +109,94 @@ namespace SramComparer.SoE.Services
 				ConsolePrinter.PrintParagraph();
 
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumComparedSlots))
-					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, checksums.ToString());
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, FormatAdditionalValues(nameof(checksums), checksums));
 
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BComparedSlots))
-					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, timestamps.ToString());
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, FormatAdditionalValues(nameof(timestamps), timestamps));
 			}
 
 			return allDiffBytes;
 
-			int CompareSaveSlots(int slotIndex, int compSaveSlotIndex = default)
+			int CompareSaveSlots(int currSlotIndex, int compSlotIndex = default)
 			{
-				if (compSaveSlotIndex == -1)
-					compSaveSlotIndex = slotIndex;
+				if (compSlotIndex == -1)
+					compSlotIndex = currSlotIndex;
 
-				var currSaveSlot = currFile.GetSaveSlot(slotIndex);
-				var currSaveSlotBytes = currFile.GetSaveSlotBytes(slotIndex);
+				var currSlot = currFile.GetSaveSlot(currSlotIndex);
+				var currSlotBytes = currFile.GetSaveSlotBytes(currSlotIndex);
 
-				var compSaveSlot = compFile.GetSaveSlot(slotIndex);
-				var compSaveSlotBytes = compFile.GetSaveSlotBytes(slotIndex);
+				var compSlot = compFile.GetSaveSlot(currSlotIndex);
+				var compSlotBytes = compFile.GetSaveSlotBytes(currSlotIndex);
 
-				var gameId = slotIndex + 1;
-				var compSaveSlotId = compSaveSlotIndex + 1;
+				var currSlotId = currSlotIndex + 1;
+				var compSlotId = compSlotIndex + 1;
 
-				var gameIdString = gameId.ToString();
-				if (gameId != compSaveSlotId)
-					gameIdString += $" ({Resources.ComparedWithOtherSaveSlotTemplate.InsertArgs(compSaveSlotId)})";
+				var slotIdString = currSlotId.ToString();
+				if (currSlotId != compSlotId)
+					slotIdString += $" ({Resources.ComparedWithOtherSaveSlotTemplate.InsertArgs(compSlotId)})";
 
-				var currSaveSlotName = $"{Res.CurrentShort} {Res.SaveSlot} {gameId}";
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumAllSlots) || compSaveSlot.Checksum != currSaveSlot.Checksum)
+				var currSlotName = $"{Res.Current} {Res.SaveSlot} {currSlotId}";
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumAllSlots) || compSlot.Checksum != currSlot.Checksum)
 					checksums.AppendLine(
-						$"{" ".Repeat(2)}{currSaveSlotName}: {currSaveSlot.Checksum.PadLeft()}");
+						$"{" ".Repeat(2)}{currSlotName}: {currSlot.Checksum.PadLeft()}");
 
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BAllSlots) || compSaveSlot.Unknown12B != currSaveSlot.Unknown12B)
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BAllSlots) || compSlot.Unknown12B != currSlot.Unknown12B)
 					timestamps.AppendLine(
-						$"{" ".Repeat(2)}{currSaveSlotName}: {currSaveSlot.Unknown12B.PadLeft()}");
+						$"{" ".Repeat(2)}{currSlotName}: {currSlot.Unknown12B.PadLeft()}");
 
-				if (compSaveSlotBytes.SequenceEqual(currSaveSlotBytes)) return allDiffBytes;
+				if (compSlotBytes.SequenceEqual(currSlotBytes)) return allDiffBytes;
 
-				var compSaveSlotName = $"{Res.ComparisonShort} {Res.SaveSlot} {compSaveSlotId}";
+				var compSlotName = $"{Res.Comparison} {Res.SaveSlot} {compSlotId}";
 				checksums.AppendLine(
-					$"{" ".Repeat(2)}{compSaveSlotName}: {compSaveSlot.Checksum.PadLeft()}");
+					$"{" ".Repeat(2)}{compSlotName}: {compSlot.Checksum.PadLeft()}");
 
 				timestamps.AppendLine(
-					$"{" ".Repeat(2)}{compSaveSlotName}: {compSaveSlot.Unknown12B.PadLeft()}");
+					$"{" ".Repeat(2)}{compSlotName}: {compSlot.Unknown12B.PadLeft()}");
 
-				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.SaveSlot} {gameIdString} ]---------------------------------------------");
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.SaveSlot} {slotIdString} ]---------------------------------------------");
 				ConsolePrinter.ResetColor();
 
 				ConsolePrinter.PrintParagraph();
 				ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.UnknownAreasOnly} ].......................................");
 				ConsolePrinter.ResetColor();
 
-				var gameDiffBytes = CompareSaveSlot(currSaveSlot, compSaveSlot, options);
-				if (gameDiffBytes > 0)
+				var slotDiffBytes = CompareSaveSlot(currSlot, compSlot, options);
+				if (slotDiffBytes > 0)
 				{
 					ConsolePrinter.PrintParagraph();
-					ConsolePrinter.PrintColoredLine(ConsoleColor.Green, " ".Repeat(4) + Res.StatusUnknownsChangedBytesTemplate.InsertArgs(gameDiffBytes));
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Green, " ".Repeat(4) + Res.StatusUnknownsChangedBytesTemplate.InsertArgs(slotDiffBytes));
 					ConsolePrinter.ResetColor();
 				}
 
 				if (!optionFlags.HasFlag(ComparisonFlagsSoE.SlotByteByByteComparison))
 				{
-					allDiffBytes += gameDiffBytes;
+					allDiffBytes += slotDiffBytes;
 					return allDiffBytes;
 				}
 
 				ConsoleHelper.EnsureMinConsoleWidth(165);
 
-				bufferName = $"{nameof(compFile.Sram.SaveSlots)} {gameId}";
-				var bufferOffset = Offsets.FirstSaveSlot + gameId * Sizes.SaveSlot.All;
-				var gameBufferDiffBytes = CompareByteArray(bufferName, bufferOffset, currSaveSlotBytes, compSaveSlotBytes, false);
-				if (gameBufferDiffBytes > gameDiffBytes)
+				bufferName = $"{nameof(compFile.Sram.SaveSlots)} {currSlotId}";
+				var bufferOffset = Offsets.FirstSaveSlot + currSlotId * Sizes.SaveSlot.All;
+				var slotBufferDiffBytes = CompareByteArray(bufferName, bufferOffset, currSlotBytes, compSlotBytes, false);
+				if (slotBufferDiffBytes > slotDiffBytes)
 				{
 					ConsolePrinter.PrintParagraph();
-					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, $@"{" ".Repeat(2)}[ {Res.SectionSaveSlotChangedTemplate} ]...................................".InsertArgs(slotIndex));
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, $@"{" ".Repeat(2)}[ {Res.SectionSaveSlotChangedTemplate} ]...................................".InsertArgs(currSlotIndex));
 					// ReSharper disable once RedundantArgumentDefaultValue
 
-					CompareByteArray(bufferName, bufferOffset, currSaveSlotBytes, compSaveSlotBytes, true, Offsets.SaveSlot.GetNameFromOffset);
+					CompareByteArray(bufferName, bufferOffset, currSlotBytes, compSlotBytes, true, Offsets.SaveSlot.GetNameFromOffset);
 					ConsolePrinter.PrintParagraph();
-					ConsolePrinter.PrintColoredLine(gameDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White, " ".Repeat(4) + Res.StatusSaveSlotChangedBytesTemplate.InsertArgs(gameIdString, gameBufferDiffBytes));
+					ConsolePrinter.PrintColoredLine(slotDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White, " ".Repeat(4) + Res.StatusSaveSlotChangedBytesTemplate.InsertArgs(slotIdString, slotBufferDiffBytes));
 					ConsolePrinter.ResetColor();
 				}
 
-				allDiffBytes += gameBufferDiffBytes;
+				allDiffBytes += slotBufferDiffBytes;
 				return allDiffBytes;
 			}
 		}
+
+		protected virtual string FormatAdditionalValues(string name, StringBuilder values) => values.Replace(Environment.NewLine, ConsolePrinter.NewLine).ToString();
 
 		protected virtual void PrintSaveSlotValidationStatus(SramFileSoE currFile, SramFileSoE compFile)
 		{
