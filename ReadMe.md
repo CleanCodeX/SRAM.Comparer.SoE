@@ -1,17 +1,17 @@
 # SoE-SramComparer
-Allows to compare (unknown) buffers and manipulate offset values in Secret of Evermore's SRAM file.
+Allows to compare (unknown) areas and modify offset values in Secret of Evermore's SRAM file.
 
 ## Features
-* Display (or modify and save) offset values
+* Display (or save modified) offset values
 * Comparison of Unknowns area only (*default*) or complete save slot area (**optional**)
 * Comparison of the non-save slot area (**optional**)
 * Display of differences in decimal, hex and binary format
 * Comparison of all save slots (*default*) or one specific slot with same or different comparison slot (**optional**)
 * Export comparison result as text file
 * Backup / restore functionality of current and comparison sram file
-* Transfer of SRAM data to another game name 
-* Display checksums for changed or all slots (**optional**)
-* All settings can be set by cmd line arguments
+* Transfer of SRAM data to an other game name 
+* Display of changed or all game's checksums (**optional**)
+* Settings can be set by cmd line arguments
 
 ## What's still unknown?
 Aprox. 54% of SoE's SRAM game slot format is still considered as 'unknown', meaning that we don't really know what these parts of SRAM actually represent.
@@ -47,8 +47,7 @@ This application uses the latest .NET 5 runtime.
 ## How to use
 **Steps**:
 
-***1.1)*** Have a look into [Unknowns](http://unknowns.xeth.de) to see examples of what parts of SRAM structure are still 
-     considered as unknown.
+***1.1)*** Before you start, have a look into [Unknowns](http://unknowns.xeth.de) to see examples of what parts of SRAM structure are still considered as unknown. Then see some [Imagery](http://imagery.xeth.de).
 ***1.2)*** Most emulators have the option to save the game's S-RAM automatically after a change occurs. 
      Make sure this is enabled if existing. Otherwise you have manually ensure that the emulator updates 
      the *.srm file.

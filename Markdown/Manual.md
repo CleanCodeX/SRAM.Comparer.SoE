@@ -1,8 +1,7 @@
 ## How to use
 **Steps**:
 
-***1.1)*** Have a look into [Unknowns](http://unknowns.xeth.de) to see examples of what parts of SRAM structure are still 
-     considered as unknown.
+***1.1)*** Before you start, have a look into [Unknowns](http://unknowns.xeth.de) to see examples of what parts of SRAM structure are still considered as unknown. Then see some [Imagery](http://imagery.xeth.de).
 ***1.2)*** Most emulators have the option to save the game's S-RAM automatically after a change occurs. 
      Make sure this is enabled if existing. Otherwise you have manually ensure that the emulator updates 
      the *.srm file.
@@ -31,9 +30,9 @@
 ***6.1)*** (optional, advanced) If you have more than one slot with changes to comparison file, press (ss) to
      set the game's save slot (1-4) to avoid comparing other save slots. If two different save slots should be 
      compared with each other, additionally press (ssc) to set the the slot of comparison file, too.
-***6.2)*** (optional, advanced) Press (fws | fns) to set comparison modes. 
+***6.2)*** (optional, advanced) Press (asbc | nsbc) to set comparison modes. 
      If you are unsure, leave at default to compare as less as possible bytes.
 
 ***7)***   (optional) Current and comparison srm file can be backed-up (b|bc) or restored (r|rc) individually.
 
-***8)***   (optional) SRAM offset values for specific save slots can be displayed by pressing (dev) or manipulated by (mov). You can decide whether to update your current SRAM file (backup recommended) or creating a new file.
+***8)***   (optional) SRAM offset values for specific save slots can be displayed by pressing (ov) or manipulated by (mov). You can decide whether to update your current SRAM file (backup recommended) or creating a new file.
