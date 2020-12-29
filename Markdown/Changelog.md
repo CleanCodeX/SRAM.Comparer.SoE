@@ -1,4 +1,4 @@
-﻿## History
+﻿## Changelog SRAM-Comparer
 
 #### 0.2.6 - 2020-12-29 
 * Colorization now optional
