@@ -207,8 +207,8 @@ namespace SramComparer.SoE.Services
 			ConsolePrinter.PrintSectionHeader();
 			ConsolePrinter.PrintColoredLine(ConsoleColor.DarkYellow, $@"{Resources.ValidationStatus}:");
 
-			OnPrintSaveSlotValidationStatus(Res.Current, currFile);
-			OnPrintSaveSlotValidationStatus(Res.Comparison, compFile);
+			OnPrintSaveSlotValidationStatus(Res.CurrentSramFile, currFile);
+			OnPrintSaveSlotValidationStatus(Res.ComparisonSramFile, compFile);
 		}
 
 		protected virtual void OnPrintSaveSlotValidationStatus(string name, ISramFile file)
