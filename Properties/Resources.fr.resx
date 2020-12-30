@@ -41,7 +41,7 @@
 		</comment>
 	</data>
 	<data name="ChecksumIfDifferent" xml:space="preserve">
-		<value>Checksum si différents</value><comment>Retranslation needed</comment>
+		<value>Checksum si différent</value><comment>Retranslation needed</comment>
 	</data>
 	<data name="CommandShowChecksumsOfAllSaveSlots" xml:space="preserve">
 		<value>Afficher les checksums de toutes les parties</value><comment>Afficher le checksum affecté</comment>
