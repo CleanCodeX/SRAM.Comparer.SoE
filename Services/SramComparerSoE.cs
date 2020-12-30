@@ -112,10 +112,10 @@ namespace SramComparer.SoE.Services
 			{
 				ConsolePrinter.PrintParagraph();
 
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumWhenDifferent))
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumIfDifferent))
 					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, FormatAdditionalValues(nameof(checksums), checksums));
 
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BWhenDifferent))
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BIfDifferent))
 					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, FormatAdditionalValues(nameof(timestamps), timestamps));
 			}
 
@@ -143,10 +143,10 @@ namespace SramComparer.SoE.Services
 				var currSlotName = $"{$"({Res.CurrentSramFile})".PadRight(padding)} {Res.SaveSlot} {currSlotId}";
 				var currSlotNameString = $"{" ".Repeat(2)}{currSlotName}";
 			
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumAllSlots) || compSlot.Checksum != currSlot.Checksum)
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.Checksum) || compSlot.Checksum != currSlot.Checksum)
 					checksums.AppendLine($"{currSlotNameString}: {currSlot.Checksum.PadLeft()}");
 
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BAllSlots) || compSlot.Unknown12B != currSlot.Unknown12B)
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12B) || compSlot.Unknown12B != currSlot.Unknown12B)
 					timestamps.AppendLine($"{currSlotNameString}: {currSlot.Unknown12B.PadLeft()}");
 
 				if (compSlotBytes.SequenceEqual(currSlotBytes)) return allDiffBytes;
@@ -304,7 +304,7 @@ namespace SramComparer.SoE.Services
 			offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown12A), out name);
 			diffBytes += CompareByteArray(name, offset, currSaveSlot.Unknown12A, compSaveSlot.Unknown12A);
 
-			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.Unknown12BWhenDifferent))
+			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.Unknown12BIfDifferent))
 			{
 				offset = GetSaveSlotOffset(nameof(currSaveSlot.Unknown12B), out name);
 				diffBytes += CompareUShort(name, offset, currSaveSlot.Unknown12B,

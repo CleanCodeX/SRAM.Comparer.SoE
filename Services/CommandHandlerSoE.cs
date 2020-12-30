@@ -45,14 +45,14 @@ namespace SramComparer.SoE.Services
 				case nameof(CommandsSoE.u12b) or nameof(CommandsSoE.u12ba):
 					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
 						command == nameof(CommandsSoE.u12ba)
-							? ComparisonFlagsSoE.Unknown12BAllSlots
-							: ComparisonFlagsSoE.Unknown12BWhenDifferent);
+							? ComparisonFlagsSoE.Unknown12B
+							: ComparisonFlagsSoE.Unknown12BIfDifferent);
 					break;
 				case nameof(CommandsSoE.cs) or nameof(CommandsSoE.csa):
 					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
 						command == nameof(CommandsSoE.csa)
-							? ComparisonFlagsSoE.ChecksumAllSlots
-							: ComparisonFlagsSoE.ChecksumWhenDifferent);
+							? ComparisonFlagsSoE.Checksum
+							: ComparisonFlagsSoE.ChecksumIfDifferent);
 					break;
 				default:
 					return base.OnRunCommand(command, options);

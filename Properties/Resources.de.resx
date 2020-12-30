@@ -11,23 +11,23 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-	<data name="ChecksumsAllSlots" xml:space="preserve">
-		<value>Prüfsummen aller Speicherslots</value>
+	<data name="ChecksumCompared" xml:space="preserve">
+		<value>Prüfsummen aller verglichenen Speicherslots</value>
 	</data>
-	<data name="Unknown12BAllSlots" xml:space="preserve">
-		<value>Unknown12B aller Speicherslots</value><comment>Don't translate term Unknown12Bs</comment>
+	<data name="Unknown12BCompared" xml:space="preserve">
+		<value>Unknown12B aller verglichenen Speicherslots</value><comment>Don't translate term Unknown12Bs</comment>
 	</data>
 	<data name="ChangesAtEveryInSaveSlotSave" xml:space="preserve">
 		<value>ändert sich bei jeder spielinternen Speicherung</value>
 	</data>
 	<data name="CommandShowChecksumsOfAllSaveSlots" xml:space="preserve">
-		<value>Prüfsummen aller Speicherslots anzeigen</value>
+		<value>Prüfsummen aller verglichenen Speicherslots anzeigen</value>
 	</data>
 	<data name="CommandShowUnknown12BValuesOfAllSaveSlots" xml:space="preserve">
 		<value>Unknown12B Werte aller Speicherslots anzeigen</value><comment>Don't translate term Unknown12Bs</comment>
 	</data>
 	<data name="CommandShowChecksumOfComparedSaveSlot" xml:space="preserve">
-		<value>Prüfsumme des verglichenen Speicherslots anzeigen wenn unterschiedlich</value>
+		<value>Prüfsumme aller verglichenen Speicherslots nur anzeigen wenn unterschiedlich</value>
 	</data>
 	<data name="CommandShowUnknown12BValueOfComparedSaveSlot" xml:space="preserve">
 		<value>Unknown12B Wert des verglichenen Speicherslots anzeigen wenn unterschiedlich</value><comment>Don't translate term Unknown12Bs</comment>
@@ -35,8 +35,8 @@
 	<data name="ComparedWithOtherSaveSlotTemplate" xml:space="preserve">
 		<value>verglichen mit Speicherslot {0}</value>
 	</data>
-	<data name="ChecksumWhenDifferent" xml:space="preserve">
-		<value>Prüfsumme wenn unterschiedlich</value>
+	<data name="ChecksumComparedIfDifferent" xml:space="preserve">
+		<value>Prüfsumme aller verglichenen Speicherslots wenn unterschiedlich</value>
 	</data>
 	<data name="Valid" xml:space="preserve">
 		<value>gültig</value>
@@ -47,10 +47,10 @@
 	<data name="Invalid" xml:space="preserve">
 		<value>ungültig</value>
 	</data>
-	<data name="Unknown12BWhenDifferent" xml:space="preserve">
+	<data name="Unknown12BComparedIfDifferent" xml:space="preserve">
 		<value>Unknown12B wenn unterschiedlich</value><comment>Don't translate this term</comment>
 	</data>
-	<data name="Checksum" xml:space="preserve">
+	<data name="ChecksumCompared" xml:space="preserve">
 		<value>Prüfsumme</value>
 	</data>
 </root>

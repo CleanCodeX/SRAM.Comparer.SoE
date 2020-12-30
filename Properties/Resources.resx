@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CommandShowChecksumOfComparedSaveSlot" xml:space="preserve">
-    <value>Show checksum of compared save slot</value>
+    <value>Show checksum of all compared save slots only if different</value>
   </data>
   <data name="CommandShowChecksumsOfAllSaveSlots" xml:space="preserve">
-    <value>Show checksums of all save slots</value>
+    <value>Show checksum of all compared save slots</value>
   </data>
   <data name="CommandShowUnknown12BValueOfComparedSaveSlot" xml:space="preserve">
-    <value>Show Unknown12B value of compared save slot</value><comment>Don't translate term Unknown12Bs</comment>
+    <value>Show Unknown12B value of all compared save slots if different</value><comment>Don't translate term Unknown12Bs</comment>
   </data>
   <data name="CommandShowUnknown12BValuesOfAllSaveSlots" xml:space="preserve">
-    <value>Show Unknown12B values of all save slots</value><comment>Don't translate term Unknown12Bs</comment>
+    <value>Show Unknown12B values of all compared save slots</value><comment>Don't translate term Unknown12Bs</comment>
   </data>
   <data name="ChangesAtEveryInSaveSlotSave" xml:space="preserve">
     <value>changes at every in-game save</value>
@@ -144,16 +144,16 @@
   <data name="ValidationStatus" xml:space="preserve">
     <value>Validation-status</value>
   </data>
-  <data name="ChecksumWhenDifferent" xml:space="preserve">
-    <value>Checksum when different</value>
+  <data name="ChecksumComparedIfDifferent" xml:space="preserve">
+    <value>Checksum of compared slots if different</value>
   </data>
-  <data name="ChecksumsAllSlots" xml:space="preserve">
-    <value>Checksum of all save slots</value>
+  <data name="ChecksumCompared" xml:space="preserve">
+    <value>Checksum of compared slots</value>
   </data>
-  <data name="Unknown12BWhenDifferent" xml:space="preserve">
+  <data name="Unknown12BComparedIfDifferent" xml:space="preserve">
     <value>Unknown12B when different</value><comment>Don't translate term Unknown12B</comment>
   </data>
-  <data name="Unknown12BAllSlots" xml:space="preserve">
+  <data name="Unknown12BCompared" xml:space="preserve">
     <value>Unknown12B of all save slots</value><comment>Don't translate term Unknown12B</comment>
   </data>
   <data name="Checksum" xml:space="preserve">
