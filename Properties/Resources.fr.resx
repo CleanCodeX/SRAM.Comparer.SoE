@@ -26,11 +26,7 @@
 	<data name="ComparedWithOtherSaveSlotTemplate" xml:space="preserve">
 		<value>par rapport à la partie {0}</value>
 	</data>
-	<data name="Unknown12BCompared" xml:space="preserve">
-		<value>Valeurs Unknown12B de toutes les parties</value><comment>Was: Afficher toutes les valeurs Unknown12B
-		</comment>
-	</data>
-	<data name="Unknown12BComparedIfDifferent" xml:space="preserve">
+	<data name="Unknown12BIfDifferent" xml:space="preserve">
 		<value>Valeurs Unknown12B si différentes</value><comment>Was: Valeurs Unknown12B de la partie en cours
 		</comment>
 	</data>
@@ -44,17 +40,13 @@
 		<value>Afficher le checksum de la partie en cours</value><comment>was: Checksum de la partie en cours
 		</comment>
 	</data>
-	<data name="ChecksumComparedIfDifferent" xml:space="preserve">
-		<value>Checksums si différents</value><comment>Retranslation needed</comment>
-	</data>
-	<data name="ChecksumCompared" xml:space="preserve">
-		<value>Checksums des parties</value><comment>was: Afficher tous les checksums
-		</comment>
+	<data name="ChecksumIfDifferent" xml:space="preserve">
+		<value>Checksum si différents</value><comment>Retranslation needed</comment>
 	</data>
 	<data name="CommandShowChecksumsOfAllSaveSlots" xml:space="preserve">
 		<value>Afficher les checksums de toutes les parties</value><comment>Afficher le checksum affecté</comment>
 	</data>
-	<data name="ChecksumCompared" xml:space="preserve">
+	<data name="Checksum" xml:space="preserve">
 		<value>Checksum</value>
 	</data>
 </root>

@@ -11,12 +11,6 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-	<data name="ChecksumCompared" xml:space="preserve">
-		<value>Prüfsummen aller verglichenen Speicherslots</value>
-	</data>
-	<data name="Unknown12BCompared" xml:space="preserve">
-		<value>Unknown12B aller verglichenen Speicherslots</value><comment>Don't translate term Unknown12Bs</comment>
-	</data>
 	<data name="ChangesAtEveryInSaveSlotSave" xml:space="preserve">
 		<value>ändert sich bei jeder spielinternen Speicherung</value>
 	</data>
@@ -35,8 +29,8 @@
 	<data name="ComparedWithOtherSaveSlotTemplate" xml:space="preserve">
 		<value>verglichen mit Speicherslot {0}</value>
 	</data>
-	<data name="ChecksumComparedIfDifferent" xml:space="preserve">
-		<value>Prüfsumme aller verglichenen Speicherslots wenn unterschiedlich</value>
+	<data name="ChecksumIfDifferent" xml:space="preserve">
+		<value>Prüfsumme falls unterschiedlich</value>
 	</data>
 	<data name="Valid" xml:space="preserve">
 		<value>gültig</value>
@@ -47,10 +41,10 @@
 	<data name="Invalid" xml:space="preserve">
 		<value>ungültig</value>
 	</data>
-	<data name="Unknown12BComparedIfDifferent" xml:space="preserve">
+	<data name="Unknown12BIfDifferent" xml:space="preserve">
 		<value>Unknown12B wenn unterschiedlich</value><comment>Don't translate this term</comment>
 	</data>
-	<data name="ChecksumCompared" xml:space="preserve">
+	<data name="Checksum" xml:space="preserve">
 		<value>Prüfsumme</value>
 	</data>
 </root>
