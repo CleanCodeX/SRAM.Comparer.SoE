@@ -1,7 +1,7 @@
 ## How to use
 **Steps**:
 
-***1.1)*** Before you start, have a look into [Unknowns](http://unknowns.xeth.de) to see examples of what parts of SRAM structure are still considered as unknown. Then see some [Imagery](http://imagery.xeth.de).
+***1.1)*** Before you start, have a look into <a href="http://unknowns.xeth.de">Unknowns</a> to see examples of what parts of SRAM structure are still considered as unknown. Then see some <a href="http://imagery.xeth.de">Imagery</a>).
 ***1.2)*** Most emulators have the option to save the game's S-RAM automatically after a change occurs. 
      Make sure this is enabled if existing. Otherwise you have manually ensure that the emulator updates 
      the *.srm file.
