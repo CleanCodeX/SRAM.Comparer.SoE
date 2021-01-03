@@ -1,5 +1,6 @@
 ## Screenshots
-![Commands](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/Cmd.png "Commands")
+
+<img src="https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/Cmd.png" alt=Commands title=Commands>
 
 ![Few Flags Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/FewFlagsChange.png "Few Flags Change")
 
