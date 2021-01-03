@@ -22,7 +22,7 @@
 ***4.2)*** As soon as you can clearly assign a change in the game to a change in the SRAM, you have found a meaning for this specific offset. Then press (e) to export the comparison result as a text file in your export directory.
 ***4.3)*** Rename the file according to your find.
 ***4.4)*** Check whether the change found also occurs in other game versions. E.g. unpatched or patched versions.
-***4.5) If it is reproducible, report the find via community.xeth.de. If necessary, create a pull request for a change to the documentation and the SRAM structure in the GitHub repository..
+***4.5) If it is reproducible, report the find via community.xeth.de. If necessary, create a pull request for a change to the documentation and the SRAM structure in the GitHub repository.
 
 ***5)***   To start a "fresh" comparison without previous SRAM changes, press again (ow) to save your current SRAM file 
      as comparison file. Then start again at step 3.1.
