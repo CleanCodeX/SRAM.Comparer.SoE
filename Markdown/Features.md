@@ -1,4 +1,4 @@
-# SoE-SramComparer
+# SoE SRAM Comparer
 Allows to compare (unknown) areas and modify offset values in Secret of Evermore's SRAM file.
 
 ## Features
@@ -13,6 +13,6 @@ Allows to compare (unknown) areas and modify offset values in Secret of Evermore
 * [C|W] Display of changed or all game's checksums (**optional**)
 * [C] Settings can be set by cmd line arguments
 
-*) C = Supported by [Windows Console App](downloads), W = Supported by [Web App](compare)
+*) C = Supported by <a href=downloads>Windows Console App</a>, W = Supported by <a href=compare>Web App</a>
 
-Images see [here](imagery).
+Images see <a href=imagery>here</a>.
