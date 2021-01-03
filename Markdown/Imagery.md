@@ -1,15 +1,15 @@
 ## Screenshots
 
-* <img src="https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/Cmd.png" title="Commands">
+![Commands](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/Cmd.png "Commands")
 
-* <img src="https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/FewFlagsChange.png" title="Few Flags Change">
+![Few Flags Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/FewFlagsChange.png "Few Flags Change")
 
-* <img src="https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/ManyValuesChange.png" title="Many Values Change">
+![Many Values Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/ManyValuesChange.png "Many Values Change")
 
-* <img src="https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/NoChange.png" title="No SRAM Change">
+![No SRAM Change](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/NoChange.png "No SRAM Change")
 
-* <img src="https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/WholeSaveSlotAreaComparison.png" title="Whole Save Slot Area Comparison">
+![Whole Save Slot Area Comparison](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/WholeSaveSlotAreaComparison.png "Whole Save Slot Area Comparison")
 
-* <img src="https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/WholeSaveSlotAreaComparison2.png" title="Whole Save Slot Area Comparison #2">
+![Whole Save Slot Area Comparison #2](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/WholeSaveSlotAreaComparison2.png "Whole Save Slot Area Comparison #2")
 
-* <img src="https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/OptionalSaveSlotInfo.png" title="Optional Save Slot Info">
+![Optional Save Slot Info](https://raw.githubusercontent.com/CleanCodeX/SramComparer.SoE/master/Images/OptionalSaveSlotInfo.png "Optional Save Slot Info")
