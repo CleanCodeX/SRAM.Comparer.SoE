@@ -1,7 +1,7 @@
 ﻿## Anleitung
 **Schritte**:
 
-***1.1)*** Schau in <a href="http://unknowns.xeth.de">Unknowns</a> um Beispiele zu sehen, welche Teile der SRAM-Struktur noch als unbekannt gelten. Anschließend schau dir einige <a href="http://imagery.xeth.de">Bilder</a> der Anwendung an.
+***1.1)*** Schau in <a href="http://unknowns.xeth.de">Unknowns</a> um Beispiele zu sehen, welche Teile der SRAM-Struktur noch als unbekannt gelten. Schau dir <a href="http://imagery.xeth.de">Bilder</a> an wie die Vergleichsergebnisse zu interpretieren sind.
 ***1.2)*** Die meisten Emulatoren haben die Einstellung das SRAM eines Spiels zu speichern sobald eine Änderung eintritt. 
      Stelle sicher, dass diese Einstellung aktiviert ist. Andernfalls musst du selbst sicherstellen, dass der Emulator die *.srm-Datei aktualisiert.
 ***1.3)*** Starte die Anwendung indem du den Pfad zur Srm Datei des Spiels als ersten Kommandozeilen Parameter übergibst. Die Datei kann auch per Drag 'n' Drop auf die Anwendung gezogen werden.
@@ -18,9 +18,9 @@
 ***4.2)*** Sobald du eine Änderung im Spiel einer Veränderung im SRAM eindeutig zuordnen kannst, hast du eine Bedeutung für dieses spezifische Offset gefunden. Anschließend drücke (e) um das Vergleichsergebnis als Text-Datei deines Export-Verzeichnisses zu exportieren.
 ***4.3)*** Benenne die Datei entsprechend deines Fundes um. 
 ***4.4)*** Überprüfe ob die festgestellte Änderung auch in anderen Spiel-Versionen auftritt. Z.B. ungepatchte oder gepatchte Versionen.
-***4.5) Falls es reproduzierbar ist berichte den Fund über community.xeth.de. Ggf. erstelle zudem einen Pull Request für eine Änderung an der Doku und der SRAM-Struktur im GitHub-Repository.
+***4.5) Stelle sicher, dass es reproduzierbar ist, anschlieénd melde den Fund über die <a href="http://community.xeth.de">Community</a>.
 
-***5)***   Um einen "frischen" Vergleich ohne vorherige SRAM Änderungen zu ermöglichen, drücke erneut ({0}) um die aktuelle SRAM-Datei als Vergleichs-Datei zu speichern. Anschließend beginne wieder bei Schritt 3.1.
+***5)***   Um einen Vergleich ohne vorherige SRAM Änderungen zu ermöglichen, drücke erneut (c) um die aktuelle SRAM-Datei als Vergleichs-Datei zu speichern. Anschließend beginne wieder bei Schritt 3.1.
 
 ***6.1)*** (optional) Wenn du mehr als einen Speicherslot mit Änderungen zur Vergleichsdatei hast, um 
        den Vergleich des Spiels auf den jeweiligen Speicherslot (1-4) zu beschränken drücke (ss). Wenn zwei verschiedene Speicherslot verglichen werden sollen, drücken zusätzlich (ssc), um auch den Speicherplatzz der Vergleichs-Datei festzulegen.
