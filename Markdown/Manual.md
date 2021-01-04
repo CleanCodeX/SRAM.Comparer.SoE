@@ -1,7 +1,7 @@
 ## How to use
 **Steps**:
 
-***1.1)*** Before you start, have a look into <a href="http://unknowns.xeth.de">Unknowns</a> to see examples of which parts of SRAM structure are still considered to be unknown. See some <a href="http://imagery.xeth.de">imagery</a> of how to interpret comparison results.
+***1.1)*** Before you start, have a look into <a href="unknowns">unknowns</a> to see examples of which parts of SRAM structure are still considered to be unknown. See some <a href="imagery">imagery</a> of how to interpret comparison results.
 ***1.2)*** Most emulators have the option to save the game's S-RAM automatically after a change occurs.
      Make sure this is enabled if existing. Otherwise you have manually ensure that the emulator updates 
      the *.srm file.
@@ -22,7 +22,7 @@
 ***4.2)*** As soon as you can clearly assign a change in the game to a change in the SRAM, you have found a meaning for this specific offset. Then press (e) to export the comparison result as a text file in your export directory.
 ***4.3)*** Rename the file according to your find.
 ***4.4)*** Check whether the change found also occurs in other game versions. E.g. unpatched or patched versions.
-***4.5) Make sure it's reproducible, then report your find via <a href="http://community.xeth.de">Community</a>.
+***4.5) Make sure it's reproducible, then report your find via <a href="community">Community</a>.
 
 ***5)***   To start a comparison without previous SRAM changes, press again (ow) to save your current SRAM file 
      as comparison file. Then start again at step 3.1.
