@@ -10,7 +10,7 @@ Erlaubt das Vergleichen von (unbekannten) Bereichen and modifizieren von Offset-
 * [C|W] Vergleichen eines spezifischen Speicherslots mit dem gleichen oder unterschiedlichem Vergleichs-Speicherslot (o)
 * [C|W] Anzeige der Unterschiede im Dezimal-, Hex- und Binär-Format
 * [C|W] Export des Vergleichsergebnisses als Text-Datei
-* [C|W] Display of changed or all game's checksums (**optional**)
+* [C|W] Display of changed or all game's checksums (o)
 * [C] Sicherungs- und Wiederherstellungs-Funktionalität der aktuellen oder Vergleichs-SRAM-Datei
 * [C] Speichern der SRAM-Datei unter einem anderen Spielnamen
 * [C] Einstellungen können parametrisiert werden
