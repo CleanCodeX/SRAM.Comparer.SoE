@@ -3,16 +3,20 @@ Allows to compare (unknown) areas and modify offset values in Secret of Evermore
 
 ## Features
 * [C|W] Display (or save modified) offset values
-* [C|W] Comparison of Unknowns area only (*default*) or complete save slot area (**optional**)
-* [C|W] Comparison of the non-save slot area (**optional**)
+* [C|W] Comparison of Unknowns area only (d) 
+* [C|W] Comparison of complete save slot area (o)
+* [C|W] Comparison of the non-save slot area (o)
+* [C|W] Comparison of all save slots (d)
+* [C|W] Comparison of one specific slot with same or different comparison slot (o)
 * [C|W] Display of differences in decimal, hex and binary format
-* [C|W] Comparison of all save slots (*default*) or one specific slot with same or different comparison slot (**optional**)
 * [C|W] Export comparison result as text file
+* [C|W] Display of changed or all game's checksums (o)
 * [C] Backup / restore functionality of current and comparison sram file
-* [C] Transfer of SRAM data to an other game name 
-* [C|W] Display of changed or all game's checksums (**optional**)
-* [C] Settings can be set by cmd line arguments
+* [C] Save SRAM file as different game name 
+* [C] Settings are parameterized
+* [W] Last used settings will be automatically saved
 
 *) C = Supported by <a href=downloads>Windows Console App</a>, W = Supported by <a href=compare>Web App</a>
+*) (O) = optional, (D) = default
 
-Images see <a href=imagery>here</a>.
+For images of console app click <a href=imagery>here</a>.
