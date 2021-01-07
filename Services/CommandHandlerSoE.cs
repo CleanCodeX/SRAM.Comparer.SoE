@@ -1,7 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using SramComparer.Services;
 using SramComparer.SoE.Enums;
+using SramComparer.SoE.Extensions;
 using SramFormat.SoE;
+using SramFormat.SoE.Constants;
 using SramFormat.SoE.Models.Structs;
 
 namespace SramComparer.SoE.Services
@@ -58,6 +61,31 @@ namespace SramComparer.SoE.Services
 					return base.OnRunCommand(command, options);
 			}
 
+			return true;
+		}
+
+		protected override bool ConvertStreamIfSaveState(ref Stream stream, string filePath, string? saveStateType)
+		{
+			if (!base.ConvertStreamIfSaveState(ref stream, filePath, saveStateType)) return false;
+
+			const int length = Sizes.Sram;
+			MemoryStream ms;
+
+			try
+			{
+				ms = stream.GetStreamSlice(length);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
+				throw;
+			}
+
+			if (length != ms.Length)
+				throw new InvalidOperationException($"Copied stream has wrong size. Was {ms.Length}, but should be {length}");
+
+			stream = ms;
+			
 			return true;
 		}
 	}
