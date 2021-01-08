@@ -76,25 +76,38 @@ namespace SramComparer.SoE.Services
 		/// <inheritdoc cref="CommandHandler{TSramFile,TSaveSlot}"/>
 		protected override bool OnRunCommand(string command, IOptions options)
 		{
-			switch (command)
+			Requires.NotNull(command, nameof(command));
+			Requires.NotNull(options, nameof(options));
+
+			if (Enum.TryParse<AlternateCommandsSoe>(command, true, out var altCommand))
+				command = ((CommandsSoE)altCommand).ToString();
+
+			var cmd = command.ParseEnum<CommandsSoE>();
+			switch (cmd)
 			{
-				case nameof(CommandsSoE.Compare):
+				case CommandsSoE.Compare:
 					Compare(options);
+
 					break;
-				case nameof(CommandsSoE.Export):
+				case CommandsSoE.Export:
 					ExportComparisonResult(options, true);
+
 					break;
-				case nameof(CommandsSoE.U12b) or nameof(CommandsSoE.U12b_IfDiff):
+				case CommandsSoE.U12b:
+				case CommandsSoE.U12b_Diff:
 					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
-						command == nameof(CommandsSoE.U12b)
-							? ComparisonFlagsSoE.Unknown12B
-							: ComparisonFlagsSoE.Unknown12BIfDifferent);
+						cmd == CommandsSoE.U12b
+						? ComparisonFlagsSoE.Unknown12B
+						: ComparisonFlagsSoE.Unknown12BIfDifferent);
+
 					break;
-				case nameof(CommandsSoE.Checksum) or nameof(CommandsSoE.Checksum_IfDiff):
-					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
-						command == nameof(CommandsSoE.Checksum)
-							? ComparisonFlagsSoE.Checksum
-							: ComparisonFlagsSoE.ChecksumIfDifferent);
+				case CommandsSoE.Checksum: 
+				case CommandsSoE.Checksum_Diff:
+					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags, 
+						cmd == CommandsSoE.Checksum
+						? ComparisonFlagsSoE.Checksum
+						: ComparisonFlagsSoE.ChecksumIfDifferent);
+
 					break;
 				default:
 					return base.OnRunCommand(command, options);
@@ -110,7 +123,7 @@ namespace SramComparer.SoE.Services
 		protected override void LoadConfig(IOptions options, string? configName = null)
 		{
 			var filePath = base.GetConfigFilePath(options.ConfigFilePath, configName);
-			Requires.FileExists(filePath, string.Empty, Resources.ErrorConfigFileDoesNotExist.InsertArgs(filePath));
+			Requires.FileExists(filePath, string.Empty, SramComparer.Properties.Resources.ErrorConfigFileDoesNotExist.InsertArgs(filePath));
 
 			var json = File.ReadAllText(filePath);
 

@@ -18,14 +18,14 @@ namespace SramComparer.SoE.Services
 			PrintCommandKey(CommandsSoE.Checksum);
 			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.Checksum.GetDisplayName()!);
 
-			PrintCommandKey(CommandsSoE.Checksum_IfDiff);
-			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.Checksum_IfDiff.GetDisplayName()!);
+			PrintCommandKey(CommandsSoE.Checksum_Diff);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.Checksum_Diff.GetDisplayName()!);
 
 			PrintCommandKey(CommandsSoE.U12b);
 			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.U12b.GetDisplayName()!);
 
-			PrintCommandKey(CommandsSoE.U12b_IfDiff);
-			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.U12b_IfDiff.GetDisplayName()!);
+			PrintCommandKey(CommandsSoE.U12b_Diff);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.U12b_Diff.GetDisplayName()!);
 		}
 
 		protected override string GetGuideText(string? guideName)

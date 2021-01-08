@@ -88,7 +88,7 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show checksum of all compared save slots ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show checksums ähnelt.
         /// </summary>
         public static string CommandShowChecksum {
             get {
@@ -97,7 +97,7 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show checksum of all compared save slots only if different ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show checksums only if different ähnelt.
         /// </summary>
         public static string CommandShowChecksumIfDifferent {
             get {
@@ -106,7 +106,7 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show Unknown12B values of all compared save slots ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show Unknown12B values ähnelt.
         /// </summary>
         public static string CommandShowUnknown12B {
             get {
@@ -115,7 +115,7 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show Unknown12B value of all compared save slots if different ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show Unknown12B value only if different ähnelt.
         /// </summary>
         public static string CommandShowUnknown12BIfDifferent {
             get {
@@ -129,15 +129,6 @@ namespace SramComparer.SoE.Properties {
         public static string ComparedWithOtherSaveSlotTemplate {
             get {
                 return ResourceManager.GetString("ComparedWithOtherSaveSlotTemplate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The config file [{0}] does not exist (yet). ähnelt.
-        /// </summary>
-        public static string ErrorConfigFileDoesNotExist {
-            get {
-                return ResourceManager.GetString("ErrorConfigFileDoesNotExist", resourceCulture);
             }
         }
         

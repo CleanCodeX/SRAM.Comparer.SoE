@@ -38,12 +38,18 @@ namespace SramComparer.SoE.Enums
 		Checksum,
 
 		[DisplayNameLocalized(nameof(Resources.CommandShowChecksumIfDifferent), typeof(Resources))]
-		Checksum_IfDiff,
+		Checksum_Diff,
 
 		[DisplayNameLocalized(nameof(Resources.CommandShowUnknown12B), typeof(Resources))]
 		U12b,
 
 		[DisplayNameLocalized(nameof(Resources.CommandShowUnknown12BIfDifferent), typeof(Resources))]
-		U12b_IfDiff
+		U12b_Diff
+	}
+
+	internal enum AlternateCommandsSoe
+	{
+		Cksm = CommandsSoE.Checksum,
+		Cksm_D = CommandsSoE.Checksum_Diff,
 	}
 }

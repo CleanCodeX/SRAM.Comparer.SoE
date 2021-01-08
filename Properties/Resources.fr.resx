@@ -49,9 +49,6 @@
 	<data name="Checksum" xml:space="preserve">
 		<value>Checksum</value>
 	</data>
-	<data name="ErrorConfigFileDoesNotExist" xml:space="preserve">
-		<value>Le fichier de configuration [{0}] n'existe pas (encore).</value>
-	</data>
 	<data name="StatusConfigFileHasBeenLoadedTemplate" xml:space="preserve">
 		<value>Le fichier de configuration [{0}] a été chargé.</value>
 	</data>
