@@ -39,21 +39,21 @@ namespace SramComparer.SoE.Services
 		{
 			switch (command)
 			{
-				case nameof(CommandsSoE.c):
+				case nameof(CommandsSoE.Compare):
 					Compare(options);
 					break;
-				case nameof(CommandsSoE.e):
+				case nameof(CommandsSoE.Export):
 					ExportComparisonResult(options, true);
 					break;
-				case nameof(CommandsSoE.u12b) or nameof(CommandsSoE.u12ba):
+				case nameof(CommandsSoE.U12b) or nameof(CommandsSoE.U12b_IfDiff):
 					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
-						command == nameof(CommandsSoE.u12ba)
+						command == nameof(CommandsSoE.U12b)
 							? ComparisonFlagsSoE.Unknown12B
 							: ComparisonFlagsSoE.Unknown12BIfDifferent);
 					break;
-				case nameof(CommandsSoE.cs) or nameof(CommandsSoE.csa):
+				case nameof(CommandsSoE.Checksum) or nameof(CommandsSoE.Checksum_IfDiff):
 					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
-						command == nameof(CommandsSoE.csa)
+						command == nameof(CommandsSoE.Checksum)
 							? ComparisonFlagsSoE.Checksum
 							: ComparisonFlagsSoE.ChecksumIfDifferent);
 					break;

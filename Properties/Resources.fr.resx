@@ -30,20 +30,20 @@
 		<value>Valeurs Unknown12B si différentes</value><comment>Was: Valeurs Unknown12B de la partie en cours
 		</comment>
 	</data>
-	<data name="CommandShowUnknown12BValueOfComparedSaveSlot" xml:space="preserve">
+	<data name="CommandShowUnknown12BIfDifferent" xml:space="preserve">
 		<value>Afficher toutes les valeurs Unknown12B de la partie en cours</value><comment>Afficher toutes les valeurs Unknown12B</comment>
 	</data>
-	<data name="CommandShowUnknown12BValuesOfAllSaveSlots" xml:space="preserve">
+	<data name="CommandShowUnknown12B" xml:space="preserve">
 		<value>Afficher toutes les valeurs Unknown12B de toutes les parties</value><comment>Retranslation needed</comment>
 	</data>
-	<data name="CommandShowChecksumOfComparedSaveSlot" xml:space="preserve">
+	<data name="CommandShowChecksumIfDifferent" xml:space="preserve">
 		<value>Afficher le checksum de la partie en cours</value><comment>was: Checksum de la partie en cours
 		</comment>
 	</data>
 	<data name="ChecksumIfDifferent" xml:space="preserve">
 		<value>Checksum si différent</value><comment>Retranslation needed</comment>
 	</data>
-	<data name="CommandShowChecksumsOfAllSaveSlots" xml:space="preserve">
+	<data name="CommandShowChecksum" xml:space="preserve">
 		<value>Afficher les checksums de toutes les parties</value><comment>Afficher le checksum affecté</comment>
 	</data>
 	<data name="Checksum" xml:space="preserve">

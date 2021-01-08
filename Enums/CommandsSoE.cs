@@ -9,35 +9,39 @@ namespace SramComparer.SoE.Enums
 	[SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "<Ausstehend>")]
 	public enum CommandsSoE
 	{
-		cmd = Commands.cmd,
-		s = Commands.s,
-		g_srm = Commands.g_srm,
-		g_savestate = Commands.g_savestate,
-		sbc = Commands.sbc,
-		nsbc = Commands.nsbc,
-		ss = Commands.ss,
-		ssc = Commands.ssc,
-		c = Commands.c,
-		ow = Commands.ow,
-		b = Commands.b,
-		bc = Commands.bc,
-		r = Commands.r,
-		rc = Commands.rc,
-		e = Commands.e,
-		ts = Commands.ts,
-		l = Commands.l,
-		lc = Commands.lc,
-		w = Commands.w,
-		q = Commands.q,
-		ov = Commands.ov,
-		mov = Commands.mov,
-		[DisplayNameLocalized(nameof(Resources.CommandShowChecksumOfComparedSaveSlot), typeof(Resources))]
-		cs,
-		[DisplayNameLocalized(nameof(Resources.CommandShowChecksumsOfAllSaveSlots), typeof(Resources))]
-		csa,
-		[DisplayNameLocalized(nameof(Resources.CommandShowUnknown12BValueOfComparedSaveSlot), typeof(Resources))]
-		u12b,
-		[DisplayNameLocalized(nameof(Resources.CommandShowUnknown12BValuesOfAllSaveSlots), typeof(Resources))]
-		u12ba
+		Help = Commands.Help,
+		Config = Commands.Config,
+		Guide_Srm = Commands.Guide_Srm,
+		Guide_Savestate = Commands.Guide_Savestate,
+		Sbc = Commands.Sbc,
+		Nsbc = Commands.Nsbc,
+		SetSlot = Commands.SetSlot,
+		SetSlot_Comp = Commands.SetSlot_Comp,
+		Compare = Commands.Compare,
+		OverwriteComp = Commands.OverwriteComp,
+		Backup = Commands.Backup,
+		Backup_Comp = Commands.Backup_Comp,
+		Restore = Commands.Restore,
+		Restore_Comp = Commands.Restore_Comp,
+		Export = Commands.Export,
+		Transfer = Commands.Transfer,
+		Lang = Commands.Lang,
+		Lang_Comp = Commands.Lang_Comp,
+		Clear = Commands.Clear,
+		Quit = Commands.Quit,
+		Offset = Commands.Offset,
+		EditOffset = Commands.EditOffset,
+
+		[DisplayNameLocalized(nameof(Resources.CommandShowChecksum), typeof(Resources))]
+		Checksum,
+
+		[DisplayNameLocalized(nameof(Resources.CommandShowChecksumIfDifferent), typeof(Resources))]
+		Checksum_IfDiff,
+
+		[DisplayNameLocalized(nameof(Resources.CommandShowUnknown12B), typeof(Resources))]
+		U12b,
+
+		[DisplayNameLocalized(nameof(Resources.CommandShowUnknown12BIfDifferent), typeof(Resources))]
+		U12b_IfDiff
 	}
 }

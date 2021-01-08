@@ -88,38 +88,38 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show checksum of all compared save slots only if different ähnelt.
-        /// </summary>
-        public static string CommandShowChecksumOfComparedSaveSlot {
-            get {
-                return ResourceManager.GetString("CommandShowChecksumOfComparedSaveSlot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Show checksum of all compared save slots ähnelt.
         /// </summary>
-        public static string CommandShowChecksumsOfAllSaveSlots {
+        public static string CommandShowChecksum {
             get {
-                return ResourceManager.GetString("CommandShowChecksumsOfAllSaveSlots", resourceCulture);
+                return ResourceManager.GetString("CommandShowChecksum", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show Unknown12B value of all compared save slots if different ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show checksum of all compared save slots only if different ähnelt.
         /// </summary>
-        public static string CommandShowUnknown12BValueOfComparedSaveSlot {
+        public static string CommandShowChecksumIfDifferent {
             get {
-                return ResourceManager.GetString("CommandShowUnknown12BValueOfComparedSaveSlot", resourceCulture);
+                return ResourceManager.GetString("CommandShowChecksumIfDifferent", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Show Unknown12B values of all compared save slots ähnelt.
         /// </summary>
-        public static string CommandShowUnknown12BValuesOfAllSaveSlots {
+        public static string CommandShowUnknown12B {
             get {
-                return ResourceManager.GetString("CommandShowUnknown12BValuesOfAllSaveSlots", resourceCulture);
+                return ResourceManager.GetString("CommandShowUnknown12B", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show Unknown12B value of all compared save slots if different ähnelt.
+        /// </summary>
+        public static string CommandShowUnknown12BIfDifferent {
+            get {
+                return ResourceManager.GetString("CommandShowUnknown12BIfDifferent", resourceCulture);
             }
         }
         

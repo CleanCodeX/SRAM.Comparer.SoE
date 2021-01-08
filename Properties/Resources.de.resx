@@ -14,16 +14,16 @@
 	<data name="ChangesAtEveryInSaveSlotSave" xml:space="preserve">
 		<value>ändert sich bei jeder spielinternen Speicherung</value>
 	</data>
-	<data name="CommandShowChecksumsOfAllSaveSlots" xml:space="preserve">
+	<data name="CommandShowChecksum" xml:space="preserve">
 		<value>Prüfsummen aller verglichenen Speicherslots anzeigen</value>
 	</data>
-	<data name="CommandShowUnknown12BValuesOfAllSaveSlots" xml:space="preserve">
+	<data name="CommandShowUnknown12B" xml:space="preserve">
 		<value>Unknown12B Werte aller Speicherslots anzeigen</value><comment>Don't translate term Unknown12Bs</comment>
 	</data>
-	<data name="CommandShowChecksumOfComparedSaveSlot" xml:space="preserve">
+	<data name="CommandShowChecksumIfDifferent" xml:space="preserve">
 		<value>Prüfsumme aller verglichenen Speicherslots nur anzeigen wenn unterschiedlich</value>
 	</data>
-	<data name="CommandShowUnknown12BValueOfComparedSaveSlot" xml:space="preserve">
+	<data name="CommandShowUnknown12BIfDifferent" xml:space="preserve">
 		<value>Unknown12B Wert des verglichenen Speicherslots anzeigen wenn unterschiedlich</value><comment>Don't translate term Unknown12Bs</comment>
 	</data>
 	<data name="ComparedWithOtherSaveSlotTemplate" xml:space="preserve">

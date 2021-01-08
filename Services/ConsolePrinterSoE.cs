@@ -15,17 +15,17 @@ namespace SramComparer.SoE.Services
 		{
 			PrintGroupName(@"Secret Of Evermore");
 
-			PrintCommandKey(CommandsSoE.cs);
-			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.cs.GetDisplayName()!);
+			PrintCommandKey(CommandsSoE.Checksum);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.Checksum.GetDisplayName()!);
 
-			PrintCommandKey(CommandsSoE.csa);
-			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.csa.GetDisplayName()!);
+			PrintCommandKey(CommandsSoE.Checksum_IfDiff);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.Checksum_IfDiff.GetDisplayName()!);
 
-			PrintCommandKey(CommandsSoE.u12b);
-			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.u12b.GetDisplayName()!);
+			PrintCommandKey(CommandsSoE.U12b);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.U12b.GetDisplayName()!);
 
-			PrintCommandKey(CommandsSoE.u12ba);
-			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.u12ba.GetDisplayName()!);
+			PrintCommandKey(CommandsSoE.U12b_IfDiff);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.U12b_IfDiff.GetDisplayName()!);
 		}
 
 		protected override string GetGuideText(string? guideName)
@@ -36,7 +36,7 @@ namespace SramComparer.SoE.Services
 			var fileName = guideName?.ToLower() switch
 			{
 				"savestate" => "guide-savestate.md",
-				_ => "guide.md"
+				_ => "guide-srm.md"
 			};
 
 			string subfolder = "";

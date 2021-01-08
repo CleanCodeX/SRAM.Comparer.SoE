@@ -13,7 +13,7 @@ Check out <a href="unknowns">Unknowns</a> to see examples of which parts of the 
 Start the application by passing the path to the savestate file (*.000-009 or * .state) of the game as the first command line parameter. The file can also be dragged and dropped onto the application.
 
 ## ***2)*** Create comparison save file
-Then press (ow) to create a comparison copy of your current save file. This allows to compare with after the current save file changed.
+Then press (overwrite) to create a comparison copy of your current save file. This allows to compare with after the current save file changed.
 
 ## ***3)*** Trigger a change in the game and compare SRAM
 
@@ -21,7 +21,7 @@ Then press (ow) to create a comparison copy of your current save file. This allo
 Change the SRAM by e.g. triggering a game event or opening a chest and create a savestate.
 
 ### Compare SRAM
-Press (c) to compare the current save file with comparison file. 
+Press (Compare) to compare the current save file with comparison file. 
 
 ## ***4)*** Interpret the comparison result and document the find
 
@@ -40,20 +40,20 @@ Check whether the found change…:
 * is still reproducible even after reloading your saved game
 
 ### Export comparison result
-As soon as you can reproducibly assign a single change in the SRAM to a change in the game, press (e) to export the comparison result as a text file in your export directory. Rename the file according to your find or your guess.
+As soon as you can reproducibly assign a single change in the SRAM to a change in the game, press (Export) to export the comparison result as a text file in your export directory. Rename the file according to your find or your guess.
 
 ### Documentation
 Document your find or your assumption via the <a href="community">Community</a> to avoid others do the same and can help you with the interpretation of your comparison results.
 
 ## ***5)*** New comparison without previous changes
-To enable a comparison without previous SRAM changes, press (ow) to save the current save file as a comparison file. Then start again at step 3.1.
+To enable a comparison without previous SRAM changes, press (overwrite) to save the current save file as a comparison file. Then start again at step 3.1.
 
 ## ***6)*** Comparison options
 
 ### (optional) Compare single or different save slots
-If you have more than one slot with changes to comparison file, press (ss) to
+If you have more than one slot with changes to comparison file, press (set_slot) to
      set the game's save slot (1-4) to avoid comparing other save slots. If two different save slots should be 
-     compared with each other, additionally press (ssc) to set the the slot of comparison file, too.
+     compared with each other, additionally press (SetSlot_Comp) to set the the slot of comparison file, too.
 
 ### (optional) Compare all or unknown only areas of save slot
 To compare all bytes (including the known areas) of a save slot byte by byte, press (sbc). If you are unsure, leave the default setting to compare as few bytes as possible.
@@ -62,7 +62,7 @@ To compare all bytes (including the known areas) of a save slot byte by byte, pr
 To compare the bytes behind all save slots press (nsbc). Currently it appears that this area is empty.
 
 ## ***7)*** (optional) Bavkup or restore SRAM files
-Current and comparison srm file can be backed-up (b) or (bc) or restored (r) or (rc) individually.
+Current and comparison srm file can be backed-up (Backup) or (Backup_Comp) or restored (Restore) or (Restore_Comp) individually.
 
 ## ***8)*** (optional) Show or edit offset values
-SRAM offset values for specific save slots can be displayed by pressing (ov) or manipulated by (mov). You can decide whether to update your current save file (backup recommended) or creating a new file.
+SRAM offset values for specific save slots can be displayed by pressing (Offset) or manipulated by (EditOffset). You can decide whether to update your current save file (backup recommended) or creating a new file.
