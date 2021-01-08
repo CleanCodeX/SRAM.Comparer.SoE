@@ -133,7 +133,7 @@ namespace SramComparer.SoE.Services
 
 				var typedOptions = (Options)options;
 
-				typedOptions.CurrenFilePath = loadedOptions.CurrenFilePath;
+				typedOptions.CurrentFilePath = loadedOptions.CurrentFilePath;
 				typedOptions.CurrentFileSaveSlot = loadedOptions.CurrentFileSaveSlot;
 				
 				typedOptions.ComparisonFilePath = loadedOptions.ComparisonFilePath;
