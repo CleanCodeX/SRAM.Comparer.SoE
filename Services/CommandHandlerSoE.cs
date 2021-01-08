@@ -64,7 +64,7 @@ namespace SramComparer.SoE.Services
 			return true;
 		}
 
-		protected override bool ConvertStreamIfSaveState(ref Stream stream, string filePath, string? saveStateType)
+		protected override bool ConvertStreamIfSaveState(ref Stream stream, string? filePath, string? saveStateType)
 		{
 			if (!base.ConvertStreamIfSaveState(ref stream, filePath, saveStateType)) return false;
 
