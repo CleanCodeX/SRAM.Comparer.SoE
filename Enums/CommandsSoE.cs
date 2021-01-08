@@ -13,7 +13,7 @@ namespace SramComparer.SoE.Enums
 		s = Commands.s,
 		g_srm = Commands.g_srm,
 		g_savestate = Commands.g_savestate,
-		asbc = Commands.asbc,
+		sbc = Commands.sbc,
 		nsbc = Commands.nsbc,
 		ss = Commands.ss,
 		ssc = Commands.ssc,

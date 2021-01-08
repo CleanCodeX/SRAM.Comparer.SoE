@@ -61,7 +61,7 @@ Um einen Vergleich ohne vorherige SRAM-Änderungen zu ermöglichen, drücke (ow)
 Wenn du mehr als einen Speicherslot mit Änderungen zur Vergleichsdatei hast um den Vergleich des Spiels auf den jeweiligen Speicherslot (1-4) zu beschränken, drücke (ss). Wenn zwei verschiedene Speicherslot verglichen werden sollen, drücken zusätzlich (ssc), um auch den Speicherplatzz der Vergleichs-Datei festzulegen.
 
 ### (optional) Alle oder nur unbekannte Speicherslot-Bereiche vergleichen
-Um alle Bytes (inkl. der bekannten Bereiche) eines Speicherslots Byte für Byte zu vergleichen, drücke (asbc). Wenn du unsicher bist, lass es bei der Voreinstellung um so wenig wie möglich Bytes zu vergleichen.
+Um alle Bytes (inkl. der bekannten Bereiche) eines Speicherslots Byte für Byte zu vergleichen, drücke (sbc). Wenn du unsicher bist, lass es bei der Voreinstellung um so wenig wie möglich Bytes zu vergleichen.
 
 ### (optional) Nicht-Speicherslot Bytes vergleichen
 Um die Bytes hinter allen Speicherslots zu vergleichen drücke (nsbc). Derzeit hat es den Anschein, als sei dieser Bereich leer.

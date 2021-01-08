@@ -56,7 +56,7 @@ If you have more than one slot with changes to comparison file, press (ss) to
      compared with each other, additionally press (ssc) to set the the slot of comparison file, too.
 
 ### (optional) Compare all or unknown only areas of save slot
-To compare all bytes (including the known areas) of a save slot byte by byte, press (asbc). If you are unsure, leave the default setting to compare as few bytes as possible.
+To compare all bytes (including the known areas) of a save slot byte by byte, press (sbc). If you are unsure, leave the default setting to compare as few bytes as possible.
 
 ### (optional) Compare non-save slot areas bytes
 To compare the bytes behind all save slots press (nsbc). Currently it appears that this area is empty.
