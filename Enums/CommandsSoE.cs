@@ -31,6 +31,8 @@ namespace SramComparer.SoE.Enums
 		Quit = Commands.Quit,
 		Offset = Commands.Offset,
 		EditOffset = Commands.EditOffset,
+		LoadConfig = Commands.LoadConfig,
+		SaveConfig = Commands.SaveConfig,
 
 		[DisplayNameLocalized(nameof(Resources.CommandShowChecksum), typeof(Resources))]
 		Checksum,

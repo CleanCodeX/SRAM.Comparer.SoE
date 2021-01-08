@@ -1,8 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Text.Json;
+using Common.Shared.Min.Extensions;
+using Common.Shared.Min.Helpers;
 using SramComparer.Services;
 using SramComparer.SoE.Enums;
 using SramComparer.SoE.Extensions;
+using SramComparer.SoE.Properties;
 using SramFormat.SoE;
 using SramFormat.SoE.Constants;
 using SramFormat.SoE.Models.Structs;
@@ -87,6 +91,44 @@ namespace SramComparer.SoE.Services
 			stream = ms;
 			
 			return true;
+		}
+
+		protected override void LoadConfig(IOptions options)
+		{
+			var filePath = base.GetConfigFilePath(options.ConfigFilePath);
+			Requires.FileExists(filePath, nameof(filePath), Resources.ErrorConfigFileDoesNotExist);
+
+			var json = File.ReadAllText(filePath);
+
+			try
+			{
+				var loadedOptions = JsonSerializer.Deserialize<Options>(json)!;
+
+				var typedOptions = (Options)options;
+
+				typedOptions.CurrenFilePath = loadedOptions.CurrenFilePath;
+				typedOptions.CurrentFileSaveSlot = loadedOptions.CurrentFileSaveSlot;
+				
+				typedOptions.ComparisonFilePath = loadedOptions.ComparisonFilePath;
+				typedOptions.ComparisonFileSaveSlot = loadedOptions.ComparisonFileSaveSlot;
+
+				typedOptions.SavestateType = loadedOptions.SavestateType;
+				typedOptions.ExportDirectory = loadedOptions.ExportDirectory;
+				typedOptions.ColorizeOutput = loadedOptions.ColorizeOutput;
+
+				typedOptions.ComparisonFlags = loadedOptions.ComparisonFlags;
+				typedOptions.GameRegion = loadedOptions.GameRegion;
+
+				typedOptions.UILanguage = loadedOptions.UILanguage;
+				typedOptions.ComparisonResultLanguage = loadedOptions.ComparisonResultLanguage;
+			}
+			catch (Exception ex)
+			{
+				throw;
+			}
+
+			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, Resources.StatusConfigFileHasBeenLoadedTemplate.InsertArgs(filePath));
+			ConsolePrinter.PrintConfig(options);
 		}
 	}
 }

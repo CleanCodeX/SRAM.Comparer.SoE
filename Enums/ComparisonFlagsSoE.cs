@@ -6,6 +6,7 @@ using ResComp = SramComparer.Properties.Resources;
 
 namespace SramComparer.SoE.Enums
 {
+	[Serializable]
 	[Flags]
 	public enum ComparisonFlagsSoE : uint
 	{

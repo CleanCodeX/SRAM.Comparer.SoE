@@ -133,11 +133,29 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The config file hasn&apos;t created before. ähnelt.
+        /// </summary>
+        public static string ErrorConfigFileDoesNotExist {
+            get {
+                return ResourceManager.GetString("ErrorConfigFileDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die invalid ähnelt.
         /// </summary>
         public static string Invalid {
             get {
                 return ResourceManager.GetString("Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Config file [{0}] has been loaded. ähnelt.
+        /// </summary>
+        public static string StatusConfigFileHasBeenLoadedTemplate {
+            get {
+                return ResourceManager.GetString("StatusConfigFileHasBeenLoadedTemplate", resourceCulture);
             }
         }
         

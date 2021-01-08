@@ -153,4 +153,10 @@
   <data name="Checksum" xml:space="preserve">
     <value>Checksum</value>
   </data>
+  <data name="ErrorConfigFileDoesNotExist" xml:space="preserve">
+    <value>The config file hasn't created before.</value>
+  </data>
+  <data name="StatusConfigFileHasBeenLoadedTemplate" xml:space="preserve">
+    <value>Config file [{0}] has been loaded.</value>
+  </data>
 </root>
