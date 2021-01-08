@@ -133,7 +133,7 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The config file hasn&apos;t created before. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The config file [{0}] does not exist (yet). ähnelt.
         /// </summary>
         public static string ErrorConfigFileDoesNotExist {
             get {

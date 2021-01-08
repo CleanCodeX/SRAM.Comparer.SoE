@@ -48,7 +48,7 @@
 		<value>Prüfsumme</value>
 	</data>
 	<data name="ErrorConfigFileDoesNotExist" xml:space="preserve">
-		<value>Es wurde bislang keine Konfig-Datei erstellt.</value>
+		<value>Die Konfig-Datei [{0}] existiert (noch) nicht.</value>
 	</data>
 	<data name="StatusConfigFileHasBeenLoadedTemplate" xml:space="preserve">
 		<value>Konfig-Datei [{0}] wurde geladen.</value>

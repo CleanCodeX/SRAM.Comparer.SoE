@@ -20,6 +20,8 @@ namespace SramComparer.SoE.Services
 		public CommandHandlerSoE() { }
 		public CommandHandlerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
 
+		#region Compare SRAM
+
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
 		public void Compare(Stream currFile, Stream compFile, IOptions options) => Compare<SramComparerSoE>(currFile, compFile, options);
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
@@ -29,6 +31,35 @@ namespace SramComparer.SoE.Services
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
 		public void Compare(IOptions options, TextWriter output) => Compare<SramComparerSoE>(options, output);
 
+		protected override bool ConvertStreamIfSaveState(ref Stream stream, string? filePath, string? saveStateType)
+		{
+			if (!base.ConvertStreamIfSaveState(ref stream, filePath, saveStateType)) return false;
+
+			const int length = Sizes.Sram;
+			MemoryStream ms;
+
+			try
+			{
+				ms = stream.GetStreamSlice(length);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
+				throw;
+			}
+
+			if (length != ms.Length)
+				throw new InvalidOperationException($"Copied stream has wrong size. Was {ms.Length}, but should be {length}");
+
+			stream = ms;
+
+			return true;
+		}
+
+		#endregion Compare SRAM
+
+		#region Export
+
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
 		public void ExportComparisonResult(IOptions options) => ExportComparisonResult<SramComparerSoE>(options);
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
@@ -37,6 +68,10 @@ namespace SramComparer.SoE.Services
 		public void ExportComparisonResult(IOptions options, string filePath) => ExportComparisonResult<SramComparerSoE>(options, filePath);
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
 		public void ExportComparisonResult(IOptions options, string filePath, bool showInExplorer) => ExportComparisonResult<SramComparerSoE>(options, filePath, showInExplorer);
+
+		#endregion Export
+
+		#region Command Handing
 
 		/// <inheritdoc cref="CommandHandler{TSramFile,TSaveSlot}"/>
 		protected override bool OnRunCommand(string command, IOptions options)
@@ -68,35 +103,14 @@ namespace SramComparer.SoE.Services
 			return true;
 		}
 
-		protected override bool ConvertStreamIfSaveState(ref Stream stream, string? filePath, string? saveStateType)
+		#endregion Command Handing
+
+		#region Config
+
+		protected override void LoadConfig(IOptions options, string? configName = null)
 		{
-			if (!base.ConvertStreamIfSaveState(ref stream, filePath, saveStateType)) return false;
-
-			const int length = Sizes.Sram;
-			MemoryStream ms;
-
-			try
-			{
-				ms = stream.GetStreamSlice(length);
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex);
-				throw;
-			}
-
-			if (length != ms.Length)
-				throw new InvalidOperationException($"Copied stream has wrong size. Was {ms.Length}, but should be {length}");
-
-			stream = ms;
-			
-			return true;
-		}
-
-		protected override void LoadConfig(IOptions options)
-		{
-			var filePath = base.GetConfigFilePath(options.ConfigFilePath);
-			Requires.FileExists(filePath, nameof(filePath), Resources.ErrorConfigFileDoesNotExist);
+			var filePath = base.GetConfigFilePath(options.ConfigFilePath, configName);
+			Requires.FileExists(filePath, string.Empty, Resources.ErrorConfigFileDoesNotExist.InsertArgs(filePath));
 
 			var json = File.ReadAllText(filePath);
 
@@ -128,7 +142,8 @@ namespace SramComparer.SoE.Services
 			}
 
 			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, Resources.StatusConfigFileHasBeenLoadedTemplate.InsertArgs(filePath));
-			ConsolePrinter.PrintConfig(options);
 		}
+
+		#endregion Config
 	}
 }

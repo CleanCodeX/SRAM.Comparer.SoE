@@ -24,6 +24,8 @@ namespace SramComparer.SoE.Services
 		public SramComparerSoE() : base(ServiceCollection.ConsolePrinter) {}
 		public SramComparerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
 
+		#region CompareSram
+
 		/// <inheritdoc cref="SramComparerBase{TSramFile,TSaveSlot}"/>
 		public override int CompareSram(SramFileSoE currFile, SramFileSoE compFile, IOptions options)
 		{
@@ -140,7 +142,7 @@ namespace SramComparer.SoE.Services
 					slotIdString += $" ({Resources.ComparedWithOtherSaveSlotTemplate.InsertArgs(compSlotId)})";
 
 				var padding = 25;
-				var currSlotName = $"{$"({Res.CurrentFile})".PadRight(padding)} {Res.SaveSlot} {currSlotId}";
+				var currSlotName = $"{$"({Res.EnumCurrentFile})".PadRight(padding)} {Res.SaveSlot} {currSlotId}";
 				var currSlotNameString = $"{" ".Repeat(2)}{currSlotName}";
 			
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.Checksum) || compSlot.Checksum != currSlot.Checksum)
@@ -151,7 +153,7 @@ namespace SramComparer.SoE.Services
 
 				if (compSlotBytes.SequenceEqual(currSlotBytes)) return allDiffBytes;
 
-				var compSlotName = $"{$"({Res.ComparisonFile})".PadRight(padding)} {Res.SaveSlot} {compSlotId}";
+				var compSlotName = $"{$"({Res.EnumComparisonFile})".PadRight(padding)} {Res.SaveSlot} {compSlotId}";
 				var compSlotNameString = $"{" ".Repeat(2)}{compSlotName}";
 
 				checksums.AppendLine($"{compSlotNameString}: {compSlot.Checksum.PadLeft()}");
@@ -207,8 +209,8 @@ namespace SramComparer.SoE.Services
 			ConsolePrinter.PrintSectionHeader();
 			ConsolePrinter.PrintColoredLine(ConsoleColor.DarkYellow, $@"{Resources.ValidationStatus}:");
 
-			OnPrintSaveSlotValidationStatus(Res.CurrentFile, currFile);
-			OnPrintSaveSlotValidationStatus(Res.ComparisonFile, compFile);
+			OnPrintSaveSlotValidationStatus(Res.EnumCurrentFile, currFile);
+			OnPrintSaveSlotValidationStatus(Res.EnumComparisonFile, compFile);
 		}
 
 		protected virtual void OnPrintSaveSlotValidationStatus(string name, ISramFile file)
@@ -228,6 +230,10 @@ namespace SramComparer.SoE.Services
 
 			ConsolePrinter.PrintColoredLine(ConsoleColor.White, @" ]");
 		}
+
+		#endregion CompareSram
+
+		#region CompareSaveSlot
 
 		/// <inheritdoc cref="SramComparerBase{TSramFile,TSaveSlot}"/>
 		public override int CompareSaveSlot(SaveSlot currSaveSlot, SaveSlot compSaveSlot, IOptions options)
@@ -391,5 +397,7 @@ namespace SramComparer.SoE.Services
 				return  GetSaveSlotBufferOffset(bufferName);
 			}
 		}
+
+		#endregion CompareSaveSlot
 	}
 }

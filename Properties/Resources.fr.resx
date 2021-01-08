@@ -50,7 +50,7 @@
 		<value>Checksum</value>
 	</data>
 	<data name="ErrorConfigFileDoesNotExist" xml:space="preserve">
-		<value>Le fichier de configuration n'a pas été créé auparavant.</value>
+		<value>Le fichier de configuration [{0}] n'existe pas (encore).</value>
 	</data>
 	<data name="StatusConfigFileHasBeenLoadedTemplate" xml:space="preserve">
 		<value>Le fichier de configuration [{0}] a été chargé.</value>
