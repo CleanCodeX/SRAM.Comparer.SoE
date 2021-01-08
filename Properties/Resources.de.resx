@@ -15,22 +15,22 @@
 		<value>ändert sich bei jeder spielinternen Speicherung</value>
 	</data>
 	<data name="CommandShowChecksum" xml:space="preserve">
-		<value>Prüfsummen aller verglichenen Speicherslots anzeigen</value>
+		<value>Prüfsummen anzeigen</value>
 	</data>
 	<data name="CommandShowUnknown12B" xml:space="preserve">
-		<value>Unknown12B Werte aller Speicherslots anzeigen</value><comment>Don't translate term Unknown12Bs</comment>
+		<value>Unknown12B-Werte anzeigen</value><comment>Don't translate term Unknown12Bs</comment>
 	</data>
 	<data name="CommandShowChecksumIfDifferent" xml:space="preserve">
-		<value>Prüfsumme aller verglichenen Speicherslots nur anzeigen wenn unterschiedlich</value>
+		<value>Prüfsummen anzeigen falls unterschiedlich</value>
 	</data>
 	<data name="CommandShowUnknown12BIfDifferent" xml:space="preserve">
-		<value>Unknown12B Wert des verglichenen Speicherslots anzeigen wenn unterschiedlich</value><comment>Don't translate term Unknown12Bs</comment>
+		<value>Unknown12B-Werte anzeigen falls unterschiedlich</value><comment>Don't translate term Unknown12Bs</comment>
 	</data>
 	<data name="ComparedWithOtherSaveSlotTemplate" xml:space="preserve">
 		<value>verglichen mit Speicherslot {0}</value>
 	</data>
 	<data name="ChecksumIfDifferent" xml:space="preserve">
-		<value>Prüfsumme falls unterschiedlich</value>
+		<value>Prüfsummen anzeigen falls unterschiedlich</value>
 	</data>
 	<data name="Valid" xml:space="preserve">
 		<value>gültig</value>

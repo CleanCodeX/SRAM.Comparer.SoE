@@ -31,20 +31,20 @@
 		</comment>
 	</data>
 	<data name="CommandShowUnknown12BIfDifferent" xml:space="preserve">
-		<value>Afficher toutes les valeurs Unknown12B de la partie en cours</value><comment>Afficher toutes les valeurs Unknown12B</comment>
+		<value>Afficher la valeur Unknown12B uniquement si elle est différente</value><comment>Afficher toutes les valeurs Unknown12B</comment>
 	</data>
 	<data name="CommandShowUnknown12B" xml:space="preserve">
-		<value>Afficher toutes les valeurs Unknown12B de toutes les parties</value><comment>Retranslation needed</comment>
+		<value>Afficher les valeurs Unknown12B</value><comment>Retranslation needed</comment>
 	</data>
 	<data name="CommandShowChecksumIfDifferent" xml:space="preserve">
-		<value>Afficher le checksum de la partie en cours</value><comment>was: Checksum de la partie en cours
+		<value>Afficher les sommes de contrôle uniquement si elles sont différentes</value><comment>was: Checksum de la partie en cours
 		</comment>
 	</data>
 	<data name="ChecksumIfDifferent" xml:space="preserve">
 		<value>Checksum si différent</value><comment>Retranslation needed</comment>
 	</data>
 	<data name="CommandShowChecksum" xml:space="preserve">
-		<value>Afficher les checksums de toutes les parties</value><comment>Afficher le checksum affecté</comment>
+		<value>Afficher les sommes de contrôle</value><comment>Afficher le checksum affecté</comment>
 	</data>
 	<data name="Checksum" xml:space="preserve">
 		<value>Checksum</value>

@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CommandShowChecksumIfDifferent" xml:space="preserve">
-    <value>Show checksum of all compared save slots only if different</value>
+    <value>Show checksums only if different</value>
   </data>
   <data name="CommandShowChecksum" xml:space="preserve">
-    <value>Show checksum of all compared save slots</value>
+    <value>Show checksums</value>
   </data>
   <data name="CommandShowUnknown12BIfDifferent" xml:space="preserve">
-    <value>Show Unknown12B value of all compared save slots if different</value><comment>Don't translate term Unknown12Bs</comment>
+    <value>Show Unknown12B value only if different</value><comment>Don't translate term Unknown12Bs</comment>
   </data>
   <data name="CommandShowUnknown12B" xml:space="preserve">
-    <value>Show Unknown12B values of all compared save slots</value><comment>Don't translate term Unknown12Bs</comment>
+    <value>Show Unknown12B values</value><comment>Don't translate term Unknown12Bs</comment>
   </data>
   <data name="ChangesAtEveryInSaveSlotSave" xml:space="preserve">
     <value>changes at every in-game save</value>
