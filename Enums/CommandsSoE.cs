@@ -11,7 +11,8 @@ namespace SramComparer.SoE.Enums
 	{
 		cmd = Commands.cmd,
 		s = Commands.s,
-		m = Commands.m,
+		g_srm = Commands.g_srm,
+		g_savestate = Commands.g_savestate,
 		asbc = Commands.asbc,
 		nsbc = Commands.nsbc,
 		ss = Commands.ss,
@@ -24,6 +25,8 @@ namespace SramComparer.SoE.Enums
 		rc = Commands.rc,
 		e = Commands.e,
 		ts = Commands.ts,
+		l = Commands.l,
+		lc = Commands.lc,
 		w = Commands.w,
 		q = Commands.q,
 		ov = Commands.ov,
