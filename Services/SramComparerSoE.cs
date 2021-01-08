@@ -31,15 +31,15 @@ namespace SramComparer.SoE.Services
 
 			ConsolePrinter.PrintParagraph();
 
-			var optionCurrSlotIndex = options.CurrentSramFileSaveSlot - 1;
-			var optionCompSlotIndex = options.ComparisonSramFileSaveSlot - 1;
+			var optionCurrSlotIndex = options.CurrentFileSaveSlot - 1;
+			var optionCompSlotIndex = options.ComparisonFileSaveSlot - 1;
 			var optionFlags = (ComparisonFlagsSoE)options.ComparisonFlags;
 
 			var slotComparisonMode = optionCompSlotIndex > -1
-				? Res.StatusTwoDifferentSaveSlotsWillBeComparedTemplate.InsertArgs(options.CurrentSramFileSaveSlot,
-					options.ComparisonSramFileSaveSlot)
+				? Res.StatusTwoDifferentSaveSlotsWillBeComparedTemplate.InsertArgs(options.CurrentFileSaveSlot,
+					options.ComparisonFileSaveSlot)
 				: optionCurrSlotIndex > -1
-					? string.Format(Res.StatusSingleSaveSlotWillBeComparedTemplate, options.CurrentSramFileSaveSlot)
+					? string.Format(Res.StatusSingleSaveSlotWillBeComparedTemplate, options.CurrentFileSaveSlot)
 					: Res.StatusAllSaveSlotsWillBeCompared;
 			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, slotComparisonMode);
 
@@ -140,7 +140,7 @@ namespace SramComparer.SoE.Services
 					slotIdString += $" ({Resources.ComparedWithOtherSaveSlotTemplate.InsertArgs(compSlotId)})";
 
 				var padding = 25;
-				var currSlotName = $"{$"({Res.CurrentSramFile})".PadRight(padding)} {Res.SaveSlot} {currSlotId}";
+				var currSlotName = $"{$"({Res.CurrentFile})".PadRight(padding)} {Res.SaveSlot} {currSlotId}";
 				var currSlotNameString = $"{" ".Repeat(2)}{currSlotName}";
 			
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.Checksum) || compSlot.Checksum != currSlot.Checksum)
@@ -151,7 +151,7 @@ namespace SramComparer.SoE.Services
 
 				if (compSlotBytes.SequenceEqual(currSlotBytes)) return allDiffBytes;
 
-				var compSlotName = $"{$"({Res.ComparisonSramFile})".PadRight(padding)} {Res.SaveSlot} {compSlotId}";
+				var compSlotName = $"{$"({Res.ComparisonFile})".PadRight(padding)} {Res.SaveSlot} {compSlotId}";
 				var compSlotNameString = $"{" ".Repeat(2)}{compSlotName}";
 
 				checksums.AppendLine($"{compSlotNameString}: {compSlot.Checksum.PadLeft()}");
@@ -207,8 +207,8 @@ namespace SramComparer.SoE.Services
 			ConsolePrinter.PrintSectionHeader();
 			ConsolePrinter.PrintColoredLine(ConsoleColor.DarkYellow, $@"{Resources.ValidationStatus}:");
 
-			OnPrintSaveSlotValidationStatus(Res.CurrentSramFile, currFile);
-			OnPrintSaveSlotValidationStatus(Res.ComparisonSramFile, compFile);
+			OnPrintSaveSlotValidationStatus(Res.CurrentFile, currFile);
+			OnPrintSaveSlotValidationStatus(Res.ComparisonFile, compFile);
 		}
 
 		protected virtual void OnPrintSaveSlotValidationStatus(string name, ISramFile file)

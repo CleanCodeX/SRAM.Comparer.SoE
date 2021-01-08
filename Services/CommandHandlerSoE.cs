@@ -26,13 +26,13 @@ namespace SramComparer.SoE.Services
 		public void Compare(IOptions options, TextWriter output) => Compare<SramComparerSoE>(options, output);
 
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public void ExportComparison(IOptions options) => ExportComparison<SramComparerSoE>(options);
+		public void ExportComparisonResult(IOptions options) => ExportComparisonResult<SramComparerSoE>(options);
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public void ExportComparison(IOptions options, bool showInExplorer) => ExportComparison<SramComparerSoE>(options, showInExplorer);
+		public void ExportComparisonResult(IOptions options, bool showInExplorer) => ExportComparisonResult<SramComparerSoE>(options, showInExplorer);
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public void ExportComparison(IOptions options, string filepath) => ExportComparison<SramComparerSoE>(options, filepath);
+		public void ExportComparisonResult(IOptions options, string filePath) => ExportComparisonResult<SramComparerSoE>(options, filePath);
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public void ExportComparison(IOptions options, string filepath, bool showInExplorer) => ExportComparison<SramComparerSoE>(options, filepath, showInExplorer);
+		public void ExportComparisonResult(IOptions options, string filePath, bool showInExplorer) => ExportComparisonResult<SramComparerSoE>(options, filePath, showInExplorer);
 
 		/// <inheritdoc cref="CommandHandler{TSramFile,TSaveSlot}"/>
 		protected override bool OnRunCommand(string command, IOptions options)
@@ -43,7 +43,7 @@ namespace SramComparer.SoE.Services
 					Compare(options);
 					break;
 				case nameof(CommandsSoE.e):
-					ExportComparison(options, true);
+					ExportComparisonResult(options, true);
 					break;
 				case nameof(CommandsSoE.u12b) or nameof(CommandsSoE.u12ba):
 					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
