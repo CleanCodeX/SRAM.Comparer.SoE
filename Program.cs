@@ -18,9 +18,8 @@ namespace SramComparer.SoE
 		{
 			var cmdLineParser = ServiceCollection.CmdLineParser;
 			cmdLineParser.ThrowIfNull(nameof(cmdLineParser));
-
+			
 			var options = cmdLineParser.Parse(args);
-
 			ServiceCollection.ConsolePrinter.ColorizeOutput = options.ColorizeOutput;
 
 			if (options.BatchCommands is null)
