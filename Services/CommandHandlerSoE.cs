@@ -31,9 +31,9 @@ namespace SramComparer.SoE.Services
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
 		public void Compare(IOptions options, TextWriter output) => Compare<SramComparerSoE>(options, output);
 
-		protected override bool ConvertStreamIfSaveState(ref Stream stream, string? filePath, string? saveStateType)
+		protected override bool ConvertStreamIfSavestate(ref Stream stream, string? filePath, string? savestateType)
 		{
-			if (!base.ConvertStreamIfSaveState(ref stream, filePath, saveStateType)) return false;
+			if (!base.ConvertStreamIfSavestate(ref stream, filePath, savestateType)) return false;
 
 			const int length = Sizes.Sram;
 			MemoryStream ms;
