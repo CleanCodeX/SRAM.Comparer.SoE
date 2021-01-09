@@ -2,6 +2,7 @@
 using System.IO;
 using Common.Shared.Min.Extensions;
 using Common.Shared.Min.Helpers;
+using SramComparer.Enums;
 using SramComparer.Helpers;
 using SramComparer.Services;
 using SramComparer.SoE.Enums;
@@ -19,6 +20,59 @@ namespace SramComparer.SoE.Services
 	{
 		public CommandHandlerSoE() { }
 		public CommandHandlerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
+
+		#region Command Handing
+
+		/// <inheritdoc cref="CommandHandler{TSramFile,TSaveSlot}"/>
+		protected override bool OnRunCommand(string command, IOptions options)
+		{
+			Requires.NotNull(command, nameof(command));
+			Requires.NotNull(options, nameof(options));
+
+			if (Enum.TryParse<AlternateCommandsSoe>(command, true, out var altSoECommand))
+				command = ((CommandsSoE)altSoECommand).ToString();
+
+			if (Enum.TryParse<AlternateCommands>(command, true, out var altCommand))
+				command = ((Commands)altCommand).ToString();
+
+			if (CheckCustomKeyBinding(command, out var boundCommand))
+				command = boundCommand;
+
+			var cmd = command.ParseEnum<CommandsSoE>();
+			switch (cmd)
+			{
+				case CommandsSoE.Compare:
+					Compare(options);
+
+					break;
+				case CommandsSoE.Export:
+					ExportComparisonResult(options, true);
+
+					break;
+				case CommandsSoE.U12b:
+				case CommandsSoE.U12b_Diff:
+					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
+						cmd == CommandsSoE.U12b
+							? ComparisonFlagsSoE.Unknown12B
+							: ComparisonFlagsSoE.Unknown12BIfDifferent);
+
+					break;
+				case CommandsSoE.Checksum:
+				case CommandsSoE.Checksum_Diff:
+					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
+						cmd == CommandsSoE.Checksum
+							? ComparisonFlagsSoE.Checksum
+							: ComparisonFlagsSoE.ChecksumIfDifferent);
+
+					break;
+				default:
+					return base.OnRunCommand(command, options);
+			}
+
+			return true;
+		}
+
+		#endregion Command Handing
 
 		#region Compare SRAM
 
@@ -70,56 +124,6 @@ namespace SramComparer.SoE.Services
 		public void ExportComparisonResult(IOptions options, string filePath, bool showInExplorer) => ExportComparisonResult<SramComparerSoE>(options, filePath, showInExplorer);
 
 		#endregion Export
-
-		#region Command Handing
-
-		/// <inheritdoc cref="CommandHandler{TSramFile,TSaveSlot}"/>
-		protected override bool OnRunCommand(string command, IOptions options)
-		{
-			Requires.NotNull(command, nameof(command));
-			Requires.NotNull(options, nameof(options));
-
-			if (Enum.TryParse<AlternateCommandsSoe>(command, true, out var altCommand))
-				command = ((CommandsSoE)altCommand).ToString();
-
-			if (CheckCustomKeyBinding(command, out var boundCommand))
-				command = boundCommand;
-
-			var cmd = command.ParseEnum<CommandsSoE>();
-			switch (cmd)
-			{
-				case CommandsSoE.Compare:
-					Compare(options);
-
-					break;
-				case CommandsSoE.Export:
-					ExportComparisonResult(options, true);
-
-					break;
-				case CommandsSoE.U12b:
-				case CommandsSoE.U12b_Diff:
-					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
-						cmd == CommandsSoE.U12b
-						? ComparisonFlagsSoE.Unknown12B
-						: ComparisonFlagsSoE.Unknown12BIfDifferent);
-
-					break;
-				case CommandsSoE.Checksum: 
-				case CommandsSoE.Checksum_Diff:
-					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags, 
-						cmd == CommandsSoE.Checksum
-						? ComparisonFlagsSoE.Checksum
-						: ComparisonFlagsSoE.ChecksumIfDifferent);
-
-					break;
-				default:
-					return base.OnRunCommand(command, options);
-			}
-
-			return true;
-		}
-
-		#endregion Command Handing
 
 		#region Config
 
