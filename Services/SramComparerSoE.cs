@@ -38,11 +38,11 @@ namespace SramComparer.SoE.Services
 			var optionFlags = (ComparisonFlagsSoE)options.ComparisonFlags;
 
 			var slotComparisonMode = optionCompSlotIndex > -1
-				? Res.StatusTwoDifferentSaveSlotsWillBeComparedTemplate.InsertArgs(options.CurrentFileSaveSlot,
+				? Res.StatusDifferentSaveSlotComparisonTemplate.InsertArgs(options.CurrentFileSaveSlot,
 					options.ComparisonFileSaveSlot)
 				: optionCurrSlotIndex > -1
-					? string.Format(Res.StatusSingleSaveSlotWillBeComparedTemplate, options.CurrentFileSaveSlot)
-					: Res.StatusAllSaveSlotsWillBeCompared;
+					? string.Format(Res.StatusSingleSaveSlotComparisonTemplate, options.CurrentFileSaveSlot)
+					: Res.StatusAllSaveSlotsComparison;
 			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, slotComparisonMode);
 
 			ConsolePrinter.PrintParagraph();
