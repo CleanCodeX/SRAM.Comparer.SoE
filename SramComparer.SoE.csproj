@@ -47,7 +47,7 @@ Added key binding customization
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CCX.SramComparer" Version="1.1.0-a4" />
+    <PackageReference Include="CCX.SramComparer" Version="1.1.0-a5" />
     <PackageReference Include="CCX.SramFormat.SoE" Version="0.2.6-a4" />
   </ItemGroup>
 
