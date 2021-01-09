@@ -47,7 +47,7 @@ Added key binding customization
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CCX.SramComparer" Version="1.1.0-a2" />
+    <PackageReference Include="CCX.SramComparer" Version="1.1.0-a3" />
     <PackageReference Include="CCX.SramFormat.SoE" Version="0.2.6-a4" />
   </ItemGroup>
 
@@ -75,13 +75,13 @@ Added key binding customization
     <None Update="Guides\de\Guide-Savestate.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Guides\de\Guide.md">
+    <None Update="Guides\de\Guide-Srm.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Guides\Guide-Savestate.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Guides\Guide.md">
+    <None Update="Guides\Guide-Srm.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Icon.ico">
