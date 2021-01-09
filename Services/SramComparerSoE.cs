@@ -48,7 +48,7 @@ namespace SramComparer.SoE.Services
 			ConsolePrinter.PrintParagraph();
 
 			var offset = GetSramOffset(nameof(compFile.Sram.Unknown1), out var bufferName);
-			var sramDiffBytes = CompareByteArray(Res.Sram + ":" + bufferName, offset, compFile.Sram.Unknown1, currFile.Sram.Unknown1);
+			var sramDiffBytes = CompareByteArray(Res.CompSram + ":" + bufferName, offset, compFile.Sram.Unknown1, currFile.Sram.Unknown1);
 			if (sramDiffBytes > 0)
 				ConsolePrinter.PrintColoredLine(ConsoleColor.Green, Res.StatusTotalDiffBytesTemplate.InsertArgs(sramDiffBytes));
 
@@ -62,7 +62,7 @@ namespace SramComparer.SoE.Services
 			var allDiffBytes = sramDiffBytes;
 
 			var checksums = new StringBuilder();
-			checksums.AppendLine($"{Resources.Checksum} (2 {Res.Bytes} | {Resources.ChangesAtEveryInSaveSlotSave}):");
+			checksums.AppendLine($"{Resources.EnumChecksum} (2 {Res.Bytes} | {Resources.CompChangesAtEveryInSaveSlotSave}):");
 
 			var timestamps = new StringBuilder();
 			timestamps.AppendLine($"{nameof(SaveSlot.Unknown12B)} (2 {Res.Bytes}):");
@@ -84,7 +84,7 @@ namespace SramComparer.SoE.Services
 				if (nonSaveSlotUnknownDiffBytes > 0)
 				{
 					ConsolePrinter.PrintParagraph();
-					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.SectionNonSaveSlotUnknowns} ].......................................");
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.CompSectionNonSaveSlotUnknowns} ].......................................");
 					ConsolePrinter.ResetColor();
 
 					nonSaveSlotUnknownDiffBytes = CompareByteArray(nameof(currFile.Sram.Unknown1), Offsets.SramUnknown1, currFile.Sram.Unknown1, compFile.Sram.Unknown1, true);
@@ -139,10 +139,10 @@ namespace SramComparer.SoE.Services
 
 				var slotIdString = currSlotId.ToString();
 				if (currSlotId != compSlotId)
-					slotIdString += $" ({Resources.ComparedWithOtherSaveSlotTemplate.InsertArgs(compSlotId)})";
+					slotIdString += $" ({Resources.CompComparedWithOtherSaveSlotTemplate.InsertArgs(compSlotId)})";
 
 				var padding = 25;
-				var currSlotName = $"{$"({Res.EnumCurrentFile})".PadRight(padding)} {Res.SaveSlot} {currSlotId}";
+				var currSlotName = $"{$"({Res.EnumCurrentFile})".PadRight(padding)} {Res.CompSlot} {currSlotId}";
 				var currSlotNameString = $"{" ".Repeat(2)}{currSlotName}";
 			
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.Checksum) || compSlot.Checksum != currSlot.Checksum)
@@ -153,17 +153,17 @@ namespace SramComparer.SoE.Services
 
 				if (compSlotBytes.SequenceEqual(currSlotBytes)) return allDiffBytes;
 
-				var compSlotName = $"{$"({Res.EnumComparisonFile})".PadRight(padding)} {Res.SaveSlot} {compSlotId}";
+				var compSlotName = $"{$"({Res.EnumComparisonFile})".PadRight(padding)} {Res.CompSlot} {compSlotId}";
 				var compSlotNameString = $"{" ".Repeat(2)}{compSlotName}";
 
 				checksums.AppendLine($"{compSlotNameString}: {compSlot.Checksum.PadLeft()}");
 				timestamps.AppendLine($"{compSlotNameString}: {compSlot.Unknown12B.PadLeft()}");
 
-				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.SaveSlot} {slotIdString} ]---------------------------------------------");
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.CompSlot} {slotIdString} ]---------------------------------------------");
 				ConsolePrinter.ResetColor();
 
 				ConsolePrinter.PrintParagraph();
-				ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.UnknownAreasOnly} ].......................................");
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.CompUnknownAreasOnly} ].......................................");
 				ConsolePrinter.ResetColor();
 
 				var slotDiffBytes = CompareSaveSlot(currSlot, compSlot, options);
@@ -188,7 +188,7 @@ namespace SramComparer.SoE.Services
 				if (slotBufferDiffBytes > slotDiffBytes)
 				{
 					ConsolePrinter.PrintParagraph();
-					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, $@"{" ".Repeat(2)}[ {Res.SectionSaveSlotChangedTemplate} ]...................................".InsertArgs(currSlotIndex));
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, $@"{" ".Repeat(2)}[ {Res.CompSectionSaveSlotChangedTemplate} ]...................................".InsertArgs(currSlotIndex));
 					// ReSharper disable once RedundantArgumentDefaultValue
 
 					CompareByteArray(bufferName, bufferOffset, currSlotBytes, compSlotBytes, true, Offsets.SaveSlot.GetNameFromOffset);
@@ -207,7 +207,7 @@ namespace SramComparer.SoE.Services
 		protected virtual void PrintSaveSlotValidationStatus(SramFileSoE currFile, SramFileSoE compFile)
 		{
 			ConsolePrinter.PrintSectionHeader();
-			ConsolePrinter.PrintColoredLine(ConsoleColor.DarkYellow, $@"{Resources.ValidationStatus}:");
+			ConsolePrinter.PrintColoredLine(ConsoleColor.DarkYellow, $@"{Resources.CompValidationStatus}:");
 
 			OnPrintSaveSlotValidationStatus(Res.EnumCurrentFile, currFile);
 			OnPrintSaveSlotValidationStatus(Res.EnumComparisonFile, compFile);
@@ -216,7 +216,7 @@ namespace SramComparer.SoE.Services
 		protected virtual void OnPrintSaveSlotValidationStatus(string name, ISramFile file)
 		{
 			ConsolePrinter.PrintColored(ConsoleColor.Gray, $@"{name}:".PadRight(15));
-			ConsolePrinter.PrintColored(ConsoleColor.DarkYellow, $@" {Res.SaveSlot} (1-4)");
+			ConsolePrinter.PrintColored(ConsoleColor.DarkYellow, $@" {Res.CompSlot} (1-4)");
 			ConsolePrinter.PrintColored(ConsoleColor.White, @" [ ");
 
 			for (var i = 0; i <= 3; i++)

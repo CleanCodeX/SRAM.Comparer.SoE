@@ -11,40 +11,40 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-	<data name="ChangesAtEveryInSaveSlotSave" xml:space="preserve">
+	<data name="CompChangesAtEveryInSaveSlotSave" xml:space="preserve">
 		<value>ändert sich bei jeder spielinternen Speicherung</value>
 	</data>
-	<data name="CommandShowChecksum" xml:space="preserve">
+	<data name="CmdShowChecksum" xml:space="preserve">
 		<value>Prüfsummen anzeigen</value>
 	</data>
-	<data name="CommandShowUnknown12B" xml:space="preserve">
+	<data name="CmdShowUnknown12B" xml:space="preserve">
 		<value>Unknown12B-Werte anzeigen</value><comment>Don't translate term Unknown12Bs</comment>
 	</data>
-	<data name="CommandShowChecksumIfDifferent" xml:space="preserve">
+	<data name="CmdShowChecksumIfDifferent" xml:space="preserve">
 		<value>Prüfsummen anzeigen falls unterschiedlich</value>
 	</data>
-	<data name="CommandShowUnknown12BIfDifferent" xml:space="preserve">
+	<data name="CmdShowUnknown12BIfDifferent" xml:space="preserve">
 		<value>Unknown12B-Werte anzeigen falls unterschiedlich</value><comment>Don't translate term Unknown12Bs</comment>
 	</data>
-	<data name="ComparedWithOtherSaveSlotTemplate" xml:space="preserve">
+	<data name="CompComparedWithOtherSaveSlotTemplate" xml:space="preserve">
 		<value>verglichen mit Speicherslot {0}</value>
 	</data>
-	<data name="ChecksumIfDifferent" xml:space="preserve">
+	<data name="EnumChecksumIfDifferent" xml:space="preserve">
 		<value>Prüfsummen anzeigen falls unterschiedlich</value>
 	</data>
 	<data name="Valid" xml:space="preserve">
 		<value>gültig</value>
 	</data>
-	<data name="ValidationStatus" xml:space="preserve">
+	<data name="CompValidationStatus" xml:space="preserve">
 		<value>Validierungs-Status</value>
 	</data>
 	<data name="Invalid" xml:space="preserve">
 		<value>ungültig</value>
 	</data>
-	<data name="Unknown12BIfDifferent" xml:space="preserve">
+	<data name="EnumUnknown12BIfDifferent" xml:space="preserve">
 		<value>Unknown12B wenn unterschiedlich</value><comment>Don't translate this term</comment>
 	</data>
-	<data name="Checksum" xml:space="preserve">
+	<data name="EnumChecksum" xml:space="preserve">
 		<value>Prüfsumme</value>
 	</data>
 	<data name="StatusConfigFileHasBeenLoadedTemplate" xml:space="preserve">

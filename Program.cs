@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Runtime.CompilerServices;
-using System.Text.Json;
 using Common.Shared.Min.Extensions;
+using SramComparer.Helpers;
 using SramComparer.SoE.Services;
 
 namespace SramComparer.SoE
@@ -24,10 +24,7 @@ namespace SramComparer.SoE
 			var options = cmdLineParser.Parse(args);
 
 			if (options.ConfigFilePath is not null && Path.GetExtension(options.ConfigFilePath).ToLower() == ".json")
-			{
-				var json = File.ReadAllText(options.ConfigFilePath);
-				options = JsonSerializer.Deserialize<Options>(json)!;
-			}
+				options = JsonFileSerializer.Deserialize<Options>(options.ConfigFilePath)!;
 
 			ServiceCollection.ConsolePrinter.ColorizeOutput = options.ColorizeOutput;
 

@@ -11,7 +11,7 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-	<data name="ChangesAtEveryInSaveSlotSave" xml:space="preserve">
+	<data name="CompChangesAtEveryInSaveSlotSave" xml:space="preserve">
 		<value>changements à chaque sauvegarde du jeu</value>
 	</data>
 	<data name="Valid" xml:space="preserve">
@@ -20,33 +20,33 @@
 	<data name="Invalid" xml:space="preserve">
 		<value>invalide</value>
 	</data>
-	<data name="ValidationStatus" xml:space="preserve">
+	<data name="CompValidationStatus" xml:space="preserve">
 		<value>Statut de validation</value>
 	</data>
-	<data name="ComparedWithOtherSaveSlotTemplate" xml:space="preserve">
+	<data name="CompComparedWithOtherSaveSlotTemplate" xml:space="preserve">
 		<value>par rapport à la partie {0}</value>
 	</data>
-	<data name="Unknown12BIfDifferent" xml:space="preserve">
+	<data name="EnumUnknown12BIfDifferent" xml:space="preserve">
 		<value>Valeurs Unknown12B si différentes</value><comment>Was: Valeurs Unknown12B de la partie en cours
 		</comment>
 	</data>
-	<data name="CommandShowUnknown12BIfDifferent" xml:space="preserve">
+	<data name="CmdShowUnknown12BIfDifferent" xml:space="preserve">
 		<value>Afficher la valeur Unknown12B uniquement si elle est différente</value><comment>Afficher toutes les valeurs Unknown12B</comment>
 	</data>
-	<data name="CommandShowUnknown12B" xml:space="preserve">
+	<data name="CmdShowUnknown12B" xml:space="preserve">
 		<value>Afficher les valeurs Unknown12B</value><comment>Retranslation needed</comment>
 	</data>
-	<data name="CommandShowChecksumIfDifferent" xml:space="preserve">
+	<data name="CmdShowChecksumIfDifferent" xml:space="preserve">
 		<value>Afficher les sommes de contrôle uniquement si elles sont différentes</value><comment>was: Checksum de la partie en cours
 		</comment>
 	</data>
-	<data name="ChecksumIfDifferent" xml:space="preserve">
+	<data name="EnumChecksumIfDifferent" xml:space="preserve">
 		<value>Checksum si différent</value><comment>Retranslation needed</comment>
 	</data>
-	<data name="CommandShowChecksum" xml:space="preserve">
+	<data name="CmdShowChecksum" xml:space="preserve">
 		<value>Afficher les sommes de contrôle</value><comment>Afficher le checksum affecté</comment>
 	</data>
-	<data name="Checksum" xml:space="preserve">
+	<data name="EnumChecksum" xml:space="preserve">
 		<value>Checksum</value>
 	</data>
 	<data name="StatusConfigFileHasBeenLoadedTemplate" xml:space="preserve">

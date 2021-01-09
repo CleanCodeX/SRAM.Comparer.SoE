@@ -117,22 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CommandShowChecksumIfDifferent" xml:space="preserve">
+  <data name="CmdShowChecksumIfDifferent" xml:space="preserve">
     <value>Show checksums only if different</value>
   </data>
-  <data name="CommandShowChecksum" xml:space="preserve">
+  <data name="CmdShowChecksum" xml:space="preserve">
     <value>Show checksums</value>
   </data>
-  <data name="CommandShowUnknown12BIfDifferent" xml:space="preserve">
+  <data name="CmdShowUnknown12BIfDifferent" xml:space="preserve">
     <value>Show Unknown12B value only if different</value><comment>Don't translate term Unknown12Bs</comment>
   </data>
-  <data name="CommandShowUnknown12B" xml:space="preserve">
+  <data name="CmdShowUnknown12B" xml:space="preserve">
     <value>Show Unknown12B values</value><comment>Don't translate term Unknown12Bs</comment>
   </data>
-  <data name="ChangesAtEveryInSaveSlotSave" xml:space="preserve">
+  <data name="CompChangesAtEveryInSaveSlotSave" xml:space="preserve">
     <value>changes at every in-game save</value>
   </data>
-  <data name="ComparedWithOtherSaveSlotTemplate" xml:space="preserve">
+  <data name="CompComparedWithOtherSaveSlotTemplate" xml:space="preserve">
     <value>compared with save slot {0}</value>
   </data>
   <data name="Invalid" xml:space="preserve">
@@ -141,16 +141,16 @@
   <data name="Valid" xml:space="preserve">
     <value>valid</value>
   </data>
-  <data name="ValidationStatus" xml:space="preserve">
+  <data name="CompValidationStatus" xml:space="preserve">
     <value>Validation-status</value>
   </data>
-  <data name="ChecksumIfDifferent" xml:space="preserve">
+  <data name="EnumChecksumIfDifferent" xml:space="preserve">
     <value>Checksum if different</value>
   </data>
-  <data name="Unknown12BIfDifferent" xml:space="preserve">
+  <data name="EnumUnknown12BIfDifferent" xml:space="preserve">
     <value>Unknown12B when different</value><comment>Don't translate term Unknown12B</comment>
   </data>
-  <data name="Checksum" xml:space="preserve">
+  <data name="EnumChecksum" xml:space="preserve">
     <value>Checksum</value>
   </data>
   <data name="StatusConfigFileHasBeenLoadedTemplate" xml:space="preserve">

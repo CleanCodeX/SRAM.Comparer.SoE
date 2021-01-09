@@ -61,74 +61,92 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die changes at every in-game save ähnelt.
-        /// </summary>
-        public static string ChangesAtEveryInSaveSlotSave {
-            get {
-                return ResourceManager.GetString("ChangesAtEveryInSaveSlotSave", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Checksum ähnelt.
-        /// </summary>
-        public static string Checksum {
-            get {
-                return ResourceManager.GetString("Checksum", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Checksum if different ähnelt.
-        /// </summary>
-        public static string ChecksumIfDifferent {
-            get {
-                return ResourceManager.GetString("ChecksumIfDifferent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Show checksums ähnelt.
         /// </summary>
-        public static string CommandShowChecksum {
+        public static string CmdShowChecksum {
             get {
-                return ResourceManager.GetString("CommandShowChecksum", resourceCulture);
+                return ResourceManager.GetString("CmdShowChecksum", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Show checksums only if different ähnelt.
         /// </summary>
-        public static string CommandShowChecksumIfDifferent {
+        public static string CmdShowChecksumIfDifferent {
             get {
-                return ResourceManager.GetString("CommandShowChecksumIfDifferent", resourceCulture);
+                return ResourceManager.GetString("CmdShowChecksumIfDifferent", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Show Unknown12B values ähnelt.
         /// </summary>
-        public static string CommandShowUnknown12B {
+        public static string CmdShowUnknown12B {
             get {
-                return ResourceManager.GetString("CommandShowUnknown12B", resourceCulture);
+                return ResourceManager.GetString("CmdShowUnknown12B", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Show Unknown12B value only if different ähnelt.
         /// </summary>
-        public static string CommandShowUnknown12BIfDifferent {
+        public static string CmdShowUnknown12BIfDifferent {
             get {
-                return ResourceManager.GetString("CommandShowUnknown12BIfDifferent", resourceCulture);
+                return ResourceManager.GetString("CmdShowUnknown12BIfDifferent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die changes at every in-game save ähnelt.
+        /// </summary>
+        public static string CompChangesAtEveryInSaveSlotSave {
+            get {
+                return ResourceManager.GetString("CompChangesAtEveryInSaveSlotSave", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die compared with save slot {0} ähnelt.
         /// </summary>
-        public static string ComparedWithOtherSaveSlotTemplate {
+        public static string CompComparedWithOtherSaveSlotTemplate {
             get {
-                return ResourceManager.GetString("ComparedWithOtherSaveSlotTemplate", resourceCulture);
+                return ResourceManager.GetString("CompComparedWithOtherSaveSlotTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Validation-status ähnelt.
+        /// </summary>
+        public static string CompValidationStatus {
+            get {
+                return ResourceManager.GetString("CompValidationStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Checksum ähnelt.
+        /// </summary>
+        public static string EnumChecksum {
+            get {
+                return ResourceManager.GetString("EnumChecksum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Checksum if different ähnelt.
+        /// </summary>
+        public static string EnumChecksumIfDifferent {
+            get {
+                return ResourceManager.GetString("EnumChecksumIfDifferent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Unknown12B when different ähnelt.
+        /// </summary>
+        public static string EnumUnknown12BIfDifferent {
+            get {
+                return ResourceManager.GetString("EnumUnknown12BIfDifferent", resourceCulture);
             }
         }
         
@@ -151,29 +169,11 @@ namespace SramComparer.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Unknown12B when different ähnelt.
-        /// </summary>
-        public static string Unknown12BIfDifferent {
-            get {
-                return ResourceManager.GetString("Unknown12BIfDifferent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die valid ähnelt.
         /// </summary>
         public static string Valid {
             get {
                 return ResourceManager.GetString("Valid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Validation-status ähnelt.
-        /// </summary>
-        public static string ValidationStatus {
-            get {
-                return ResourceManager.GetString("ValidationStatus", resourceCulture);
             }
         }
     }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Text.Json;
 using Common.Shared.Min.Extensions;
 using Common.Shared.Min.Helpers;
+using SramComparer.Helpers;
 using SramComparer.Services;
 using SramComparer.SoE.Enums;
 using SramComparer.SoE.Extensions;
@@ -82,6 +82,9 @@ namespace SramComparer.SoE.Services
 			if (Enum.TryParse<AlternateCommandsSoe>(command, true, out var altCommand))
 				command = ((CommandsSoE)altCommand).ToString();
 
+			if (CheckCustomKeyBinding(command, out var boundCommand))
+				command = boundCommand;
+
 			var cmd = command.ParseEnum<CommandsSoE>();
 			switch (cmd)
 			{
@@ -125,11 +128,9 @@ namespace SramComparer.SoE.Services
 			var filePath = base.GetConfigFilePath(options.ConfigFilePath, configName);
 			Requires.FileExists(filePath, string.Empty, SramComparer.Properties.Resources.ErrorConfigFileDoesNotExist.InsertArgs(filePath));
 
-			var json = File.ReadAllText(filePath);
-
 			try
 			{
-				var loadedOptions = JsonSerializer.Deserialize<Options>(json)!;
+				var loadedOptions = JsonFileSerializer.Deserialize<Options>(filePath)!;
 
 				var typedOptions = (Options)options;
 
@@ -158,5 +159,7 @@ namespace SramComparer.SoE.Services
 		}
 
 		#endregion Config
+
+		protected override void CreateKeyBindingsFile<TEnum>() => base.CreateKeyBindingsFile<CommandsSoE>();
 	}
 }
