@@ -165,7 +165,7 @@ namespace SramComparer.SoE.Services
 				throw;
 			}
 
-			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, Resources.StatusConfigFileHasBeenLoadedTemplate.InsertArgs(filePath));
+			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, Resources.StatusConfigFileLoadedTemplate.InsertArgs(filePath));
 		}
 
 		#endregion Config

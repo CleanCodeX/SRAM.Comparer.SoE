@@ -45,7 +45,7 @@ namespace SramComparer.SoE
 			{
 				consolePrinter.PrintSectionHeader();
 				consolePrinter.PrintColoredLine(ConsoleColor.Green,
-					Resources.StatusConfigFileHasBeenLoadedTemplate.InsertArgs(loadedConfigFile));
+					Resources.StatusConfigFileLoadedTemplate.InsertArgs(loadedConfigFile));
 				consolePrinter.ResetColor();
 			}
 

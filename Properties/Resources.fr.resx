@@ -49,7 +49,7 @@
 	<data name="EnumChecksum" xml:space="preserve">
 		<value>Checksum</value>
 	</data>
-	<data name="StatusConfigFileHasBeenLoadedTemplate" xml:space="preserve">
+	<data name="StatusConfigFileLoadedTemplate" xml:space="preserve">
 		<value>Le fichier de configuration [{0}] a été chargé.</value>
 	</data>
 </root>
