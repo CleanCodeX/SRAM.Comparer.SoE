@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Runtime.CompilerServices;
 using Common.Shared.Min.Extensions;
@@ -22,6 +23,8 @@ namespace SramComparer.SoE
 
 		public static int Main(string[] args)
 		{
+			ConsoleHelper.RedefineConsoleColors(bgColor: Color.FromArgb(17, 17, 17));
+
 			var consolePrinter = ServiceCollection.ConsolePrinter;
 
 			var cmdLineParser = ServiceCollection.CmdLineParser;
@@ -41,7 +44,7 @@ namespace SramComparer.SoE
 			if (loadedConfigFile is not null)
 			{
 				consolePrinter.PrintSectionHeader();
-				consolePrinter.PrintColoredLine(ConsoleColor.Cyan,
+				consolePrinter.PrintColoredLine(ConsoleColor.Green,
 					Resources.StatusConfigFileHasBeenLoadedTemplate.InsertArgs(loadedConfigFile));
 				consolePrinter.ResetColor();
 			}

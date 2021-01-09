@@ -133,6 +133,7 @@ namespace SramComparer.SoE.Services
 
 		protected override void LoadConfig(IOptions options, string? configName = null)
 		{
+			ConsolePrinter.PrintSectionHeader();
 			var filePath = base.GetConfigFilePath(options.ConfigFilePath, configName);
 			Requires.FileExists(filePath, string.Empty, SramComparer.Properties.Resources.ErrorConfigFileDoesNotExist.InsertArgs(filePath));
 
