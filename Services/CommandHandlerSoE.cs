@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using Common.Shared.Min.Extensions;
 using Common.Shared.Min.Helpers;
@@ -19,7 +20,7 @@ namespace SramComparer.SoE.Services
 	public class CommandHandlerSoE: CommandHandler<SramFileSoE, SaveSlot>
 	{
 		public CommandHandlerSoE() { }
-		public CommandHandlerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
+		public CommandHandlerSoE(IConsolePrinter consolePrinter) : base(consolePrinter) {}
 
 		#region Command Handing
 
@@ -29,16 +30,19 @@ namespace SramComparer.SoE.Services
 			Requires.NotNull(command, nameof(command));
 			Requires.NotNull(options, nameof(options));
 
-			if (Enum.TryParse<AlternateCommandsSoe>(command, true, out var altSoECommand))
-				command = ((CommandsSoE)altSoECommand).ToString();
-
-			if (Enum.TryParse<AlternateCommands>(command, true, out var altCommand))
-				command = ((Commands)altCommand).ToString();
-
-			if (CheckCustomKeyBinding(command, out var boundCommand))
-				command = boundCommand;
-
 			var cmd = command.ParseEnum<CommandsSoE>();
+			if (cmd == default)
+			{
+				if (Enum.TryParse<AlternateCommandsSoe>(command, true, out var altSoECommand))
+					command = ((CommandsSoE) altSoECommand).ToString();
+				else if (Enum.TryParse<AlternateCommands>(command, true, out var altCommand))
+					command = ((Commands) altCommand).ToString();
+				else if (CheckCustomKeyBinding(command, out var boundCommand))
+					command = boundCommand;
+
+				cmd = command.ParseEnum<CommandsSoE>();
+			}
+
 			switch (cmd)
 			{
 				case CommandsSoE.Compare:
@@ -156,6 +160,7 @@ namespace SramComparer.SoE.Services
 			}
 			catch (Exception ex)
 			{
+				Debug.Print(ex.Message);
 				throw;
 			}
 
