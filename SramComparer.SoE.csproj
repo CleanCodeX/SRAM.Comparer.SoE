@@ -4,22 +4,26 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <StartupObject></StartupObject>
-    <Version>0.3.0-a1</Version>
+    <Version>0.3.0-a2</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
     <RepositoryUrl>https://github.com/CleanCodeX/SramComparer.SoE</RepositoryUrl>
     <PackageDescription>Allows to compare unknown parts of SoE's sram file</PackageDescription>
-    <Description>Comparer for Secret of Evermore's SRAM file.</Description>
-    <Authors>XETH</Authors>
+    <Description>SRAM Comparer implementation for Secret of Evermore</Description>
+    <Authors>CleanCodeX</Authors>
     <Company>KST</Company>
     <Copyright></Copyright>
-    <PackageTags>SoE, SRAM, Secret of Evermore</PackageTags>
+    <PackageTags>SoE, Secret of Evermore, SRAM, SNES</PackageTags>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>Added savestate comparison
+Added savestate offset value display
+Added config(s) loading/saving (support for custom config name)
+Added key binding customization
+</PackageReleaseNotes>
     <PackageId>CCX.SramComparer.SoE</PackageId>
     <Platforms>AnyCPU</Platforms>
     <PackageProjectUrl>http://evermore.xeth.de</PackageProjectUrl>
@@ -43,8 +47,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CCX.SramComparer" Version="1.0.4-a3" />
-    <PackageReference Include="CCX.SramFormat.SoE" Version="0.2.6-a3" />
+    <PackageReference Include="CCX.SramComparer" Version="1.1.0-a2" />
+    <PackageReference Include="CCX.SramFormat.SoE" Version="0.2.6-a4" />
   </ItemGroup>
 
   <ItemGroup>
