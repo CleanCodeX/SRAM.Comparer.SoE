@@ -1,5 +1,5 @@
-## Tutorials zur Interpretatino der Vergleichsergebnisse
+## Tutorials zur Interpretation der Vergleichsergebnisse
 
-Hier wird es kommende Tutorials geben, wie man Vergleichsergebnisse interpretiert.
+Hier wirst du bald erscheinende Tutorials finden, wie Vergleichsergebnisse interpretiert werden.
 
 Bleib dran.
