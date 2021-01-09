@@ -2,7 +2,7 @@
 
 Dies ist eine Schritt-für-Schritt Anleitung der SRAM-Comparer Konsolenanwendung und dem Vergleichen von SRM-Dateien.
 
-Um Savestate-Dateien zu vergleichen siehe <a href=guide-savestate>hier</a>.
+<a href=guides>Übersicht</a>
 
 ## ***1)*** Vorbereitung
 

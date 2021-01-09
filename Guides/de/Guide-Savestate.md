@@ -2,7 +2,7 @@
 
 Dies ist eine Schritt-für-Schritt Anleitung der SRAM-Comparer Konsolenanwendung und dem Vergleichen von Snes9x Savestate-Dateien.
 
-Um SRM-Dateien zu vergleichen siehe <a href=guide-srm>hier</a>.
+<a href=guides>Übersicht</a>
 
 ## ***1)*** Vorbereitung
 

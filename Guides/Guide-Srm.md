@@ -2,7 +2,7 @@
 
 This is a step-by-step guide of SRAM-Comparer console app and comparing SRM files.
 
-To compare savestate files see <a href=guide-savestate>here</a>.
+<a href=guides>Overview</a>
 
 ## ***1)*** Preparation
 

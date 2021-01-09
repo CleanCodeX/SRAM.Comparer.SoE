@@ -2,7 +2,7 @@
 
 This is a step-by-step guide of SRAM-Comparer console app and comparing Snes9x savestate files.
 
-To compare SRM files see <a href=guide-srm>here</a>.
+<a href=guides>Overview</a>
 
 ## ***1)*** Preparation
 
