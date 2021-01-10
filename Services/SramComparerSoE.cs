@@ -31,7 +31,7 @@ namespace SramComparer.SoE.Services
 		{
 			PrintSaveSlotValidationStatus(currFile, compFile);
 
-			ConsolePrinter.PrintParagraph();
+			ConsolePrinter.PrintLine();
 
 			var optionCurrSlotIndex = options.CurrentFileSaveSlot - 1;
 			var optionCompSlotIndex = options.ComparisonFileSaveSlot - 1;
@@ -45,7 +45,7 @@ namespace SramComparer.SoE.Services
 					: Res.StatusAllSaveSlotsComparison;
 			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, slotComparisonMode);
 
-			ConsolePrinter.PrintParagraph();
+			ConsolePrinter.PrintLine();
 
 			var offset = GetSramOffset(nameof(compFile.Sram.Unknown1), out var bufferName);
 			var sramDiffBytes = CompareByteArray(Res.CompSram + ":" + bufferName, offset, compFile.Sram.Unknown1, currFile.Sram.Unknown1);
@@ -83,13 +83,13 @@ namespace SramComparer.SoE.Services
 
 				if (nonSaveSlotUnknownDiffBytes > 0)
 				{
-					ConsolePrinter.PrintParagraph();
+					ConsolePrinter.PrintLine();
 					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.CompSectionNonSaveSlotUnknowns} ].......................................");
 					ConsolePrinter.ResetColor();
 
 					nonSaveSlotUnknownDiffBytes = CompareByteArray(nameof(currFile.Sram.Unknown1), Offsets.SramUnknown1, currFile.Sram.Unknown1, compFile.Sram.Unknown1, true);
 
-					ConsolePrinter.PrintParagraph();
+					ConsolePrinter.PrintLine();
 					ConsolePrinter.PrintColoredLine(nonSaveSlotUnknownDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White, " ".Repeat(4) + Res.StatusNonSaveSlotUnknownsBytesTemplate.InsertArgs(nonSaveSlotUnknownDiffBytes));
 					ConsolePrinter.ResetColor();
 
@@ -97,7 +97,7 @@ namespace SramComparer.SoE.Services
 				}
 			}
 
-			ConsolePrinter.PrintParagraph();
+			ConsolePrinter.PrintLine();
 
 			const int borderLength = 50;
 			var color = allDiffBytes > 0 ? ConsoleColor.Yellow : ConsoleColor.Green;
@@ -112,7 +112,7 @@ namespace SramComparer.SoE.Services
 
 			if (optionFlags != default)
 			{
-				ConsolePrinter.PrintParagraph();
+				ConsolePrinter.PrintLine();
 
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumIfDifferent))
 					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, FormatAdditionalValues(nameof(checksums), checksums));
@@ -162,14 +162,14 @@ namespace SramComparer.SoE.Services
 				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.CompSlot} {slotIdString} ]---------------------------------------------");
 				ConsolePrinter.ResetColor();
 
-				ConsolePrinter.PrintParagraph();
+				ConsolePrinter.PrintLine();
 				ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.CompUnknownAreasOnly} ].......................................");
 				ConsolePrinter.ResetColor();
 
 				var slotDiffBytes = CompareSaveSlot(currSlot, compSlot, options);
 				if (slotDiffBytes > 0)
 				{
-					ConsolePrinter.PrintParagraph();
+					ConsolePrinter.PrintLine();
 					ConsolePrinter.PrintColoredLine(ConsoleColor.Green, " ".Repeat(4) + Res.StatusUnknownsChangedBytesTemplate.InsertArgs(slotDiffBytes));
 					ConsolePrinter.ResetColor();
 				}
@@ -187,12 +187,12 @@ namespace SramComparer.SoE.Services
 				var slotBufferDiffBytes = CompareByteArray(bufferName, bufferOffset, currSlotBytes, compSlotBytes, false);
 				if (slotBufferDiffBytes > slotDiffBytes)
 				{
-					ConsolePrinter.PrintParagraph();
+					ConsolePrinter.PrintLine();
 					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, $@"{" ".Repeat(2)}[ {Res.CompSectionSaveSlotChangedTemplate} ]...................................".InsertArgs(currSlotIndex));
 					// ReSharper disable once RedundantArgumentDefaultValue
 
 					CompareByteArray(bufferName, bufferOffset, currSlotBytes, compSlotBytes, true, Offsets.SaveSlot.GetNameFromOffset);
-					ConsolePrinter.PrintParagraph();
+					ConsolePrinter.PrintLine();
 					ConsolePrinter.PrintColoredLine(slotDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White, " ".Repeat(4) + Res.StatusSaveSlotChangedBytesTemplate.InsertArgs(slotIdString, slotBufferDiffBytes));
 					ConsolePrinter.ResetColor();
 				}

@@ -12,30 +12,8 @@ namespace SramComparer.SoE.Enums
 	[JsonConverter(typeof(JsonStringEnumObjectConverter))]
 	public enum CommandsSoE
 	{
-		Help = Commands.Help,
-		Config = Commands.Config,
-		Guide_Srm = Commands.Guide_Srm,
-		Guide_Savestate = Commands.Guide_Savestate,
-		Sbc = Commands.Sbc,
-		Nsbc = Commands.Nsbc,
-		SetSlot = Commands.SetSlot,
-		SetSlot_Comp = Commands.SetSlot_Comp,
 		Compare = Commands.Compare,
-		OverwriteComp = Commands.OverwriteComp,
-		Backup = Commands.Backup,
-		Backup_Comp = Commands.Backup_Comp,
-		Restore = Commands.Restore,
-		Restore_Comp = Commands.Restore_Comp,
 		Export = Commands.Export,
-		Transfer = Commands.Transfer,
-		Lang = Commands.Lang,
-		Lang_Comp = Commands.Lang_Comp,
-		Clear = Commands.Clear,
-		Quit = Commands.Quit,
-		Offset = Commands.Offset,
-		EditOffset = Commands.EditOffset,
-		LoadConfig = Commands.LoadConfig,
-		SaveConfig = Commands.SaveConfig,
 
 		[DisplayNameLocalized(nameof(Resources.CmdShowChecksum), typeof(Resources))]
 		Checksum,

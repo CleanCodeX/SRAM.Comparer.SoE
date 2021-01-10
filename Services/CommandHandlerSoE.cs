@@ -91,6 +91,9 @@ namespace SramComparer.SoE.Services
 
 		protected override bool ConvertStreamIfSavestate(ref Stream stream, string? filePath, string? savestateType)
 		{
+			stream.ThrowIfNull(nameof(stream));
+			filePath.ThrowIfNull(nameof(filePath));
+
 			if (!base.ConvertStreamIfSavestate(ref stream, filePath, savestateType)) return false;
 
 			const int length = Sizes.Sram;
