@@ -39,16 +39,6 @@ namespace SramComparer.SoE
 				loadedConfigFile = configFile;
 			}
 
-			//var savestate = new SavestateManager().Load(options.CurrentFilePath!, SavestateLoadIncludeOffset.FIL);
-			//var sbuffer = savestate.SRA.Data;
-			//File.WriteAllBytes("SramDump.txt", sbuffer);
-			//var wbuffer = savestate.RAM.Data;
-			//File.WriteAllBytes("WramDump.txt", wbuffer);
-			//var dbuffer = savestate.DMA.Data;
-			//File.WriteAllBytes("DmaDump.txt", dbuffer);
-			//var fbuffer = savestate.FIL.Data;
-			//File.WriteAllBytes("FillRamDump.txt", fbuffer);
-
 			consolePrinter.ColorizeOutput = options.ColorizeOutput;
 
 			if (loadedConfigFile is not null)
