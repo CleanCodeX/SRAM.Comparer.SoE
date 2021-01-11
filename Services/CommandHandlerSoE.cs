@@ -9,9 +9,9 @@ using SramComparer.Services;
 using SramComparer.SoE.Enums;
 using SramComparer.SoE.Extensions;
 using SramComparer.SoE.Properties;
-using SramFormat.SoE;
-using SramFormat.SoE.Constants;
-using SramFormat.SoE.Models.Structs;
+using RosettaStone.Sram.SoE;
+using RosettaStone.Sram.SoE.Constants;
+using RosettaStone.Sram.SoE.Models.Structs;
 
 namespace SramComparer.SoE.Services
 {

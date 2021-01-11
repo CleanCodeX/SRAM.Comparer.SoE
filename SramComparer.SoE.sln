@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SramComparer.SoE", "SramComparer.SoE.csproj", "{1B76AC4E-92E9-4795-B688-5F346E9D133F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SramFormat.SoE", "..\SramFormat.SoE\SramFormat.SoE.csproj", "{0960B794-1101-4C96-AD06-63CDC65B2948}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SramFormat.SoE", "..\RosettaStone.Sram.SoE\RosettaStone.Sram.SoE.csproj", "{0960B794-1101-4C96-AD06-63CDC65B2948}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SramComparer", "..\SramComparer\SramComparer.csproj", "{07E046E9-1E62-4487-A8E7-7A992196C966}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SramCommons", "..\SramCommons\SramCommons.csproj", "{81BB0E57-E77D-4196-AE72-EBCE161A5591}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SavestateFormat.Snes9x", "..\SavestateFormat.Snes9x\SavestateFormat.Snes9x.csproj", "{C5E63381-ADF7-496F-A5DC-66A91452AF3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SavestateFormat.Snes9x", "..\RosettaStone.Savestate.Snes9x\RosettaStone.Savestate.Snes9x.csproj", "{C5E63381-ADF7-496F-A5DC-66A91452AF3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

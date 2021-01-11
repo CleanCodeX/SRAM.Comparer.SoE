@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using Common.Shared.Min.Extensions;
-using SramFormat.SoE.Constants;
-using SramFormat.SoE.Models.Structs;
+using RosettaStone.Sram.SoE.Constants;
+using RosettaStone.Sram.SoE.Models.Structs;
 
 // ReSharper disable InconsistentNaming
 

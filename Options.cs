@@ -1,5 +1,5 @@
 ﻿using SramComparer.SoE.Enums;
-using SramFormat.SoE.Enums;
+using RosettaStone.Sram.SoE.Enums;
 
 namespace SramComparer.SoE
 {
