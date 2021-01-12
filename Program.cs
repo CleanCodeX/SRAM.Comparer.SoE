@@ -23,37 +23,46 @@ namespace SramComparer.SoE
 
 		public static int Main(string[] args)
 		{
-			ConsoleHelper.RedefineConsoleColors(bgColor: Color.FromArgb(17, 17, 17));
-
 			var consolePrinter = ServiceCollection.ConsolePrinter;
 
-			var cmdLineParser = ServiceCollection.CmdLineParser;
-			cmdLineParser.ThrowIfNull(nameof(cmdLineParser));
-
-			var loadedConfigFile = File.Exists(DefaultConfigFileName) ? DefaultConfigFileName : null;
-
-			var options = cmdLineParser.Parse(args, GetDefaultConfigOrNew());
-			if (options.ConfigFilePath is { } configFile && configFile != DefaultConfigFileName)
+			try
 			{
-				options = JsonFileSerializer.Deserialize<Options>(configFile);
-				loadedConfigFile = configFile;
+				ConsoleHelper.RedefineConsoleColors(bgColor: Color.FromArgb(17, 17, 17));
+
+				var cmdLineParser = ServiceCollection.CmdLineParser;
+				cmdLineParser.ThrowIfNull(nameof(cmdLineParser));
+
+				var loadedConfigFile = File.Exists(DefaultConfigFileName) ? DefaultConfigFileName : null;
+
+				var options = cmdLineParser.Parse(args, GetDefaultConfigOrNew());
+				if (options.ConfigFilePath is { } configFile && configFile != DefaultConfigFileName)
+				{
+					options = JsonFileSerializer.Deserialize<Options>(configFile);
+					loadedConfigFile = configFile;
+				}
+
+				consolePrinter.ColorizeOutput = options.ColorizeOutput;
+
+				if (loadedConfigFile is not null)
+				{
+					consolePrinter.PrintSectionHeader();
+					consolePrinter.PrintColoredLine(ConsoleColor.Green,
+						Resources.StatusConfigFileLoadedTemplate.InsertArgs(loadedConfigFile));
+					consolePrinter.ResetColor();
+				}
+
+				if (options.BatchCommands is null)
+					CommandMenu.Instance.Show(options);
+				else
+					CommandQueue.Instance.Start(options);
+
 			}
-
-			consolePrinter.ColorizeOutput = options.ColorizeOutput;
-
-			if (loadedConfigFile is not null)
+			catch (Exception ex)
 			{
-				consolePrinter.PrintSectionHeader();
-				consolePrinter.PrintColoredLine(ConsoleColor.Green,
-					Resources.StatusConfigFileLoadedTemplate.InsertArgs(loadedConfigFile));
-				consolePrinter.ResetColor();
+				consolePrinter.PrintFatalError(ex.Message);
+				Console.ReadKey();
 			}
-
-			if (options.BatchCommands is null)
-				CommandMenu.Instance.Show(options);
-			else
-				CommandQueue.Instance.Start(options);
-
+			
 			return 0;
 		}
 		
