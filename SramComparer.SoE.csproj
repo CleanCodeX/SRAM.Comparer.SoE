@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <StartupObject></StartupObject>
-    <Version>0.3.1-c4</Version>
+    <Version>0.3.1-c5</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
     <RepositoryUrl>https://github.com/CleanCodeX/SramComparer.SoE</RepositoryUrl>
@@ -48,12 +48,7 @@ Added key binding customization
 
   <ItemGroup>
     <PackageReference Include="CCX.RosettaStone.Sram.SoE" Version="0.3.0-a2" />
-    <PackageReference Include="CCX.SramComparer" Version="1.2.0-a4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RosettaStone.Sram.SoE\RosettaStone.Sram.SoE.csproj" />
-    <ProjectReference Include="..\SramComparer\SramComparer.csproj" />
+    <PackageReference Include="CCX.SramComparer" Version="1.2.0-a5" />
   </ItemGroup>
 
   <ItemGroup>
