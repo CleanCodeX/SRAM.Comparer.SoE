@@ -30,8 +30,8 @@ Added key binding customization
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>none</DebugType>
-    <DebugSymbols>false</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -48,7 +48,7 @@ Added key binding customization
 
   <ItemGroup>
     <PackageReference Include="CCX.RosettaStone.Sram.SoE" Version="0.3.0-a1" />
-    <PackageReference Include="CCX.SramComparer" Version="1.2.0-a2" />
+    <PackageReference Include="CCX.SramComparer" Version="1.2.0-a3" />
   </ItemGroup>
 
   <ItemGroup>
