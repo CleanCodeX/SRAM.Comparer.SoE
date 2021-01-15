@@ -246,10 +246,10 @@ namespace SramComparer.SoE.Services
 			// ReSharper disable once InlineOutVariableDeclaration
 			string name;
 			// ReSharper disable once JoinDeclarationAndInitializer
-			int diffBytes, offset;
+			int diffBytes;
 
 			//Unknown 4
-			offset = GetSaveSlotOffset($"{nameof(currData.Unknown4_BoyBuff)}{delimiter}{nameof(currData.Unknown4_BoyBuff.BuffFlags)}", out name);
+			var offset = GetSaveSlotOffset($"{nameof(currData.Unknown4_BoyBuff)}{delimiter}{nameof(currData.Unknown4_BoyBuff.BuffFlags)}", out name);
 			diffBytes = CompareUInt16(name, offset, currData.Unknown4_BoyBuff.BuffFlags.ToUShort(), compData.Unknown4_BoyBuff.BuffFlags.ToUShort());
 
 			offset = GetSaveSlotOffset($"{nameof(currData.Unknown4_BoyBuff)}{delimiter}{nameof(currData.Unknown4_BoyBuff.Unknown1)}", out name);
