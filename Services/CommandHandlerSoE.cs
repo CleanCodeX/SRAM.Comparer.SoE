@@ -3,22 +3,25 @@ using System.Diagnostics;
 using System.IO;
 using Common.Shared.Min.Extensions;
 using Common.Shared.Min.Helpers;
+using RosettaStone.Sram.SoE.Constants;
+using RosettaStone.Sram.SoE.Models;
+using RosettaStone.Sram.SoE.Models.Structs;
 using SramComparer.Enums;
 using SramComparer.Helpers;
 using SramComparer.Services;
 using SramComparer.SoE.Enums;
 using SramComparer.SoE.Extensions;
 using SramComparer.SoE.Properties;
-using RosettaStone.Sram.SoE;
-using RosettaStone.Sram.SoE.Constants;
-using RosettaStone.Sram.SoE.Models.Structs;
+using Snes9x = RosettaStone.Savestate.Snes9x.SoE.Extensions.StreamExtensions;
 
 namespace SramComparer.SoE.Services
 {
 	/// <summary>Command handler implementation for SoE</summary>
 	/// <inheritdoc cref="CommandHandler{TSramFile,TSaveSlot}"/>
-	public class CommandHandlerSoE: CommandHandler<SramFileSoE, SaveSlot>
+	public class CommandHandlerSoE: CommandHandler<SramFileSoE, SaveSlotSoE>
 	{
+		private const string Snes9xId = "Snes9x";
+
 		public CommandHandlerSoE() { }
 		public CommandHandlerSoE(IConsolePrinter consolePrinter) : base(consolePrinter) {}
 
@@ -96,7 +99,7 @@ namespace SramComparer.SoE.Services
 
 			if (!base.ConvertStreamIfSavestate(ref stream, filePath, savestateType)) return false;
 
-			const int length = Sizes.Sram;
+			const int length = SramSizes.Sram;
 			MemoryStream ms;
 
 			try
@@ -172,6 +175,17 @@ namespace SramComparer.SoE.Services
 		}
 
 		#endregion Config
+
+		protected override Stream GetSramFromSavestate(string? savestateType, Stream stream)
+		{
+			savestateType ??= Snes9xId;
+
+			return savestateType switch
+			{
+				Snes9xId => Snes9x.GetSramFromSavestate(stream),
+				_ => throw new NotSupportedException($"Savestate type {savestateType} is not supported.")
+			}; ;
+		}
 
 		protected override void CreateKeyBindingsFile<TEnum>() => base.CreateKeyBindingsFile<CommandsSoE>();
 	}
