@@ -1,10 +1,13 @@
 ﻿using SramComparer.SoE.Enums;
 using RosettaStone.Sram.SoE.Enums;
+using SramComparer.Enums;
 
 namespace SramComparer.SoE
 {
 	/// <summary>Options implementation for SoE</summary>
-	/// <inheritdoc cref="Options{TGameRegion,TComparisonFlags}"/>
-	public class Options : Options<GameRegion, ComparisonFlagsSoE>
-	{ }
+	/// <inheritdoc cref="Options{TGameRegion,TComparisonFlags, ExportFlags}"/>
+	public class Options : Options<GameRegion, ComparisonFlagsSoE, ExportFlags>
+	{
+		public Options() => ExportFlags = ExportFlags.PromptName | ExportFlags.AppendLog;
+	}
 }

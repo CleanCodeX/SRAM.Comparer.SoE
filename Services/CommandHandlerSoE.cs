@@ -53,7 +53,7 @@ namespace SramComparer.SoE.Services
 
 					break;
 				case CommandsSoE.Export:
-					ExportComparisonResult(options, true);
+					ExportComparisonResult(options);
 
 					break;
 				case CommandsSoE.U12b:
@@ -127,11 +127,7 @@ namespace SramComparer.SoE.Services
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
 		public void ExportComparisonResult(IOptions options) => ExportComparisonResult<SramComparerSoE>(options);
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public void ExportComparisonResult(IOptions options, bool showInExplorer) => ExportComparisonResult<SramComparerSoE>(options, showInExplorer);
-		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public void ExportComparisonResult(IOptions options, string filePath) => ExportComparisonResult<SramComparerSoE>(options, filePath);
-		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public void ExportComparisonResult(IOptions options, string filePath, bool showInExplorer) => ExportComparisonResult<SramComparerSoE>(options, filePath, showInExplorer);
+		public void ExportComparisonResult(IOptions options, string filePath) => ExportComparisonResult<SramComparerSoE>(options, filePath); 
 
 		#endregion Export
 
