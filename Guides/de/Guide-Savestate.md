@@ -63,4 +63,4 @@ Um die Bytes hinter allen Speicherslots zu vergleichen drücke (nsbc). Derzeit h
 Die aktuelle und die Vergleichs-Datei können einzeln gesichert (Backup) bzw. (Backup_Comp) oder wiederhergestellt (Restore) bzw. (Restore_Comp) werden.
 
 ## ***8)*** (optional) Offset-Werte anzeigen und ändern
-SRAM Offset-Werte für bestimmte Speicherslot können durch durch Drücken von (Offset) angezeigt oder durch (EditOffset) manipuliert werden. Du kannst entscheiden, ob du die aktuelle Speicher-Datei aktualisieren (Sicherung empfohlen) oder eine neue Datei erstellen möchtest.
+SRAM Offset-Werte für bestimmte Speicherslots können durch durch Drücken von (Offset) angezeigt oder durch (EditOffset) manipuliert werden. Du kannst entscheiden, ob du die aktuelle Speicher-Datei aktualisieren (Sicherung empfohlen) oder eine neue Datei erstellen möchtest.

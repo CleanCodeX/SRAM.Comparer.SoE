@@ -17,7 +17,7 @@ namespace SramComparer.SoE.Helpers
 				? (int)bufferName.ParseEnum<SaveSlotUnknownOffset>()
 				: (int)Marshal.OffsetOf<SaveSlotDataSoE>(bufferName);
 
-		public static int GetSramBufferOffset(string bufferName) => SramOffsets.SramUnknown1;
+		public static int GetSramBufferOffset(string bufferName) => SramOffsets.Unknown1;
 
 		[SuppressMessage("ReSharper", "UnusedMember.Local")]
 		[SuppressMessage("ReSharper", "UnusedMember.Global")]

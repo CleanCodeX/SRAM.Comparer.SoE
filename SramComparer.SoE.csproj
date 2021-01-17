@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <StartupObject></StartupObject>
-    <Version>0.3.1-d7</Version>
+    <Version>0.3.1-e1</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
     <RepositoryUrl>https://github.com/CleanCodeX/SramComparer.SoE</RepositoryUrl>
@@ -47,9 +47,9 @@ Added key binding customization
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CCX.RosettaStone.Savestate.Snes9x.SoE" Version="0.0.2-b5" />
-    <PackageReference Include="CCX.RosettaStone.Sram.SoE" Version="0.4.0-b2" />
-    <PackageReference Include="CCX.SramComparer" Version="1.2.1-a3" />
+    <PackageReference Include="CCX.RosettaStone.Savestate.Snes9x.SoE" Version="0.0.3-a1" />
+    <PackageReference Include="CCX.RosettaStone.Sram.SoE" Version="0.4.1-a3" />
+    <PackageReference Include="CCX.SramComparer" Version="1.2.2-a2" />
   </ItemGroup>
 
   <ItemGroup>

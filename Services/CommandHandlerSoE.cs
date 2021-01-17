@@ -6,11 +6,11 @@ using Common.Shared.Min.Helpers;
 using RosettaStone.Sram.SoE.Constants;
 using RosettaStone.Sram.SoE.Models;
 using RosettaStone.Sram.SoE.Models.Structs;
+using SramCommons.Extensions;
 using SramComparer.Enums;
 using SramComparer.Helpers;
 using SramComparer.Services;
 using SramComparer.SoE.Enums;
-using SramComparer.SoE.Extensions;
 using SramComparer.SoE.Properties;
 using Snes9x = RosettaStone.Savestate.Snes9x.SoE.Extensions.StreamExtensions;
 
@@ -99,12 +99,12 @@ namespace SramComparer.SoE.Services
 
 			if (!base.ConvertStreamIfSavestate(ref stream, filePath, savestateType)) return false;
 
-			const int length = SramSizes.Sram;
+			const int length = SramSizes.All;
 			MemoryStream ms;
 
 			try
 			{
-				ms = stream.GetStreamSlice(length);
+				ms = stream.GetSlice(length);
 			}
 			catch (Exception ex)
 			{
@@ -180,7 +180,7 @@ namespace SramComparer.SoE.Services
 			{
 				Snes9xId => Snes9x.GetSramFromSavestate(stream),
 				_ => throw new NotSupportedException($"Savestate type {savestateType} is not supported.")
-			}; ;
+			};
 		}
 
 		protected override void CreateKeyBindingsFile<TEnum>() => base.CreateKeyBindingsFile<CommandsSoE>();

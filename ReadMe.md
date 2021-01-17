@@ -16,6 +16,7 @@ How to contribute see [here](http://contribute.xeth.de).
 ## Guides
 * [Guide (SRM)](http://guide-srm.xeth.de)
 * [Guide (Savestate)](http://guide-savestate.xeth.de)
+* [Tutorials](http://tutorials.xeth.de)
 
 ## Screenshots
 [Imagery](http://imagery.xeth.de)
