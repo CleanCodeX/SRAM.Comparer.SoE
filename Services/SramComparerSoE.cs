@@ -309,7 +309,7 @@ namespace SramComparer.SoE.Services
 			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.Unknown12BIfDifferent))
 			{
 				offset = GetSaveSlotOffset(nameof(currData.Unknown12B), out name);
-				diffBytes += CompareUInt16(name, offset, currData.Unknown12B,
+				diffBytes += CompareUInt32(name, offset, currData.Unknown12B,
 					compData.Unknown12B);
 			}
 
