@@ -63,11 +63,10 @@ namespace SramComparer.SoE.Services
 
 			var allDiffBytes = sramDiffBytes;
 
-			var checksums = new StringBuilder();
-			checksums.AppendLine($"{Resources.EnumChecksum} (2 {Res.Bytes} | {Resources.CompChangesAtEveryInSaveSlotSave}):");
+			StringBuilder checksums = new(), timestamps = new();
 
-			var timestamps = new StringBuilder();
-			timestamps.AppendLine($"{nameof(SaveSlotDataSoE.Unknown12B)} (2 {Res.Bytes}):");
+			checksums.AppendLine($"{Resources.EnumChecksum} (2 {Res.Bytes} | {Resources.CompChangesAtEveryInSaveSlotSave}):");
+			timestamps.AppendLine($"{nameof(SaveSlotDataSoE.Unknown12B)} ({SramSizes.SaveSlot.Unknown12B} {Res.Bytes}):");
 
 			if (optionCurrSlotIndex > -1 && optionCompSlotIndex > -1)
 				allDiffBytes = CompareSaveSlots(optionCurrSlotIndex, optionCompSlotIndex);
@@ -104,10 +103,11 @@ namespace SramComparer.SoE.Services
 			const int borderLength = 50;
 			var color = allDiffBytes > 0 ? ConsoleColor.Yellow : ConsoleColor.Green;
 			ConsolePrinter.PrintColoredLine(color, "=".Repeat(borderLength));
-			if (allDiffBytes > 0)
-				ConsolePrinter.PrintColoredLine(color, @$"== {Res.StatusSramChangedBytesTemplate} ".PadRight(borderLength + 1, '=').InsertArgs(allDiffBytes));
-			else
-				ConsolePrinter.PrintColoredLine(color, @$"== {Res.StatusNoSramBytesChanged} =".PadRight(borderLength, '='));
+			ConsolePrinter.PrintColoredLine(color,
+				allDiffBytes > 0
+					? @$"== {Res.StatusSramChangedBytesTemplate} ".PadRight(borderLength + 1, '=')
+						.InsertArgs(allDiffBytes)
+					: @$"== {Res.StatusNoSramBytesChanged} =".PadRight(borderLength, '='));
 
 			ConsolePrinter.PrintColoredLine(color, "=".Repeat(borderLength));
 			ConsolePrinter.ResetColor();
@@ -143,7 +143,7 @@ namespace SramComparer.SoE.Services
 				if (currSlotId != compSlotId)
 					slotIdString += $" ({Resources.CompComparedWithOtherSaveSlotTemplate.InsertArgs(compSlotId)})";
 
-				var padding = 25;
+				const int padding = 25;
 				var currSlotName = $"{$"({Res.EnumCurrentFile})".PadRight(padding)} {Res.CompSlot} {currSlotId}";
 				var currSlotNameString = $"{" ".Repeat(2)}{currSlotName}";
 			
