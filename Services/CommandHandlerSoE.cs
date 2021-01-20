@@ -81,7 +81,7 @@ namespace SramComparer.SoE.Services
 
 		#endregion Command Handing
 
-		#region Compare SRAM
+		#region Compare S-RAM
 
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
 		public void Compare(Stream currFile, Stream compFile, IOptions options) => Compare<SramComparerSoE>(currFile, compFile, options);
@@ -120,7 +120,7 @@ namespace SramComparer.SoE.Services
 			return true;
 		}
 
-		#endregion Compare SRAM
+		#endregion Compare S-RAM
 
 		#region Export
 

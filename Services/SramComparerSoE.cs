@@ -17,7 +17,7 @@ using Res = SramComparer.Properties.Resources;
 
 namespace SramComparer.SoE.Services
 {
-	/// <summary>SRAM comparer implementation for SoE</summary>
+	/// <summary>S-RAM comparer implementation for SoE</summary>
 	/// <inheritdoc cref="SramComparerBase{TSramFile,TSaveSlot}"/>
 	public class SramComparerSoE : SramComparerBase<SramFileSoE, SaveSlotSoE>
 	{
@@ -29,14 +29,16 @@ namespace SramComparer.SoE.Services
 		/// <inheritdoc cref="SramComparerBase{TSramFile,TSaveSlot}"/>
 		public override int CompareSram(SramFileSoE currFile, SramFileSoE compFile, IOptions options)
 		{
-			PrintSaveSlotValidationStatus(currFile, compFile);
+			var optionFlags = (ComparisonFlagsSoE)options.ComparisonFlags;
+
+			if(!optionFlags.HasFlag(ComparisonFlagsSoE.HideValidationStatus))
+				PrintSaveSlotValidationStatus(currFile, compFile);
 
 			ConsolePrinter.PrintLine();
 
 			var optionCurrSlotIndex = options.CurrentFileSaveSlot - 1;
 			var optionCompSlotIndex = options.ComparisonFileSaveSlot - 1;
-			var optionFlags = (ComparisonFlagsSoE)options.ComparisonFlags;
-
+			
 			var slotComparisonMode = optionCompSlotIndex > -1
 				? Res.StatusDifferentSaveSlotComparisonTemplate.InsertArgs(options.CurrentFileSaveSlot,
 					options.ComparisonFileSaveSlot)

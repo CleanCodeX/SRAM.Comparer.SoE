@@ -1,26 +1,26 @@
 ﻿# Anleitung Savestate-Datei (Snes9x)
 
-Dies ist eine Schritt-für-Schritt Anleitung der SRAM-Comparer Konsolenanwendung und dem Vergleichen von Snes9x Savestate-Dateien.
+Dies ist eine Schritt-für-Schritt Anleitung der S-RAM-Comparer Konsolenanwendung und dem Vergleichen von Snes9x Savestate-Dateien.
 
 <a href=guides>Übersicht</a>
 
 ## ***1)*** Vorbereitung
 
 ### Nützliche Links
-Schau in <a href="unknowns">Unknowns</a> um Beispiele zu sehen, welche Teile der SRAM-Struktur noch als unbekannt gelten. Schau dir <a href="imagery">Bilder</a> an wie die Vergleichsergebnisse zu interpretieren sind.
+Schau in <a href="unknowns">Unknowns</a> um Beispiele zu sehen, welche Teile der S-RAM-Struktur noch als unbekannt gelten. Schau dir <a href="imagery">Bilder</a> an wie die Vergleichsergebnisse zu interpretieren sind.
 
 ### Konsolenanwendung starten
 Starte die Anwendung, indem du den Pfad zur Savestate-Datei (*.000-009 or * .state) des Spiels als ersten Kommandozeilen Parameter übergibst. Die Datei kann auch per Drag 'n' Drop auf die Anwendung gezogen werden.
 
-## ***2)*** SRAM Vergleichs-Datei erstellen
+## ***2)*** S-RAM Vergleichs-Datei erstellen
 Anschließend drücke (overwrite) um eine Kopie deiner aktuellen Speicher-Datei zu erstellen. Diese ermöglicht einen Vergleich nach einer Änderung deiner aktuellen Speicher-Datei.
 
-## ***3)*** Veränderung im Spiel auslösen und SRAM vergleichen
+## ***3)*** Veränderung im Spiel auslösen und S-RAM vergleichen
 
-### SRAM-Änderung auslösen
-Verursache eine Änderung des SRAMs indem du z.B. ein Spielereignis auslöst oder eine Truhe öffnest und erstelle einen Savestate.
+### S-RAM-Änderung auslösen
+Verursache eine Änderung des S-RAMs indem du z.B. ein Spielereignis auslöst oder eine Truhe öffnest und erstelle einen Savestate.
 
-### SRAM vergleichen
+### S-RAM vergleichen
 Drücke (Compare) um die aktuelle Speicher-Datei mit der Vergleichs-Datei zu vergleichen. 
 
 ## ***4)*** Vergleichsergebnis interpretieren und Fund dokumentieren
@@ -40,13 +40,13 @@ Oft bedeuten Wert-Änderungen doch etwas anderes als angenommen. Stelle die Repr
 * auch nach dem erneuten Laden deines Spielstandes noch reproduzierbar ist 
 
 ### Exportieren des Vergleichs-Ergebnisses
-Sobald du reproduzierbar eine einzelne Änderung im SRAM einer Veränderung im Spiel zuordnen kannst, drücke (Export) um das Vergleichsergebnis als Text-Datei deines Export-Verzeichnisses zu exportieren. Benenne die Datei entsprechend deines Fundes oder deiner Vermutung um.
+Sobald du reproduzierbar eine einzelne Änderung im S-RAM einer Veränderung im Spiel zuordnen kannst, drücke (Export) um das Vergleichsergebnis als Text-Datei deines Export-Verzeichnisses zu exportieren. Benenne die Datei entsprechend deines Fundes oder deiner Vermutung um.
 
 ### Dokumentation
 Dokumentiere deinen Fund oder deine Vermutung über die <a href="community">Community</a> um zu vermeiden, dass andere dass selbe vergleichen und dir beim Interpretieren deiner Vergleichsergebnisse helfen können.
 
 ## ***5)*** Neuer Vergleich ohne bisherige Änderungen
-Um einen Vergleich ohne vorherige SRAM-Änderungen zu ermöglichen, drücke (overwrite) um die aktuelle Speicher-Datei als Vergleichs-Datei zu speichern. Anschließend beginne wieder bei Schritt 3.1.
+Um einen Vergleich ohne vorherige S-RAM-Änderungen zu ermöglichen, drücke (overwrite) um die aktuelle Speicher-Datei als Vergleichs-Datei zu speichern. Anschließend beginne wieder bei Schritt 3.1.
 
 ## ***6)*** Vergleichs-Optionen
 
@@ -59,8 +59,8 @@ Um alle Bytes (inkl. der bekannten Bereiche) eines Speicherslots Byte für Byte 
 ### (optional) Nicht-Speicherslot Bytes vergleichen
 Um die Bytes hinter allen Speicherslots zu vergleichen drücke (nsbc). Derzeit hat es den Anschein, als sei dieser Bereich leer.
 
-## ***7)*** (optional) SRAM-Dateien sichern und wiederherstellen
+## ***7)*** (optional) S-RAM-Dateien sichern und wiederherstellen
 Die aktuelle und die Vergleichs-Datei können einzeln gesichert (Backup) bzw. (Backup_Comp) oder wiederhergestellt (Restore) bzw. (Restore_Comp) werden.
 
 ## ***8)*** (optional) Offset-Werte anzeigen und ändern
-SRAM Offset-Werte für bestimmte Speicherslots können durch durch Drücken von (Offset) angezeigt oder durch (EditOffset) manipuliert werden. Du kannst entscheiden, ob du die aktuelle Speicher-Datei aktualisieren (Sicherung empfohlen) oder eine neue Datei erstellen möchtest.
+S-RAM Offset-Werte für bestimmte Speicherslots können durch durch Drücken von (Offset) angezeigt oder durch (EditOffset) manipuliert werden. Du kannst entscheiden, ob du die aktuelle Speicher-Datei aktualisieren (Sicherung empfohlen) oder eine neue Datei erstellen möchtest.
