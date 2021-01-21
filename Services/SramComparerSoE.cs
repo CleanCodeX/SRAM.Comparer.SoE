@@ -31,8 +31,8 @@ namespace SramComparer.SoE.Services
 		{
 			var optionFlags = (ComparisonFlagsSoE)options.ComparisonFlags;
 
-			if(!optionFlags.HasFlag(ComparisonFlagsSoE.HideValidationStatus))
-				PrintSaveSlotValidationStatus(currFile, compFile);
+			if(optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumStatus))
+				PrintSaveSlotChecksumValidation(currFile, compFile);
 
 			ConsolePrinter.PrintLine();
 
@@ -78,7 +78,7 @@ namespace SramComparer.SoE.Services
 					allDiffBytes = CompareSaveSlots(slotIndex);
 				}
 
-			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.NonSlotByteByByteComparison))
+			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.NonSlotComparison))
 			{
 				var nonSaveSlotUnknownDiffBytes = CompareByteArray(nameof(currFile.Struct.Unknown1), 0, currFile.Struct.Unknown1, compFile.Struct.Unknown1, false);
 
@@ -176,7 +176,7 @@ namespace SramComparer.SoE.Services
 					ConsolePrinter.ResetColor();
 				}
 
-				if (!optionFlags.HasFlag(ComparisonFlagsSoE.SlotByteByByteComparison))
+				if (!optionFlags.HasFlag(ComparisonFlagsSoE.SlotByteComparison))
 				{
 					allDiffBytes += slotDiffBytes;
 					return allDiffBytes;
@@ -206,16 +206,16 @@ namespace SramComparer.SoE.Services
 
 		protected virtual string FormatAdditionalValues(string name, StringBuilder values) => values.Replace(Environment.NewLine, ConsolePrinter.NewLine).ToString();
 
-		protected virtual void PrintSaveSlotValidationStatus(SramFileSoE currFile, SramFileSoE compFile)
+		protected virtual void PrintSaveSlotChecksumValidation(SramFileSoE currFile, SramFileSoE compFile)
 		{
 			ConsolePrinter.PrintSectionHeader();
-			ConsolePrinter.PrintColoredLine(ConsoleColor.DarkYellow, $@"{Resources.CompValidationStatus}:");
+			ConsolePrinter.PrintColoredLine(ConsoleColor.DarkYellow, $@"{Resources.CompChecksumValidation}:");
 
-			OnPrintSaveSlotValidationStatus(Res.EnumCurrentFile, currFile);
-			OnPrintSaveSlotValidationStatus(Res.EnumComparisonFile, compFile);
+			OnPrintSaveSlotChecksumValidation(Res.EnumCurrentFile, currFile);
+			OnPrintSaveSlotChecksumValidation(Res.EnumComparisonFile, compFile);
 		}
 
-		protected virtual void OnPrintSaveSlotValidationStatus(string name, IMultiSegmentFile file)
+		protected virtual void OnPrintSaveSlotChecksumValidation(string name, IMultiSegmentFile file)
 		{
 			ConsolePrinter.PrintColored(ConsoleColor.Gray, $@"{name}:".PadRight(15));
 			ConsolePrinter.PrintColored(ConsoleColor.DarkYellow, $@" {Res.CompSlot} (1-4)");

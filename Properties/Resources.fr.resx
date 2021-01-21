@@ -20,7 +20,7 @@
 	<data name="Invalid" xml:space="preserve">
 		<value>invalide</value>
 	</data>
-	<data name="CompValidationStatus" xml:space="preserve">
+	<data name="CompChecksumValidation" xml:space="preserve">
 		<value>Statut de validation</value>
 	</data>
 	<data name="CompComparedWithOtherSaveSlotTemplate" xml:space="preserve">

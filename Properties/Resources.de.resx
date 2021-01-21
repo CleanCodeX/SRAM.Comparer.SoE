@@ -35,7 +35,7 @@
 	<data name="Valid" xml:space="preserve">
 		<value>gültig</value>
 	</data>
-	<data name="CompValidationStatus" xml:space="preserve">
+	<data name="CompChecksumValidation" xml:space="preserve">
 		<value>Validierungs-Status</value>
 	</data>
 	<data name="Invalid" xml:space="preserve">

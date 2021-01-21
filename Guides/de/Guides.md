@@ -2,5 +2,5 @@
 
 Dies sind Schritt-für-Schritt Anleitungen wie die Konsolenanwendung verwendet wird.
 
-* Um Srm-Dateien zu vergleichen siehe <a href=guides/srm>hier</a>.
-* Um Savestate-Dateien zu vergleichen siehe <a href=guides/savestate>hier</a>.
+<a href=guides/srm>SRM-Dateien</a>.
+<a href=guides/savestate>Savestate-Dateien</a>.

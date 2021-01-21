@@ -141,7 +141,7 @@
   <data name="Valid" xml:space="preserve">
     <value>valid</value>
   </data>
-  <data name="CompValidationStatus" xml:space="preserve">
+  <data name="CompChecksumValidation" xml:space="preserve">
     <value>Validation-status</value>
   </data>
   <data name="EnumChecksumIfDifferent" xml:space="preserve">

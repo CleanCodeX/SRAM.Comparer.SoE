@@ -11,13 +11,13 @@ namespace SramComparer.SoE.Enums
 	public enum ComparisonFlagsSoE : uint
 	{
 		[DisplayNameLocalized(nameof(ResComp.EnumSlotByteComparison), typeof(ResComp))]
-		SlotByteByByteComparison = ComparisonFlags.SlotByteByByteComparison,
+		SlotByteComparison = ComparisonFlags.SlotByteComparison,
 
-		[DisplayNameLocalized(nameof(ResComp.EnumNonSlotByteComparison), typeof(ResComp))]
-		NonSlotByteByByteComparison = ComparisonFlags.NonSlotByteByByteComparison,
+		[DisplayNameLocalized(nameof(ResComp.EnumNonSlotComparison), typeof(ResComp))]
+		NonSlotComparison = ComparisonFlags.NonSlotComparison,
 
-		[DisplayNameLocalized(nameof(ResComp.EnumNonSlotByteComparison), typeof(ResComp))]
-		HideValidationStatus = ComparisonFlags.HideValidationStatus,
+		[DisplayNameLocalized(nameof(ResComp.EnumChecksumStatus), typeof(ResComp))]
+		ChecksumStatus = ComparisonFlags.ChecksumStatus,
 
 		[DisplayNameLocalized(nameof(Res.EnumChecksumIfDifferent), typeof(Res))]
 		ChecksumIfDifferent = 0x100,
