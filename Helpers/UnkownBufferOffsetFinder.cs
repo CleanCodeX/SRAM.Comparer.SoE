@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
 using System.Runtime.InteropServices;
 using Common.Shared.Min.Extensions;
 using RosettaStone.Sram.SoE.Models;
@@ -14,58 +14,55 @@ namespace SramComparer.SoE.Helpers
 		internal const string StructDelimiter = "__";
 
 		public static int GetSaveSlotBufferOffset(string bufferName) => bufferName.Contains(StructDelimiter)
-				? (int)bufferName.ParseEnum<SaveSlotUnknownOffset>()
-				: (int)Marshal.OffsetOf<SaveSlotDataSoE>(bufferName) + SramSizes.SaveSlot.Checksum;
+			? (int) bufferName.ParseEnum<SaveSlotUnknownOffset>()
+			: InternalGetBufferOffset<SaveSlotDataSoE>(bufferName) + SramSizes.SaveSlot.Checksum;
 
-		public static int GetSramBufferOffset(string bufferName) => SramOffsets.Unknown1;
+		public static int GetSramBufferOffset(string bufferName) => bufferName.Contains(StructDelimiter)
+			? (int)bufferName.ParseEnum<SaveSlotUnknownOffset>()
+			: InternalGetBufferOffset<SramSoE>(bufferName);
 
-		private const int Chunk3Size = SramSizes.SaveSlot.Chunk03; // 6 bytes
-		private const int DogStatusBuffs1 = SramOffsets.SaveSlot.Chunk03; // Offset 112
-		private const int DogStatusBuffs2 = DogStatusBuffs1 + Chunk3Size;
-		private const int DogStatusBuffs3 = DogStatusBuffs1 + Chunk3Size * 2;
-		private const int DogStatusBuffs4 = DogStatusBuffs1 + Chunk3Size * 3;
-
-		[SuppressMessage("ReSharper", "UnusedMember.Local")]
-		[SuppressMessage("ReSharper", "UnusedMember.Global")]
-		private enum SaveSlotUnknownOffset
+		private static int InternalGetBufferOffset<TParentBuffer>(string bufferName)
+			where TParentBuffer: struct
 		{
-			DogStatusBuffs1_Id = DogStatusBuffs1, // Offset 112
-			DogStatusBuffs1_Timer = DogStatusBuffs1 + 2, 
-			DogStatusBuffs1_Boost = DogStatusBuffs1 + 4, 
+			var index = bufferName.IndexOf('.'); // check for path info
+			if (index == -1)
+				return FindFieldOffset<TParentBuffer>(bufferName);
 
-			DogStatusBuffs2_Id = DogStatusBuffs2, // Offset 118
-			DogStatusBuffs2_Timer = DogStatusBuffs2 + 2, 
-			DogStatusBuffs2_Boost = DogStatusBuffs2 + 4,
+			var parentFieldType = GetParentStructType<TParentBuffer>(bufferName, index, out var parentOffset);
+			var fieldName = bufferName.Substring(index + 1);
 
-			DogStatusBuffs3_Id = DogStatusBuffs3,  // Offset 126
-			DogStatusBuffs3_Timer = DogStatusBuffs3 + 2, 
-			DogStatusBuffs3_Boost = DogStatusBuffs3 + 4,
+			return parentOffset + (int) Marshal.OffsetOf(parentFieldType, fieldName);
+		}
 
-			DogStatusBuffs4_Id = DogStatusBuffs4, // Offset 134
-			DogStatusBuffs4_Timer = DogStatusBuffs4 + 2,
-			DogStatusBuffs4_Boost = DogStatusBuffs4 + 4, 
+		private static Type GetParentStructType<TParentBuffer>(string fieldName, int index, out int parentOffset)
+			where TParentBuffer : struct
+		{
+			var parentStructFieldName = fieldName.Substring(0, index);
+			parentOffset = (int) Marshal.OffsetOf<TParentBuffer>(parentStructFieldName);
 
-			Unknown7_DogBuff = SramOffsets.SaveSlot.Chunk10, 
-			Unknown7_DogBuff__BuffFlags = Unknown7_DogBuff, 
-			Unknown7_DogBuff__Unknown1 = Unknown7_DogBuff + 2, 
-			Unknown7_DogBuff__Unknown2 = Unknown7_DogBuff + 4, 
-			Unknown7_DogBuff__Unknown3 = Unknown7_DogBuff + 28, 
-			Unknown7_DogBuff__Unknown7 = Unknown7_DogBuff + 30, 
+			return typeof(TParentBuffer).GetField(parentStructFieldName)!.FieldType;
+		}
 
-			Unknown15 = SramOffsets.SaveSlot.Unknown15, // Offset 609
-			Unknown15_Offset0To16 = Unknown15, 
-			Unknown15_Offset17 = Unknown15 + 17, 
-			Unknown15_Offset18 = Unknown15 + 18, 
-			Unknown15_Offset19 = Unknown15 + 19, 
-			Unknown15_Offset20 = Unknown15 + 20, 
-			Unknown15_Offset21 = Unknown15 + 21, 
-			Unknown15_Offset22 = Unknown15 + 22, 
-			Unknown15_Offset23 = Unknown15 + 23, 
-			Unknown15_Offset24 = Unknown15 + 24, 
-			Unknown15_Offset25To117 = Unknown15 + 25,
+		private static int FindFieldOffset<TParentBuffer>(string fieldName)
+			where TParentBuffer : struct
+		{
+			var parentOffset = 0;
+			var parentType = typeof(TParentBuffer);
+			if (parentType.GetField(fieldName) is null)
+			{
+				foreach (var fieldInfo in parentType.GetFields())
+				{
+					var fieldType = fieldInfo.FieldType;
+					if (fieldType.GetField(fieldName) is not { } foundFieldInfo) continue;
 
-			Unknown16C = SramOffsets.SaveSlot.Unknown16C, // Offset 643
-			Unknown16C__Offset1To5 = Unknown16C + 1, // Offset 644
+					parentType = fieldType;
+					parentOffset = (int) Marshal.OffsetOf<TParentBuffer>(fieldInfo.Name);
+
+					break;
+				}
+			}
+
+			return parentOffset + (int) Marshal.OffsetOf(parentType, fieldName);
 		}
 	}
 }

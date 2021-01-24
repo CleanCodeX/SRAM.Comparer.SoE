@@ -9,6 +9,7 @@ using SramCommons.Models;
 using SramComparer.Helpers;
 using SramComparer.Services;
 using SramComparer.SoE.Enums;
+using SramComparer.SoE.Helpers;
 using SramComparer.SoE.Properties;
 using static SramComparer.SoE.Helpers.UnkownBufferOffsetFinder;
 using Res = SramComparer.Properties.Resources;
@@ -48,8 +49,8 @@ namespace SramComparer.SoE.Services
 
 			ConsolePrinter.PrintLine();
 
-			var offset = GetSramOffset(nameof(compFile.Struct.Unknown1), out var bufferName);
-			var sramDiffBytes = CompareByteArray(Res.CompSram + ":" + bufferName, offset, compFile.Struct.Unknown1, currFile.Struct.Unknown1);
+			var offset = GetSramOffset(nameof(compFile.Struct.Unknown19), out var bufferName);
+			var sramDiffBytes = CompareByteArray(Res.CompSram + ":" + bufferName, offset, compFile.Struct.Unknown19, currFile.Struct.Unknown19);
 			if (sramDiffBytes > 0)
 				ConsolePrinter.PrintColoredLine(ConsoleColor.Green, Res.StatusTotalDiffBytesTemplate.InsertArgs(sramDiffBytes));
 
@@ -57,7 +58,7 @@ namespace SramComparer.SoE.Services
 			{
 				name = bufferName;
 
-				return GetSramBufferOffset(bufferName);
+				return UnkownBufferOffsetFinder.GetSramBufferOffset(bufferName);
 			}
 
 			var allDiffBytes = sramDiffBytes;
@@ -79,7 +80,7 @@ namespace SramComparer.SoE.Services
 
 			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.NonSlotComparison))
 			{
-				var nonSaveSlotUnknownDiffBytes = CompareByteArray(nameof(currFile.Struct.Unknown1), 0, currFile.Struct.Unknown1, compFile.Struct.Unknown1, false);
+				var nonSaveSlotUnknownDiffBytes = CompareByteArray(nameof(currFile.Struct.Unknown19), 0, currFile.Struct.Unknown19, compFile.Struct.Unknown19, false);
 
 				if (nonSaveSlotUnknownDiffBytes > 0)
 				{
@@ -87,7 +88,7 @@ namespace SramComparer.SoE.Services
 					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.CompSectionNonSaveSlotUnknowns} ].......................................");
 					ConsolePrinter.ResetColor();
 
-					nonSaveSlotUnknownDiffBytes = CompareByteArray(nameof(currFile.Struct.Unknown1), SramOffsets.Unknown1, currFile.Struct.Unknown1, compFile.Struct.Unknown1, true);
+					nonSaveSlotUnknownDiffBytes = CompareByteArray(nameof(currFile.Struct.Unknown19), SramOffsets.Unknown19, currFile.Struct.Unknown19, compFile.Struct.Unknown19, true);
 
 					ConsolePrinter.PrintLine();
 					ConsolePrinter.PrintColoredLine(nonSaveSlotUnknownDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White, " ".Repeat(4) + Res.StatusNonSaveSlotUnknownsBytesTemplate.InsertArgs(nonSaveSlotUnknownDiffBytes));
@@ -242,7 +243,7 @@ namespace SramComparer.SoE.Services
 			ref var currData = ref currSaveSlot.Data;
 			ref var compData = ref compSaveSlot.Data;
 
-			var delimiter = StructDelimiter;
+			const string delimiter = StructDelimiter;
 
 			// ReSharper disable once InlineOutVariableDeclaration
 			string name;
@@ -250,32 +251,36 @@ namespace SramComparer.SoE.Services
 			int diffBytes = 0, offset;
 
 			//Unknown 4
-			for (var i = 0; i <= 5; ++i)
+			for (var i = 0; i < 4; ++i)
 			{
-				offset = GetSaveSlotOffset($"{nameof(currData.BoyStatusBuffs)}{i}{delimiter}{nameof(CharacterBuffStatus.Id)}", out name);
+				var parentName = nameof(currData.BoyStatusBuffs);
+				offset = GetSaveSlotOffset(BuildBufferName(parentName, i, nameof(CharacterBuffStatus.Id)), out name);
 				diffBytes += CompareUInt16(name, offset, currData.BoyStatusBuffs.Status[i].Id, compData.BoyStatusBuffs.Status[i].Id);
 
-				offset = GetSaveSlotOffset($"{nameof(currData.BoyStatusBuffs)}{i}{delimiter}{nameof(CharacterBuffStatus.Id)}", out name);
+				offset = GetSaveSlotOffset(BuildBufferName(parentName, i, nameof(CharacterBuffStatus.Timer)), out name);
 				diffBytes += CompareUInt16(name, offset, currData.BoyStatusBuffs.Status[i].Timer, compData.BoyStatusBuffs.Status[i].Timer);
 
-				offset = GetSaveSlotOffset($"{nameof(currData.BoyStatusBuffs)}{i}{delimiter}{nameof(CharacterBuffStatus.Id)}", out name);
+				offset = GetSaveSlotOffset(BuildBufferName(parentName, i, nameof(CharacterBuffStatus.Boost)), out name);
 				diffBytes += CompareUInt16(name, offset, currData.BoyStatusBuffs.Status[i].Boost, compData.BoyStatusBuffs.Status[i].Boost);
 			}
 			//Unknown 4
 
 			//Unknown 7
-			for (var i = 0; i <= 5; ++i)
+			for (var i = 0; i < 4; ++i)
 			{
-				offset = GetSaveSlotOffset($"{nameof(currData.DogStatusBuffs)}{i}{delimiter}{nameof(CharacterBuffStatus.Id)}", out name);
+				var parentName = nameof(currData.DogStatusBuffs);
+				offset = GetSaveSlotOffset(BuildBufferName(parentName, i, nameof(CharacterBuffStatus.Id)), out name);
 				diffBytes += CompareUInt16(name, offset, currData.DogStatusBuffs.Status[i].Id, compData.DogStatusBuffs.Status[i].Id);
 
-				offset = GetSaveSlotOffset($"{nameof(currData.DogStatusBuffs)}{i}{delimiter}{nameof(CharacterBuffStatus.Id)}", out name);
+				offset = GetSaveSlotOffset(BuildBufferName(parentName, i, nameof(CharacterBuffStatus.Timer)), out name);
 				diffBytes += CompareUInt16(name, offset, currData.DogStatusBuffs.Status[i].Timer, compData.DogStatusBuffs.Status[i].Timer);
 
-				offset = GetSaveSlotOffset($"{nameof(currData.DogStatusBuffs)}{i}{delimiter}{nameof(CharacterBuffStatus.Id)}", out name);
+				offset = GetSaveSlotOffset(BuildBufferName(parentName, i, nameof(CharacterBuffStatus.Boost)), out name);
 				diffBytes += CompareUInt16(name, offset, currData.DogStatusBuffs.Status[i].Boost, compData.DogStatusBuffs.Status[i].Boost);
 			}
 			//Unknown 7
+
+			static string BuildBufferName(string parentName, int index, string bufferName) => $"{parentName}{index}{StructDelimiter}{bufferName}";
 
 			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown9), out name);
 			diffBytes += CompareUInt16(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown9, compData.EquippedStuff_Moneys_Levels.Unknown9);
@@ -366,7 +371,7 @@ namespace SramComparer.SoE.Services
 			static int GetSaveSlotOffset(string bufferName, out string name)
 			{
 				name = bufferName;
-				return  GetSaveSlotBufferOffset(bufferName);
+				return  UnkownBufferOffsetFinder.GetSaveSlotBufferOffset(bufferName);
 			}
 		}
 
