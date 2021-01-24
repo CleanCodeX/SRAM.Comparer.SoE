@@ -286,7 +286,7 @@ namespace SramComparer.SoE.Services
 			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown11), out name);
 			diffBytes += CompareByteArray(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown11, compData.EquippedStuff_Moneys_Levels.Unknown11);
 
-			// 12 A - C
+			//Unknown 12 A - C
 			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown12A), out name);
 			diffBytes += CompareByteArray(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown12A, compData.EquippedStuff_Moneys_Levels.Unknown12A);
 
@@ -310,41 +310,12 @@ namespace SramComparer.SoE.Services
 				BitConverter.GetBytes(compData.Collectables_Spots.Unknown14.ToUInt()));
 
 			//Unknown 15
-			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown15)}{delimiter}{nameof(currData.Collectables_Spots.Unknown15.Offset0To16)}", out name);
-			diffBytes += CompareByteArray(name, offset, currData.Collectables_Spots.Unknown15.Offset0To16, compData.Collectables_Spots.Unknown15.Offset0To16);
-
-			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown15)}{delimiter}{nameof(currData.Collectables_Spots.Unknown15.Offset17)}", out name);
-			diffBytes += CompareByte(name, offset, currData.Collectables_Spots.Unknown15.Offset17.ToByte(), compData.Collectables_Spots.Unknown15.Offset17.ToByte());
-
-			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown15)}{delimiter}{nameof(currData.Collectables_Spots.Unknown15.Offset18)}", out name);
-			diffBytes += CompareByte(name, offset, currData.Collectables_Spots.Unknown15.Offset18.ToByte(), compData.Collectables_Spots.Unknown15.Offset18.ToByte());
-
-			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown15)}{delimiter}{nameof(currData.Collectables_Spots.Unknown15.Offset19)}", out name);
-			diffBytes += CompareByte(name, offset, currData.Collectables_Spots.Unknown15.Offset19.ToByte(), compData.Collectables_Spots.Unknown15.Offset19.ToByte());
-
-			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown15)}{delimiter}{nameof(currData.Collectables_Spots.Unknown15.Offset20)}", out name);
-			diffBytes += CompareByte(name, offset, currData.Collectables_Spots.Unknown15.Offset20.ToByte(), compData.Collectables_Spots.Unknown15.Offset20.ToByte());
-
-			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown15)}{delimiter}{nameof(currData.Collectables_Spots.Unknown15.Offset21)}", out name);
-			diffBytes += CompareByte(name, offset, currData.Collectables_Spots.Unknown15.Offset21, compData.Collectables_Spots.Unknown15.Offset21);
-
-			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown15)}{delimiter}{nameof(currData.Collectables_Spots.Unknown15.Offset22)}", out name);
-			diffBytes += CompareByte(name, offset, currData.Collectables_Spots.Unknown15.Offset22, compData.Collectables_Spots.Unknown15.Offset22);
-
-			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown15)}{delimiter}{nameof(currData.Collectables_Spots.Unknown15.Offset22)}", out name);
-			diffBytes += CompareByte(name, offset, currData.Collectables_Spots.Unknown15.Offset22, compData.Collectables_Spots.Unknown15.Offset22);
-
-			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown15)}{delimiter}{nameof(currData.Collectables_Spots.Unknown15.Offset23)}", out name);
-			diffBytes += CompareByte(name, offset, currData.Collectables_Spots.Unknown15.Offset23, compData.Collectables_Spots.Unknown15.Offset23);
-
-			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown15)}{delimiter}{nameof(currData.Collectables_Spots.Unknown15.Offset24)}", out name);
-			diffBytes += CompareByte(name, offset, currData.Collectables_Spots.Unknown15.Offset24.ToByte(), compData.Collectables_Spots.Unknown15.Offset24.ToByte());
-
-			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown15)}{delimiter}{nameof(currData.Collectables_Spots.Unknown15.Offset25To117)}", out name);
-			diffBytes += CompareByteArray(name, offset, currData.Collectables_Spots.Unknown15.Offset25To117, compData.Collectables_Spots.Unknown15.Offset25To117);
+			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown15)}{delimiter}{nameof(currData.Collectables_Spots.Unknown15.Offset0To23)}", out name);
+			diffBytes += CompareByteArray(name, offset, currData.Collectables_Spots.Unknown15.Offset0To23, compData.Collectables_Spots.Unknown15.Offset0To23);
 			//Unknown 15
 
-			// 16 A - C
+			#region Unknown 16
+
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown16A), out name);
 			diffBytes += CompareByteArray(name, offset, currData.Collectables_Spots.Unknown16A, compData.Collectables_Spots.Unknown16A);
 
@@ -352,8 +323,6 @@ namespace SramComparer.SoE.Services
 			diffBytes += CompareByteArray(name, offset, 
 				BitConverter.GetBytes(currData.Collectables_Spots.Unknown16B_GothicaFlags.ToUInt()), 
 				BitConverter.GetBytes(compData.Collectables_Spots.Unknown16B_GothicaFlags.ToUInt()));
-
-			#region Unknown 16
 
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown16C), out name);
 			diffBytes += CompareByte(name, offset,
