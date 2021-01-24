@@ -65,7 +65,7 @@ namespace SramComparer.SoE.Services
 			StringBuilder checksums = new(), timestamps = new();
 
 			checksums.AppendLine($"{Resources.EnumChecksum} (2 {Res.Bytes} | {Resources.CompChangesAtEveryInSaveSlotSave}):");
-			timestamps.AppendLine($"{nameof(SaveSlotDataSoE.Unknown12B)} ({SramSizes.SaveSlot.Unknown12B} {Res.Bytes}):");
+			timestamps.AppendLine($"{nameof(SramSizes.SaveSlot.Unknown12B)} ({SramSizes.SaveSlot.Unknown12B} {Res.Bytes}):");
 
 			if (optionCurrSlotIndex > -1 && optionCompSlotIndex > -1)
 				allDiffBytes = CompareSaveSlots(optionCurrSlotIndex, optionCompSlotIndex);
@@ -292,9 +292,9 @@ namespace SramComparer.SoE.Services
 
 			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.Unknown12BIfDifferent))
 			{
-				offset = GetSaveSlotOffset(nameof(currData.Unknown12B), out name);
-				diffBytes += CompareUInt32(name, offset, currData.Unknown12B,
-					compData.Unknown12B);
+				offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown12B), out name);
+				diffBytes += CompareUInt32(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown12B,
+					compData.EquippedStuff_Moneys_Levels.Unknown12B);
 			}
 
 			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown12C), out name);
