@@ -10,21 +10,24 @@ namespace SramComparer.SoE.Enums
 	[Flags]
 	public enum ComparisonFlagsSoE : uint
 	{
-		[DisplayNameLocalized(nameof(ResComp.EnumSlotByteComparison), typeof(Res))]
-		SlotByteByByteComparison = ComparisonFlags.SlotByteComparison,
+		[DisplayNameLocalized(nameof(ResComp.EnumSlotByteComparison), typeof(ResComp))]
+		SlotByteComparison = ComparisonFlags.SlotByteComparison,
 
-		[DisplayNameLocalized(nameof(ResComp.EnumNonSlotComparison), typeof(Res))]
-		NonSlotByteByByteComparison = ComparisonFlags.NonSlotComparison,
+		[DisplayNameLocalized(nameof(ResComp.EnumNonSlotComparison), typeof(ResComp))]
+		NonSlotComparison = ComparisonFlags.NonSlotComparison,
+
+		[DisplayNameLocalized(nameof(ResComp.EnumChecksumStatus), typeof(ResComp))]
+		ChecksumStatus = ComparisonFlags.ChecksumStatus,
 
 		[DisplayNameLocalized(nameof(Res.EnumChecksumIfDifferent), typeof(Res))]
-		ChecksumIfDifferent = 1 << 2,
+		ChecksumIfDifferent = 0x100,
 
 		[DisplayNameLocalized(nameof(Res.EnumChecksum), typeof(Res))]
-		Checksum = 1 << 3 | ChecksumIfDifferent,
+		Checksum = 0x200 | ChecksumIfDifferent,
 
 		[DisplayNameLocalized(nameof(Res.EnumUnknown12BIfDifferent), typeof(Res))]
-		Unknown12BIfDifferent = 1 << 4,
+		Unknown12BIfDifferent = 0x400,
 
-		Unknown12B = 1 << 5 | Unknown12BIfDifferent,
+		Unknown12B = 0x800 | Unknown12BIfDifferent,
 	}
 }

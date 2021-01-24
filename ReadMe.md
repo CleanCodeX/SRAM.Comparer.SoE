@@ -1,5 +1,5 @@
 # SoE-SramComparer
-Allows to compare (unknown) areas and modify offset values in Secret of Evermore's SRAM.
+Allows to compare (unknown) areas and modify offset values in Secret of Evermore's S-RAM.
 
 ## Features
 Features see [here](http://features.xeth.de).
@@ -8,7 +8,7 @@ Features see [here](http://features.xeth.de).
 Unknowns see [here](http://unknowns.xeth.de).
 
 ## Can I help?
-How to contribute see [here](http://contribute.xeth.de).
+How to contribute see [here](http://contributing.xeth.de).
 
 ## Downloads & Prerequisites
 [Releases](http://downloads.xeth.de)

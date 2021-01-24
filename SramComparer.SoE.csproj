@@ -9,11 +9,11 @@
     <LangVersion>preview</LangVersion>
     <RepositoryUrl>https://github.com/CleanCodeX/SramComparer.SoE</RepositoryUrl>
     <PackageDescription>Allows to compare unknown parts of SoE's sram file</PackageDescription>
-    <Description>SRAM Comparer implementation for Secret of Evermore</Description>
+    <Description>S-RAM Comparer implementation for Secret of Evermore</Description>
     <Authors>CleanCoderX</Authors>
     <Company>KST</Company>
     <Copyright></Copyright>
-    <PackageTags>SoE, Secret of Evermore, S-RAM, SRAM, SNES</PackageTags>
+    <PackageTags>SoE, Secret of Evermore, S-RAM, S-RAM, SNES</PackageTags>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>

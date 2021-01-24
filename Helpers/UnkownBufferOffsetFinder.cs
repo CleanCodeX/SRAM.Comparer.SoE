@@ -15,7 +15,7 @@ namespace SramComparer.SoE.Helpers
 
 		public static int GetSaveSlotBufferOffset(string bufferName) => bufferName.Contains(StructDelimiter)
 				? (int)bufferName.ParseEnum<SaveSlotUnknownOffset>()
-				: (int)Marshal.OffsetOf<SaveSlotDataSoE>(bufferName);
+				: (int)Marshal.OffsetOf<SaveSlotDataSoE>(bufferName) + SramSizes.SaveSlot.Checksum;
 
 		public static int GetSramBufferOffset(string bufferName) => SramOffsets.Unknown1;
 

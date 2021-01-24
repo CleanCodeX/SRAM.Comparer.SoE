@@ -66,6 +66,8 @@ namespace SramComparer.SoE
 			return 0;
 		}
 		
-		private static IOptions GetDefaultConfigOrNew() => File.Exists(DefaultConfigFileName) ? JsonFileSerializer.Deserialize<Options>(DefaultConfigFileName) : new Options();
+		private static IOptions GetDefaultConfigOrNew() => File.Exists(DefaultConfigFileName) 
+			? JsonFileSerializer.Deserialize<Options>(DefaultConfigFileName) 
+			: new Options();
 	}
 }

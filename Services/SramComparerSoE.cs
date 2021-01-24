@@ -16,7 +16,7 @@ using Res = SramComparer.Properties.Resources;
 
 namespace SramComparer.SoE.Services
 {
-	/// <summary>SRAM comparer implementation for SoE</summary>
+	/// <summary>S-RAM comparer implementation for SoE</summary>
 	/// <inheritdoc cref="SramComparerBase{TSramFile,TSaveSlot}"/>
 	public class SramComparerSoE : SramComparerBase<SramFileSoE, SaveSlotSoE>
 	{
@@ -28,14 +28,16 @@ namespace SramComparer.SoE.Services
 		/// <inheritdoc cref="SramComparerBase{TSramFile,TSaveSlot}"/>
 		public override int CompareSram(SramFileSoE currFile, SramFileSoE compFile, IOptions options)
 		{
-			PrintSaveSlotValidationStatus(currFile, compFile);
+			var optionFlags = (ComparisonFlagsSoE)options.ComparisonFlags;
+
+			if(optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumStatus))
+				PrintSaveSlotChecksumValidation(currFile, compFile);
 
 			ConsolePrinter.PrintLine();
 
 			var optionCurrSlotIndex = options.CurrentFileSaveSlot - 1;
 			var optionCompSlotIndex = options.ComparisonFileSaveSlot - 1;
-			var optionFlags = (ComparisonFlagsSoE)options.ComparisonFlags;
-
+			
 			var slotComparisonMode = optionCompSlotIndex > -1
 				? Res.StatusDifferentSaveSlotComparisonTemplate.InsertArgs(options.CurrentFileSaveSlot,
 					options.ComparisonFileSaveSlot)
@@ -60,11 +62,10 @@ namespace SramComparer.SoE.Services
 
 			var allDiffBytes = sramDiffBytes;
 
-			var checksums = new StringBuilder();
-			checksums.AppendLine($"{Resources.EnumChecksum} (2 {Res.Bytes} | {Resources.CompChangesAtEveryInSaveSlotSave}):");
+			StringBuilder checksums = new(), timestamps = new();
 
-			var timestamps = new StringBuilder();
-			timestamps.AppendLine($"{nameof(SaveSlotDataSoE.EquippedStuff_Moneys_Levels.Unknown12B)} (2 {Res.Bytes}):");
+			checksums.AppendLine($"{Resources.EnumChecksum} (2 {Res.Bytes} | {Resources.CompChangesAtEveryInSaveSlotSave}):");
+			timestamps.AppendLine($"{nameof(SaveSlotDataSoE.Unknown12B)} ({SramSizes.SaveSlot.Unknown12B} {Res.Bytes}):");
 
 			if (optionCurrSlotIndex > -1 && optionCompSlotIndex > -1)
 				allDiffBytes = CompareSaveSlots(optionCurrSlotIndex, optionCompSlotIndex);
@@ -76,7 +77,7 @@ namespace SramComparer.SoE.Services
 					allDiffBytes = CompareSaveSlots(slotIndex);
 				}
 
-			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.NonSlotByteByByteComparison))
+			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.NonSlotComparison))
 			{
 				var nonSaveSlotUnknownDiffBytes = CompareByteArray(nameof(currFile.Struct.Unknown1), 0, currFile.Struct.Unknown1, compFile.Struct.Unknown1, false);
 
@@ -101,10 +102,11 @@ namespace SramComparer.SoE.Services
 			const int borderLength = 50;
 			var color = allDiffBytes > 0 ? ConsoleColor.Yellow : ConsoleColor.Green;
 			ConsolePrinter.PrintColoredLine(color, "=".Repeat(borderLength));
-			if (allDiffBytes > 0)
-				ConsolePrinter.PrintColoredLine(color, @$"== {Res.StatusSramChangedBytesTemplate} ".PadRight(borderLength + 1, '=').InsertArgs(allDiffBytes));
-			else
-				ConsolePrinter.PrintColoredLine(color, @$"== {Res.StatusNoSramBytesChanged} =".PadRight(borderLength, '='));
+			ConsolePrinter.PrintColoredLine(color,
+				allDiffBytes > 0
+					? @$"== {Res.StatusSramChangedBytesTemplate} ".PadRight(borderLength + 1, '=')
+						.InsertArgs(allDiffBytes)
+					: @$"== {Res.StatusNoSramBytesChanged} =".PadRight(borderLength, '='));
 
 			ConsolePrinter.PrintColoredLine(color, "=".Repeat(borderLength));
 			ConsolePrinter.ResetColor();
@@ -140,7 +142,7 @@ namespace SramComparer.SoE.Services
 				if (currSlotId != compSlotId)
 					slotIdString += $" ({Resources.CompComparedWithOtherSaveSlotTemplate.InsertArgs(compSlotId)})";
 
-				var padding = 25;
+				const int padding = 25;
 				var currSlotName = $"{$"({Res.EnumCurrentFile})".PadRight(padding)} {Res.CompSlot} {currSlotId}";
 				var currSlotNameString = $"{" ".Repeat(2)}{currSlotName}";
 			
@@ -173,7 +175,7 @@ namespace SramComparer.SoE.Services
 					ConsolePrinter.ResetColor();
 				}
 
-				if (!optionFlags.HasFlag(ComparisonFlagsSoE.SlotByteByByteComparison))
+				if (!optionFlags.HasFlag(ComparisonFlagsSoE.SlotByteComparison))
 				{
 					allDiffBytes += slotDiffBytes;
 					return allDiffBytes;
@@ -203,16 +205,16 @@ namespace SramComparer.SoE.Services
 
 		protected virtual string FormatAdditionalValues(string name, StringBuilder values) => values.Replace(Environment.NewLine, ConsolePrinter.NewLine).ToString();
 
-		protected virtual void PrintSaveSlotValidationStatus(SramFileSoE currFile, SramFileSoE compFile)
+		protected virtual void PrintSaveSlotChecksumValidation(SramFileSoE currFile, SramFileSoE compFile)
 		{
 			ConsolePrinter.PrintSectionHeader();
-			ConsolePrinter.PrintColoredLine(ConsoleColor.DarkYellow, $@"{Resources.CompValidationStatus}:");
+			ConsolePrinter.PrintColoredLine(ConsoleColor.DarkYellow, $@"{Resources.CompChecksumValidation}:");
 
-			OnPrintSaveSlotValidationStatus(Res.EnumCurrentFile, currFile);
-			OnPrintSaveSlotValidationStatus(Res.EnumComparisonFile, compFile);
+			OnPrintSaveSlotChecksumValidation(Res.EnumCurrentFile, currFile);
+			OnPrintSaveSlotChecksumValidation(Res.EnumComparisonFile, compFile);
 		}
 
-		protected virtual void OnPrintSaveSlotValidationStatus(string name, IMultiSegmentFile file)
+		protected virtual void OnPrintSaveSlotChecksumValidation(string name, IMultiSegmentFile file)
 		{
 			ConsolePrinter.PrintColored(ConsoleColor.Gray, $@"{name}:".PadRight(15));
 			ConsolePrinter.PrintColored(ConsoleColor.DarkYellow, $@" {Res.CompSlot} (1-4)");
@@ -290,9 +292,9 @@ namespace SramComparer.SoE.Services
 
 			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.Unknown12BIfDifferent))
 			{
-				offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown12B), out name);
-				diffBytes += CompareUInt16(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown12B,
-					compData.EquippedStuff_Moneys_Levels.Unknown12B);
+				offset = GetSaveSlotOffset(nameof(currData.Unknown12B), out name);
+				diffBytes += CompareUInt32(name, offset, currData.Unknown12B,
+					compData.Unknown12B);
 			}
 
 			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown12C), out name);

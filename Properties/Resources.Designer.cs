@@ -117,9 +117,9 @@ namespace SramComparer.SoE.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Validation-status ähnelt.
         /// </summary>
-        public static string CompValidationStatus {
+        public static string CompChecksumValidation {
             get {
-                return ResourceManager.GetString("CompValidationStatus", resourceCulture);
+                return ResourceManager.GetString("CompChecksumValidation", resourceCulture);
             }
         }
         
