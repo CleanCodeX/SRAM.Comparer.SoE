@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RosettaStone.Savestate.Snes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RosettaStone.Savestate.Snes9x", "..\RosettaStone.Savestate.Snes9x\RosettaStone.Savestate.Snes9x.csproj", "{EF9D4B4F-FD6C-4412-8D4C-76755C424A5F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SramCommons", "..\SramCommons\SramCommons.csproj", "{42E1126E-F3CE-4550-8498-2BA9676AE1AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{EF9D4B4F-FD6C-4412-8D4C-76755C424A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF9D4B4F-FD6C-4412-8D4C-76755C424A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF9D4B4F-FD6C-4412-8D4C-76755C424A5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42E1126E-F3CE-4550-8498-2BA9676AE1AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42E1126E-F3CE-4550-8498-2BA9676AE1AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42E1126E-F3CE-4550-8498-2BA9676AE1AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42E1126E-F3CE-4550-8498-2BA9676AE1AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

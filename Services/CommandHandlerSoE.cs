@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.IO;
 using Common.Shared.Min.Extensions;
 using Common.Shared.Min.Helpers;
-using RosettaStone.Sram.SoE.Constants;
 using RosettaStone.Sram.SoE.Models;
 using RosettaStone.Sram.SoE.Models.Structs;
 using SramCommons.Extensions;
