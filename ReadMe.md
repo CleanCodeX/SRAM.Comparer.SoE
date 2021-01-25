@@ -1,4 +1,4 @@
-# SoE-SRAM.Comparison
+# SoE-SRAM Comparison
 Allows to compare (unknown) areas and modify offset values in Secret of Evermore's S-RAM.
 
 ## Features
