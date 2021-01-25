@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using RosettaStone.Sram.SoE.Models;
-using RosettaStone.Sram.SoE.Models.Structs;
+using SRAM.SoE.Models;
+using SRAM.SoE.Models.Structs;
 
-namespace SramComparer.SoE.Helpers
+namespace SRAM.Comparison.SoE.Helpers
 {
 	/// <summary>
 	/// Base offsets for <see cref="SaveSlotUnknownOffset" /> members

@@ -2,10 +2,10 @@
 using System.Globalization;
 using System.IO;
 using Common.Shared.Min.Extensions;
-using SramComparer.Services;
-using SramComparer.SoE.Enums;
+using SRAM.Comparison.Services;
+using SRAM.Comparison.SoE.Enums;
 
-namespace SramComparer.SoE.Services
+namespace SRAM.Comparison.SoE.Services
 {
 	/// <summary>Console printer implementation for SoE</summary>
 	/// <inheritdoc cref="ConsolePrinter"/>

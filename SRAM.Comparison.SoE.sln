@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SramComparer.SoE", "SramComparer.SoE.csproj", "{1B76AC4E-92E9-4795-B688-5F346E9D133F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRAM.Comparison.SoE", "SRAM.Comparison.SoE.csproj", "{1B76AC4E-92E9-4795-B688-5F346E9D133F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RosettaStone.Sram.SoE", "..\RosettaStone.Sram.SoE\RosettaStone.Sram.SoE.csproj", "{0960B794-1101-4C96-AD06-63CDC65B2948}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRAM.SoE", "..\SRAM.SoE\SRAM.SoE.csproj", "{0960B794-1101-4C96-AD06-63CDC65B2948}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SramComparer", "..\SramComparer\SramComparer.csproj", "{07E046E9-1E62-4487-A8E7-7A992196C966}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRAM.Comparison", "..\SRAM.Comparison\SRAM.Comparison.csproj", "{07E046E9-1E62-4487-A8E7-7A992196C966}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RosettaStone.Savestate.Snes9x.SoE", "..\RosettaStone.Savestate.Snes9x.SoE\RosettaStone.Savestate.Snes9x.SoE.csproj", "{BE130BBC-4EE8-432C-83AC-085CA103828B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WRAM.Snes9x.SoE", "..\WRAM.Snes9x.SoE\WRAM.Snes9x.SoE.csproj", "{BE130BBC-4EE8-432C-83AC-085CA103828B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RosettaStone.Savestate.Snes9x", "..\RosettaStone.Savestate.Snes9x\RosettaStone.Savestate.Snes9x.csproj", "{EF9D4B4F-FD6C-4412-8D4C-76755C424A5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WRAM.Snes9x", "..\WRAM.Snes9x\WRAM.Snes9x.csproj", "{EF9D4B4F-FD6C-4412-8D4C-76755C424A5F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SramCommons", "..\SramCommons\SramCommons.csproj", "{42E1126E-F3CE-4550-8498-2BA9676AE1AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRAM", "..\SRAM\SRAM.csproj", "{42E1126E-F3CE-4550-8498-2BA9676AE1AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WRAM", "..\WRAM\WRAM.csproj", "{629C1B56-025F-4E27-9A9F-717EC74FB1F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{42E1126E-F3CE-4550-8498-2BA9676AE1AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42E1126E-F3CE-4550-8498-2BA9676AE1AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42E1126E-F3CE-4550-8498-2BA9676AE1AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{629C1B56-025F-4E27-9A9F-717EC74FB1F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{629C1B56-025F-4E27-9A9F-717EC74FB1F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{629C1B56-025F-4E27-9A9F-717EC74FB1F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{629C1B56-025F-4E27-9A9F-717EC74FB1F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

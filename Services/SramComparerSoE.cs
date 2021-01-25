@@ -2,20 +2,20 @@
 using System.Linq;
 using System.Text;
 using Common.Shared.Min.Extensions;
-using RosettaStone.Sram.SoE.Models;
-using RosettaStone.Sram.SoE.Models.Structs;
-using SramCommons.Extensions;
-using SramCommons.Models;
-using SramComparer.Helpers;
-using SramComparer.Services;
-using SramComparer.SoE.Enums;
-using SramComparer.SoE.Helpers;
-using SramComparer.SoE.Properties;
-using static SramComparer.SoE.Helpers.UnkownBufferOffsetFinder;
-using Res = SramComparer.Properties.Resources;
+using IO.Extensions;
+using IO.Models;
+using SRAM.Comparison.Helpers;
+using SRAM.Comparison.Services;
+using SRAM.Comparison.SoE.Enums;
+using SRAM.Comparison.SoE.Helpers;
+using SRAM.Comparison.SoE.Properties;
+using SRAM.SoE.Models;
+using SRAM.SoE.Models.Structs;
+using static SRAM.Comparison.SoE.Helpers.UnkownBufferOffsetFinder;
+using Res = SRAM.Comparison.Properties.Resources;
 // ReSharper disable RedundantArgumentDefaultValue
 
-namespace SramComparer.SoE.Services
+namespace SRAM.Comparison.SoE.Services
 {
 	/// <summary>S-RAM comparer implementation for SoE</summary>
 	/// <inheritdoc cref="SramComparerBase{TSramFile,TSaveSlot}"/>
@@ -27,7 +27,7 @@ namespace SramComparer.SoE.Services
 		#region CompareSram
 
 		/// <inheritdoc cref="SramComparerBase{TSramFile,TSaveSlot}"/>
-		public override int CompareSram(SramFileSoE currFile, SramFileSoE compFile, IOptions options)
+		protected override int OnCompareSram(SramFileSoE currFile, SramFileSoE compFile, IOptions options)
 		{
 			var optionFlags = (ComparisonFlagsSoE)options.ComparisonFlags;
 
@@ -168,7 +168,7 @@ namespace SramComparer.SoE.Services
 				ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.CompUnknownAreasOnly} ].......................................");
 				ConsolePrinter.ResetColor();
 
-				var slotDiffBytes = CompareSaveSlot(currSlot, compSlot, options);
+				var slotDiffBytes = OnCompareSaveSlot(currSlot, compSlot, options);
 				if (slotDiffBytes > 0)
 				{
 					ConsolePrinter.PrintLine();
@@ -238,7 +238,7 @@ namespace SramComparer.SoE.Services
 		#region CompareSaveSlot
 
 		/// <inheritdoc cref="SramComparerBase{TSramFile,TSaveSlot}"/>
-		public override int CompareSaveSlot(SaveSlotSoE currSaveSlot, SaveSlotSoE compSaveSlot, IOptions options)
+		protected override int OnCompareSaveSlot(SaveSlotSoE currSaveSlot, SaveSlotSoE compSaveSlot, IOptions options)
 		{
 			ref var currData = ref currSaveSlot.Data;
 			ref var compData = ref compSaveSlot.Data;

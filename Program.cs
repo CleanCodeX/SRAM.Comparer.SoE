@@ -3,11 +3,11 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.CompilerServices;
 using Common.Shared.Min.Extensions;
-using SramComparer.Helpers;
-using SramComparer.SoE.Properties;
-using SramComparer.SoE.Services;
+using SRAM.Comparison.Helpers;
+using SRAM.Comparison.SoE.Properties;
+using SRAM.Comparison.SoE.Services;
 
-namespace SramComparer.SoE
+namespace SRAM.Comparison.SoE
 {
 	public static class Program
 	{
@@ -35,7 +35,7 @@ namespace SramComparer.SoE
 				var loadedConfigFile = File.Exists(DefaultConfigFileName) ? DefaultConfigFileName : null;
 
 				var options = cmdLineParser.Parse(args, GetDefaultConfigOrNew());
-				if (options.ConfigFilePath is { } configFile && configFile != DefaultConfigFileName)
+				if (options.ConfigPath is { } configFile && configFile != DefaultConfigFileName)
 				{
 					options = JsonFileSerializer.Deserialize<Options>(configFile);
 					loadedConfigFile = configFile;

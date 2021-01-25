@@ -1,10 +1,10 @@
 ﻿using System;
 using Common.Shared.Min.Attributes;
-using SramComparer.Enums;
-using Res = SramComparer.SoE.Properties.Resources;
-using ResComp = SramComparer.Properties.Resources;
+using SRAM.Comparison.Enums;
+using Res = SRAM.Comparison.SoE.Properties.Resources;
+using ResComp = SRAM.Comparison.Properties.Resources;
 
-namespace SramComparer.SoE.Enums
+namespace SRAM.Comparison.SoE.Enums
 {
 	[Serializable]
 	[Flags]

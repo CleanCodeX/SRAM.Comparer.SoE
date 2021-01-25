@@ -3,17 +3,18 @@ using System.Diagnostics;
 using System.IO;
 using Common.Shared.Min.Extensions;
 using Common.Shared.Min.Helpers;
-using RosettaStone.Sram.SoE.Models;
-using RosettaStone.Sram.SoE.Models.Structs;
-using SramCommons.Extensions;
-using SramComparer.Enums;
-using SramComparer.Helpers;
-using SramComparer.Services;
-using SramComparer.SoE.Enums;
-using SramComparer.SoE.Properties;
-using Snes9x = RosettaStone.Savestate.Snes9x.SoE.Extensions.StreamExtensions;
+using IO.Extensions;
+using SoE.Models.Enums;
+using SRAM.SoE.Models;
+using SRAM.SoE.Models.Structs;
+using SRAM.Comparison.Enums;
+using SRAM.Comparison.Helpers;
+using SRAM.Comparison.Services;
+using SRAM.Comparison.SoE.Enums;
+using SRAM.Comparison.SoE.Properties;
+using Snes9x = WRAM.Snes9x.SoE.Extensions.StreamExtensions;
 
-namespace SramComparer.SoE.Services
+namespace SRAM.Comparison.SoE.Services
 {
 	/// <summary>Command handler implementation for SoE</summary>
 	/// <inheritdoc cref="CommandHandler{TSramFile,TSaveSlot}"/>
@@ -91,12 +92,12 @@ namespace SramComparer.SoE.Services
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
 		public void Compare(IOptions options, TextWriter output) => Compare<SramComparerSoE>(options, output);
 
-		protected override bool ConvertStreamIfSavestate(ref Stream stream, string? filePath, string? savestateType)
+		protected override bool ConvertStreamIfSavestate(IOptions options, ref Stream stream, string? filePath)
 		{
 			stream.ThrowIfNull(nameof(stream));
 			filePath.ThrowIfNull(nameof(filePath));
 
-			if (!base.ConvertStreamIfSavestate(ref stream, filePath, savestateType)) return false;
+			if (!base.ConvertStreamIfSavestate(options, ref stream, filePath)) return false;
 
 			const int length = SramSizes.All;
 			MemoryStream ms;
@@ -135,8 +136,8 @@ namespace SramComparer.SoE.Services
 		protected override void LoadConfig(IOptions options, string? configName = null)
 		{
 			ConsolePrinter.PrintSectionHeader();
-			var filePath = base.GetConfigFilePath(options.ConfigFilePath, configName);
-			Requires.FileExists(filePath, string.Empty, SramComparer.Properties.Resources.ErrorConfigFileDoesNotExist.InsertArgs(filePath));
+			var filePath = base.GetConfigFilePath(options.ConfigPath, configName);
+			Requires.FileExists(filePath, string.Empty, SRAM.Comparison.Properties.Resources.ErrorConfigFileDoesNotExist.InsertArgs(filePath));
 
 			try
 			{
@@ -147,11 +148,11 @@ namespace SramComparer.SoE.Services
 				typedOptions.CurrentFilePath = loadedOptions.CurrentFilePath;
 				typedOptions.CurrentFileSaveSlot = loadedOptions.CurrentFileSaveSlot;
 				
-				typedOptions.ComparisonFilePath = loadedOptions.ComparisonFilePath;
+				typedOptions.ComparisonPath = loadedOptions.ComparisonPath;
 				typedOptions.ComparisonFileSaveSlot = loadedOptions.ComparisonFileSaveSlot;
 
 				typedOptions.SavestateType = loadedOptions.SavestateType;
-				typedOptions.ExportDirectory = loadedOptions.ExportDirectory;
+				typedOptions.ExportPath = loadedOptions.ExportPath;
 				typedOptions.ColorizeOutput = loadedOptions.ColorizeOutput;
 
 				typedOptions.ComparisonFlags = loadedOptions.ComparisonFlags;
@@ -171,13 +172,13 @@ namespace SramComparer.SoE.Services
 
 		#endregion Config
 
-		protected override Stream GetSramFromSavestate(string? savestateType, Stream stream)
+		protected override Stream GetSramFromSavestate(IOptions options, Stream stream)
 		{
-			savestateType ??= Snes9xId;
+			var savestateType = options.SavestateType ?? Snes9xId;
 
 			return savestateType switch
 			{
-				Snes9xId => Snes9x.GetSramFromSavestate(stream),
+				Snes9xId => Snes9x.GetSramFromSavestate(stream, (GameRegion)options.GameRegion),
 				_ => throw new NotSupportedException($"Savestate type {savestateType} is not supported.")
 			};
 		}

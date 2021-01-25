@@ -4,13 +4,13 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <StartupObject></StartupObject>
-    <Version>0.3.1-e1</Version>
+    <Version>0.4.0-a1</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
-    <RepositoryUrl>https://github.com/CleanCodeX/SramComparer.SoE</RepositoryUrl>
+    <RepositoryUrl>https://github.com/CleanCodeX/SRAM.Comparison.SoE</RepositoryUrl>
     <PackageDescription>Allows to compare unknown parts of SoE's sram file</PackageDescription>
     <Description>S-RAM Comparer implementation for Secret of Evermore</Description>
-    <Authors>CleanCoderX</Authors>
+    <Authors>S. Krauter { CleanCoderX, XETH }</Authors>
     <Company>KST</Company>
     <Copyright></Copyright>
     <PackageTags>SoE, Secret of Evermore, S-RAM, S-RAM, SNES</PackageTags>
@@ -24,10 +24,23 @@ Added savestate offset value display
 Added config(s) loading/saving (support for custom config name)
 Added key binding customization
 </PackageReleaseNotes>
-    <PackageId>CCX.SramComparer.SoE</PackageId>
+    <PackageId>CCX.SRAM.Comparison.SoE</PackageId>
     <Platforms>AnyCPU</Platforms>
     <PackageProjectUrl>http://evermore.xeth.de</PackageProjectUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CCX.WRAM.Snes9x.SoE" Version="0.5.0-a1" />
+    <PackageReference Include="CCX.SRAM.SoE" Version="0.5.0-a2" />
+    <PackageReference Include="CCX.SRAM.Comparison" Version="1.3.0-a1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SoE\SoE.csproj" />
+    <ProjectReference Include="..\WRAM.Snes9x.SoE\WRAM.Snes9x.SoE.csproj" />
+    <ProjectReference Include="..\SRAM.SoE\SRAM.SoE.csproj" />
+    <ProjectReference Include="..\SRAM.Comparison\SRAM.Comparison.csproj" />
+  </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>embedded</DebugType>
@@ -44,18 +57,6 @@ Added key binding customization
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="CCX.RosettaStone.Savestate.Snes9x.SoE" Version="0.0.3-a1" />
-    <PackageReference Include="CCX.RosettaStone.Sram.SoE" Version="0.4.1-a3" />
-    <PackageReference Include="CCX.SramComparer" Version="1.2.2-a2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RosettaStone.Savestate.Snes9x.SoE\RosettaStone.Savestate.Snes9x.SoE.csproj" />
-    <ProjectReference Include="..\RosettaStone.Sram.SoE\RosettaStone.Sram.SoE.csproj" />
-    <ProjectReference Include="..\SramComparer\SramComparer.csproj" />
   </ItemGroup>
 
   <ItemGroup>

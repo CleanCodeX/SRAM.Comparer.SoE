@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using Common.Shared.Min.Extensions;
-using RosettaStone.Sram.SoE.Models;
-using RosettaStone.Sram.SoE.Models.Structs;
+using SRAM.SoE.Models;
+using SRAM.SoE.Models.Structs;
 
 // ReSharper disable InconsistentNaming
 
-namespace SramComparer.SoE.Helpers
+namespace SRAM.Comparison.SoE.Helpers
 {
 	/// <summary>List of buffers in sub-structures</summary>
 	internal static class UnkownBufferOffsetFinder
