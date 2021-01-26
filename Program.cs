@@ -4,14 +4,15 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using Common.Shared.Min.Extensions;
 using SRAM.Comparison.Helpers;
-using SRAM.Comparison.SoE.Properties;
+using SRAM.Comparison.Services;
 using SRAM.Comparison.SoE.Services;
+using Resources = SRAM.Comparison.Properties.Resources;
 
 namespace SRAM.Comparison.SoE
 {
 	public static class Program
 	{
-		private static readonly string DefaultConfigFileName = CommandHandlerSoE.DefaultConfigFileName;
+		private static readonly string DefaultConfigFileName = CommandHandler.DefaultConfigFileName;
 
 		[ModuleInitializer]
 		public static void InitializeServices()
@@ -32,22 +33,33 @@ namespace SRAM.Comparison.SoE
 				var cmdLineParser = ServiceCollection.CmdLineParser;
 				cmdLineParser.ThrowIfNull(nameof(cmdLineParser));
 
-				var loadedConfigFile = File.Exists(DefaultConfigFileName) ? DefaultConfigFileName : null;
+				IOptions options = null!;
+				string? configToLoad = null;
+				var cmdParser = new CmdLineParserSoE();
 
-				var options = cmdLineParser.Parse(args, GetDefaultConfigOrNew());
-				if (options.ConfigPath is { } configFile && configFile != DefaultConfigFileName)
+				if (File.Exists(DefaultConfigFileName))
+					configToLoad = DefaultConfigFileName;
+				else
 				{
-					options = JsonFileSerializer.Deserialize<Options>(configFile);
-					loadedConfigFile = configFile;
+					options = cmdParser.Parse(args);
+
+					if (options.ConfigPath is { } configFile)
+						configToLoad = configFile;
+				}
+
+				if (configToLoad is not null)
+				{
+					var loadedConfig = JsonFileSerializer.Deserialize<Options>(configToLoad);
+					options = cmdParser.Parse(args, loadedConfig);
 				}
 
 				consolePrinter.ColorizeOutput = options.ColorizeOutput;
 
-				if (loadedConfigFile is not null)
+				if (configToLoad is not null)
 				{
 					consolePrinter.PrintSectionHeader();
 					consolePrinter.PrintColoredLine(ConsoleColor.Green,
-						Resources.StatusConfigFileLoadedTemplate.InsertArgs(loadedConfigFile));
+						Resources.StatusConfigFileLoadedTemplate.InsertArgs(configToLoad));
 					consolePrinter.ResetColor();
 				}
 
@@ -65,9 +77,5 @@ namespace SRAM.Comparison.SoE
 			
 			return 0;
 		}
-		
-		private static IOptions GetDefaultConfigOrNew() => File.Exists(DefaultConfigFileName) 
-			? JsonFileSerializer.Deserialize<Options>(DefaultConfigFileName) 
-			: new Options();
 	}
 }

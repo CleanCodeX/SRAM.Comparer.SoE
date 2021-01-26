@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Common.Shared.Min.Extensions;
 using Common.Shared.Min.Helpers;
 using IO.Extensions;
 using SoE.Models.Enums;
-using SRAM.SoE.Models;
-using SRAM.SoE.Models.Structs;
 using SRAM.Comparison.Enums;
 using SRAM.Comparison.Helpers;
 using SRAM.Comparison.Services;
 using SRAM.Comparison.SoE.Enums;
-using SRAM.Comparison.SoE.Properties;
+using SRAM.SoE.Models;
+using SRAM.SoE.Models.Structs;
+using Resources = SRAM.Comparison.Properties.Resources;
 using Snes9x = WRAM.Snes9x.SoE.Extensions.StreamExtensions;
 
 namespace SRAM.Comparison.SoE.Services
@@ -137,29 +138,16 @@ namespace SRAM.Comparison.SoE.Services
 		{
 			ConsolePrinter.PrintSectionHeader();
 			var filePath = base.GetConfigFilePath(options.ConfigPath, configName);
-			Requires.FileExists(filePath, string.Empty, SRAM.Comparison.Properties.Resources.ErrorConfigFileDoesNotExist.InsertArgs(filePath));
+			Requires.FileExists(filePath, string.Empty, Resources.ErrorConfigFileDoesNotExist.InsertArgs(filePath));
 
 			try
 			{
 				var loadedOptions = JsonFileSerializer.Deserialize<Options>(filePath)!;
-
-				var typedOptions = (Options)options;
-
-				typedOptions.CurrentFilePath = loadedOptions.CurrentFilePath;
-				typedOptions.CurrentFileSaveSlot = loadedOptions.CurrentFileSaveSlot;
-				
-				typedOptions.ComparisonPath = loadedOptions.ComparisonPath;
-				typedOptions.ComparisonFileSaveSlot = loadedOptions.ComparisonFileSaveSlot;
-
-				typedOptions.SavestateType = loadedOptions.SavestateType;
-				typedOptions.ExportPath = loadedOptions.ExportPath;
-				typedOptions.ColorizeOutput = loadedOptions.ColorizeOutput;
-
-				typedOptions.ComparisonFlags = loadedOptions.ComparisonFlags;
-				typedOptions.GameRegion = loadedOptions.GameRegion;
-
-				typedOptions.UILanguage = loadedOptions.UILanguage;
-				typedOptions.ComparisonResultLanguage = loadedOptions.ComparisonResultLanguage;
+				foreach (var propertyInfo in typeof(IOptions).GetProperties().Where(e => e.CanWrite))
+				{
+					var newValue = propertyInfo.GetValue(loadedOptions);
+					propertyInfo.SetValue(options, newValue);
+				}
 			}
 			catch (Exception ex)
 			{

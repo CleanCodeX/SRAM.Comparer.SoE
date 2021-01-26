@@ -106,20 +106,20 @@ namespace SRAM.Comparison.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die compared with save slot {0} ähnelt.
-        /// </summary>
-        public static string CompComparedWithOtherSaveSlotTemplate {
-            get {
-                return ResourceManager.GetString("CompComparedWithOtherSaveSlotTemplate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Validation-status ähnelt.
         /// </summary>
         public static string CompChecksumValidation {
             get {
                 return ResourceManager.GetString("CompChecksumValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die compared with save slot {0} ähnelt.
+        /// </summary>
+        public static string CompComparedWithOtherSaveSlotTemplate {
+            get {
+                return ResourceManager.GetString("CompComparedWithOtherSaveSlotTemplate", resourceCulture);
             }
         }
         
@@ -156,15 +156,6 @@ namespace SRAM.Comparison.SoE.Properties {
         public static string Invalid {
             get {
                 return ResourceManager.GetString("Invalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Config file [{0}] has been loaded. ähnelt.
-        /// </summary>
-        public static string StatusConfigFileLoadedTemplate {
-            get {
-                return ResourceManager.GetString("StatusConfigFileLoadedTemplate", resourceCulture);
             }
         }
         

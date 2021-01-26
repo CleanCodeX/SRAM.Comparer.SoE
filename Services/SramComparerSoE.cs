@@ -7,7 +7,6 @@ using IO.Models;
 using SRAM.Comparison.Helpers;
 using SRAM.Comparison.Services;
 using SRAM.Comparison.SoE.Enums;
-using SRAM.Comparison.SoE.Helpers;
 using SRAM.Comparison.SoE.Properties;
 using SRAM.SoE.Models;
 using SRAM.SoE.Models.Structs;
@@ -24,7 +23,7 @@ namespace SRAM.Comparison.SoE.Services
 		public SramComparerSoE() : base(ServiceCollection.ConsolePrinter) {}
 		public SramComparerSoE(IConsolePrinter consolePrinter) :base(consolePrinter) {}
 
-		#region CompareSram
+		#region Compare S-RAM
 
 		/// <inheritdoc cref="SramComparerBase{TSramFile,TSaveSlot}"/>
 		protected override int OnCompareSram(SramFileSoE currFile, SramFileSoE compFile, IOptions options)
@@ -58,7 +57,7 @@ namespace SRAM.Comparison.SoE.Services
 			{
 				name = bufferName;
 
-				return UnkownBufferOffsetFinder.GetSramBufferOffset(bufferName);
+				return GetSramBufferOffset(bufferName);
 			}
 
 			var allDiffBytes = sramDiffBytes;
@@ -85,7 +84,7 @@ namespace SRAM.Comparison.SoE.Services
 				if (nonSaveSlotUnknownDiffBytes > 0)
 				{
 					ConsolePrinter.PrintLine();
-					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.CompSectionNonSaveSlotUnknowns} ].......................................");
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.CompSectionNonSaveSlotUnknowns} ]");
 					ConsolePrinter.ResetColor();
 
 					nonSaveSlotUnknownDiffBytes = CompareByteArray(nameof(currFile.Struct.Unknown19), SramOffsets.Unknown19, currFile.Struct.Unknown19, compFile.Struct.Unknown19, true);
@@ -105,8 +104,7 @@ namespace SRAM.Comparison.SoE.Services
 			ConsolePrinter.PrintColoredLine(color, "=".Repeat(borderLength));
 			ConsolePrinter.PrintColoredLine(color,
 				allDiffBytes > 0
-					? @$"== {Res.StatusSramChangedBytesTemplate} ".PadRight(borderLength + 1, '=')
-						.InsertArgs(allDiffBytes)
+					? @$"== {Res.StatusSramChangedBytesTemplate.InsertArgs(allDiffBytes)} ".PadRight(borderLength, '=')
 					: @$"== {Res.StatusNoSramBytesChanged} =".PadRight(borderLength, '='));
 
 			ConsolePrinter.PrintColoredLine(color, "=".Repeat(borderLength));
@@ -161,11 +159,11 @@ namespace SRAM.Comparison.SoE.Services
 				checksums.AppendLine($"{compSlotNameString}: {compSlot.Checksum.PadLeft()}");
 				timestamps.AppendLine($"{compSlotNameString}: {compSlot.Data.EquippedStuff_Moneys_Levels.Unknown12B.PadLeft()}");
 
-				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.CompSlot} {slotIdString} ]---------------------------------------------");
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.CompSlot} {slotIdString} ]");
 				ConsolePrinter.ResetColor();
 
 				ConsolePrinter.PrintLine();
-				ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.CompUnknownAreasOnly} ].......................................");
+				ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, " ".Repeat(2) + $@"[ {Res.CompUnknownAreasOnly} ]");
 				ConsolePrinter.ResetColor();
 
 				var slotDiffBytes = OnCompareSaveSlot(currSlot, compSlot, options);
@@ -182,7 +180,7 @@ namespace SRAM.Comparison.SoE.Services
 					return allDiffBytes;
 				}
 
-				ConsoleHelper.EnsureMinConsoleWidth(165);
+				ConsoleHelper.EnsureMinConsoleWidth(ComparisonConsoleWidth);
 
 				bufferName = $"{nameof(compFile.Struct.SaveSlots)} {currSlotId}";
 				var bufferOffset = SramOffsets.FirstSaveSlot + currSlotId * SramSizes.SaveSlot.All;
@@ -190,7 +188,7 @@ namespace SRAM.Comparison.SoE.Services
 				if (slotBufferDiffBytes > slotDiffBytes)
 				{
 					ConsolePrinter.PrintLine();
-					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, $@"{" ".Repeat(2)}[ {Res.CompSectionSaveSlotChangedTemplate} ]...................................".InsertArgs(currSlotIndex));
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, $@"{" ".Repeat(2)}[ {Res.CompSectionSaveSlotChangedTemplate} ]".InsertArgs(currSlotIndex));
 					// ReSharper disable once RedundantArgumentDefaultValue
 
 					CompareByteArray(bufferName, bufferOffset, currSlotBytes, compSlotBytes, true, SramOffsets.SaveSlot.GetNameFromOffset);
@@ -235,7 +233,7 @@ namespace SRAM.Comparison.SoE.Services
 
 		#endregion CompareSram
 
-		#region CompareSaveSlot
+		#region Compare SaveSlot
 
 		/// <inheritdoc cref="SramComparerBase{TSramFile,TSaveSlot}"/>
 		protected override int OnCompareSaveSlot(SaveSlotSoE currSaveSlot, SaveSlotSoE compSaveSlot, IOptions options)
@@ -311,8 +309,13 @@ namespace SRAM.Comparison.SoE.Services
 
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown14), out name);
 			diffBytes += CompareByteArray(name, offset, 
-				BitConverter.GetBytes(currData.Collectables_Spots.Unknown14.ToUInt()), 
-				BitConverter.GetBytes(compData.Collectables_Spots.Unknown14.ToUInt()));
+				BitConverter.GetBytes(currData.Collectables_Spots.Unknown14.ToUShort()), 
+				BitConverter.GetBytes(compData.Collectables_Spots.Unknown14.ToUShort()));
+
+			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown14B), out name);
+			diffBytes += CompareByte(name, offset,
+				currData.Collectables_Spots.Unknown14B,
+				compData.Collectables_Spots.Unknown14B);
 
 			//Unknown 15
 			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown15)}{delimiter}{nameof(currData.Collectables_Spots.Unknown15.Offset0To23)}", out name);
@@ -371,7 +374,7 @@ namespace SRAM.Comparison.SoE.Services
 			static int GetSaveSlotOffset(string bufferName, out string name)
 			{
 				name = bufferName;
-				return  UnkownBufferOffsetFinder.GetSaveSlotBufferOffset(bufferName);
+				return  GetSaveSlotBufferOffset(bufferName);
 			}
 		}
 
