@@ -132,6 +132,8 @@ namespace SRAM.Comparison.SoE.Services
 
 		#region Config
 
+		protected override int GetMaxSaveSlotId() => 4;
+
 		protected override void LoadConfig(IOptions options, string? configName = null)
 		{
 			ConsolePrinter.PrintSectionHeader();
