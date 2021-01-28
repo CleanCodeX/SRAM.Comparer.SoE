@@ -49,8 +49,16 @@ namespace SRAM.Comparison.SoE
 
 				if (configToLoad is not null)
 				{
-					var loadedConfig = JsonFileSerializer.Deserialize<Options>(configToLoad);
-					options = cmdParser.Parse(args, loadedConfig);
+					try
+					{
+						var loadedConfig = JsonFileSerializer.Deserialize<Options>(configToLoad);
+						options = cmdParser.Parse(args, loadedConfig);
+					}
+					catch (Exception ex)
+					{
+						consolePrinter.PrintError(ex);
+						options = cmdParser.Parse(args);
+					}
 				}
 
 				consolePrinter.ColorizeOutput = options.ColorizeOutput;

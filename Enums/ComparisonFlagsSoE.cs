@@ -19,6 +19,9 @@ namespace SRAM.Comparison.SoE.Enums
 		[DisplayNameLocalized(nameof(ResComp.EnumChecksumStatus), typeof(ResComp))]
 		ChecksumStatus = ComparisonFlags.ChecksumStatus,
 
+		[DisplayNameLocalized(nameof(ResComp.EnumOverwriteCompFile), typeof(ResComp))]
+		OverwriteComp = ComparisonFlags.OverwriteComp,
+
 		[DisplayNameLocalized(nameof(Res.EnumChecksumIfDifferent), typeof(Res))]
 		ChecksumIfDifferent = 0x100,
 

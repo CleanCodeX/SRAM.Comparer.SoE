@@ -8,6 +8,7 @@ using SRAM.Comparison.Helpers;
 using SRAM.Comparison.Services;
 using SRAM.Comparison.SoE.Enums;
 using SRAM.Comparison.SoE.Properties;
+using SRAM.SoE.Extensions;
 using SRAM.SoE.Models;
 using SRAM.SoE.Models.Structs;
 using static SRAM.Comparison.SoE.Helpers.UnkownBufferOffsetFinder;
@@ -29,7 +30,6 @@ namespace SRAM.Comparison.SoE.Services
 		protected override int OnCompareSram(SramFileSoE currFile, SramFileSoE compFile, IOptions options)
 		{
 			var optionFlags = (ComparisonFlagsSoE)options.ComparisonFlags;
-
 			if(optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumStatus))
 				PrintSaveSlotChecksumValidation(currFile, compFile);
 
@@ -62,20 +62,27 @@ namespace SRAM.Comparison.SoE.Services
 
 			var allDiffBytes = sramDiffBytes;
 
+			#region Preparation for additional save slot value display
+
 			StringBuilder checksums = new(), timestamps = new();
 
 			checksums.AppendLine($"{Resources.EnumChecksum} (2 {Res.Bytes} | {Resources.CompChangesAtEveryInSaveSlotSave}):");
 			timestamps.AppendLine($"{nameof(SramSizes.SaveSlot.Unknown12B)} ({SramSizes.SaveSlot.Unknown12B} {Res.Bytes}):");
 
+			#endregion
+
+			// Single slot cimparison
 			if (optionCurrSlotIndex > -1 && optionCompSlotIndex > -1)
 				allDiffBytes = CompareSaveSlots(optionCurrSlotIndex, optionCompSlotIndex);
-			else
+			else 
 				for (var slotIndex = 0; slotIndex < 4; slotIndex++)
 				{
 					if (optionCurrSlotIndex > -1 && optionCurrSlotIndex != slotIndex) continue;
 
 					allDiffBytes = CompareSaveSlots(slotIndex);
 				}
+
+			#region Non slot comparison
 
 			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.NonSlotComparison))
 			{
@@ -97,6 +104,10 @@ namespace SRAM.Comparison.SoE.Services
 				}
 			}
 
+			#endregion
+
+			#region display of comparison summary
+
 			ConsolePrinter.PrintLine();
 
 			const int borderLength = 50;
@@ -110,6 +121,10 @@ namespace SRAM.Comparison.SoE.Services
 			ConsolePrinter.PrintColoredLine(color, "=".Repeat(borderLength));
 			ConsolePrinter.ResetColor();
 
+			#endregion
+
+			#region Display of additional save slot values
+
 			if (optionFlags != default)
 			{
 				ConsolePrinter.PrintLine();
@@ -120,6 +135,8 @@ namespace SRAM.Comparison.SoE.Services
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BIfDifferent))
 					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, FormatAdditionalValues(nameof(timestamps), timestamps));
 			}
+
+			#endregion
 
 			return allDiffBytes;
 
@@ -141,23 +158,31 @@ namespace SRAM.Comparison.SoE.Services
 				if (currSlotId != compSlotId)
 					slotIdString += $" ({Resources.CompComparedWithOtherSaveSlotTemplate.InsertArgs(compSlotId)})";
 
+				#region Additional save slot value display
+
 				const int padding = 25;
 				var currSlotName = $"{$"({Res.EnumCurrentFile})".PadRight(padding)} {Res.CompSlot} {currSlotId}";
 				var currSlotNameString = $"{" ".Repeat(2)}{currSlotName}";
-			
+				
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.Checksum) || compSlot.Checksum != currSlot.Checksum)
 					checksums.AppendLine($"{currSlotNameString}: {currSlot.Checksum.PadLeft()}");
 
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12B) || compSlot.Data.EquippedStuff_Moneys_Levels.Unknown12B != currSlot.Data.EquippedStuff_Moneys_Levels.Unknown12B)
 					timestamps.AppendLine($"{currSlotNameString}: {currSlot.Data.EquippedStuff_Moneys_Levels.Unknown12B.PadLeft()}");
 
+				#endregion
+
 				if (compSlotBytes.SequenceEqual(currSlotBytes)) return allDiffBytes;
+
+				#region Additional save slot value display
 
 				var compSlotName = $"{$"({Res.EnumComparisonFile})".PadRight(padding)} {Res.CompSlot} {compSlotId}";
 				var compSlotNameString = $"{" ".Repeat(2)}{compSlotName}";
 
 				checksums.AppendLine($"{compSlotNameString}: {compSlot.Checksum.PadLeft()}");
 				timestamps.AppendLine($"{compSlotNameString}: {compSlot.Data.EquippedStuff_Moneys_Levels.Unknown12B.PadLeft()}");
+
+				#endregion
 
 				ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, $@"[ {Res.CompSlot} {slotIdString} ]");
 				ConsolePrinter.ResetColor();
@@ -174,30 +199,38 @@ namespace SRAM.Comparison.SoE.Services
 					ConsolePrinter.ResetColor();
 				}
 
-				if (!optionFlags.HasFlag(ComparisonFlagsSoE.SlotByteComparison))
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.SlotByteComparison))
 				{
+					#region Slot byte by byte comparison
+
+					ConsoleHelper.EnsureMinConsoleWidth(ComparisonConsoleWidth);
+
+					bufferName = $"{nameof(compFile.Struct.SaveSlots)} {currSlotId}";
+					var bufferOffset = SramOffsets.FirstSaveSlot + currSlotId * SramSizes.SaveSlot.All;
+					var slotBufferDiffBytes = CompareByteArray(bufferName, bufferOffset, currSlotBytes, compSlotBytes, false);
+					if (slotBufferDiffBytes > slotDiffBytes)
+					{
+						ConsolePrinter.PrintLine();
+						ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta,
+							$@"{" ".Repeat(2)}[ {Res.CompSectionSaveSlotChangedTemplate} ]".InsertArgs(currSlotIndex));
+						// ReSharper disable once RedundantArgumentDefaultValue
+
+						CompareByteArray(bufferName, bufferOffset, currSlotBytes, compSlotBytes, true,
+							offset => typeof(SaveSlotDataSoE).GetFieldNameFromOffset(offset), isUnknown: false);
+						ConsolePrinter.PrintLine();
+						ConsolePrinter.PrintColoredLine(slotDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White,
+							" ".Repeat(4) +
+							Res.StatusSaveSlotChangedBytesTemplate.InsertArgs(slotIdString, slotBufferDiffBytes));
+						ConsolePrinter.ResetColor();
+					}
+
+					allDiffBytes += slotBufferDiffBytes;
+
+					#endregion
+				}
+				else
 					allDiffBytes += slotDiffBytes;
-					return allDiffBytes;
-				}
 
-				ConsoleHelper.EnsureMinConsoleWidth(ComparisonConsoleWidth);
-
-				bufferName = $"{nameof(compFile.Struct.SaveSlots)} {currSlotId}";
-				var bufferOffset = SramOffsets.FirstSaveSlot + currSlotId * SramSizes.SaveSlot.All;
-				var slotBufferDiffBytes = CompareByteArray(bufferName, bufferOffset, currSlotBytes, compSlotBytes, false);
-				if (slotBufferDiffBytes > slotDiffBytes)
-				{
-					ConsolePrinter.PrintLine();
-					ConsolePrinter.PrintColoredLine(ConsoleColor.Magenta, $@"{" ".Repeat(2)}[ {Res.CompSectionSaveSlotChangedTemplate} ]".InsertArgs(currSlotIndex));
-					// ReSharper disable once RedundantArgumentDefaultValue
-
-					CompareByteArray(bufferName, bufferOffset, currSlotBytes, compSlotBytes, true, SramOffsets.SaveSlot.GetNameFromOffset);
-					ConsolePrinter.PrintLine();
-					ConsolePrinter.PrintColoredLine(slotDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White, " ".Repeat(4) + Res.StatusSaveSlotChangedBytesTemplate.InsertArgs(slotIdString, slotBufferDiffBytes));
-					ConsolePrinter.ResetColor();
-				}
-
-				allDiffBytes += slotBufferDiffBytes;
 				return allDiffBytes;
 			}
 		}
@@ -216,10 +249,10 @@ namespace SRAM.Comparison.SoE.Services
 		protected virtual void OnPrintSaveSlotChecksumValidation(string name, IMultiSegmentFile file)
 		{
 			ConsolePrinter.PrintColored(ConsoleColor.Gray, $@"{name}:".PadRight(15));
-			ConsolePrinter.PrintColored(ConsoleColor.DarkYellow, $@" {Res.CompSlot} (1-4)");
+			ConsolePrinter.PrintColored(ConsoleColor.DarkYellow, $@" {Res.CompSlot} (1-{file.MaxIndex + 1})");
 			ConsolePrinter.PrintColored(ConsoleColor.White, @" [ ");
 
-			for (var i = 0; i <= 3; i++)
+			for (var i = 0; i <= file.MaxIndex; i++)
 			{
 				if (i > 0)
 					ConsolePrinter.PrintColored(ConsoleColor.White, @" | ");

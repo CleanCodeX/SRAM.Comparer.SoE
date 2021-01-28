@@ -35,7 +35,6 @@ Added key binding customization
 
   <ItemGroup>
     <PackageReference Include="CCX.WRAM.Snes9x.SoE" Version="0.5.0-a1" />
-    <PackageReference Include="CCX.SRAM.SoE" Version="0.5.0-a2" />
     <PackageReference Include="CCX.SRAM.Comparison" Version="1.3.0-a1" />
   </ItemGroup>
 

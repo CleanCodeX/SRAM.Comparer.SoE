@@ -51,11 +51,9 @@ namespace SRAM.Comparison.SoE.Services
 			{
 				case CommandsSoE.Compare:
 					Compare(options);
-
 					break;
 				case CommandsSoE.Export:
-					ExportComparisonResult(options);
-
+					ExportCompResult(options);
 					break;
 				case CommandsSoE.U12b:
 				case CommandsSoE.U12b_Diff:
@@ -85,13 +83,13 @@ namespace SRAM.Comparison.SoE.Services
 		#region Compare S-RAM
 
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public void Compare(Stream currFile, Stream compFile, IOptions options) => Compare<SramComparerSoE>(currFile, compFile, options);
+		public int Compare(Stream currFile, Stream compFile, IOptions options) => Compare<SramComparerSoE>(currFile, compFile, options);
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public void Compare(Stream currFile, Stream compFile, IOptions options, TextWriter output) => Compare<SramComparerSoE>(currFile, compFile, options, output);
+		public int Compare(Stream currFile, Stream compFile, IOptions options, TextWriter output) => Compare<SramComparerSoE>(currFile, compFile, options, output);
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public void Compare(IOptions options) => Compare<SramComparerSoE>(options);
+		public int Compare(IOptions options) => Compare<SramComparerSoE>(options);
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public void Compare(IOptions options, TextWriter output) => Compare<SramComparerSoE>(options, output);
+		public int Compare(IOptions options, TextWriter output) => Compare<SramComparerSoE>(options, output);
 
 		protected override bool ConvertStreamIfSavestate(IOptions options, ref Stream stream, string? filePath)
 		{
@@ -126,9 +124,9 @@ namespace SRAM.Comparison.SoE.Services
 		#region Export
 
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public void ExportComparisonResult(IOptions options) => ExportComparisonResult<SramComparerSoE>(options);
+		public string? ExportCompResult(IOptions options) => ExportCompResult<SramComparerSoE>(options);
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public void ExportComparisonResult(IOptions options, string filePath) => ExportComparisonResult<SramComparerSoE>(options, filePath); 
+		public string? ExportCompResult(IOptions options, string filePath) => ExportCompResult<SramComparerSoE>(options, filePath); 
 
 		#endregion Export
 
@@ -138,11 +136,12 @@ namespace SRAM.Comparison.SoE.Services
 		{
 			ConsolePrinter.PrintSectionHeader();
 			var filePath = base.GetConfigFilePath(options.ConfigPath, configName);
-			Requires.FileExists(filePath, string.Empty, Resources.ErrorConfigFileDoesNotExist.InsertArgs(filePath));
+			Requires.FileExists(filePath, string.Empty, Resources.ErrorConfigFileDoesNotExistTemplate.InsertArgs(filePath));
 
 			try
 			{
 				var loadedOptions = JsonFileSerializer.Deserialize<Options>(filePath)!;
+				
 				foreach (var propertyInfo in typeof(IOptions).GetProperties().Where(e => e.CanWrite))
 				{
 					var newValue = propertyInfo.GetValue(loadedOptions);
