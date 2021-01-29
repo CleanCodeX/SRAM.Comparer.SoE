@@ -13,11 +13,15 @@ namespace SRAM.Comparison.SoE.Helpers
 	{
 		internal const string StructDelimiter = "__";
 
-		public static int GetSaveSlotBufferOffset(string bufferName) => bufferName.Contains(StructDelimiter)
+		private static bool IsDefinedOffset(string bufferName) => Enum.IsDefined(typeof(SaveSlotUnknownOffset), bufferName);
+
+		public static int GetSaveSlotBufferOffset(string bufferName) => 
+			bufferName.Contains(StructDelimiter) && IsDefinedOffset(bufferName)
 			? (int) bufferName.ParseEnum<SaveSlotUnknownOffset>()
 			: InternalGetBufferOffset<SaveSlotDataSoE>(bufferName) + SramSizes.SaveSlot.Checksum;
 
-		public static int GetSramBufferOffset(string bufferName) => bufferName.Contains(StructDelimiter)
+		public static int GetSramBufferOffset(string bufferName) => 
+			bufferName.Contains(StructDelimiter) && IsDefinedOffset(bufferName)
 			? (int)bufferName.ParseEnum<SaveSlotUnknownOffset>()
 			: InternalGetBufferOffset<SramSoE>(bufferName);
 
@@ -53,7 +57,7 @@ namespace SRAM.Comparison.SoE.Helpers
 				foreach (var fieldInfo in parentType.GetFields())
 				{
 					var fieldType = fieldInfo.FieldType;
-					if (fieldType.GetField(fieldName) is not { } foundFieldInfo) continue;
+					if (fieldType.GetField(fieldName) is null) continue;
 
 					parentType = fieldType;
 					parentOffset = (int) Marshal.OffsetOf<TParentBuffer>(fieldInfo.Name);
@@ -62,7 +66,7 @@ namespace SRAM.Comparison.SoE.Helpers
 				}
 			}
 
-			return parentOffset + (int) Marshal.OffsetOf(parentType, fieldName);
+			return parentOffset + (int)Marshal.OffsetOf(parentType, fieldName);
 		}
 	}
 }
