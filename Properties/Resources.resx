@@ -124,10 +124,10 @@
     <value>Show checksums</value>
   </data>
   <data name="CmdShowUnknown12BIfDifferent" xml:space="preserve">
-    <value>Show Unknown12B value only if different</value><comment>Don't translate term Unknown12Bs</comment>
+    <value>Show 'Unknown12B' value only if different</value><comment>Don't translate term Unknown12Bs</comment>
   </data>
   <data name="CmdShowUnknown12B" xml:space="preserve">
-    <value>Show Unknown12B values</value><comment>Don't translate term Unknown12Bs</comment>
+    <value>Show 'Unknown12B' values</value><comment>Don't translate term Unknown12Bs</comment>
   </data>
   <data name="CompChangesAtEveryInSaveSlotSave" xml:space="preserve">
     <value>changes at every in-game save</value>

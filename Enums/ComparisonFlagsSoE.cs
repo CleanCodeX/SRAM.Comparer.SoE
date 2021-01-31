@@ -10,10 +10,10 @@ namespace SRAM.Comparison.SoE.Enums
 	[Flags]
 	public enum ComparisonFlagsSoE : uint
 	{
-		[DisplayNameLocalized(nameof(ResComp.EnumSlotByteComparison), typeof(ResComp))]
+		[DisplayNameLocalized(nameof(ResComp.EnumSaveSlotByteComparison), typeof(ResComp))]
 		SlotByteComparison = ComparisonFlags.SlotByteComparison,
 
-		[DisplayNameLocalized(nameof(ResComp.EnumNonSlotComparison), typeof(ResComp))]
+		[DisplayNameLocalized(nameof(ResComp.EnumNonSaveSlotComparison), typeof(ResComp))]
 		NonSlotComparison = ComparisonFlags.NonSlotComparison,
 
 		[DisplayNameLocalized(nameof(ResComp.EnumChecksumStatus), typeof(ResComp))]

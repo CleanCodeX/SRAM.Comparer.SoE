@@ -13,7 +13,7 @@ namespace SRAM.Comparison.SoE.Enums
 	public enum CommandsSoE
 	{
 		Compare = Commands.Compare,
-		Export = Commands.Export,
+		ExportComparison = Commands.ExportComparison,
 
 		[DisplayNameLocalized(nameof(Resources.CmdShowChecksum), typeof(Resources))]
 		Checksum,

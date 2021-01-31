@@ -206,7 +206,7 @@ namespace SRAM.Comparison.SoE.Services
 						// ReSharper disable once RedundantArgumentDefaultValue
 
 						CompareValue(bufferName, bufferOffset, currSlotBytes, compSlotBytes, true,
-							offset => typeof(SaveSlotDataSoE).GetFieldNameFromOffset(offset), isUnknown: false);
+							offset => typeof(SaveSlotDataSoE).GetFieldNameByOffset(offset), isUnknown: false);
 						ConsolePrinter.PrintLine();
 						ConsolePrinter.PrintColoredLine(slotDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White,
 							" ".Repeat(4) +

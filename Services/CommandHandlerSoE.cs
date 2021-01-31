@@ -52,7 +52,7 @@ namespace SRAM.Comparison.SoE.Services
 				case CommandsSoE.Compare:
 					Compare(options);
 					break;
-				case CommandsSoE.Export:
+				case CommandsSoE.ExportComparison:
 					ExportCompResult(options);
 					break;
 				case CommandsSoE.U12b:
