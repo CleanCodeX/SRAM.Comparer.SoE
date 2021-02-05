@@ -17,20 +17,20 @@ namespace SRAM.Comparison.SoE
 		[ModuleInitializer]
 		public static void InitializeServices()
 		{
-			ServiceCollection.ConsolePrinter = new ConsolePrinterSoE();
-			ServiceCollection.CmdLineParser = new CmdLineParserSoE();
-			ServiceCollection.CommandHandler = new CommandHandlerSoE();
+			ComparisonServices.ConsolePrinter = new ConsolePrinterSoE();
+			ComparisonServices.CmdLineParser = new CmdLineParserSoE();
+			ComparisonServices.CommandHandler = new CommandHandlerSoE();
 		}
 
 		public static int Main(string[] args)
 		{
-			var consolePrinter = ServiceCollection.ConsolePrinter;
+			var consolePrinter = ComparisonServices.ConsolePrinter;
 
 			try
 			{
 				ConsoleHelper.RedefineConsoleColors(bgColor: Color.FromArgb(17, 17, 17));
 
-				var cmdLineParser = ServiceCollection.CmdLineParser;
+				var cmdLineParser = ComparisonServices.CmdLineParser;
 				cmdLineParser.ThrowIfNull(nameof(cmdLineParser));
 
 				IOptions options = null!;
