@@ -79,8 +79,16 @@ namespace SRAM.Comparison.SoE
 			}
 			catch (Exception ex)
 			{
-				consolePrinter.PrintFatalError(ex.Message);
-				Console.ReadKey();
+				consolePrinter.PrintFatalError(ex.Message + Environment.NewLine + ex.StackTrace);
+
+				try
+				{
+					Console.ReadKey();
+				}
+				catch
+				{
+					// Ignore
+				}
 			}
 			
 			return 0;

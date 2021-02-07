@@ -195,7 +195,7 @@ namespace SRAM.Comparison.SoE.Services
 
 					ConsoleHelper.EnsureMinConsoleWidth(ComparisonConsoleWidth);
 
-					var bufferName = $"{nameof(compFile.Struct.SaveSlots)} {currSlotId}";
+					var bufferName = $"{nameof(compFile.Struct.SaveSlots)}[{currSlotIndex}]";
 					var bufferOffset = SramOffsets.FirstSaveSlot + currSlotId * SramSizes.SaveSlot.All;
 					var slotBufferDiffBytes = CompareValue(bufferName, bufferOffset, currSlotBytes, compSlotBytes, false);
 					if (slotBufferDiffBytes > slotDiffBytes)
@@ -338,8 +338,8 @@ namespace SRAM.Comparison.SoE.Services
 
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown14), out name);
 			diffBytes += CompareValue(name, offset, 
-				currData.Collectables_Spots.Unknown14.ToBytes(), 
-				compData.Collectables_Spots.Unknown14.ToBytes());
+				currData.Collectables_Spots.Unknown14.ToByteArray(), 
+				compData.Collectables_Spots.Unknown14.ToByteArray());
 
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown14B), out name);
 			diffBytes += CompareValue(name, offset,
@@ -348,8 +348,8 @@ namespace SRAM.Comparison.SoE.Services
 
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.GourdSpots), out name);
 			diffBytes += CompareValue(name, offset,
-				currData.Collectables_Spots.GourdSpots.ToBytes(),
-				compData.Collectables_Spots.GourdSpots.ToBytes());
+				currData.Collectables_Spots.GourdSpots.ToByteArray(),
+				compData.Collectables_Spots.GourdSpots.ToByteArray());
 
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.IngredientSniffSpots), out name);
 			diffBytes += CompareValue(name, offset,
@@ -368,13 +368,13 @@ namespace SRAM.Comparison.SoE.Services
 
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown16B_GothicaFlags), out name);
 			diffBytes += CompareValue(name, offset, 
-				currData.Collectables_Spots.Unknown16B_GothicaFlags.ToBytes(), 
-				compData.Collectables_Spots.Unknown16B_GothicaFlags.ToBytes());
+				currData.Collectables_Spots.Unknown16B_GothicaFlags.ToByteArray(), 
+				compData.Collectables_Spots.Unknown16B_GothicaFlags.ToByteArray());
 
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown16C), out name);
 			diffBytes += CompareValue(name, offset,
-				currData.Collectables_Spots.Unknown16C.Offset0.ToBytes(),
-				compData.Collectables_Spots.Unknown16C.Offset0.ToBytes());
+				currData.Collectables_Spots.Unknown16C.Offset0.ToByteArray(),
+				compData.Collectables_Spots.Unknown16C.Offset0.ToByteArray());
 
 			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown16C)}{delimiter}{nameof(currData.Collectables_Spots.Unknown16C.Offset1To5)}", out name);
 			diffBytes += CompareValue(name, offset, currData.Collectables_Spots.Unknown16C.Offset1To5, compData.Collectables_Spots.Unknown16C.Offset1To5);
@@ -398,7 +398,7 @@ namespace SRAM.Comparison.SoE.Services
 			diffBytes += CompareValue(name, offset, currData.LastLanding_CurrentWeapon.Unknown17E, compData.LastLanding_CurrentWeapon.Unknown17E);
 
 			offset = GetSaveSlotOffset(nameof(currData.LastLanding_CurrentWeapon.LastLandingLocation), out name);
-			diffBytes += CompareValue(name, offset, currData.LastLanding_CurrentWeapon.LastLandingLocation.ToBytes(), compData.LastLanding_CurrentWeapon.LastLandingLocation.ToBytes());
+			diffBytes += CompareValue(name, offset, currData.LastLanding_CurrentWeapon.LastLandingLocation.ToByteArray(), compData.LastLanding_CurrentWeapon.LastLandingLocation.ToByteArray());
 
 			offset = GetSaveSlotOffset(nameof(currData.LastLanding_CurrentWeapon.CurrentEquippedWeapon), out name);
 			diffBytes += CompareValue(name + "_Chunk20", offset, currData.LastLanding_CurrentWeapon.CurrentEquippedWeapon, compData.LastLanding_CurrentWeapon.CurrentEquippedWeapon);
