@@ -13,6 +13,7 @@ namespace SRAM.Comparison.SoE
 	public static class Program
 	{
 		private static readonly string DefaultConfigFileName = CommandHandler.DefaultConfigFileName;
+		private static IConsolePrinter ConsolePrinter => ComparisonServices.ConsolePrinter;
 
 		[ModuleInitializer]
 		public static void InitializeServices()
@@ -24,8 +25,6 @@ namespace SRAM.Comparison.SoE
 
 		public static int Main(string[] args)
 		{
-			var consolePrinter = ComparisonServices.ConsolePrinter;
-
 			try
 			{
 				ConsoleHelper.RedefineConsoleColors(bgColor: Color.FromArgb(17, 17, 17));
@@ -56,19 +55,19 @@ namespace SRAM.Comparison.SoE
 					}
 					catch (Exception ex)
 					{
-						consolePrinter.PrintError(ex);
+						ConsolePrinter.PrintError(ex);
 						options = cmdParser.Parse(args);
 					}
 				}
 
-				consolePrinter.ColorizeOutput = options.ColorizeOutput;
+				ConsolePrinter.ColorizeOutput = options.ColorizeOutput;
 
 				if (configToLoad is not null)
 				{
-					consolePrinter.PrintSectionHeader();
-					consolePrinter.PrintColoredLine(ConsoleColor.Green,
+					ConsolePrinter.PrintSectionHeader();
+					ConsolePrinter.PrintColoredLine(ConsoleColor.Green,
 						Resources.StatusConfigFileLoadedTemplate.InsertArgs(configToLoad));
-					consolePrinter.ResetColor();
+					ConsolePrinter.ResetColor();
 				}
 
 				if (options.BatchCommands is null)
@@ -79,7 +78,7 @@ namespace SRAM.Comparison.SoE
 			}
 			catch (Exception ex)
 			{
-				consolePrinter.PrintFatalError(ex.Message + Environment.NewLine + ex.StackTrace);
+				ConsolePrinter.PrintFatalError(ex.Message + Environment.NewLine + ex.StackTrace);
 
 				try
 				{
