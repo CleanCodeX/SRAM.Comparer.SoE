@@ -98,7 +98,7 @@ namespace SRAM.Comparison.SoE.Services
 
 			if (!base.ConvertStreamIfSavestate(options, ref stream, filePath)) return false;
 
-			const int length = SramSizes.All;
+			const int length = SramSizes.Size;
 			MemoryStream ms;
 
 			try
