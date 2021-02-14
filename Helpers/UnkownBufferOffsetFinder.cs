@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Common.Shared.Min.Extensions;
+using IO.Extensions;
+using SRAM.SoE.Extensions;
 using SRAM.SoE.Models;
 using SRAM.SoE.Models.Structs;
 
@@ -18,7 +21,7 @@ namespace SRAM.Comparison.SoE.Helpers
 		public static int GetSaveSlotBufferOffset(string bufferName) => 
 			bufferName.Contains(StructDelimiter) && IsDefinedOffset(bufferName)
 			? (int) bufferName.ParseEnum<SaveSlotUnknownOffset>()
-			: InternalGetBufferOffset<SaveSlotDataSoE>(bufferName) + SramSizes.SaveSlot.Checksum;
+			: InternalGetBufferOffset<SaveSlotDataSoE>(bufferName) + SramSizes.Checksum;
 
 		public static int GetSramBufferOffset(string bufferName) => 
 			bufferName.Contains(StructDelimiter) && IsDefinedOffset(bufferName)
@@ -54,7 +57,7 @@ namespace SRAM.Comparison.SoE.Helpers
 			var parentType = typeof(TParentBuffer);
 			if (parentType.GetField(fieldName) is null)
 			{
-				foreach (var fieldInfo in parentType.GetFields())
+				foreach (var fieldInfo in parentType.GetPublicInstanceFields())
 				{
 					var fieldType = fieldInfo.FieldType;
 					if (fieldType.GetField(fieldName) is null) continue;

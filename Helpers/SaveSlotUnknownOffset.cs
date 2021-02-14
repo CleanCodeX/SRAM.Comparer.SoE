@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using SRAM.SoE.Models;
 using SRAM.SoE.Models.Structs;
+using WRAM.Snes9x.SoE.Models.Structs.Chunks;
 
 namespace SRAM.Comparison.SoE.Helpers
 {
@@ -10,8 +11,8 @@ namespace SRAM.Comparison.SoE.Helpers
 	internal enum SaveSlotBaseOffset
 	{
 
-		Chunk3Size = SramSizes.SaveSlot.Chunk03, // 6 bytes
-		Chunk10Size = SramSizes.SaveSlot.Chunk10, // 6 bytes
+		Chunk3Size = Chunk03.Size, // 6 bytes
+		Chunk10Size = Chunk10.Size, // 6 bytes
 
 		BoyStatusBuffs0 = SramOffsets.SaveSlot.Chunk03, // Offset 112
 		BoyStatusBuffs1 = BoyStatusBuffs0 + Chunk3Size,

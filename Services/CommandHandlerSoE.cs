@@ -13,7 +13,7 @@ using SRAM.Comparison.SoE.Enums;
 using SRAM.SoE.Models;
 using SRAM.SoE.Models.Structs;
 using Resources = SRAM.Comparison.Properties.Resources;
-using Snes9x = WRAM.Snes9x.SoE.Extensions.StreamExtensions;
+using Snes9x = SRAM.SoE.Extensions.StreamExtensions;
 
 namespace SRAM.Comparison.SoE.Services
 {

@@ -4,6 +4,8 @@ using System.Text;
 using Common.Shared.Min.Extensions;
 using IO.Extensions;
 using IO.Models;
+using SoE;
+using SoE.Models.Structs;
 using SRAM.Comparison.Helpers;
 using SRAM.Comparison.Services;
 using SRAM.Comparison.SoE.Enums;
@@ -57,7 +59,7 @@ namespace SRAM.Comparison.SoE.Services
 			StringBuilder checksums = new(), timestamps = new();
 
 			checksums.AppendLine($"{Resources.EnumChecksum} (2 {Res.Bytes} | {Resources.CompChangesAtEveryInSaveSlotSave}):");
-			timestamps.AppendLine($"{nameof(SramSizes.SaveSlot.Unknown12B)} ({SramSizes.SaveSlot.Unknown12B} {Res.Bytes}):");
+			timestamps.AppendLine($"{nameof(Sizes.Unknown12B)} ({Sizes.Unknown12B} {Res.Bytes}):");
 
 			#endregion
 
@@ -157,8 +159,8 @@ namespace SRAM.Comparison.SoE.Services
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.Checksum) || compSlot.Checksum != currSlot.Checksum)
 					checksums.AppendLine($"{currSlotNameString}: {currSlot.Checksum.PadLeft()}");
 
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12B) || compSlot.Data.EquippedStuff_Moneys_Levels.Unknown12B != currSlot.Data.EquippedStuff_Moneys_Levels.Unknown12B)
-					timestamps.AppendLine($"{currSlotNameString}: {currSlot.Data.EquippedStuff_Moneys_Levels.Unknown12B.PadLeft()}");
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12B) || compSlot.Data.EquippedStuff_Moneys_Levels.ScriptedEventTimer != currSlot.Data.EquippedStuff_Moneys_Levels.ScriptedEventTimer)
+					timestamps.AppendLine($"{currSlotNameString}: {currSlot.Data.EquippedStuff_Moneys_Levels.ScriptedEventTimer.PadLeft()}");
 
 				#endregion
 
@@ -170,7 +172,7 @@ namespace SRAM.Comparison.SoE.Services
 				var compSlotNameString = $"{" ".Repeat(2)}{compSlotName}";
 
 				checksums.AppendLine($"{compSlotNameString}: {compSlot.Checksum.PadLeft()}");
-				timestamps.AppendLine($"{compSlotNameString}: {compSlot.Data.EquippedStuff_Moneys_Levels.Unknown12B.PadLeft()}");
+				timestamps.AppendLine($"{compSlotNameString}: {compSlot.Data.EquippedStuff_Moneys_Levels.ScriptedEventTimer.PadLeft()}");
 
 				#endregion
 
@@ -196,7 +198,7 @@ namespace SRAM.Comparison.SoE.Services
 					ConsoleHelper.EnsureMinConsoleWidth(ComparisonConsoleWidth);
 
 					var bufferName = $"{nameof(compFile.Struct.SaveSlots)}[{currSlotIndex}]";
-					var bufferOffset = SramOffsets.FirstSaveSlot + currSlotId * SramSizes.SaveSlot.All;
+					var bufferOffset = SramOffsets.FirstSaveSlot + currSlotId * SramSizes.SaveSlot;
 					var slotBufferDiffBytes = CompareValue(bufferName, bufferOffset, currSlotBytes, compSlotBytes, false);
 					if (slotBufferDiffBytes > slotDiffBytes)
 					{
@@ -304,7 +306,7 @@ namespace SRAM.Comparison.SoE.Services
 			static string BuildBufferName(string parentName, int index, string bufferName) => $"{parentName}{index}{StructDelimiter}{bufferName}";
 
 			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.CurrentEquippedWeapon), out name);
-			diffBytes += CompareValue(name + "_Chunk16", offset, currData.EquippedStuff_Moneys_Levels.CurrentEquippedWeapon, compData.EquippedStuff_Moneys_Levels.CurrentEquippedWeapon);
+			diffBytes += CompareValue(name + "_Chunk16", offset, currData.EquippedStuff_Moneys_Levels.CurrentEquippedWeapon.ToUShort(), compData.EquippedStuff_Moneys_Levels.CurrentEquippedWeapon.ToUShort());
 
 			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown9), out name);
 			diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown9, compData.EquippedStuff_Moneys_Levels.Unknown9);
@@ -312,25 +314,19 @@ namespace SRAM.Comparison.SoE.Services
 			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.EquippedAlchemies), out name);
 			diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.EquippedAlchemies.ToBytes(), compData.EquippedStuff_Moneys_Levels.EquippedAlchemies.ToBytes());
 
-			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown10), out name);
-			diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown10, compData.EquippedStuff_Moneys_Levels.Unknown10);
-
 			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown11), out name);
 			diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown11, compData.EquippedStuff_Moneys_Levels.Unknown11);
 
-			//Unknown 12 A - C
-			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown12A), out name);
-			diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown12A, compData.EquippedStuff_Moneys_Levels.Unknown12A);
-
+			//Unknown 12
 			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.Unknown12BIfDifferent))
 			{
-				offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown12B), out name);
-				diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown12B,
-					compData.EquippedStuff_Moneys_Levels.Unknown12B);
+				offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.ScriptedEventTimer), out name);
+				diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.ScriptedEventTimer,
+					compData.EquippedStuff_Moneys_Levels.ScriptedEventTimer);
 			}
 
-			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown12C), out name);
-			diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown12C, compData.EquippedStuff_Moneys_Levels.Unknown12C);
+			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.ControlsPrefs_Configuration), out name);
+			diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.ControlsPrefs_Configuration, compData.EquippedStuff_Moneys_Levels.ControlsPrefs_Configuration);
 			// 
 
 			offset = GetSaveSlotOffset(nameof(currData.AlchemyLevels.Unknown13), out name);
@@ -366,10 +362,10 @@ namespace SRAM.Comparison.SoE.Services
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown16A), out name);
 			diffBytes += CompareValue(name, offset, currData.Collectables_Spots.Unknown16A, compData.Collectables_Spots.Unknown16A);
 
-			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown16B_GothicaFlags), out name);
+			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown16B), out name);
 			diffBytes += CompareValue(name, offset, 
-				currData.Collectables_Spots.Unknown16B_GothicaFlags.ToByteArray(), 
-				compData.Collectables_Spots.Unknown16B_GothicaFlags.ToByteArray());
+				currData.Collectables_Spots.Unknown16B.ToByteArray(), 
+				compData.Collectables_Spots.Unknown16B.ToByteArray());
 
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown16C), out name);
 			diffBytes += CompareValue(name, offset,
@@ -401,7 +397,7 @@ namespace SRAM.Comparison.SoE.Services
 			diffBytes += CompareValue(name, offset, currData.LastLanding_CurrentWeapon.LastLandingLocation.ToByteArray(), compData.LastLanding_CurrentWeapon.LastLandingLocation.ToByteArray());
 
 			offset = GetSaveSlotOffset(nameof(currData.LastLanding_CurrentWeapon.CurrentEquippedWeapon), out name);
-			diffBytes += CompareValue(name + "_Chunk20", offset, currData.LastLanding_CurrentWeapon.CurrentEquippedWeapon, compData.LastLanding_CurrentWeapon.CurrentEquippedWeapon);
+			diffBytes += CompareValue(name + "_Chunk20", offset, currData.LastLanding_CurrentWeapon.CurrentEquippedWeapon.ToUShort(), compData.LastLanding_CurrentWeapon.CurrentEquippedWeapon.ToUShort());
 
 			offset = GetSaveSlotOffset(nameof(currData.LastLanding_CurrentWeapon.Unknown17F), out name);
 			diffBytes += CompareValue(name, offset, currData.LastLanding_CurrentWeapon.Unknown17F, compData.LastLanding_CurrentWeapon.Unknown17F);
