@@ -21,10 +21,10 @@ namespace SRAM.Comparison.SoE.Enums
 		[DisplayNameLocalized(nameof(Resources.CmdShowChecksumIfDifferent), typeof(Resources))]
 		Checksum_Diff,
 
-		[DisplayNameLocalized(nameof(Resources.CmdShowUnknown12B), typeof(Resources))]
+		[DisplayNameLocalized(nameof(Resources.CmdShowScriptedEventTimer), typeof(Resources))]
 		U12b,
 
-		[DisplayNameLocalized(nameof(Resources.CmdShowUnknown12BIfDifferent), typeof(Resources))]
+		[DisplayNameLocalized(nameof(Resources.CmdShowScriptedEventTimerIfDifferent), typeof(Resources))]
 		U12b_Diff
 	}
 

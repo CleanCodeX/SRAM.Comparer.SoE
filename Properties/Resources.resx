@@ -123,11 +123,11 @@
   <data name="CmdShowChecksum" xml:space="preserve">
     <value>Show checksums</value>
   </data>
-  <data name="CmdShowUnknown12BIfDifferent" xml:space="preserve">
-    <value>Show 'Unknown12B' value only if different</value><comment>Don't translate term Unknown12Bs</comment>
+  <data name="CmdShowScriptedEventTimerIfDifferent" xml:space="preserve">
+    <value>Show 'ScriptedEventTimer' value only if different</value><comment>Don't translate term ScriptedEventTimers</comment>
   </data>
-  <data name="CmdShowUnknown12B" xml:space="preserve">
-    <value>Show 'Unknown12B' values</value><comment>Don't translate term Unknown12Bs</comment>
+  <data name="CmdShowScriptedEventTimer" xml:space="preserve">
+    <value>Show 'ScriptedEventTimer' values</value><comment>Don't translate term ScriptedEventTimers</comment>
   </data>
   <data name="CompChangesAtEveryInSaveSlotSave" xml:space="preserve">
     <value>changes at every in-game save</value>
@@ -147,8 +147,8 @@
   <data name="EnumChecksumIfDifferent" xml:space="preserve">
     <value>Checksum if different</value>
   </data>
-  <data name="EnumUnknown12BIfDifferent" xml:space="preserve">
-    <value>Unknown12B when different</value><comment>Don't translate term Unknown12B</comment>
+  <data name="EnumScriptedEventTimerIfDifferent" xml:space="preserve">
+    <value>ScriptedEventTimer when different</value><comment>Don't translate term ScriptedEventTimer</comment>
   </data>
   <data name="EnumChecksum" xml:space="preserve">
     <value>Checksum</value>

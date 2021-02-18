@@ -17,14 +17,14 @@
 	<data name="CmdShowChecksum" xml:space="preserve">
 		<value>Prüfsummen anzeigen</value>
 	</data>
-	<data name="CmdShowUnknown12B" xml:space="preserve">
-		<value>Unknown12B-Werte anzeigen</value><comment>Don't translate term Unknown12Bs</comment>
+	<data name="CmdShowScriptedEventTimer" xml:space="preserve">
+		<value>ScriptedEventTimer-Werte anzeigen</value><comment>Don't translate term ScriptedEventTimers</comment>
 	</data>
 	<data name="CmdShowChecksumIfDifferent" xml:space="preserve">
 		<value>Prüfsummen anzeigen falls unterschiedlich</value>
 	</data>
-	<data name="CmdShowUnknown12BIfDifferent" xml:space="preserve">
-		<value>Unknown12B-Werte anzeigen falls unterschiedlich</value><comment>Don't translate term Unknown12Bs</comment>
+	<data name="CmdShowScriptedEventTimerIfDifferent" xml:space="preserve">
+		<value>ScriptedEventTimer-Werte anzeigen falls unterschiedlich</value><comment>Don't translate term ScriptedEventTimers</comment>
 	</data>
 	<data name="CompComparedWithOtherSaveSlotTemplate" xml:space="preserve">
 		<value>verglichen mit Speicherslot {0}</value>
@@ -41,8 +41,8 @@
 	<data name="Invalid" xml:space="preserve">
 		<value>ungültig</value>
 	</data>
-	<data name="EnumUnknown12BIfDifferent" xml:space="preserve">
-		<value>Unknown12B wenn unterschiedlich</value><comment>Don't translate this term</comment>
+	<data name="EnumScriptedEventTimerIfDifferent" xml:space="preserve">
+		<value>ScriptedEventTimer wenn unterschiedlich</value><comment>Don't translate this term</comment>
 	</data>
 	<data name="EnumChecksum" xml:space="preserve">
 		<value>Prüfsumme</value>

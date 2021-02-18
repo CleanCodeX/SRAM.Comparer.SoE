@@ -59,8 +59,8 @@ namespace SRAM.Comparison.SoE.Services
 				case CommandsSoE.U12b_Diff:
 					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
 						cmd == CommandsSoE.U12b
-							? ComparisonFlagsSoE.Unknown12B
-							: ComparisonFlagsSoE.Unknown12BIfDifferent);
+							? ComparisonFlagsSoE.ScriptedEventTimer
+							: ComparisonFlagsSoE.ScriptedEventTimerIfDifferent);
 
 					break;
 				case CommandsSoE.Checksum:

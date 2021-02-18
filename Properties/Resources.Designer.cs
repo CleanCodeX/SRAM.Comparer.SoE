@@ -79,20 +79,20 @@ namespace SRAM.Comparison.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show Unknown12B values ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show ScriptedEventTimer values ähnelt.
         /// </summary>
-        public static string CmdShowUnknown12B {
+        public static string CmdShowScriptedEventTimer {
             get {
-                return ResourceManager.GetString("CmdShowUnknown12B", resourceCulture);
+                return ResourceManager.GetString("CmdShowScriptedEventTimer", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show Unknown12B value only if different ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show ScriptedEventTimer value only if different ähnelt.
         /// </summary>
-        public static string CmdShowUnknown12BIfDifferent {
+        public static string CmdShowScriptedEventTimerIfDifferent {
             get {
-                return ResourceManager.GetString("CmdShowUnknown12BIfDifferent", resourceCulture);
+                return ResourceManager.GetString("CmdShowScriptedEventTimerIfDifferent", resourceCulture);
             }
         }
         
@@ -142,11 +142,11 @@ namespace SRAM.Comparison.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Unknown12B when different ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die ScriptedEventTimer when different ähnelt.
         /// </summary>
-        public static string EnumUnknown12BIfDifferent {
+        public static string EnumScriptedEventTimerIfDifferent {
             get {
-                return ResourceManager.GetString("EnumUnknown12BIfDifferent", resourceCulture);
+                return ResourceManager.GetString("EnumScriptedEventTimerIfDifferent", resourceCulture);
             }
         }
         

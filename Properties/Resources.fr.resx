@@ -26,15 +26,15 @@
 	<data name="CompComparedWithOtherSaveSlotTemplate" xml:space="preserve">
 		<value>par rapport à la partie {0}</value>
 	</data>
-	<data name="EnumUnknown12BIfDifferent" xml:space="preserve">
-		<value>Valeurs Unknown12B si différentes</value><comment>Was: Valeurs Unknown12B de la partie en cours
+	<data name="EnumScriptedEventTimerIfDifferent" xml:space="preserve">
+		<value>Valeurs ScriptedEventTimer si différentes</value><comment>Was: Valeurs ScriptedEventTimer de la partie en cours
 		</comment>
 	</data>
-	<data name="CmdShowUnknown12BIfDifferent" xml:space="preserve">
-		<value>Afficher la valeur Unknown12B uniquement si elle est différente</value><comment>Afficher toutes les valeurs Unknown12B</comment>
+	<data name="CmdShowScriptedEventTimerIfDifferent" xml:space="preserve">
+		<value>Afficher la valeur ScriptedEventTimer uniquement si elle est différente</value><comment>Afficher toutes les valeurs ScriptedEventTimer</comment>
 	</data>
-	<data name="CmdShowUnknown12B" xml:space="preserve">
-		<value>Afficher les valeurs Unknown12B</value><comment>Retranslation needed</comment>
+	<data name="CmdShowScriptedEventTimer" xml:space="preserve">
+		<value>Afficher les valeurs ScriptedEventTimer</value><comment>Retranslation needed</comment>
 	</data>
 	<data name="CmdShowChecksumIfDifferent" xml:space="preserve">
 		<value>Afficher les sommes de contrôle uniquement si elles sont différentes</value><comment>was: Checksum de la partie en cours

@@ -28,9 +28,9 @@ namespace SRAM.Comparison.SoE.Enums
 		[DisplayNameLocalized(nameof(Res.EnumChecksum), typeof(Res))]
 		Checksum = 0x200 | ChecksumIfDifferent,
 
-		[DisplayNameLocalized(nameof(Res.EnumUnknown12BIfDifferent), typeof(Res))]
-		Unknown12BIfDifferent = 0x400,
+		[DisplayNameLocalized(nameof(Res.EnumScriptedEventTimerIfDifferent), typeof(Res))]
+		ScriptedEventTimerIfDifferent = 0x400,
 
-		Unknown12B = 0x800 | Unknown12BIfDifferent,
+		ScriptedEventTimer = 0x800 | ScriptedEventTimerIfDifferent,
 	}
 }

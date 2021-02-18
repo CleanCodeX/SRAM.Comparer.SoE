@@ -17,11 +17,11 @@
 	<data name="CmdShowChecksumIfDifferent" xml:space="preserve">
 		<value>Mostrar sumas de comprobación solo si son diferentes</value>
 	</data>
-	<data name="CmdShowUnknown12B" xml:space="preserve">
-		<value>Mostrar valores 'Unknown12B'</value>
+	<data name="CmdShowScriptedEventTimer" xml:space="preserve">
+		<value>Mostrar valores 'ScriptedEventTimer'</value>
 	</data>
-	<data name="CmdShowUnknown12BIfDifferent" xml:space="preserve">
-		<value>Mostrar el valor 'Unknown12B' solo si es diferente</value>
+	<data name="CmdShowScriptedEventTimerIfDifferent" xml:space="preserve">
+		<value>Mostrar el valor 'ScriptedEventTimer' solo si es diferente</value>
 	</data>
 	<data name="CompChangesAtEveryInSaveSlotSave" xml:space="preserve">
 		<value>cambios en cada guardado del juego</value>
@@ -38,7 +38,7 @@
 	<data name="EnumChecksumIfDifferent" xml:space="preserve">
 		<value>Suma de comprobación si es diferente</value>
 	</data>
-	<data name="EnumUnknown12BIfDifferent" xml:space="preserve">
+	<data name="EnumScriptedEventTimerIfDifferent" xml:space="preserve">
 		<value>Desconocida 12B cuando es diferente</value>
 	</data>
 	<data name="Invalid" xml:space="preserve">

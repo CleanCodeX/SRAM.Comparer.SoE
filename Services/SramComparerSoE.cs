@@ -61,7 +61,7 @@ namespace SRAM.Comparison.SoE.Services
 			StringBuilder checksums = new(), timestamps = new();
 
 			checksums.AppendLine($"{Resources.EnumChecksum} (2 {Res.Bytes} | {Resources.CompChangesAtEveryInSaveSlotSave}):");
-			timestamps.AppendLine($"{nameof(Sizes.Unknown12B)} ({Sizes.Unknown12B} {Res.Bytes}):");
+			timestamps.AppendLine($"{nameof(Sizes.ScriptedEventTimer)} ({Sizes.ScriptedEventTimer} {Res.Bytes}):");
 
 			#endregion
 
@@ -126,7 +126,7 @@ namespace SRAM.Comparison.SoE.Services
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.ChecksumIfDifferent))
 					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, FormatAdditionalValues(nameof(checksums), checksums));
 
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12BIfDifferent))
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.ScriptedEventTimerIfDifferent))
 					ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, FormatAdditionalValues(nameof(timestamps), timestamps));
 			}
 
@@ -161,7 +161,7 @@ namespace SRAM.Comparison.SoE.Services
 				if (optionFlags.HasFlag(ComparisonFlagsSoE.Checksum) || compSlot.Checksum != currSlot.Checksum)
 					checksums.AppendLine($"{currSlotNameString}: {currSlot.Checksum.PadLeft()}");
 
-				if (optionFlags.HasFlag(ComparisonFlagsSoE.Unknown12B) || compSlot.Data.EquippedStuff_Moneys_Levels.ScriptedEventTimer != currSlot.Data.EquippedStuff_Moneys_Levels.ScriptedEventTimer)
+				if (optionFlags.HasFlag(ComparisonFlagsSoE.ScriptedEventTimer) || compSlot.Data.EquippedStuff_Moneys_Levels.ScriptedEventTimer != currSlot.Data.EquippedStuff_Moneys_Levels.ScriptedEventTimer)
 					timestamps.AppendLine($"{currSlotNameString}: {currSlot.Data.EquippedStuff_Moneys_Levels.ScriptedEventTimer.PadLeft()}");
 
 				#endregion
@@ -316,7 +316,7 @@ namespace SRAM.Comparison.SoE.Services
 			diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown11, compData.EquippedStuff_Moneys_Levels.Unknown11);
 
 			//Unknown 12
-			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.Unknown12BIfDifferent))
+			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.ScriptedEventTimerIfDifferent))
 			{
 				offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.ScriptedEventTimer), out name);
 				diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.ScriptedEventTimer,
