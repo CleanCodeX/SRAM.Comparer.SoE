@@ -39,7 +39,7 @@
 		<value>Suma de comprobación si es diferente</value>
 	</data>
 	<data name="EnumScriptedEventTimerIfDifferent" xml:space="preserve">
-		<value>Desconocida 12B cuando es diferente</value>
+		<value>Desconocida ScriptedEventTimer cuando es diferente</value>
 	</data>
 	<data name="Invalid" xml:space="preserve">
 		<value>inválida</value>

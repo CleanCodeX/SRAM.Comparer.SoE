@@ -21,11 +21,11 @@ namespace SRAM.Comparison.SoE.Services
 			PrintCommandKey(CommandsSoE.Checksum_Diff);
 			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.Checksum_Diff.GetDisplayName()!);
 
-			PrintCommandKey(CommandsSoE.U12b);
-			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.U12b.GetDisplayName()!);
+			PrintCommandKey(CommandsSoE.EventTimer);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.EventTimer.GetDisplayName()!);
 
-			PrintCommandKey(CommandsSoE.U12b_Diff);
-			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.U12b_Diff.GetDisplayName()!);
+			PrintCommandKey(CommandsSoE.EventTimer_Diff);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.EventTimer_Diff.GetDisplayName()!);
 		}
 
 		protected override string GetGuideText(string? guideName)

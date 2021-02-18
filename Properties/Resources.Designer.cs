@@ -79,7 +79,7 @@ namespace SRAM.Comparison.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show ScriptedEventTimer values ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show &apos;ScriptedEventTimer&apos; value ähnelt.
         /// </summary>
         public static string CmdShowScriptedEventTimer {
             get {
@@ -88,7 +88,7 @@ namespace SRAM.Comparison.SoE.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show ScriptedEventTimer value only if different ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show &apos;ScriptedEventTimer&apos; value only if different ähnelt.
         /// </summary>
         public static string CmdShowScriptedEventTimerIfDifferent {
             get {

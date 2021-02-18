@@ -55,10 +55,10 @@ namespace SRAM.Comparison.SoE.Services
 				case CommandsSoE.ExportComparison:
 					ExportCompResult(options);
 					break;
-				case CommandsSoE.U12b:
-				case CommandsSoE.U12b_Diff:
+				case CommandsSoE.EventTimer:
+				case CommandsSoE.EventTimer_Diff:
 					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
-						cmd == CommandsSoE.U12b
+						cmd == CommandsSoE.EventTimer
 							? ComparisonFlagsSoE.ScriptedEventTimer
 							: ComparisonFlagsSoE.ScriptedEventTimerIfDifferent);
 

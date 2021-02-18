@@ -18,13 +18,13 @@
 		<value>Prüfsummen anzeigen</value>
 	</data>
 	<data name="CmdShowScriptedEventTimer" xml:space="preserve">
-		<value>ScriptedEventTimer-Werte anzeigen</value><comment>Don't translate term ScriptedEventTimers</comment>
+		<value>ScriptedEventTimer-Wert anzeigen</value>
 	</data>
 	<data name="CmdShowChecksumIfDifferent" xml:space="preserve">
 		<value>Prüfsummen anzeigen falls unterschiedlich</value>
 	</data>
 	<data name="CmdShowScriptedEventTimerIfDifferent" xml:space="preserve">
-		<value>ScriptedEventTimer-Werte anzeigen falls unterschiedlich</value><comment>Don't translate term ScriptedEventTimers</comment>
+		<value>ScriptedEventTimer-Wert anzeigen falls unterschiedlich</value>
 	</data>
 	<data name="CompComparedWithOtherSaveSlotTemplate" xml:space="preserve">
 		<value>verglichen mit Speicherslot {0}</value>
@@ -42,7 +42,7 @@
 		<value>ungültig</value>
 	</data>
 	<data name="EnumScriptedEventTimerIfDifferent" xml:space="preserve">
-		<value>ScriptedEventTimer wenn unterschiedlich</value><comment>Don't translate this term</comment>
+		<value>ScriptedEventTimer wenn unterschiedlich</value>
 	</data>
 	<data name="EnumChecksum" xml:space="preserve">
 		<value>Prüfsumme</value>

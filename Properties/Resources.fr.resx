@@ -27,24 +27,22 @@
 		<value>par rapport à la partie {0}</value>
 	</data>
 	<data name="EnumScriptedEventTimerIfDifferent" xml:space="preserve">
-		<value>Valeurs ScriptedEventTimer si différentes</value><comment>Was: Valeurs ScriptedEventTimer de la partie en cours
-		</comment>
+		<value>Valeur ScriptedEventTimer si différentes</value>
 	</data>
 	<data name="CmdShowScriptedEventTimerIfDifferent" xml:space="preserve">
-		<value>Afficher la valeur ScriptedEventTimer uniquement si elle est différente</value><comment>Afficher toutes les valeurs ScriptedEventTimer</comment>
+		<value>Afficher la valeur ScriptedEventTimer uniquement si elle est différente</value>
 	</data>
 	<data name="CmdShowScriptedEventTimer" xml:space="preserve">
-		<value>Afficher les valeurs ScriptedEventTimer</value><comment>Retranslation needed</comment>
+		<value>Afficher le valeur ScriptedEventTimer</value>
 	</data>
 	<data name="CmdShowChecksumIfDifferent" xml:space="preserve">
-		<value>Afficher les sommes de contrôle uniquement si elles sont différentes</value><comment>was: Checksum de la partie en cours
-		</comment>
+		<value>Afficher les sommes de contrôle uniquement si elles sont différentes</value>
 	</data>
 	<data name="EnumChecksumIfDifferent" xml:space="preserve">
-		<value>Checksum si différent</value><comment>Retranslation needed</comment>
+		<value>Checksum si différent</value>
 	</data>
 	<data name="CmdShowChecksum" xml:space="preserve">
-		<value>Afficher les sommes de contrôle</value><comment>Afficher le checksum affecté</comment>
+		<value>Afficher les sommes de contrôle</value>
 	</data>
 	<data name="EnumChecksum" xml:space="preserve">
 		<value>Checksum</value>

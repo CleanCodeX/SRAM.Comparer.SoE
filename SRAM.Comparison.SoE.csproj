@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <StartupObject></StartupObject>
-    <Version>0.4.0-b7</Version>
+    <Version>0.4.0-b8</Version>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
     <RepositoryUrl>https://github.com/CleanCodeX/SRAM.Comparison.SoE</RepositoryUrl>

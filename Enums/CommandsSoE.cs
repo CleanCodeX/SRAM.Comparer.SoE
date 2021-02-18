@@ -22,10 +22,10 @@ namespace SRAM.Comparison.SoE.Enums
 		Checksum_Diff,
 
 		[DisplayNameLocalized(nameof(Resources.CmdShowScriptedEventTimer), typeof(Resources))]
-		U12b,
+		EventTimer,
 
 		[DisplayNameLocalized(nameof(Resources.CmdShowScriptedEventTimerIfDifferent), typeof(Resources))]
-		U12b_Diff
+		EventTimer_Diff
 	}
 
 	internal enum AlternateCommandsSoe

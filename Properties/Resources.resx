@@ -124,10 +124,10 @@
     <value>Show checksums</value>
   </data>
   <data name="CmdShowScriptedEventTimerIfDifferent" xml:space="preserve">
-    <value>Show 'ScriptedEventTimer' value only if different</value><comment>Don't translate term ScriptedEventTimers</comment>
+    <value>Show 'ScriptedEventTimer' value only if different</value>
   </data>
   <data name="CmdShowScriptedEventTimer" xml:space="preserve">
-    <value>Show 'ScriptedEventTimer' values</value><comment>Don't translate term ScriptedEventTimers</comment>
+    <value>Show 'ScriptedEventTimer' value</value>
   </data>
   <data name="CompChangesAtEveryInSaveSlotSave" xml:space="preserve">
     <value>changes at every in-game save</value>
@@ -148,7 +148,7 @@
     <value>Checksum if different</value>
   </data>
   <data name="EnumScriptedEventTimerIfDifferent" xml:space="preserve">
-    <value>ScriptedEventTimer when different</value><comment>Don't translate term ScriptedEventTimer</comment>
+    <value>ScriptedEventTimer when different</value>
   </data>
   <data name="EnumChecksum" xml:space="preserve">
     <value>Checksum</value>
