@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using Common.Shared.Min.Extensions;
 using IO.Extensions;
-using SRAM.SoE.Extensions;
+using IO.Helpers;
 using SRAM.SoE.Models;
 using SRAM.SoE.Models.Structs;
 
@@ -14,62 +17,106 @@ namespace SRAM.Comparison.SoE.Helpers
 	/// <summary>List of buffers in sub-structures</summary>
 	internal static class UnkownBufferOffsetFinder
 	{
+		private const string OffsetNotFoundTemplate = "Offset for {0} could not be found.";
+		private const string NamedOffsetNotDefinedTemplate = "Named offset {0} is not defined.";
+
 		internal const string StructDelimiter = "__";
 
-		private static bool IsDefinedOffset(string bufferName) => Enum.IsDefined(typeof(SaveSlotUnknownOffset), bufferName);
+		public static int GetSaveSlotBufferOffset(string fieldName) => 
+			fieldName.Contains(StructDelimiter) 
+			? (int)fieldName.ParseEnum<SaveSlotUnknownOffset>().GetOrThrowIfDefault(fieldName, OffsetNotFoundTemplate.InsertArgs(fieldName))
+			: InternalGetBufferOffset(typeof(SaveSlotDataSoE), fieldName).GetOrThrowIfDefault(fieldName, NamedOffsetNotDefinedTemplate.InsertArgs(fieldName)) + SramSizes.Checksum;
 
-		public static int GetSaveSlotBufferOffset(string bufferName) => 
-			bufferName.Contains(StructDelimiter) && IsDefinedOffset(bufferName)
-			? (int) bufferName.ParseEnum<SaveSlotUnknownOffset>()
-			: InternalGetBufferOffset<SaveSlotDataSoE>(bufferName) + SramSizes.Checksum;
+		public static int GetSramBufferOffset(string fieldName) => 
+			fieldName.Contains(StructDelimiter)
+			? (int)fieldName.ParseEnum<SaveSlotUnknownOffset>().GetOrThrowIfDefault(fieldName, OffsetNotFoundTemplate.InsertArgs(fieldName))
+			: InternalGetBufferOffset(typeof(SramSoE), fieldName).GetOrThrowIfDefault(fieldName, NamedOffsetNotDefinedTemplate.InsertArgs(fieldName));
 
-		public static int GetSramBufferOffset(string bufferName) => 
-			bufferName.Contains(StructDelimiter) && IsDefinedOffset(bufferName)
-			? (int)bufferName.ParseEnum<SaveSlotUnknownOffset>()
-			: InternalGetBufferOffset<SramSoE>(bufferName);
-
-		private static int InternalGetBufferOffset<TParentBuffer>(string bufferName)
-			where TParentBuffer: struct
+		private static int InternalGetBufferOffset(Type type, string bufferName)
 		{
 			var index = bufferName.IndexOf('.'); // check for path info
 			if (index == -1)
-				return FindFieldOffset<TParentBuffer>(bufferName);
+			{
+				var offset = FindFieldOffset(type, bufferName);
+				if (offset > -1)
+					return offset;
 
-			var parentFieldType = GetParentStructType<TParentBuffer>(bufferName, index, out var parentOffset);
-			var fieldName = bufferName.Substring(index + 1);
+				throw new ArgumentException($"Type [{type.Name}] does not contain field [{bufferName}]");
+			}
 
-			return parentOffset + (int) Marshal.OffsetOf(parentFieldType, fieldName);
+			var parentFieldType = GetBaseFieldTypeAndOffset(type, bufferName[..index], out var parentOffset);
+			var fieldName = bufferName[(index + 1)..];
+
+			return parentOffset + InternalGetBufferOffset(parentFieldType, fieldName);
 		}
 
-		private static Type GetParentStructType<TParentBuffer>(string fieldName, int index, out int parentOffset)
-			where TParentBuffer : struct
+		private static Type GetBaseFieldTypeAndOffset(Type type, string fieldName, out int parentOffset)
 		{
-			var parentStructFieldName = fieldName.Substring(0, index);
-			parentOffset = (int) Marshal.OffsetOf<TParentBuffer>(parentStructFieldName);
+			parentOffset = (int) Marshal.OffsetOf(type, fieldName);
 
-			return typeof(TParentBuffer).GetField(parentStructFieldName)!.FieldType;
+			return type.GetField(fieldName)!.FieldType;
 		}
 
-		private static int FindFieldOffset<TParentBuffer>(string fieldName)
-			where TParentBuffer : struct
+		private static int FindFieldOffset(Type type, string fieldName)
 		{
 			var parentOffset = 0;
-			var parentType = typeof(TParentBuffer);
-			if (parentType.GetField(fieldName) is null)
+
+			var fieldInfo = type.GetField(fieldName, BindingFlags.Instance | BindingFlags.Public);
+			if (fieldInfo is null)
 			{
-				foreach (var fieldInfo in parentType.GetPublicInstanceFields())
+				foreach (var childFieldInfo in type.GetPublicInstanceFields())
 				{
-					var fieldType = fieldInfo.FieldType;
+					var fieldType = childFieldInfo.FieldType;
 					if (fieldType.GetField(fieldName) is null) continue;
 
-					parentType = fieldType;
-					parentOffset = (int) Marshal.OffsetOf<TParentBuffer>(fieldInfo.Name);
+					parentOffset = (int) Marshal.OffsetOf(type, childFieldInfo.Name);
+					type = fieldType;
 
 					break;
 				}
 			}
 
-			return parentOffset + (int)Marshal.OffsetOf(parentType, fieldName);
+			return parentOffset + (int)Marshal.OffsetOf(type, fieldName);
+		}
+
+		internal static string BuildFieldName([NotNull] in Type rootType, [NotNull] Type type, [NotNull] string fieldName)
+		{
+			rootType.ThrowIfNull(nameof(rootType));
+			type.ThrowIfNull(nameof(type));
+			fieldName.ThrowIfNull(nameof(fieldName));
+			type.GetField(fieldName).ThrowIfNull(fieldName, $"Type [{type}] has no field named [{fieldName}].");
+
+			List<string> list = new();
+
+			if (!BuildFieldNameInternal(list, rootType, type, fieldName))
+				throw new ArgumentException($"Field name {fieldName} could not be found.");
+
+			return list.AsEnumerable().Reverse().ToArray().Join(".");
+		}
+
+		private static bool BuildFieldNameInternal(in List<string> list, in Type parentType, Type type, string fieldName)
+		{
+			var fields = parentType.GetPublicInstanceStructFields();
+			foreach (var field in fields)
+			{
+				if (field.FieldType == type)
+				{
+					list.Add(fieldName);
+					list.Add(field.Name);
+					return true;
+				}
+
+				if (!field.FieldType.IsDefined<HasOffsetMembersAttribute>())
+					continue;
+
+				if (BuildFieldNameInternal(list, field.FieldType, type, fieldName))
+				{
+					list.Add(field.Name);
+					return true;
+				}
+			}
+
+			return false;
 		}
 	}
 }

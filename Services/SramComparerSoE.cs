@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Common.Shared.Min.Extensions;
@@ -6,6 +7,7 @@ using IO.Extensions;
 using IO.Models;
 using SoE;
 using SoE.Models.Structs;
+using SoE.Models.Structs.Unknown;
 using SRAM.Comparison.Helpers;
 using SRAM.Comparison.Services;
 using SRAM.Comparison.SoE.Enums;
@@ -197,9 +199,9 @@ namespace SRAM.Comparison.SoE.Services
 
 					ConsoleHelper.EnsureMinConsoleWidth(ComparisonConsoleWidth);
 
-					var bufferName = $"{nameof(compFile.Struct.SaveSlots)}[{currSlotIndex}]";
+					var fieldName = $"{nameof(compFile.Struct.SaveSlots)}[{currSlotIndex}]";
 					var bufferOffset = SramOffsets.FirstSaveSlot + currSlotId * SramSizes.SaveSlot;
-					var slotBufferDiffBytes = CompareValue(bufferName, bufferOffset, currSlotBytes, compSlotBytes, false);
+					var slotBufferDiffBytes = CompareValue(fieldName, bufferOffset, currSlotBytes, compSlotBytes, false);
 					if (slotBufferDiffBytes > slotDiffBytes)
 					{
 						ConsolePrinter.PrintLine();
@@ -207,7 +209,7 @@ namespace SRAM.Comparison.SoE.Services
 							$@"{" ".Repeat(2)}[ {Res.CompSectionSaveSlotChangedTemplate} ]".InsertArgs(currSlotIndex));
 						// ReSharper disable once RedundantArgumentDefaultValue
 
-						CompareValue(bufferName, bufferOffset, currSlotBytes, compSlotBytes, true,
+						CompareValue(fieldName, bufferOffset, currSlotBytes, compSlotBytes, true,
 							offset => typeof(SaveSlotDataSoE).GetFieldNameByOffset(offset), isUnknown: false);
 						ConsolePrinter.PrintLine();
 						ConsolePrinter.PrintColoredLine(slotDiffBytes > 0 ? ConsoleColor.Green : ConsoleColor.White,
@@ -266,8 +268,6 @@ namespace SRAM.Comparison.SoE.Services
 			ref var currData = ref currSaveSlot.Data;
 			ref var compData = ref compSaveSlot.Data;
 
-			const string delimiter = StructDelimiter;
-
 			// ReSharper disable once InlineOutVariableDeclaration
 			string name;
 			// ReSharper disable once JoinDeclarationAndInitializer
@@ -277,13 +277,13 @@ namespace SRAM.Comparison.SoE.Services
 			for (var i = 0; i < 4; ++i)
 			{
 				var parentName = nameof(currData.BoyStatusBuffs);
-				offset = GetSaveSlotOffset(BuildBufferName(parentName, i, nameof(CharacterBuffStatus.Id)), out name);
+				offset = GetSaveSlotOffset(BuildIndexName(parentName, i, nameof(CharacterBuffStatus.Id)), out name);
 				diffBytes += CompareValue(name, offset, currData.BoyStatusBuffs.Status[i].Id, compData.BoyStatusBuffs.Status[i].Id);
 
-				offset = GetSaveSlotOffset(BuildBufferName(parentName, i, nameof(CharacterBuffStatus.Timer)), out name);
+				offset = GetSaveSlotOffset(BuildIndexName(parentName, i, nameof(CharacterBuffStatus.Timer)), out name);
 				diffBytes += CompareValue(name, offset, currData.BoyStatusBuffs.Status[i].Timer, compData.BoyStatusBuffs.Status[i].Timer);
 
-				offset = GetSaveSlotOffset(BuildBufferName(parentName, i, nameof(CharacterBuffStatus.Boost)), out name);
+				offset = GetSaveSlotOffset(BuildIndexName(parentName, i, nameof(CharacterBuffStatus.Boost)), out name);
 				diffBytes += CompareValue(name, offset, currData.BoyStatusBuffs.Status[i].Boost, compData.BoyStatusBuffs.Status[i].Boost);
 			}
 			//Unknown 4
@@ -292,18 +292,16 @@ namespace SRAM.Comparison.SoE.Services
 			for (var i = 0; i < 4; ++i)
 			{
 				var parentName = nameof(currData.DogStatusBuffs);
-				offset = GetSaveSlotOffset(BuildBufferName(parentName, i, nameof(CharacterBuffStatus.Id)), out name);
+				offset = GetSaveSlotOffset(BuildIndexName(parentName, i, nameof(CharacterBuffStatus.Id)), out name);
 				diffBytes += CompareValue(name, offset, currData.DogStatusBuffs.Status[i].Id, compData.DogStatusBuffs.Status[i].Id);
 
-				offset = GetSaveSlotOffset(BuildBufferName(parentName, i, nameof(CharacterBuffStatus.Timer)), out name);
+				offset = GetSaveSlotOffset(BuildIndexName(parentName, i, nameof(CharacterBuffStatus.Timer)), out name);
 				diffBytes += CompareValue(name, offset, currData.DogStatusBuffs.Status[i].Timer, compData.DogStatusBuffs.Status[i].Timer);
 
-				offset = GetSaveSlotOffset(BuildBufferName(parentName, i, nameof(CharacterBuffStatus.Boost)), out name);
+				offset = GetSaveSlotOffset(BuildIndexName(parentName, i, nameof(CharacterBuffStatus.Boost)), out name);
 				diffBytes += CompareValue(name, offset, currData.DogStatusBuffs.Status[i].Boost, compData.DogStatusBuffs.Status[i].Boost);
 			}
 			//Unknown 7
-
-			static string BuildBufferName(string parentName, int index, string bufferName) => $"{parentName}{index}{StructDelimiter}{bufferName}";
 
 			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.CurrentEquippedWeapon), out name);
 			diffBytes += CompareValue(name + "_Chunk16", offset, currData.EquippedStuff_Moneys_Levels.CurrentEquippedWeapon.ToUShort(), compData.EquippedStuff_Moneys_Levels.CurrentEquippedWeapon.ToUShort());
@@ -334,8 +332,8 @@ namespace SRAM.Comparison.SoE.Services
 
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown14), out name);
 			diffBytes += CompareValue(name, offset, 
-				currData.Collectables_Spots.Unknown14.ToByteArray(), 
-				compData.Collectables_Spots.Unknown14.ToByteArray());
+				currData.Collectables_Spots.Unknown14.Value.ToByteArray(), 
+				compData.Collectables_Spots.Unknown14.Value.ToByteArray());
 
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown14B), out name);
 			diffBytes += CompareValue(name, offset,
@@ -344,17 +342,17 @@ namespace SRAM.Comparison.SoE.Services
 
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.GourdSpots), out name);
 			diffBytes += CompareValue(name, offset,
-				currData.Collectables_Spots.GourdSpots.ToByteArray(),
-				compData.Collectables_Spots.GourdSpots.ToByteArray());
+				currData.Collectables_Spots.GourdSpots.Value.ToByteArray(),
+				compData.Collectables_Spots.GourdSpots.Value.ToByteArray());
 
 			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.IngredientSniffSpots), out name);
 			diffBytes += CompareValue(name, offset,
-				currData.Collectables_Spots.IngredientSniffSpots.SniffSpots,
-				compData.Collectables_Spots.IngredientSniffSpots.SniffSpots);
+				currData.Collectables_Spots.IngredientSniffSpots.Data,
+				compData.Collectables_Spots.IngredientSniffSpots.Data);
 
 			//Unknown 15
-			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown15)}{delimiter}{nameof(currData.Collectables_Spots.Unknown15.Offset0To23)}", out name);
-			diffBytes += CompareValue(name, offset, currData.Collectables_Spots.Unknown15.Offset0To23, compData.Collectables_Spots.Unknown15.Offset0To23);
+			offset = GetSaveSlotTypeOffset(typeof(Unknown15), nameof(currData.Collectables_Spots.Unknown15.Data), out name);
+			diffBytes += CompareValue(name, offset, currData.Collectables_Spots.Unknown15.Data, compData.Collectables_Spots.Unknown15.Data);
 			//Unknown 15
 
 			#region Unknown 16
@@ -367,13 +365,8 @@ namespace SRAM.Comparison.SoE.Services
 				currData.Collectables_Spots.Unknown16B.ToByteArray(), 
 				compData.Collectables_Spots.Unknown16B.ToByteArray());
 
-			offset = GetSaveSlotOffset(nameof(currData.Collectables_Spots.Unknown16C), out name);
-			diffBytes += CompareValue(name, offset,
-				currData.Collectables_Spots.Unknown16C.Offset0.ToByteArray(),
-				compData.Collectables_Spots.Unknown16C.Offset0.ToByteArray());
-
-			offset = GetSaveSlotOffset($"{nameof(currData.Collectables_Spots.Unknown16C)}{delimiter}{nameof(currData.Collectables_Spots.Unknown16C.Offset1To5)}", out name);
-			diffBytes += CompareValue(name, offset, currData.Collectables_Spots.Unknown16C.Offset1To5, compData.Collectables_Spots.Unknown16C.Offset1To5);
+			offset = GetSaveSlotTypeOffset(typeof(Unknown16C), nameof(currData.Collectables_Spots.Unknown16C.Data), out name);
+			diffBytes += CompareValue(name, offset, currData.Collectables_Spots.Unknown16C.Data, compData.Collectables_Spots.Unknown16C.Data);
 
 			#endregion Unknown 16
 
@@ -412,11 +405,26 @@ namespace SRAM.Comparison.SoE.Services
 
 			return diffBytes;
 
-			static int GetSaveSlotOffset(string bufferName, out string name)
+			static string BuildIndexName(string parentName, int index, string fieldName) => $"{parentName}{index}{StructDelimiter}{fieldName}";
+
+			static int GetSaveSlotTypeOffset(Type parentType, string fieldName, out string name)
 			{
-				name = bufferName;
-				return  GetSaveSlotBufferOffset(bufferName);
+				return GetSaveSlotOffset(BuildFieldName(typeof(SaveSlotDataSoE), parentType, fieldName), out name);
 			}
+
+			static int GetSaveSlotOffset(string fieldName, out string name)
+			{
+				name = fieldName;
+				return  GetSaveSlotBufferOffset(fieldName);
+			}
+		}
+
+		protected override int? GetWramOffset(int offset)
+		{
+			if (!SramOffsets.WramOffsetMappings.TryGetValue(offset, out var result))
+				return null;
+				
+			return result.WramOffset;
 		}
 
 		#endregion CompareSaveSlot

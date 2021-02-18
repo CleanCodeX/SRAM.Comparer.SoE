@@ -66,10 +66,6 @@ namespace SRAM.Comparison.SoE.Helpers
 		DogStatusBuffs3__Id = SaveSlotBaseOffset.DogStatusBuffs3, // Offset 134
 		DogStatusBuffs3__Timer = SaveSlotBaseOffset.DogStatusBuffs3 + 2,
 		DogStatusBuffs3__Boost = SaveSlotBaseOffset.DogStatusBuffs3 + 4,
-
-		Unknown15__Offset0To23 = SaveSlotBaseOffset.Unknown15,
-
-		Unknown16C__Offset1To5 = SaveSlotBaseOffset.Unknown16C + 1, // Offset 644
 	}
 }
 
