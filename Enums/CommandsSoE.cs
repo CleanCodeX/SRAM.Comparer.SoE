@@ -30,7 +30,9 @@ namespace SRAM.Comparison.SoE.Enums
 
 	internal enum AlternateCommandsSoe
 	{
-		Cksm = CommandsSoE.Checksum,
-		Cksm_D = CommandsSoE.Checksum_Diff,
+		Check = CommandsSoE.Checksum,
+		CheckDiff = CommandsSoE.Checksum_Diff,
+		Timer = CommandsSoE.EventTimer,
+		TimerDiff = CommandsSoE.EventTimer_Diff,
 	}
 }

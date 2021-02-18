@@ -28,6 +28,11 @@ namespace SRAM.Comparison.SoE.Services
 			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.EventTimer_Diff.GetDisplayName()!);
 		}
 
+		protected override string GetAlternateCommands(in Enum cmd, Type alternateCommands) => base.GetAlternateCommands(cmd, 
+			cmd.GetType() == typeof(CommandsSoE) 
+			? typeof(AlternateCommandsSoe) 
+			: alternateCommands);
+
 		protected override string GetGuideText(string? guideName)
 		{
 			string? content = null;
