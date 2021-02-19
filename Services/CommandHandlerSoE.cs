@@ -53,7 +53,7 @@ namespace SRAM.Comparison.SoE.Services
 					Compare(options);
 					break;
 				case CommandsSoE.ExportComparison:
-					ExportCompResult(options);
+					SaveCompResult(options);
 					break;
 				case CommandsSoE.EventTimer:
 				case CommandsSoE.EventTimer_Diff:
@@ -124,9 +124,9 @@ namespace SRAM.Comparison.SoE.Services
 		#region Export
 
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public string? ExportCompResult(IOptions options) => ExportCompResult<SramComparerSoE>(options);
+		public string? SaveCompResult(IOptions options) => SaveCompResult<SramComparerSoE>(options);
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
-		public string? ExportCompResult(IOptions options, string filePath) => ExportCompResult<SramComparerSoE>(options, filePath); 
+		public string? SaveCompResult(IOptions options, string filePath) => SaveCompResult<SramComparerSoE>(options, filePath); 
 
 		#endregion Export
 
