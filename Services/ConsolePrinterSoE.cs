@@ -18,14 +18,14 @@ namespace SRAM.Comparison.SoE.Services
 			PrintCommandKey(CommandsSoE.Checksum);
 			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.Checksum.GetDisplayName()!);
 
-			PrintCommandKey(CommandsSoE.Checksum_Diff);
-			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.Checksum_Diff.GetDisplayName()!);
+			PrintCommandKey(CommandsSoE.ChecksumDiff);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.ChecksumDiff.GetDisplayName()!);
 
 			PrintCommandKey(CommandsSoE.EventTimer);
 			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.EventTimer.GetDisplayName()!);
 
-			PrintCommandKey(CommandsSoE.EventTimer_Diff);
-			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.EventTimer_Diff.GetDisplayName()!);
+			PrintCommandKey(CommandsSoE.EventTimerDiff);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.EventTimerDiff.GetDisplayName()!);
 		}
 
 		protected override string GetAlternateCommands(in Enum cmd, Type alternateCommands) => base.GetAlternateCommands(cmd, 

@@ -13,26 +13,28 @@ namespace SRAM.Comparison.SoE.Enums
 	public enum CommandsSoE
 	{
 		Compare = Commands.Compare,
-		ExportComparison = Commands.ExportComparison,
+		ExportCompResult = Commands.ExportCompResult,
+		ExportCompResultOpen = Commands.ExportCompResultOpen,
+		ExportCompResultSelect = Commands.ExportCompResultSelect,
 
 		[DisplayNameLocalized(nameof(Resources.CmdShowChecksum), typeof(Resources))]
 		Checksum,
 
 		[DisplayNameLocalized(nameof(Resources.CmdShowChecksumIfDifferent), typeof(Resources))]
-		Checksum_Diff,
+		ChecksumDiff,
 
 		[DisplayNameLocalized(nameof(Resources.CmdShowScriptedEventTimer), typeof(Resources))]
 		EventTimer,
 
 		[DisplayNameLocalized(nameof(Resources.CmdShowScriptedEventTimerIfDifferent), typeof(Resources))]
-		EventTimer_Diff
+		EventTimerDiff
 	}
 
 	internal enum AlternateCommandsSoe
 	{
 		Check = CommandsSoE.Checksum,
-		CheckDiff = CommandsSoE.Checksum_Diff,
+		CheckDiff = CommandsSoE.ChecksumDiff,
 		Timer = CommandsSoE.EventTimer,
-		TimerDiff = CommandsSoE.EventTimer_Diff,
+		TimerDiff = CommandsSoE.EventTimerDiff,
 	}
 }

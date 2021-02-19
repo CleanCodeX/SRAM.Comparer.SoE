@@ -52,11 +52,21 @@ namespace SRAM.Comparison.SoE.Services
 				case CommandsSoE.Compare:
 					Compare(options);
 					break;
-				case CommandsSoE.ExportComparison:
-					SaveCompResult(options);
+				case CommandsSoE.ExportCompResult:
+				case CommandsSoE.ExportCompResultOpen:
+				case CommandsSoE.ExportCompResultSelect:
+					var localOptions = options.Copy();
+
+					if (cmd == CommandsSoE.ExportCompResultOpen)
+						localOptions.ExportFlags = localOptions.ExportFlags.SetUInt32Flags(ExportFlags.OpenFile);
+
+					if (cmd == CommandsSoE.ExportCompResultSelect)
+						localOptions.ExportFlags = localOptions.ExportFlags.SetUInt32Flags(ExportFlags.SelectFile);
+
+					SaveCompResult(localOptions);
 					break;
 				case CommandsSoE.EventTimer:
-				case CommandsSoE.EventTimer_Diff:
+				case CommandsSoE.EventTimerDiff:
 					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
 						cmd == CommandsSoE.EventTimer
 							? ComparisonFlagsSoE.ScriptedEventTimer
@@ -64,7 +74,7 @@ namespace SRAM.Comparison.SoE.Services
 
 					break;
 				case CommandsSoE.Checksum:
-				case CommandsSoE.Checksum_Diff:
+				case CommandsSoE.ChecksumDiff:
 					options.ComparisonFlags = InvertIncludeFlag(options.ComparisonFlags,
 						cmd == CommandsSoE.Checksum
 							? ComparisonFlagsSoE.Checksum
