@@ -27,6 +27,7 @@ Added key binding customization
     <PackageId>CCX.SRAM.Comparison.SoE</PackageId>
     <Platforms>AnyCPU</Platforms>
     <PackageProjectUrl>http://evermore.xeth.de</PackageProjectUrl>
+    <AssemblyName>SramComparer</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
