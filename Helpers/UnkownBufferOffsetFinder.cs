@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -22,32 +23,58 @@ namespace SRAM.Comparison.SoE.Helpers
 
 		internal const string StructDelimiter = "__";
 
-		public static int GetSaveSlotBufferOffset(string fieldName) => 
-			fieldName.Contains(StructDelimiter) 
-			? (int)fieldName.ParseEnum<SaveSlotUnknownOffset>().GetOrThrowIfDefault(fieldName, OffsetNotFoundTemplate.InsertArgs(fieldName))
-			: InternalGetBufferOffset(typeof(SaveSlotDataSoE), fieldName).GetOrThrowIfDefault(fieldName, NamedOffsetNotDefinedTemplate.InsertArgs(fieldName)) + SramSizes.Checksum;
-
-		public static int GetSramBufferOffset(string fieldName) => 
-			fieldName.Contains(StructDelimiter)
-			? (int)fieldName.ParseEnum<SaveSlotUnknownOffset>().GetOrThrowIfDefault(fieldName, OffsetNotFoundTemplate.InsertArgs(fieldName))
-			: InternalGetBufferOffset(typeof(SramSoE), fieldName).GetOrThrowIfDefault(fieldName, NamedOffsetNotDefinedTemplate.InsertArgs(fieldName));
-
-		private static int InternalGetBufferOffset(Type type, string bufferName)
+		internal class FindOffsetResult
 		{
-			var index = bufferName.IndexOf('.'); // check for path info
+			public Type? ParentType;
+			public string? Path;
+
+			public override string? ToString() => ParentType is null ? Path : $"[{ParentType.Name}] {Path}";
+		}
+
+		public static int GetSaveSlotBufferOffset(string fieldName, out FindOffsetResult result)
+		{
+			result = new();
+			int offset;
+
+			if (fieldName.Contains(StructDelimiter))
+				offset = (int)fieldName.ParseEnum<SaveSlotUnknownOffset>();
+			else
+				offset = InternalGetBufferOffset(typeof(SaveSlotDataSoE), fieldName, result);
+
+			offset.ThrowIfDefault(fieldName, OffsetNotFoundTemplate.InsertArgs(fieldName));
+
+			return SramSizes.Checksum + offset;
+		}
+
+		public static int GetSramBufferOffset(string fieldName, out FindOffsetResult result)
+		{
+			result = new();
+			return fieldName.Contains(StructDelimiter)
+				? (int) fieldName.ParseEnum<SaveSlotUnknownOffset>()
+					.GetOrThrowIfDefault(fieldName, OffsetNotFoundTemplate.InsertArgs(fieldName))
+				: InternalGetBufferOffset(typeof(SramSoE), fieldName, result)
+					.GetOrThrowIfDefault(fieldName, NamedOffsetNotDefinedTemplate.InsertArgs(fieldName));
+		}
+
+		private static int InternalGetBufferOffset(Type type, string fieldNameOrPath, FindOffsetResult result)
+		{
+			var index = fieldNameOrPath.IndexOf('.'); // check for path info
 			if (index == -1)
 			{
-				var offset = FindFieldOffset(type, bufferName);
+				var offset = FindFieldOffset(type, fieldNameOrPath, result);
 				if (offset > -1)
 					return offset;
 
-				throw new ArgumentException($"Type [{type.Name}] does not contain field [{bufferName}]");
+				throw new ArgumentException($"Type [{type.Name}] does not contain field [{fieldNameOrPath}]");
 			}
 
-			var parentFieldType = GetBaseFieldTypeAndOffset(type, bufferName[..index], out var parentOffset);
-			var fieldName = bufferName[(index + 1)..];
+			var fieldName = fieldNameOrPath[..index];
+			var parentFieldType = GetBaseFieldTypeAndOffset(type, fieldName, out var parentOffset);
 
-			return parentOffset + InternalGetBufferOffset(parentFieldType, fieldName);
+			result.Path += $"{fieldName}.";
+			fieldNameOrPath = fieldNameOrPath[(index + 1)..];
+			
+			return parentOffset + InternalGetBufferOffset(parentFieldType, fieldNameOrPath, result);
 		}
 
 		private static Type GetBaseFieldTypeAndOffset(Type type, string fieldName, out int parentOffset)
@@ -57,10 +84,11 @@ namespace SRAM.Comparison.SoE.Helpers
 			return type.GetField(fieldName)!.FieldType;
 		}
 
-		private static int FindFieldOffset(Type type, string fieldName)
+		private static int FindFieldOffset(Type type, string fieldName, FindOffsetResult result)
 		{
-			var parentOffset = 0;
+			result.ParentType = type;
 
+			var parentOffset = 0;
 			var fieldInfo = type.GetField(fieldName, BindingFlags.Instance | BindingFlags.Public);
 			if (fieldInfo is null)
 			{
@@ -71,24 +99,29 @@ namespace SRAM.Comparison.SoE.Helpers
 
 					parentOffset = (int) Marshal.OffsetOf(type, childFieldInfo.Name);
 					type = fieldType;
+					result.ParentType = fieldType;
+					Debug.Assert(result.Path is null);
+					result.Path += $"{childFieldInfo.Name}.{fieldName}";
 
 					break;
 				}
 			}
+			else
+				result.Path += fieldName;
 
-			return parentOffset + (int)Marshal.OffsetOf(type, fieldName);
+			return parentOffset + (int) Marshal.OffsetOf(type, fieldName);
 		}
 
-		internal static string BuildFieldName([NotNull] in Type rootType, [NotNull] Type type, [NotNull] string fieldName)
+		internal static string BuildFieldName([NotNull] in Type rootType, [NotNull] Type containingType, [NotNull] string fieldName)
 		{
 			rootType.ThrowIfNull(nameof(rootType));
-			type.ThrowIfNull(nameof(type));
+			containingType.ThrowIfNull(nameof(containingType));
 			fieldName.ThrowIfNull(nameof(fieldName));
-			type.GetField(fieldName).ThrowIfNull(fieldName, $"Type [{type}] has no field named [{fieldName}].");
+			containingType.GetField(fieldName).ThrowIfNull(fieldName, $"Type [{containingType}] has no field named [{fieldName}].");
 
 			List<string> list = new();
 
-			if (!BuildFieldNameInternal(list, rootType, type, fieldName))
+			if (!BuildFieldNameInternal(list, rootType, containingType, fieldName))
 				throw new ArgumentException($"Field name {fieldName} could not be found.");
 
 			return list.AsEnumerable().Reverse().ToArray().Join(".");

@@ -19,10 +19,7 @@
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Added savestate comparison
-Added savestate offset value display
-Added config(s) loading/saving (support for custom config name)
-Added key binding customization
+    <PackageReleaseNotes>Bugfix for loading/saving config files
 </PackageReleaseNotes>
     <PackageId>CCX.SRAM.Comparison.SoE</PackageId>
     <Platforms>AnyCPU</Platforms>
@@ -41,6 +38,7 @@ Added key binding customization
 
   <ItemGroup>
     <ProjectReference Include="..\SoE\SoE.csproj" />
+    <ProjectReference Include="..\SRAM.Comparison.Media\SRAM.Comparison.Media.csproj" />
     <ProjectReference Include="..\WRAM.Snes9x.SoE\WRAM.Snes9x.SoE.csproj" />
     <ProjectReference Include="..\SRAM.SoE\SRAM.SoE.csproj" />
     <ProjectReference Include="..\SRAM.Comparison\SRAM.Comparison.csproj" />
