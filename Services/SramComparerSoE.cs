@@ -326,13 +326,13 @@ namespace SRAM.Comparison.SoE.Services
 			diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.CurrentEquippedWeapon.ToUShort(), compData.EquippedStuff_Moneys_Levels.CurrentEquippedWeapon.ToUShort());
 
 			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown9), out name);
-			diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown9, compData.EquippedStuff_Moneys_Levels.Unknown9);
+			diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown9, compData.EquippedStuff_Moneys_Levels.Unknown9, isUnknown: true);
 
 			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.EquippedAlchemies), out name);
 			diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.EquippedAlchemies.ToBytes(), compData.EquippedStuff_Moneys_Levels.EquippedAlchemies.ToBytes());
 
 			offset = GetSaveSlotOffset(nameof(currData.EquippedStuff_Moneys_Levels.Unknown11), out name);
-			diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown11, compData.EquippedStuff_Moneys_Levels.Unknown11);
+			diffBytes += CompareValue(name, offset, currData.EquippedStuff_Moneys_Levels.Unknown11, compData.EquippedStuff_Moneys_Levels.Unknown11, isUnknown: true);
 
 			//Unknown 12
 			if (options.ComparisonFlags.HasFlag(ComparisonFlagsSoE.ScriptedEventTimerIfDifferent))
@@ -351,7 +351,7 @@ namespace SRAM.Comparison.SoE.Services
 			#region Chunk 17
 
 			offset = GetSaveSlotOffset(nameof(currData.AlchemyLevels.Unknown13), out name);
-			diffBytes += CompareValue(name, offset, currData.AlchemyLevels.Unknown13, compData.AlchemyLevels.Unknown13);
+			diffBytes += CompareValue(name, offset, currData.AlchemyLevels.Unknown13, compData.AlchemyLevels.Unknown13, isUnknown: true);
 
 			#endregion
 
@@ -461,6 +461,8 @@ namespace SRAM.Comparison.SoE.Services
 
 			#endregion
 		}
+
+		private new int CompareValue(string name, int offset, ReadOnlySpan<byte> currValues, ReadOnlySpan<byte> compValues, bool writeToConsole = true, Func<int, string?>? offsetNameCallback = null, bool isUnknown = false) => base.CompareValue(name, offset, currValues, compValues, writeToConsole, offsetNameCallback, isUnknown || name.ContainsInsensitive("Unknown"));
 
 		protected override int? GetWramOffset(int offset) => 
 			SramOffsets.WramOffsetMappings.TryGetValue(offset, out var result) ? result.WramOffset : null;

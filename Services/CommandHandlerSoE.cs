@@ -23,7 +23,19 @@ namespace SRAM.Comparison.SoE.Services
 	{
 		private const string Snes9xId = "Snes9x";
 
-		public CommandHandlerSoE() { }
+		private new static readonly Uris Uris = new() 
+		{
+			Docu = "http://docu.xeth.de",
+			Downloads = "http://releases.xeth.de",
+			LatestUpdate = "http://xeth.de/Releases/SramComparer/LatestUpdate.json",
+			Forum = "http://forum.xeth.de",
+			Project = "https://evermore.azurewebsites.net",
+			DiscordInvite = "https://discord.gg/s4wTHQgxae"
+		};
+
+		public override string? AppVersion { get; set; } = "033";
+
+		public CommandHandlerSoE() {}
 		public CommandHandlerSoE(IConsolePrinter consolePrinter) : base(consolePrinter) {}
 
 		#region Command Handing
@@ -183,5 +195,7 @@ namespace SRAM.Comparison.SoE.Services
 		}
 
 		protected override void CreateKeyBindingsFile<TEnum>() => base.CreateKeyBindingsFile<CommandsSoE>();
+
+		protected override Uris GetUris() => Uris;
 	}
 }

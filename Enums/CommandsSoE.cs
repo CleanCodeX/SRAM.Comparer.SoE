@@ -27,7 +27,7 @@ namespace SRAM.Comparison.SoE.Enums
 		EventTimer,
 
 		[DisplayNameLocalized(nameof(Resources.CmdShowScriptedEventTimerIfDifferent), typeof(Resources))]
-		EventTimerDiff
+		EventTimerDiff,
 	}
 
 	internal enum AlternateCommandsSoe
