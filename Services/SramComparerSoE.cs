@@ -206,7 +206,7 @@ namespace SRAM.Comparison.SoE.Services
 				{
 					#region Slot byte by byte comparison
 
-					ConsoleHelper.EnsureMinConsoleWidth(ComparisonConsoleWidth);
+					ConsoleHelper.EnsureMinConsoleWidth(ComparisonMinConsoleWidth);
 
 					var fieldName = $"{nameof(compFile.Struct.SaveSlots)}[{currSlotIndex}]";
 					var bufferOffset = SramOffsets.FirstSaveSlot + currSlotId * SramSizes.SaveSlot;
