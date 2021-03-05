@@ -289,13 +289,13 @@ namespace SRAM.Comparison.SoE.Services
 			{
 				var parentName = nameof(currData.BoyStatusBuffs);
 				offset = GetSaveSlotOffset(BuildIndexName(parentName, i, nameof(CharacterBuffStatus.Id)), out name);
-				diffBytes += CompareValue(name, offset, currData.BoyStatusBuffs.Status[i].Id, compData.BoyStatusBuffs.Status[i].Id);
+				diffBytes += CompareValue(name, offset, currData.BoyStatusBuffs.BoyStatus[i].Id, compData.BoyStatusBuffs.BoyStatus[i].Id);
 
 				offset = GetSaveSlotOffset(BuildIndexName(parentName, i, nameof(CharacterBuffStatus.Timer)), out name);
-				diffBytes += CompareValue(name, offset, currData.BoyStatusBuffs.Status[i].Timer, compData.BoyStatusBuffs.Status[i].Timer);
+				diffBytes += CompareValue(name, offset, currData.BoyStatusBuffs.BoyStatus[i].Timer, compData.BoyStatusBuffs.BoyStatus[i].Timer);
 
 				offset = GetSaveSlotOffset(BuildIndexName(parentName, i, nameof(CharacterBuffStatus.Boost)), out name);
-				diffBytes += CompareValue(name, offset, currData.BoyStatusBuffs.Status[i].Boost, compData.BoyStatusBuffs.Status[i].Boost);
+				diffBytes += CompareValue(name, offset, currData.BoyStatusBuffs.BoyStatus[i].Boost, compData.BoyStatusBuffs.BoyStatus[i].Boost);
 			}
 			//Unknown 4
 
@@ -308,13 +308,13 @@ namespace SRAM.Comparison.SoE.Services
 			{
 				var parentName = nameof(currData.DogStatusBuffs);
 				offset = GetSaveSlotOffset(BuildIndexName(parentName, i, nameof(CharacterBuffStatus.Id)), out name);
-				diffBytes += CompareValue(name, offset, currData.DogStatusBuffs.Status[i].Id, compData.DogStatusBuffs.Status[i].Id);
+				diffBytes += CompareValue(name, offset, currData.DogStatusBuffs.DogStatus[i].Id, compData.DogStatusBuffs.DogStatus[i].Id);
 
 				offset = GetSaveSlotOffset(BuildIndexName(parentName, i, nameof(CharacterBuffStatus.Timer)), out name);
-				diffBytes += CompareValue(name, offset, currData.DogStatusBuffs.Status[i].Timer, compData.DogStatusBuffs.Status[i].Timer);
+				diffBytes += CompareValue(name, offset, currData.DogStatusBuffs.DogStatus[i].Timer, compData.DogStatusBuffs.DogStatus[i].Timer);
 
 				offset = GetSaveSlotOffset(BuildIndexName(parentName, i, nameof(CharacterBuffStatus.Boost)), out name);
-				diffBytes += CompareValue(name, offset, currData.DogStatusBuffs.Status[i].Boost, compData.DogStatusBuffs.Status[i].Boost);
+				diffBytes += CompareValue(name, offset, currData.DogStatusBuffs.DogStatus[i].Boost, compData.DogStatusBuffs.DogStatus[i].Boost);
 			}
 			//Unknown 7
 
@@ -411,27 +411,27 @@ namespace SRAM.Comparison.SoE.Services
 
 			#region Chunk 20
 
-			offset = GetSaveSlotOffset(nameof(currData.LastLanding_CurrentWeapon.Unknown17C), out name);
-			diffBytes += CompareValue(name, offset, currData.LastLanding_CurrentWeapon.Unknown17C, compData.LastLanding_CurrentWeapon.Unknown17C);
+			offset = GetSaveSlotOffset(nameof(currData.CurrentWeapon_LastLanding.Unknown17C), out name);
+			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.Unknown17C, compData.CurrentWeapon_LastLanding.Unknown17C);
 
-			offset = GetSaveSlotTypeOffset(typeof(Chunk20), nameof(currData.LastLanding_CurrentWeapon.CurrentEquippedWeapon), out name);
-			diffBytes += CompareValue(name, offset, currData.LastLanding_CurrentWeapon.CurrentEquippedWeapon.ToUShort(), compData.LastLanding_CurrentWeapon.CurrentEquippedWeapon.ToUShort());
+			offset = GetSaveSlotTypeOffset(typeof(Chunk20), nameof(currData.CurrentWeapon_LastLanding.CurrentEquippedWeapon), out name);
+			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.CurrentEquippedWeapon.ToUShort(), compData.CurrentWeapon_LastLanding.CurrentEquippedWeapon.ToUShort());
 
-			offset = GetSaveSlotOffset(nameof(currData.LastLanding_CurrentWeapon.Unknown17D), out name);
-			diffBytes += CompareValue(name, offset, currData.LastLanding_CurrentWeapon.Unknown17D, compData.LastLanding_CurrentWeapon.Unknown17D);
+			offset = GetSaveSlotOffset(nameof(currData.CurrentWeapon_LastLanding.Unknown17D), out name);
+			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.Unknown17D, compData.CurrentWeapon_LastLanding.Unknown17D);
 
-			offset = GetSaveSlotOffset(nameof(currData.LastLanding_CurrentWeapon.Unknown17E), out name);
-			diffBytes += CompareValue(name, offset, currData.LastLanding_CurrentWeapon.Unknown17E, compData.LastLanding_CurrentWeapon.Unknown17E);
+			offset = GetSaveSlotOffset(nameof(currData.CurrentWeapon_LastLanding.Unknown17E), out name);
+			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.Unknown17E, compData.CurrentWeapon_LastLanding.Unknown17E);
 
-			offset = GetSaveSlotOffset(nameof(currData.LastLanding_CurrentWeapon.LastLandingLocation), out name);
-			diffBytes += CompareValue(name, offset, currData.LastLanding_CurrentWeapon.LastLandingLocation.ToByteArray(), compData.LastLanding_CurrentWeapon.LastLandingLocation.ToByteArray());
+			offset = GetSaveSlotOffset(nameof(currData.CurrentWeapon_LastLanding.LastLandingLocation), out name);
+			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.LastLandingLocation.ToByteArray(), compData.CurrentWeapon_LastLanding.LastLandingLocation.ToByteArray());
 
 			#endregion
 
 			#region Chunk 21
 
-			offset = GetSaveSlotOffset(nameof(currData.LastLanding_CurrentWeapon.Unknown17F), out name);
-			diffBytes += CompareValue(name, offset, currData.LastLanding_CurrentWeapon.Unknown17F, compData.LastLanding_CurrentWeapon.Unknown17F);
+			offset = GetSaveSlotOffset(nameof(currData.CurrentWeapon_LastLanding.Unknown17F), out name);
+			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.Unknown17F, compData.CurrentWeapon_LastLanding.Unknown17F);
 
 			offset = GetSaveSlotOffset(nameof(currData.TradeGoods.Unknown17G), out name);
 			diffBytes += CompareValue(name, offset, currData.TradeGoods.Unknown17G, compData.TradeGoods.Unknown17G);
