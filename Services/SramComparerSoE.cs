@@ -13,6 +13,7 @@ using SRAM.Comparison.Services;
 using SRAM.Comparison.SoE.Enums;
 using SRAM.Comparison.SoE.Properties;
 using SRAM.SoE.Extensions;
+using SRAM.SoE.Helpers;
 using SRAM.SoE.Models;
 using SRAM.SoE.Models.Structs;
 using WRAM.Snes9x.SoE.Models.Structs.Chunks;
@@ -260,9 +261,9 @@ namespace SRAM.Comparison.SoE.Services
 
 		private static Dictionary<int, List<int>> ZeroSlotBytes = new();
 
-		private static Dictionary<int, SramOffsets.Unknowns> SearchUnknownByteValue(int slotIndex, byte[] bytes, byte valueToFind)
+		private static Dictionary<int, SramUnknownOffset> SearchUnknownByteValue(int slotIndex, byte[] bytes, byte valueToFind)
 		{
-			Dictionary<int, SramOffsets.Unknowns> foundOffsets = new();
+			Dictionary<int, SramUnknownOffset> foundOffsets = new();
 
 			foreach (var (offsetEnum, size) in SramOffsets.SaveSlot.UnknownBuffers)
 			{
@@ -277,7 +278,7 @@ namespace SRAM.Comparison.SoE.Services
 
 			foreach (var (offset, offsetEnum) in foundOffsets)
 			{
-				var section = offsetEnum.GetAttribute<SramOffsets.SectionAttribute>()!;
+				var section = offsetEnum.GetAttribute<SectionAttribute>()!;
 				Debug.Assert(section != null);
 
 				var relativeChunkOffset = offset - section.SramOffset;
