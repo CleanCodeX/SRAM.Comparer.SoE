@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -37,7 +38,12 @@ namespace SRAM.Comparison.SoE.Helpers
 			int offset;
 
 			if (fieldName.Contains(StructDelimiter))
-				offset = (int)fieldName.ParseEnum<SaveSlotUnknownOffset>();
+			{
+				var enumValue = fieldName.Remove("[").Remove("]").ParseEnum<SaveSlotUnknownOffset>();
+				offset = (int)enumValue;
+				result.Path = fieldName.Replace(StructDelimiter, ".");
+				result.ParentType = enumValue.GetAttribute<EnumDataTypeAttribute>()?.EnumType;
+			}
 			else
 				offset = InternalGetBufferOffset(typeof(SaveSlotDataSoE), fieldName, result);
 

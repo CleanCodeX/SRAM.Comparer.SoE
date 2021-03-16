@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using SRAM.SoE.Models;
 using SRAM.SoE.Models.Structs;
 using WRAM.Snes9x.SoE.Models.Structs.Chunks;
@@ -35,36 +36,60 @@ namespace SRAM.Comparison.SoE.Helpers
 	[SuppressMessage("ReSharper", "UnusedMember.Global")]
 	internal enum SaveSlotUnknownOffset
 	{
+		[EnumDataType(typeof(Chunk03))]
 		BoyStatusBuffs0__Id = SaveSlotBaseOffset.BoyStatusBuffs0, // Offset 112
+		[EnumDataType(typeof(Chunk03))]
 		BoyStatusBuffs0__Timer = SaveSlotBaseOffset.BoyStatusBuffs0 + 2,
+		[EnumDataType(typeof(Chunk03))]
 		BoyStatusBuffs0__Boost = SaveSlotBaseOffset.BoyStatusBuffs0 + 4,
 
+		[EnumDataType(typeof(Chunk03))]
 		BoyStatusBuffs1__Id = SaveSlotBaseOffset.BoyStatusBuffs1, // Offset 118
+		[EnumDataType(typeof(Chunk03))]
 		BoyStatusBuffs1__Timer = SaveSlotBaseOffset.BoyStatusBuffs1 + 2,
+		[EnumDataType(typeof(Chunk03))]
 		BoyStatusBuffs1__Boost = SaveSlotBaseOffset.BoyStatusBuffs1 + 4,
 
+		[EnumDataType(typeof(Chunk03))]
 		BoyStatusBuffs2__Id = SaveSlotBaseOffset.BoyStatusBuffs2, // Offset 126
+		[EnumDataType(typeof(Chunk03))]
 		BoyStatusBuffs2__Timer = SaveSlotBaseOffset.BoyStatusBuffs2 + 2,
+		[EnumDataType(typeof(Chunk03))]
 		BoyStatusBuffs2__Boost = SaveSlotBaseOffset.BoyStatusBuffs2 + 4,
 
+		[EnumDataType(typeof(Chunk03))]
 		BoyStatusBuffs3__Id = SaveSlotBaseOffset.BoyStatusBuffs3, // Offset 134
+		[EnumDataType(typeof(Chunk03))]
 		BoyStatusBuffs3__Timer = SaveSlotBaseOffset.BoyStatusBuffs3 + 2,
+		[EnumDataType(typeof(Chunk03))]
 		BoyStatusBuffs3__Boost = SaveSlotBaseOffset.BoyStatusBuffs3 + 4,
 
+		[EnumDataType(typeof(Chunk10))]
 		DogStatusBuffs0__Id = SaveSlotBaseOffset.DogStatusBuffs0, // Offset 112
+		[EnumDataType(typeof(Chunk10))]
 		DogStatusBuffs0__Timer = SaveSlotBaseOffset.DogStatusBuffs0 + 2,
+		[EnumDataType(typeof(Chunk10))]
 		DogStatusBuffs0__Boost = SaveSlotBaseOffset.DogStatusBuffs0 + 4,
 
+		[EnumDataType(typeof(Chunk10))]
 		DogStatusBuffs1__Id = SaveSlotBaseOffset.DogStatusBuffs1, // Offset 118
+		[EnumDataType(typeof(Chunk10))]
 		DogStatusBuffs1__Timer = SaveSlotBaseOffset.DogStatusBuffs1 + 2,
+		[EnumDataType(typeof(Chunk10))]
 		DogStatusBuffs1__Boost = SaveSlotBaseOffset.DogStatusBuffs1 + 4,
 
+		[EnumDataType(typeof(Chunk10))]
 		DogStatusBuffs2__Id = SaveSlotBaseOffset.DogStatusBuffs2, // Offset 126
+		[EnumDataType(typeof(Chunk10))]
 		DogStatusBuffs2__Timer = SaveSlotBaseOffset.DogStatusBuffs2 + 2,
+		[EnumDataType(typeof(Chunk10))]
 		DogStatusBuffs2__Boost = SaveSlotBaseOffset.DogStatusBuffs2 + 4,
 
+		[EnumDataType(typeof(Chunk10))]
 		DogStatusBuffs3__Id = SaveSlotBaseOffset.DogStatusBuffs3, // Offset 134
+		[EnumDataType(typeof(Chunk10))]
 		DogStatusBuffs3__Timer = SaveSlotBaseOffset.DogStatusBuffs3 + 2,
+		[EnumDataType(typeof(Chunk10))]
 		DogStatusBuffs3__Boost = SaveSlotBaseOffset.DogStatusBuffs3 + 4,
 	}
 }

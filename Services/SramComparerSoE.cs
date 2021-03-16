@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Common.Shared.Min.Extensions;
@@ -6,7 +8,6 @@ using IO.Extensions;
 using IO.Models;
 using SoE;
 using SoE.Models.Structs;
-using SoE.Models.Structs.Unknown;
 using SRAM.Comparison.Helpers;
 using SRAM.Comparison.Services;
 using SRAM.Comparison.SoE.Enums;
@@ -238,6 +239,62 @@ namespace SRAM.Comparison.SoE.Services
 			}
 		}
 
+		private void PrintAlwaysZeroSlotBytes()
+		{
+			var offsets = ZeroSlotBytes.SelectMany(e => e.Value).Distinct().ToList();
+			List<int> alwaysZero = new();
+
+			foreach (var offset in offsets)
+			{
+				if (ZeroSlotBytes[0].Contains(offset) &&
+					ZeroSlotBytes[1].Contains(offset) &&
+					ZeroSlotBytes[2].Contains(offset) &&
+					ZeroSlotBytes[3].Contains(offset))
+					alwaysZero.Add(offset);
+			}
+
+			Debug.Print($@"{alwaysZero.Count} ""unknown"" bytes which are {0}");
+			foreach (var offset in alwaysZero)
+				Debug.Print($"x{offset:X}|{offset}");
+		}
+
+		private static Dictionary<int, List<int>> ZeroSlotBytes = new();
+
+		private static Dictionary<int, SramOffsets.Unknowns> SearchUnknownByteValue(int slotIndex, byte[] bytes, byte valueToFind)
+		{
+			Dictionary<int, SramOffsets.Unknowns> foundOffsets = new();
+
+			foreach (var (offsetEnum, size) in SramOffsets.SaveSlot.UnknownBuffers)
+			{
+				var offset = offsetEnum.ToInt();
+
+				for (var i = offset; i < offset + size; i++)
+					if (bytes[i] == valueToFind)
+						foundOffsets.Add(i, offsetEnum);
+			}
+
+			Dictionary<int, (int, string)> wramOffsets = new();
+
+			foreach (var (offset, offsetEnum) in foundOffsets)
+			{
+				var section = offsetEnum.GetAttribute<SramOffsets.SectionAttribute>()!;
+				Debug.Assert(section != null);
+
+				var relativeChunkOffset = offset - section.SramOffset;
+				var wramOffset = section.WramOffset + relativeChunkOffset;
+
+				wramOffsets.Add(wramOffset, (offset, $"{section.Section}.{offsetEnum}"));
+			}
+
+			Debug.Print($@"{foundOffsets.Count} ""unknown"" bytes which are {valueToFind}");
+			foreach (var (wram, (sram, buffer)) in wramOffsets.OrderBy(e => e.Key))
+				Debug.Print($"$7E{wram:X4}, S: x{sram:X}|{sram} ({buffer})");
+
+			ZeroSlotBytes.Add(slotIndex, foundOffsets.Keys.ToList());
+
+			return foundOffsets;
+		}
+
 		protected virtual string FormatAdditionalValues(string name, StringBuilder values) => values.Replace(Environment.NewLine, ConsolePrinter.NewLine).ToString();
 
 		protected virtual void PrintSaveSlotChecksumValidation(SramFileSoE currFile, SramFileSoE compFile)
@@ -378,7 +435,7 @@ namespace SRAM.Comparison.SoE.Services
 				compData.Collectables_Spots.IngredientSniffSpots.Data);
 
 			//Unknown 15
-			offset = GetSaveSlotTypeOffset(typeof(Unknown15), nameof(currData.Collectables_Spots.Unknown15.Data), out name);
+			offset = GetSaveSlotTypeOffset(typeof(Chunk18), nameof(currData.Collectables_Spots.Unknown15), out name);
 			diffBytes += CompareValue(name, offset, currData.Collectables_Spots.Unknown15.Data, compData.Collectables_Spots.Unknown15.Data);
 			//Unknown 15
 
@@ -392,7 +449,7 @@ namespace SRAM.Comparison.SoE.Services
 				currData.Collectables_Spots.Unknown16B.ToByteArray(),
 				compData.Collectables_Spots.Unknown16B.ToByteArray());
 
-			offset = GetSaveSlotTypeOffset(typeof(Unknown16C), nameof(currData.Collectables_Spots.Unknown16C.Data), out name);
+			offset = GetSaveSlotTypeOffset(typeof(Chunk18), nameof(currData.Collectables_Spots.Unknown16C), out name);
 			diffBytes += CompareValue(name, offset, currData.Collectables_Spots.Unknown16C.Data, compData.Collectables_Spots.Unknown16C.Data);
 
 			#endregion Unknown 16
@@ -401,8 +458,20 @@ namespace SRAM.Comparison.SoE.Services
 
 			#region Chunk 19
 
-			offset = GetSaveSlotOffset(nameof(currData.PossessedStuff.Unknown17A), out name);
-			diffBytes += CompareValue(name, offset, currData.PossessedStuff.Unknown17A, compData.PossessedStuff.Unknown17A);
+			offset = GetSaveSlotOffset(nameof(currData.PossessedStuff.Act2UnknownState1), out name);
+			diffBytes += CompareValue(name, offset, currData.PossessedStuff.Act2UnknownState1, compData.PossessedStuff.Act2UnknownState1);
+
+			offset = GetSaveSlotOffset(nameof(currData.PossessedStuff.Act2UnknownState2), out name);
+			diffBytes += CompareValue(name, offset, currData.PossessedStuff.Act2UnknownState2, compData.PossessedStuff.Act2UnknownState2);
+
+			offset = GetSaveSlotOffset(nameof(currData.PossessedStuff.TinkersStateMaybe), out name);
+			diffBytes += CompareValue(name, offset, currData.PossessedStuff.TinkersStateMaybe, compData.PossessedStuff.TinkersStateMaybe, isUnknown: true);
+
+			offset = GetSaveSlotOffset(nameof(currData.PossessedStuff.UnknownPyramidState1), out name);
+			diffBytes += CompareValue(name, offset, currData.PossessedStuff.UnknownPyramidState1, compData.PossessedStuff.UnknownPyramidState1);
+
+			offset = GetSaveSlotOffset(nameof(currData.PossessedStuff.UnknownPyramidState2), out name);
+			diffBytes += CompareValue(name, offset, currData.PossessedStuff.UnknownPyramidState2, compData.PossessedStuff.UnknownPyramidState2);
 
 			offset = GetSaveSlotOffset(nameof(currData.PossessedStuff.Unknown17B), out name);
 			diffBytes += CompareValue(name, offset, currData.PossessedStuff.Unknown17B, compData.PossessedStuff.Unknown17B);
@@ -411,8 +480,8 @@ namespace SRAM.Comparison.SoE.Services
 
 			#region Chunk 20
 
-			offset = GetSaveSlotOffset(nameof(currData.CurrentWeapon_LastLanding.Unknown17C), out name);
-			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.Unknown17C, compData.CurrentWeapon_LastLanding.Unknown17C);
+			offset = GetSaveSlotOffset(nameof(currData.CurrentWeapon_LastLanding.UnknownFireEyesState1), out name);
+			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.UnknownFireEyesState1, compData.CurrentWeapon_LastLanding.UnknownFireEyesState1);
 
 			offset = GetSaveSlotTypeOffset(typeof(Chunk20), nameof(currData.CurrentWeapon_LastLanding.CurrentEquippedWeapon), out name);
 			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.CurrentEquippedWeapon.ToUShort(), compData.CurrentWeapon_LastLanding.CurrentEquippedWeapon.ToUShort());
@@ -420,8 +489,11 @@ namespace SRAM.Comparison.SoE.Services
 			offset = GetSaveSlotOffset(nameof(currData.CurrentWeapon_LastLanding.Unknown17D), out name);
 			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.Unknown17D, compData.CurrentWeapon_LastLanding.Unknown17D);
 
-			offset = GetSaveSlotOffset(nameof(currData.CurrentWeapon_LastLanding.Unknown17E), out name);
-			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.Unknown17E, compData.CurrentWeapon_LastLanding.Unknown17E);
+			offset = GetSaveSlotOffset(nameof(currData.CurrentWeapon_LastLanding.Unknown17E1), out name);
+			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.Unknown17E1, compData.CurrentWeapon_LastLanding.Unknown17E1);
+
+			offset = GetSaveSlotOffset(nameof(currData.CurrentWeapon_LastLanding.Unknown17E2), out name);
+			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.Unknown17E2, compData.CurrentWeapon_LastLanding.Unknown17E2);
 
 			offset = GetSaveSlotOffset(nameof(currData.CurrentWeapon_LastLanding.LastLandingLocation), out name);
 			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.LastLandingLocation.ToByteArray(), compData.CurrentWeapon_LastLanding.LastLandingLocation.ToByteArray());
@@ -429,12 +501,6 @@ namespace SRAM.Comparison.SoE.Services
 			#endregion
 
 			#region Chunk 21
-
-			offset = GetSaveSlotOffset(nameof(currData.CurrentWeapon_LastLanding.Unknown17F), out name);
-			diffBytes += CompareValue(name, offset, currData.CurrentWeapon_LastLanding.Unknown17F, compData.CurrentWeapon_LastLanding.Unknown17F);
-
-			offset = GetSaveSlotOffset(nameof(currData.TradeGoods.Unknown17G), out name);
-			diffBytes += CompareValue(name, offset, currData.TradeGoods.Unknown17G, compData.TradeGoods.Unknown17G);
 
 			offset = GetSaveSlotOffset(nameof(currData.TradeGoods.Unknown18), out name);
 			diffBytes += CompareValue(name, offset, currData.TradeGoods.Unknown18, compData.TradeGoods.Unknown18);
@@ -445,7 +511,7 @@ namespace SRAM.Comparison.SoE.Services
 
 			#region Helpers
 
-			static string BuildIndexName(string parentName, int index, string fieldName) => $"{parentName}{index}{StructDelimiter}{fieldName}";
+			static string BuildIndexName(string parentName, int index, string fieldName) => $"{parentName}[{index}]{StructDelimiter}{fieldName}";
 
 			static int GetSaveSlotTypeOffset(Type containingType, string fieldName, out string name) => 
 				GetSaveSlotOffset(BuildFieldName(typeof(SaveSlotDataSoE), containingType, fieldName), out name);
@@ -454,7 +520,7 @@ namespace SRAM.Comparison.SoE.Services
 			{
 				var offset = GetSaveSlotBufferOffset(fieldName, out var result);
 
-				name = result.ToString()!;
+				name = result.ToString() ?? fieldName;
 
 				return offset;
 			}
