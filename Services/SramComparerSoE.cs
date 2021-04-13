@@ -11,9 +11,9 @@ using SoE.Models.Structs;
 using SRAM.Comparison.Helpers;
 using SRAM.Comparison.Services;
 using SRAM.Comparison.SoE.Enums;
+using SRAM.Comparison.SoE.Helpers;
 using SRAM.Comparison.SoE.Properties;
 using SRAM.SoE.Extensions;
-using SRAM.SoE.Helpers;
 using SRAM.SoE.Models;
 using SRAM.SoE.Models.Structs;
 using WRAM.Snes9x.SoE.Models.Structs.Chunks;
@@ -240,61 +240,61 @@ namespace SRAM.Comparison.SoE.Services
 			}
 		}
 
-		private void PrintAlwaysZeroSlotBytes()
-		{
-			var offsets = ZeroSlotBytes.SelectMany(e => e.Value).Distinct().ToList();
-			List<int> alwaysZero = new();
+		//private void PrintAlwaysZeroSlotBytes()
+		//{
+		//	var offsets = ZeroSlotBytes.SelectMany(e => e.Value).Distinct().ToList();
+		//	List<int> alwaysZero = new();
 
-			foreach (var offset in offsets)
-			{
-				if (ZeroSlotBytes[0].Contains(offset) &&
-					ZeroSlotBytes[1].Contains(offset) &&
-					ZeroSlotBytes[2].Contains(offset) &&
-					ZeroSlotBytes[3].Contains(offset))
-					alwaysZero.Add(offset);
-			}
+		//	foreach (var offset in offsets)
+		//	{
+		//		if (ZeroSlotBytes[0].Contains(offset) &&
+		//			ZeroSlotBytes[1].Contains(offset) &&
+		//			ZeroSlotBytes[2].Contains(offset) &&
+		//			ZeroSlotBytes[3].Contains(offset))
+		//			alwaysZero.Add(offset);
+		//	}
 
-			Debug.Print($@"{alwaysZero.Count} ""unknown"" bytes which are {0}");
-			foreach (var offset in alwaysZero)
-				Debug.Print($"x{offset:X}|{offset}");
-		}
+		//	Debug.Print($@"{alwaysZero.Count} ""unknown"" bytes which are {0}");
+		//	foreach (var offset in alwaysZero)
+		//		Debug.Print($"x{offset:X}|{offset}");
+		//}
 
-		private static Dictionary<int, List<int>> ZeroSlotBytes = new();
+		//private static Dictionary<int, List<int>> ZeroSlotBytes = new();
 
-		private static Dictionary<int, SramUnknownOffset> SearchUnknownByteValue(int slotIndex, byte[] bytes, byte valueToFind)
-		{
-			Dictionary<int, SramUnknownOffset> foundOffsets = new();
+		//private static Dictionary<int, SramUnknownOffset> SearchUnknownByteValue(int slotIndex, byte[] bytes, byte valueToFind)
+		//{
+		//	Dictionary<int, SramUnknownOffset> foundOffsets = new();
 
-			foreach (var (offsetEnum, size) in SramOffsets.SaveSlot.UnknownBuffers)
-			{
-				var offset = offsetEnum.ToInt();
+		//	foreach (var (offsetEnum, size) in SramOffsets.SaveSlot.UnknownBuffers)
+		//	{
+		//		var offset = offsetEnum.ToInt();
 
-				for (var i = offset; i < offset + size; i++)
-					if (bytes[i] == valueToFind)
-						foundOffsets.Add(i, offsetEnum);
-			}
+		//		for (var i = offset; i < offset + size; i++)
+		//			if (bytes[i] == valueToFind)
+		//				foundOffsets.Add(i, offsetEnum);
+		//	}
 
-			Dictionary<int, (int, string)> wramOffsets = new();
+		//	Dictionary<int, (int, string)> wramOffsets = new();
 
-			foreach (var (offset, offsetEnum) in foundOffsets)
-			{
-				var section = offsetEnum.GetAttribute<SectionAttribute>()!;
-				Debug.Assert(section != null);
+		//	foreach (var (offset, offsetEnum) in foundOffsets)
+		//	{
+		//		var section = offsetEnum.GetAttribute<SectionAttribute>()!;
+		//		Debug.Assert(section != null);
 
-				var relativeChunkOffset = offset - section.SramOffset;
-				var wramOffset = section.WramOffset + relativeChunkOffset;
+		//		var relativeChunkOffset = offset - section.SramOffset;
+		//		var wramOffset = section.WramOffset + relativeChunkOffset;
 
-				wramOffsets.Add(wramOffset, (offset, $"{section.Section}.{offsetEnum}"));
-			}
+		//		wramOffsets.Add(wramOffset, (offset, $"{section.Section}.{offsetEnum}"));
+		//	}
 
-			Debug.Print($@"{foundOffsets.Count} ""unknown"" bytes which are {valueToFind}");
-			foreach (var (wram, (sram, buffer)) in wramOffsets.OrderBy(e => e.Key))
-				Debug.Print($"$7E{wram:X4}, S: x{sram:X}|{sram} ({buffer})");
+		//	Debug.Print($@"{foundOffsets.Count} ""unknown"" bytes which are {valueToFind}");
+		//	foreach (var (wram, (sram, buffer)) in wramOffsets.OrderBy(e => e.Key))
+		//		Debug.Print($"$7E{wram:X4}, S: x{sram:X}|{sram} ({buffer})");
 
-			ZeroSlotBytes.Add(slotIndex, foundOffsets.Keys.ToList());
+		//	ZeroSlotBytes.Add(slotIndex, foundOffsets.Keys.ToList());
 
-			return foundOffsets;
-		}
+		//	return foundOffsets;
+		//}
 
 		protected virtual string FormatAdditionalValues(string name, StringBuilder values) => values.Replace(Environment.NewLine, ConsolePrinter.NewLine).ToString();
 
