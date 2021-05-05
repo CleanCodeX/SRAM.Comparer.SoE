@@ -28,6 +28,9 @@ namespace SRAM.Comparison.SoE.Enums
 
 		[DisplayNameLocalized(nameof(Resources.CmdShowScriptedEventTimerIfDifferent), typeof(Resources))]
 		EventTimerDiff,
+
+		[DisplayNameLocalized(nameof(Resources.CmdShowTerminalCodes), typeof(Resources))]
+		ShowTerminalCodes,
 	}
 
 	internal enum AlternateCommandsSoe
@@ -36,5 +39,7 @@ namespace SRAM.Comparison.SoE.Enums
 		CheckDiff = CommandsSoE.ChecksumDiff,
 		Timer = CommandsSoE.EventTimer,
 		TimerDiff = CommandsSoE.EventTimerDiff,
+		ShowCodes = CommandsSoE.ShowTerminalCodes,
+		STC = CommandsSoE.ShowTerminalCodes,
 	}
 }

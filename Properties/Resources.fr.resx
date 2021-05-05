@@ -20,9 +20,6 @@
 	<data name="Invalid" xml:space="preserve">
 		<value>invalide</value>
 	</data>
-	<data name="CompChecksumValidation" xml:space="preserve">
-		<value>Statut de validation</value>
-	</data>
 	<data name="CompComparedWithOtherSaveSlotTemplate" xml:space="preserve">
 		<value>par rapport à la partie {0}</value>
 	</data>
@@ -46,5 +43,32 @@
 	</data>
 	<data name="EnumChecksum" xml:space="preserve">
 		<value>Checksum</value>
+	</data>
+	<data name="AlarmCode" xml:space="preserve">
+		<value>Code de la salle d'alarme</value>
+	</data>
+	<data name="CmdShowTerminalCodes" xml:space="preserve">
+		<value>Afficher les codes des terminaux</value>
+	</data>
+	<data name="ErrorBothTerminalCodesAreNotEqual" xml:space="preserve">
+		<value>Le code d'alarme et le code secret de la salle du boss ne sont pas les mêmes.</value>
+	</data>
+	<data name="SecretBossRoomCode" xml:space="preserve">
+		<value>Code de chambre du boss secret</value>
+	</data>
+	<data name="StatusBothTerminalCodesAreEqual" xml:space="preserve">
+		<value>Parce que les deux codes sont égaux, la porte secrète de la salle du boss ne s'ouvre pas. Pensez à changer le code secret de la salle du boss.</value>
+	</data>
+	<data name="StatusNewSecretBossRoomCode" xml:space="preserve">
+		<value>Nouveau code de salle du boss secret</value>
+	</data>
+	<data name="StatusSaveslotIsEmpty" xml:space="preserve">
+		<value>Cette zone de sauvegarde semble être vide</value>
+	</data>
+	<data name="TerminalCodes" xml:space="preserve">
+		<value>Codes de borne</value>
+	</data>
+	<data name="PromptChangeSecretBossRoomCode" xml:space="preserve">
+		<value>Changer le code secret de la salle du boss? 1 = oui / 0 = non</value>
 	</data>
 </root>

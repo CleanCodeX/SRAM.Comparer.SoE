@@ -26,9 +26,6 @@
 	<data name="CompChangesAtEveryInSaveSlotSave" xml:space="preserve">
 		<value>cambios en cada guardado del juego</value>
 	</data>
-	<data name="CompChecksumValidation" xml:space="preserve">
-		<value>Estado de validación</value>
-	</data>
 	<data name="CompComparedWithOtherSaveSlotTemplate" xml:space="preserve">
 		<value>en comparación con guardar espacio {0}</value>
 	</data>
@@ -46,5 +43,32 @@
 	</data>
 	<data name="Valid" xml:space="preserve">
 		<value>válida</value>
+	</data>
+	<data name="AlarmCode" xml:space="preserve">
+		<value>Código de sala de alarma</value>
+	</data>
+	<data name="CmdShowTerminalCodes" xml:space="preserve">
+		<value>Mostrar códigos de terminal</value>
+	</data>
+	<data name="ErrorBothTerminalCodesAreNotEqual" xml:space="preserve">
+		<value>El código de alarma y el código secreto de la habitación del jefe no son lo mismo.</value>
+	</data>
+	<data name="SecretBossRoomCode" xml:space="preserve">
+		<value>Código secreto de la habitación del jefe</value>
+	</data>
+	<data name="StatusBothTerminalCodesAreEqual" xml:space="preserve">
+		<value>Debido a que ambos códigos son iguales, la puerta secreta de la sala del jefe no se abrirá. Considere cambiar el código secreto de la sala del jefe</value>
+	</data>
+	<data name="StatusNewSecretBossRoomCode" xml:space="preserve">
+		<value>Nuevo código secreto de sala de jefe</value>
+	</data>
+	<data name="StatusSaveslotIsEmpty" xml:space="preserve">
+		<value>Este saveslot parece estar vacío</value>
+	</data>
+	<data name="TerminalCodes" xml:space="preserve">
+		<value>Códigos de terminal</value>
+	</data>
+	<data name="PromptChangeSecretBossRoomCode" xml:space="preserve">
+		<value>¿Cambiar el código secreto de la habitación del jefe? 1 = sí / 0 = no</value>
 	</data>
 </root>

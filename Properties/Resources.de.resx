@@ -35,9 +35,6 @@
 	<data name="Valid" xml:space="preserve">
 		<value>gültig</value>
 	</data>
-	<data name="CompChecksumValidation" xml:space="preserve">
-		<value>Validierungs-Status</value>
-	</data>
 	<data name="Invalid" xml:space="preserve">
 		<value>ungültig</value>
 	</data>
@@ -46,5 +43,32 @@
 	</data>
 	<data name="EnumChecksum" xml:space="preserve">
 		<value>Prüfsumme</value>
+	</data>
+	<data name="CmdShowTerminalCodes" xml:space="preserve">
+		<value>Terminal Codes anzeigen</value>
+	</data>
+	<data name="AlarmCode" xml:space="preserve">
+		<value>Alarm-Code</value>
+	</data>
+	<data name="ErrorBothTerminalCodesAreNotEqual" xml:space="preserve">
+		<value>Alarm-Code und geheimer Boss-Code sind nicht identisch.</value>
+	</data>
+	<data name="SecretBossRoomCode" xml:space="preserve">
+		<value>Geheimer Boss-Code</value>
+	</data>
+	<data name="StatusBothTerminalCodesAreEqual" xml:space="preserve">
+		<value>Da beide Codes gleich sind, öffnet sich die Tür des geheimen Boss-Raums nicht. Erwäge den geheimen Boss-Code zu ändern.</value>
+	</data>
+	<data name="StatusNewSecretBossRoomCode" xml:space="preserve">
+		<value>Neuer geheimer Bosscode</value>
+	</data>
+	<data name="StatusSaveslotIsEmpty" xml:space="preserve">
+		<value>Dieser Speicherplatz scheint leer zu sein</value>
+	</data>
+	<data name="TerminalCodes" xml:space="preserve">
+		<value>Terminalcodes</value>
+	</data>
+	<data name="PromptChangeSecretBossRoomCode" xml:space="preserve">
+		<value>Geheimer Boss Raumcode ändern? 1 = ja / 0 = nein</value>
 	</data>
 </root>

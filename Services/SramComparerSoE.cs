@@ -301,7 +301,7 @@ namespace SRAM.Comparison.SoE.Services
 		protected virtual void PrintSaveSlotChecksumValidation(SramFileSoE currFile, SramFileSoE compFile)
 		{
 			ConsolePrinter.PrintSectionHeader();
-			ConsolePrinter.PrintColoredLine(ConsoleColor.DarkYellow, $@"{Resources.CompChecksumValidation}:");
+			ConsolePrinter.PrintColoredLine(ConsoleColor.DarkYellow, $@"{Resources.EnumChecksum}:");
 
 			OnPrintSaveSlotChecksumValidation(Res.EnumCurrentFile, currFile);
 			OnPrintSaveSlotChecksumValidation(Res.EnumComparisonFile, compFile);

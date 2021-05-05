@@ -26,6 +26,9 @@ namespace SRAM.Comparison.SoE.Services
 
 			PrintCommandKey(CommandsSoE.EventTimerDiff);
 			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.EventTimerDiff.GetDisplayName()!);
+
+			PrintCommandKey(CommandsSoE.ShowTerminalCodes);
+			PrintColoredLine(ConsoleColor.Yellow, CommandsSoE.ShowTerminalCodes.GetDisplayName()!);
 		}
 
 		protected override string GetAlternateCommands(in Enum cmd, Type alternateCommands) => base.GetAlternateCommands(cmd, 

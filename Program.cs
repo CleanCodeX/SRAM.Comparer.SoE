@@ -27,14 +27,16 @@ namespace SRAM.Comparison.SoE
 		{
 			try
 			{
+#pragma warning disable CA1416
 				ConsoleHelper.RedefineConsoleColors(bgColor: Color.FromArgb(17, 17, 17));
+#pragma warning restore CA1416 
 
 				var cmdLineParser = ComparisonServices.CmdLineParser;
 				cmdLineParser.ThrowIfNull(nameof(cmdLineParser));
 
 				IOptions options = null!;
 				string? configToLoad = null;
-				var cmdParser = new CmdLineParserSoE();
+				CmdLineParserSoE cmdParser = new();
 
 				if (File.Exists(DefaultConfigFileName))
 					configToLoad = DefaultConfigFileName;

@@ -6,13 +6,17 @@ using Common.Shared.Min.Extensions;
 using Common.Shared.Min.Helpers;
 using IO.Extensions;
 using SoE.Models.Enums;
+using SoE.Models.Structs;
 using SRAM.Comparison.Enums;
 using SRAM.Comparison.Helpers;
 using SRAM.Comparison.Services;
 using SRAM.Comparison.SoE.Enums;
+using SRAM.Comparison.SoE.Helpers;
 using SRAM.SoE.Models;
 using SRAM.SoE.Models.Structs;
-using Resources = SRAM.Comparison.Properties.Resources;
+using SRAM.Comparison.SoE.Properties;
+using WRAM.Snes9x.SoE.Models;
+using ResComp = SRAM.Comparison.Properties.Resources;
 using Snes9x = SRAM.SoE.Extensions.StreamExtensions;
 
 namespace SRAM.Comparison.SoE.Services
@@ -33,7 +37,7 @@ namespace SRAM.Comparison.SoE.Services
 			DiscordInvite = "https://discord.gg/s4wTHQgxae"
 		};
 
-		public override string? AppVersion { get; set; } = "033";
+		public override string? AppVersion { get; set; } = "035";
 
 		public CommandHandlerSoE() {}
 		public CommandHandlerSoE(IConsolePrinter consolePrinter) : base(consolePrinter) {}
@@ -93,11 +97,63 @@ namespace SRAM.Comparison.SoE.Services
 							: ComparisonFlagsSoE.ChecksumIfDifferent);
 
 					break;
+				case CommandsSoE.ShowTerminalCodes:
+					ShowTerminalCodes(options);
+
+					break;
 				default:
 					return base.OnRunCommand(command, options);
 			}
 
 			return true;
+		}
+
+		private void ShowTerminalCodes(IOptions options)
+		{
+			options.CurrentFilePath.ThrowIfNull(nameof(options.CurrentFilePath));
+			FileStream fileStream = new(options.CurrentFilePath, FileMode.Open, FileAccess.Read);
+			var (AlarmCode, SecretCode) = GetTerminalCodes(options, fileStream);
+
+			TerminalCodePrinter.PrintTerminalCodes(ConsolePrinter, AlarmCode, SecretCode);
+
+			if (!AlarmCode.IsValid || !SecretCode.IsValid || !Equals(AlarmCode, SecretCode))
+				return;
+
+			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, Resources.StatusBothTerminalCodesAreEqual);
+
+			ConsolePrinter.PrintColoredLine(ConsoleColor.Cyan, Resources.PromptChangeSecretBossRoomCode);
+			var cancel = Console.ReadLine()!.ToLower() != "1";
+			ConsolePrinter.ResetColor();
+
+			if (cancel) return;
+
+			ChangeSecretCodeIfSame(options);
+		}
+
+		private void ChangeSecretCodeIfSame(IOptions options)
+		{
+			options.CurrentFilePath.ThrowIfNull(nameof(options.CurrentFilePath));
+
+			TerminalCode newCode;
+
+			using (FileStream inputStream = new(options.CurrentFilePath, FileMode.Open, FileAccess.Read))
+			{
+				var resultData = ChangeSecretDoorCodeIfSame(options, inputStream, out newCode);
+				resultData.ThrowIfNull(nameof(resultData));
+
+				var newCodeString = newCode.ToString().SubstringAfter("| ");
+				var newFileName = Path.Join(options.CurrentFilePath + $".#{newCodeString}#" + Path.GetExtension(options.CurrentFilePath));
+				
+				File.WriteAllBytes(newFileName, resultData);
+			}
+
+			if (newCode.IsDefault)
+				return;
+
+			ConsolePrinter.PrintSectionHeader();
+			ConsolePrinter.PrintColored(ConsoleColor.White, $"{Resources.StatusNewSecretBossRoomCode}: ");
+			TerminalCodePrinter.PrintValidCode(ConsolePrinter, newCode);
+			ConsolePrinter.ResetColor();
 		}
 
 		#endregion Command Handing
@@ -113,34 +169,19 @@ namespace SRAM.Comparison.SoE.Services
 		/// <summary>Convinience method for using the standard <see cref="SramComparerSoE"/></summary>
 		public int Compare(IOptions options, TextWriter output) => Compare<SramComparerSoE>(options, output);
 
-		protected override bool ConvertStreamIfSavestate(IOptions options, ref Stream stream, string? filePath)
+		public override byte[]? ConvertStreamIfSavestate(IOptions options, in Stream stream, string? filePath)
 		{
 			stream.ThrowIfNull(nameof(stream));
-			filePath.ThrowIfNull(nameof(filePath));
 
-			if (!base.ConvertStreamIfSavestate(options, ref stream, filePath)) return false;
+			if (base.ConvertStreamIfSavestate(options, in stream, filePath) is not { } convertedData)
+				return null;
 
-			const int length = SramSizes.Size;
-			MemoryStream ms;
+			if (convertedData.Length != SramSizes.Size && convertedData.Length != WramSizes.Size)
+				throw new InvalidOperationException($"Copied stream has wrong size. Was {convertedData.Length}, but should be {SramSizes.Size} for SRM-files or {WramSizes.Size} for savestate-files");
 
-			try
-			{
-				ms = stream.GetSlice(length);
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex);
-				throw;
-			}
-
-			if (length != ms.Length)
-				throw new InvalidOperationException($"Copied stream has wrong size. Was {ms.Length}, but should be {length}");
-
-			stream = ms;
-
-			return true;
+			return convertedData;
 		}
-
+		
 		#endregion Compare S-RAM
 
 		#region Export
@@ -160,7 +201,7 @@ namespace SRAM.Comparison.SoE.Services
 		{
 			ConsolePrinter.PrintSectionHeader();
 			var filePath = base.GetConfigFilePath(options.ConfigPath, configName);
-			Requires.FileExists(filePath, string.Empty, Resources.ErrorConfigFileDoesNotExistTemplate.InsertArgs(filePath));
+			Requires.FileExists(filePath, string.Empty, ResComp.ErrorConfigFileDoesNotExistTemplate.InsertArgs(filePath));
 
 			try
 			{
@@ -178,18 +219,77 @@ namespace SRAM.Comparison.SoE.Services
 				throw;
 			}
 
-			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, Resources.StatusConfigFileLoadedTemplate.InsertArgs(filePath));
+			ConsolePrinter.PrintColoredLine(ConsoleColor.Yellow, ResComp.StatusConfigFileLoadedTemplate.InsertArgs(filePath));
 		}
 
 		#endregion Config
 
-		protected override Stream GetSramFromSavestate(IOptions options, Stream stream)
+		public (TerminalCode AlarmCode, TerminalCode SecretCode) GetTerminalCodes(IOptions options, Stream stream)
+		{
+			if (ConvertStreamIfSavestate(options, stream, options.CurrentFilePath) is { } convertedData)
+				stream = convertedData.ToStream();
+
+			SramFileSoE sramFile = new(stream, (GameRegion)options.GameRegion);
+			var saveslotData = sramFile.GetSegment(options.CurrentFileSaveSlot);
+			ref var chunk20 = ref saveslotData.Data.CurrentWeapon_LastLanding;
+			return (chunk20.AlarmCode, chunk20.SecretCode);
+		}
+
+		public byte[]? ChangeSecretDoorCodeIfSame(IOptions options, Stream inputStream, out TerminalCode newCode)
+		{
+			if (ConvertStreamIfSavestate(options, inputStream, options.CurrentFilePath) is { } srmData)
+				inputStream = srmData.ToStream();
+
+			SramFileSoE sramFile = new(inputStream, (GameRegion)options.GameRegion);
+			var slotIndex = options.CurrentFileSaveSlot;
+			var saveslotData = sramFile.GetSegment(slotIndex);
+			ref var chunk20 = ref saveslotData.Data.CurrentWeapon_LastLanding;
+
+			newCode = default;
+
+			if (chunk20.AlarmCode.IsDefault || chunk20.SecretCode.IsDefault)
+				return default;
+
+			if (!Equals(chunk20.AlarmCode, chunk20.SecretCode))
+				throw new InvalidOperationException(Resources.ErrorBothTerminalCodesAreNotEqual);
+
+			ref var code = ref chunk20.SecretCode;
+
+			code.Code1 = code.Code1 switch
+			{
+				TerminalCodeColor.Blue => TerminalCodeColor.Green,
+				TerminalCodeColor.Green => TerminalCodeColor.Blue,
+				_ => TerminalCodeColor.Green,
+			};
+
+			newCode = code;
+			sramFile.SetSegment(slotIndex, saveslotData);
+
+			MemoryStream outputStream = new();
+			sramFile.Save(outputStream);
+
+			if (ConvertStreamToByteArrayIfSavestate(options, outputStream, options.CurrentFilePath) is { } savestateData)
+				return savestateData;
+
+			return outputStream.GetBuffer();
+		}
+
+		protected override byte[] LoadSramFromSavestate(IOptions options, in Stream stream)
 		{
 			var savestateType = options.SavestateType ?? Snes9xId;
-
 			return savestateType switch
 			{
-				Snes9xId => Snes9x.GetSramFromSavestate(stream, (GameRegion)options.GameRegion),
+				Snes9xId => Snes9x.ReadSramFromSavestate(stream, (GameRegion)options.GameRegion),
+				_ => throw new NotSupportedException($"Savestate type {savestateType} is not supported.")
+			};
+		}
+
+		protected override byte[] SaveSramToSavestate(IOptions options, in Stream savestateStream, in Stream srmStream)
+		{
+			var savestateType = options.SavestateType ?? Snes9xId;
+			return savestateType switch
+			{
+				Snes9xId => Snes9x.WriteSramToSavestate(savestateStream, (GameRegion)options.GameRegion, srmStream.GetBytes()),
 				_ => throw new NotSupportedException($"Savestate type {savestateType} is not supported.")
 			};
 		}

@@ -123,6 +123,9 @@
   <data name="CmdShowChecksum" xml:space="preserve">
     <value>Show checksums</value>
   </data>
+  <data name="CmdShowTerminalCodes" xml:space="preserve">
+    <value>Show terminal codes</value>
+  </data>
   <data name="CmdShowScriptedEventTimerIfDifferent" xml:space="preserve">
     <value>Show 'ScriptedEventTimer' value only if different</value>
   </data>
@@ -141,9 +144,6 @@
   <data name="Valid" xml:space="preserve">
     <value>valid</value>
   </data>
-  <data name="CompChecksumValidation" xml:space="preserve">
-    <value>Validation-status</value>
-  </data>
   <data name="EnumChecksumIfDifferent" xml:space="preserve">
     <value>Checksum if different</value>
   </data>
@@ -152,5 +152,29 @@
   </data>
   <data name="EnumChecksum" xml:space="preserve">
     <value>Checksum</value>
+  </data>
+  <data name="AlarmCode" xml:space="preserve">
+    <value>Alarm room code</value>
+  </data>
+  <data name="SecretBossRoomCode" xml:space="preserve">
+    <value>Secret boss room code</value>
+  </data>
+  <data name="StatusNewSecretBossRoomCode" xml:space="preserve">
+    <value>New secret boss room code</value>
+  </data>
+  <data name="ErrorBothTerminalCodesAreNotEqual" xml:space="preserve">
+    <value>Alarm code and secret boss room code aren't the same.</value>
+  </data>
+  <data name="StatusBothTerminalCodesAreEqual" xml:space="preserve">
+    <value>Because both codes are equal, secret boss room door won't open. Consider changing the secret boss room code.</value>
+  </data>
+  <data name="StatusSaveslotIsEmpty" xml:space="preserve">
+    <value>This saveslot seems to be empty</value>
+  </data>
+  <data name="TerminalCodes" xml:space="preserve">
+    <value>Terminal codes</value>
+  </data>
+  <data name="PromptChangeSecretBossRoomCode" xml:space="preserve">
+    <value>Change secret boss room code? 1 = yes / 0 = no</value>
   </data>
 </root>

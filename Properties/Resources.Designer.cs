@@ -61,6 +61,15 @@ namespace SRAM.Comparison.SoE.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Alarm room code ähnelt.
+        /// </summary>
+        public static string AlarmCode {
+            get {
+                return ResourceManager.GetString("AlarmCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Show checksums ähnelt.
         /// </summary>
         public static string CmdShowChecksum {
@@ -97,20 +106,20 @@ namespace SRAM.Comparison.SoE.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show terminal codes ähnelt.
+        /// </summary>
+        public static string CmdShowTerminalCodes {
+            get {
+                return ResourceManager.GetString("CmdShowTerminalCodes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die changes at every in-game save ähnelt.
         /// </summary>
         public static string CompChangesAtEveryInSaveSlotSave {
             get {
                 return ResourceManager.GetString("CompChangesAtEveryInSaveSlotSave", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Validation-status ähnelt.
-        /// </summary>
-        public static string CompChecksumValidation {
-            get {
-                return ResourceManager.GetString("CompChecksumValidation", resourceCulture);
             }
         }
         
@@ -151,11 +160,74 @@ namespace SRAM.Comparison.SoE.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Alarm code and secret boss room code aren&apos;t the same. ähnelt.
+        /// </summary>
+        public static string ErrorBothTerminalCodesAreNotEqual {
+            get {
+                return ResourceManager.GetString("ErrorBothTerminalCodesAreNotEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die invalid ähnelt.
         /// </summary>
         public static string Invalid {
             get {
                 return ResourceManager.GetString("Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Change secret boss room code? 1 = yes / 0 = no ähnelt.
+        /// </summary>
+        public static string PromptChangeSecretBossRoomCode {
+            get {
+                return ResourceManager.GetString("PromptChangeSecretBossRoomCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Secret boss room code ähnelt.
+        /// </summary>
+        public static string SecretBossRoomCode {
+            get {
+                return ResourceManager.GetString("SecretBossRoomCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Because both codes are equal, secret boss room door won&apos;t open. Consider changing the secret boss room code. ähnelt.
+        /// </summary>
+        public static string StatusBothTerminalCodesAreEqual {
+            get {
+                return ResourceManager.GetString("StatusBothTerminalCodesAreEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New secret boss room code ähnelt.
+        /// </summary>
+        public static string StatusNewSecretBossRoomCode {
+            get {
+                return ResourceManager.GetString("StatusNewSecretBossRoomCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This saveslot seems to be empty ähnelt.
+        /// </summary>
+        public static string StatusSaveslotIsEmpty {
+            get {
+                return ResourceManager.GetString("StatusSaveslotIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Terminal codes ähnelt.
+        /// </summary>
+        public static string TerminalCodes {
+            get {
+                return ResourceManager.GetString("TerminalCodes", resourceCulture);
             }
         }
         
