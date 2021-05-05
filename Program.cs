@@ -4,9 +4,9 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using Common.Shared.Min.Extensions;
 using SRAM.Comparison.Helpers;
+using SRAM.Comparison.Properties;
 using SRAM.Comparison.Services;
 using SRAM.Comparison.SoE.Services;
-using Resources = SRAM.Comparison.Properties.Resources;
 
 namespace SRAM.Comparison.SoE
 {
@@ -30,7 +30,7 @@ namespace SRAM.Comparison.SoE
 #pragma warning disable CA1416
 				ConsoleHelper.RedefineConsoleColors(bgColor: Color.FromArgb(17, 17, 17));
 #pragma warning restore CA1416 
-
+				
 				var cmdLineParser = ComparisonServices.CmdLineParser;
 				cmdLineParser.ThrowIfNull(nameof(cmdLineParser));
 
@@ -63,7 +63,7 @@ namespace SRAM.Comparison.SoE
 				}
 
 				ConsolePrinter.ColorizeOutput = options.ColorizeOutput;
-
+				
 				if (configToLoad is not null)
 				{
 					ConsolePrinter.PrintSectionHeader();
