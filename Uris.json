@@ -1,8 +1,8 @@
 {
-	"Downloads": "http://releases.xeth.de",
-	"Docu": "http://docu.xeth.de",
-	"LatestUpdate": "http://xeth.de/Releases/SramComparer/LatestUpdate.json",
+	"Downloads": "https://releases.xeth.de",
+	"Docu": "https://docu.xeth.de",
+	"LatestUpdate": "https://xeth.de/Releases/SramComparer/LatestUpdate.json",
 	"Project": "https://evermore.azurewebsites.net",
-	"Forum": "http://forum.xeth.de",
+	"Forum": "https://forum.xeth.de",
 	"DiscordInvite": "https://discord.gg/s4wTHQgxae"
 }

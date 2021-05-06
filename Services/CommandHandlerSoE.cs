@@ -29,10 +29,10 @@ namespace SRAM.Comparison.SoE.Services
 
 		private new static readonly Uris Uris = new() 
 		{
-			Docu = "http://docu.xeth.de",
-			Downloads = "http://releases.xeth.de",
-			LatestUpdate = "http://xeth.de/Releases/SramComparer/LatestUpdate.json",
-			Forum = "http://forum.xeth.de",
+			Docu = "https://docu.xeth.de",
+			Downloads = "https://releases.xeth.de",
+			LatestUpdate = "https://xeth.de/Releases/SramComparer/LatestUpdate.json",
+			Forum = "https://forum.xeth.de",
 			Project = "https://evermore.azurewebsites.net",
 			DiscordInvite = "https://discord.gg/s4wTHQgxae"
 		};

@@ -23,7 +23,7 @@
 </PackageReleaseNotes>
     <PackageId>CCX.SRAM.Comparison.SoE</PackageId>
     <Platforms>AnyCPU</Platforms>
-    <PackageProjectUrl>http://evermore.xeth.de</PackageProjectUrl>
+    <PackageProjectUrl>https://evermore.xeth.de</PackageProjectUrl>
     <AssemblyName>SramComparer</AssemblyName>
   </PropertyGroup>
 
